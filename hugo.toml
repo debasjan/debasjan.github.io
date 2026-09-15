@@ -1,7 +1,7 @@
 baseURL = "https://debasjan.github.io/"
-locale = "pl-PL"
-defaultContentLanguage = "pl"
-title = "debas — blog o pentestingu i security"
+locale = "en-US"
+defaultContentLanguage = "en"
+title = "debas — pentesting & security blog"
 theme = "PaperMod"
 
 enableRobotsTXT = true
@@ -20,11 +20,12 @@ pygmentsUseClasses = true
 
 [params]
   env = "production"
-  title = "debas — blog o pentestingu i security"
-  description = "Writeupy z labów HackTheBox i OSCP, notatki z bug bounty oraz materiały o pentestingu po polsku."
-  keywords = ["pentesting", "security", "hackthebox", "oscp", "bug bounty", "cybersecurity", "writeupy", "ethical hacking"]
+  title = "debas — pentesting & security blog"
+  description = "Write-ups from HackTheBox and OSCP labs, and offensive-security material by debas."
+  keywords = ["pentesting", "security", "hackthebox", "oscp", "active directory", "cybersecurity", "write-ups", "ethical hacking"]
   author = "Jan Jędrzejak (debas)"
-  DateFormat = "2 January 2006"
+  images = ["images/og-cover.png"]
+  DateFormat = "January 2, 2006"
   defaultTheme = "dark"
   disableThemeToggle = false
   ShowShareButtons = false
@@ -44,14 +45,14 @@ pygmentsUseClasses = true
   tocopen = false
 
   [params.homeInfoParams]
-    Title = "Cześć, tu debas 👋"
+    Title = "Hi, I'm debas 👋"
     Content = """
-Piszę o ofensywnym bezpieczeństwie: writeupy z maszyn HackTheBox, notatki
-z przygotowań do OSCP i znaleziska z bug bounty. Wszystko po polsku,
-z naciskiem na tok rozumowania, nie tylko listę komend.
+I write about offensive security: write-ups from HackTheBox machines and
+notes from my OSCP preparation. The focus is on the reasoning behind each
+step, not just a list of commands.
 
-Zobacz też moje [portfolio na GitHubie](https://github.com/debasjan/security-portfolio)
-z pełnymi writeupami i metodologią.
+See also my [portfolio on GitHub](https://github.com/debasjan/security-portfolio)
+with the full write-ups and methodology.
 """
 
   [[params.socialIcons]]
@@ -63,6 +64,10 @@ z pełnymi writeupami i metodologią.
 
   [params.assets]
     disableHLJS = true
+    favicon = "/favicon.ico"
+    favicon16x16 = "/favicon-16x16.png"
+    favicon32x32 = "/favicon-32x32.png"
+    apple_touch_icon = "/apple-touch-icon.png"
 
   [params.fuseOpts]
     isCaseSensitive = false
@@ -75,14 +80,14 @@ z pełnymi writeupami i metodologią.
 
 [menu]
   [[menu.main]]
-    identifier = "writeupy"
-    name = "Writeupy"
-    url = "/writeupy/"
+    identifier = "writeups"
+    name = "Write-ups"
+    url = "/writeups/"
     weight = 10
   [[menu.main]]
-    identifier = "o-mnie"
-    name = "O mnie"
-    url = "/o-mnie/"
+    identifier = "about"
+    name = "About"
+    url = "/about/"
     weight = 20
   [[menu.main]]
     identifier = "portfolio"
@@ -91,14 +96,9 @@ z pełnymi writeupami i metodologią.
     weight = 30
   [[menu.main]]
     identifier = "search"
-    name = "Szukaj"
-    url = "/szukaj/"
+    name = "Search"
+    url = "/search/"
     weight = 40
-  [[menu.main]]
-    identifier = "archiwum"
-    name = "Archiwum"
-    url = "/archiwum/"
-    weight = 50
 
 [taxonomies]
   tag = "tags"
