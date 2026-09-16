@@ -7,6 +7,10 @@ categories: ["writeups"]
 summary: "A room built around Icecast, a streaming media server with a disclosed, dated remote code execution vulnerability and a ready Metasploit module. After landing an initial Meterpreter session, the..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Ice — TryHackMe"
+  relative: true
 ---
 | | |
 |---|---|

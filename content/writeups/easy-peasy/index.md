@@ -7,6 +7,10 @@ categories: ["writeups"]
 summary: "Easy Peasy is less about a single vulnerability and more a chain of encoding/decoding puzzles gating access to the actual machine: directory brute-forcing and source inspection surface..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Easy Peasy — TryHackMe"
+  relative: true
 ---
 | | |
 |---|---|

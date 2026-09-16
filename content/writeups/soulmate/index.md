@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Soulmate hides its real attack surface behind a subdomain that only shows up under vhost fuzzing. That subdomain runs CrushFTP, vulnerable to a very recent authentication-bypass CVE that lets an..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Soulmate — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Soulmate HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "UpDown is the deepest chain in this batch: an exposed .git directory leaks source code for a hidden developer subdomain gated behind a secret HTTP header. Once inside, an upload filter blocks..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.webp"
+  alt: "UpDown — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="UpDown HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

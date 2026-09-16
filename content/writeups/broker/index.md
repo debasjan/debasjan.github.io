@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Broker runs a version of Apache ActiveMQ vulnerable to a critical unauthenticated RCE disclosed in late 2023. That gets a shell directly as the service account. Root comes from a sudo rule..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.jpg"
+  alt: "Broker — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.jpg" alt="Broker HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

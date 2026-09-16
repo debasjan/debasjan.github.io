@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Bashed is a short chain built around finding things that were left where they shouldn't be. Directory fuzzing turns up a fully functional web shell someone else forgot to remove, giving instant..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Bashed — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Bashed HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

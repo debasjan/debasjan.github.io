@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Nibbles looks empty at first glance — a single \"Hello world!\" page — until the page source points at a hidden /nibbleblog/ directory. Guessing the admin password (after a blacklist made..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Nibbles — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Nibbles HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

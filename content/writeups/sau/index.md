@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Sau chains two separate vulnerabilities in two separate applications through a Server-Side Request Forgery: a public Request Baskets instance is used to reach an internal-only Maltrail instance,..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Sau — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Sau HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Forest is a Domain Controller with Exchange installed that allows anonymous LDAP binds, enough to enumerate the domain without any credentials. That turns up a service account with Kerberos..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Forest — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Forest HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

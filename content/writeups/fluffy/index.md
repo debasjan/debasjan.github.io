@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Fluffy is an assumed-breach scenario (starting credentials provided) built around a very recent Windows Explorer spoofing bug and an equally recent AD CS misconfiguration. A crafted archive..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Fluffy — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Fluffy HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

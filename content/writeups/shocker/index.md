@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Shocker is a compact demonstration of Shellshock, one of the most widespread web vulnerabilities of the last decade — a bash-parsing bug that turned almost any CGI script into remote code..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Shocker — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Shocker HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

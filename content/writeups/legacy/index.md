@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Legacy, alongside Lame, was one of the very first machines on Hack The Box, and it's built around another single, historically significant SMB vulnerability: MS08-067, a remote code execution bug..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Legacy — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Legacy HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Expressway is one of the few boxes in this set where the entire foothold lives in UDP rather than TCP — a default nmap scan shows almost nothing until a UDP sweep reveals an IKE/IPsec VPN..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Expressway — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Expressway HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

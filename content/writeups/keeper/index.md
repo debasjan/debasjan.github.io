@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Keeper's foothold is a support-ticketing system still running its documented default credentials. From there, a leaked password gets an SSH account, whose home directory holds an old KeePass..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Keeper — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Keeper HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

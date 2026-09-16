@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Timelapse chains three layers of \"encrypted, but crackable\" data: a password-protected ZIP, a password-protected PFX certificate bundle inside it, and finally a PowerShell history file leaking..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Timelapse — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Timelapse HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

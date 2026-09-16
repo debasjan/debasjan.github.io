@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Administrator is a full domain-compromise chain built entirely on ACL abuse, starting from a single low-privileged credential given at the start. GenericAll gets me from Olivia to Michael,..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Administrator — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Administrator HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

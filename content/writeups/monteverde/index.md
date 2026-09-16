@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Monteverde starts with the same low-effort wins as most AD boxes — anonymous LDAP, a username-as-password spray — but the privilege escalation is what makes it worth including: the box runs Azure..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Monteverde — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Monteverde HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

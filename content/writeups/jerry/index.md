@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Jerry is a single-service box: Apache Tomcat, reachable with its own undisturbed default manager credentials. Tomcat's manager application is designed to deploy applications on request, and a..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Jerry — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Jerry HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

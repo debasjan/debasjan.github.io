@@ -7,6 +7,10 @@ categories: ["writeups"]
 summary: "A beginner-focused room built around a single theme: anonymous access left open on both FTP and SMB. Anonymous FTP holds a script that, once understood and lightly modified, becomes a reverse..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Anonymous — TryHackMe"
+  relative: true
 ---
 | | |
 |---|---|

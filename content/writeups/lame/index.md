@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Lame was the very first machine ever published on Hack The Box, and it's a single-exploit box: an old Samba version accepts shell metacharacters in its username-mapping feature, giving direct,..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Lame — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Lame HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

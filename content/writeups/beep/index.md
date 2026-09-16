@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Beep exposes a large VoIP/PBX (Elastix) stack, and the actual attack surface only becomes reachable after working around a browser-side TLS restriction. A known LFI in Elastix leaks a..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Beep — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Beep HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

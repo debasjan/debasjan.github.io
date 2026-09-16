@@ -7,6 +7,10 @@ categories: ["writeups"]
 summary: "A dual offense-and-defense room built around PrintNightmare — a vulnerability in the Windows Print Spooler service that lets an authenticated user (any domain user, since the spooler runs by..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "PrintNightmare — TryHackMe"
+  relative: true
 ---
 | | |
 |---|---|

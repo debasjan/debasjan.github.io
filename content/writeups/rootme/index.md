@@ -7,6 +7,10 @@ categories: ["writeups"]
 summary: "A compact, classic-shape box: directory brute-forcing finds an admin path hiding a file upload form, an extension-filter bypass gets a PHP web shell onto the server, and privilege escalation is a..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "RootMe — TryHackMe"
+  relative: true
 ---
 | | |
 |---|---|

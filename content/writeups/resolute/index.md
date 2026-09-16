@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Resolute chains a familiar early-AD pattern — anonymous enumeration, a password left in an LDAP field, a lockout-safe spray — into an escalation path I hadn't used elsewhere in this set: abusing..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.webp"
+  alt: "Resolute — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.webp" alt="Resolute HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

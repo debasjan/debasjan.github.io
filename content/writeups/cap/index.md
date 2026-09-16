@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Cap runs a web app that lets users capture and download their own network traffic — a feature that's only safe if access control actually checks whose capture is being requested. It doesn't: an..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Cap — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Cap HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

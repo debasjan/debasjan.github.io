@@ -7,6 +7,10 @@ categories: ["writeups"]
 summary: "A themed beginner room (Brooklyn Nine-Nine references throughout) where FTP holds a file leaking SSH credentials directly, and privilege escalation is another SUID-binary abuse — this time less,..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Brooklyn Nine Nine — TryHackMe"
+  relative: true
 ---
 | | |
 |---|---|

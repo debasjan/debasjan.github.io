@@ -7,6 +7,10 @@ categories: ["writeups"]
 summary: "LazyAdmin's web root hides an outdated CMS (SweetRice) behind brute-forced directories. A database credential recovered from the CMS's own files unlocks its admin panel, which accepts a file..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "LazyAdmin — TryHackMe"
+  relative: true
 ---
 | | |
 |---|---|

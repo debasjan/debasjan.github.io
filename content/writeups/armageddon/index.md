@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Armageddon is a CMS box built around Drupalgeddon2, a critical unauthenticated RCE in old Drupal releases. From the resulting shell, Drupal's own settings file leaks database credentials, which..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Armageddon — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Armageddon HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

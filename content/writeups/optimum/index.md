@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Optimum is a lesson in why version banners matter: the only exposed service is an outdated file-server product with a public remote code execution exploit, giving an immediate foothold. From..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Optimum — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Optimum HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

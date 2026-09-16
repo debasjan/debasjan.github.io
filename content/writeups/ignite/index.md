@@ -7,6 +7,10 @@ categories: ["writeups"]
 summary: "A short, single-application box: the site runs Fuel CMS, and its version and dashboard are enough to identify a public, well-documented remote code execution exploit for the platform. Running it..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Ignite — TryHackMe"
+  relative: true
 ---
 | | |
 |---|---|

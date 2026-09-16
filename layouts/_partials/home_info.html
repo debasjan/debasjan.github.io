@@ -1,0 +1,16 @@
+{{- /* Project override: renders the homepage intro as a full-width hero banner. */ -}}
+{{- with site.Params.homeInfoParams }}
+<section class="hero-banner">
+    <div class="hero-banner__inner">
+        <h1 class="hero-banner__title">{{ .Title | markdownify }}</h1>
+        <div class="hero-banner__desc">
+            {{ $opts := dict "display" "block" }}
+            {{ .Content | $.Page.RenderString $opts }}
+        </div>
+        <div class="hero-banner__cta">
+            <a class="primary" href="{{ "/writeups/" | relURL }}">Read the write-ups</a>
+            <a href="https://github.com/debasjan/security-portfolio">Portfolio</a>
+        </div>
+    </div>
+</section>
+{{- end -}}

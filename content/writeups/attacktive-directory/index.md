@@ -7,6 +7,10 @@ categories: ["writeups"]
 summary: "A guided introduction to core Active Directory attacks, chained end to end: Kerbrute enumerates valid domain usernames without any credentials, one of those accounts is AS-REP Roastable and cracks..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Attacktive Directory — TryHackMe"
+  relative: true
 ---
 | | |
 |---|---|

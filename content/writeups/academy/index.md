@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Academy's foothold comes from a file left on an anonymous FTP server that hands over working application credentials outright. From there, a student records app accepts a profile picture upload..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Academy — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Academy HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

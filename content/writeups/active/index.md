@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Active demonstrates two classic AD post-compromise techniques back to back: pulling a Group Policy Preferences credential off an anonymously-readable SMB share, then using that credential to..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Active — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Active HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

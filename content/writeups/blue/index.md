@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Blue is a direct demonstration of EternalBlue, the SMBv1 vulnerability made infamous by WannaCry and NotPetya. A single Metasploit module against an unpatched SMB service gives an immediate SYSTEM..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Blue — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Blue HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

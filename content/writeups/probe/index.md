@@ -7,6 +7,10 @@ categories: ["writeups"]
 summary: "Probe is a pure enumeration room — there's no exploitation or shell to obtain, just a target with an unusually wide service footprint (multiple web servers on different ports, FTP, a database..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Probe — TryHackMe"
+  relative: true
 ---
 | | |
 |---|---|

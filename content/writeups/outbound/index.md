@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Outbound is a multi-stage credential chain hidden behind a single webmail RCE. Exploiting a critical Roundcube vulnerability gives a low-privileged shell and access to the mail application's own..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Outbound — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Outbound HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

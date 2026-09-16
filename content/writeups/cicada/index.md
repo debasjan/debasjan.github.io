@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Cicada is a beginner-friendly AD chain: a guest SMB session reveals an onboarding notice with a default domain password, spraying that password finds a valid account, that account's enumeration..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Cicada — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Cicada HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

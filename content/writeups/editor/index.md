@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Editor is built around two real, recently-disclosed CVEs stacked back to back: an unauthenticated RCE in XWiki, and a SUID-related privilege escalation in a Netdata monitoring plugin. The path..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Editor — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Editor HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|

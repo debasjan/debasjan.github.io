@@ -7,10 +7,11 @@ categories: ["writeups"]
 summary: "Sauna's company website lists employee full names, which I turned into a username list and then AS-REP roasted to get a first foothold. Running WinPEAS from there revealed a second account..."
 ShowToc: true
 TocOpen: false
+cover:
+  image: "00-card.png"
+  alt: "Sauna — Hack The Box"
+  relative: true
 ---
-<p align="left">
-  <img src="00-card.png" alt="Sauna HTB machine card" width="650">
-</p>
 
 | | |
 |---|---|
