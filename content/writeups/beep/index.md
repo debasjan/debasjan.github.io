@@ -1,6 +1,6 @@
 ---
 title: "Beep — Hack The Box"
-date: 2026-07-01
+date: 2026-08-25
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]

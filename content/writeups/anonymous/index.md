@@ -1,6 +1,6 @@
 ---
 title: "Anonymous — TryHackMe"
-date: 2026-07-25
+date: 2026-08-09
 draft: false
 tags: ["tryhackme", "linux", "easy"]
 categories: ["writeups"]

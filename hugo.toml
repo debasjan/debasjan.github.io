@@ -77,9 +77,14 @@ step, not just a list of commands.
 
 [menu]
   [[menu.main]]
-    identifier = "writeups"
-    name = "Write-ups"
-    url = "/writeups/"
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 5
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
     weight = 10
   [[menu.main]]
     identifier = "certifications"
@@ -87,9 +92,9 @@ step, not just a list of commands.
     url = "/certifications/"
     weight = 15
   [[menu.main]]
-    identifier = "about"
-    name = "About"
-    url = "/about/"
+    identifier = "writeups"
+    name = "Write-ups"
+    url = "/writeups/"
     weight = 20
   [[menu.main]]
     identifier = "portfolio"

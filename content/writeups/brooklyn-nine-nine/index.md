@@ -1,6 +1,6 @@
 ---
 title: "Brooklyn Nine Nine — TryHackMe"
-date: 2026-07-27
+date: 2026-08-11
 draft: false
 tags: ["tryhackme", "linux", "easy"]
 categories: ["writeups"]

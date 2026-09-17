@@ -1,5 +1,5 @@
 /* ---- debas custom skin -------------------------------------------- */
-/* Palette: bg #0F0E15, card #17151E, text #EEE / #AAA, accent #FF7B7B */
+/* Palette: bg #0F0E15, card #17151E, text #EEE / #AAA, accent #2DADF0 */
 
 :root[data-theme="dark"] {
     --theme: rgb(15, 14, 21);        /* page background   #0F0E15 */
@@ -10,14 +10,14 @@
     --content: rgb(220, 220, 224);
     --code-block-bg: rgb(9, 8, 15);
     --code-bg: rgb(9, 8, 15);
-    --border: rgba(255, 123, 123, 0.16);
-    --accent: rgb(255, 123, 123);    /* coral accent       #FF7B7B */
-    --accent-dim: rgba(255, 123, 123, 0.12);
+    --border: rgba(45, 173, 240, 0.16);
+    --accent: rgb(45, 173, 240);    /* coral accent       #2DADF0 */
+    --accent-dim: rgba(45, 173, 240, 0.12);
 }
 
 :root {
-    --accent: rgb(214, 68, 68);
-    --accent-dim: rgba(214, 68, 68, 0.1);
+    --accent: rgb(24, 130, 189);
+    --accent-dim: rgba(24, 130, 189, 0.1);
 }
 
 body,
@@ -51,7 +51,7 @@ body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 123, 123, .015) 2px, rgba(255, 123, 123, .015) 4px);
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(45, 173, 240, .015) 2px, rgba(45, 173, 240, .015) 4px);
     pointer-events: none;
     z-index: 0;
 }
@@ -295,7 +295,7 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
     width: 1px;
     height: 70px;
     margin-top: 4px;
-    background: linear-gradient(rgba(255, 123, 123, .5), transparent);
+    background: linear-gradient(rgba(45, 173, 240, .5), transparent);
 }
 
 .social-sidebar a { color: var(--secondary); display: flex; transition: color .2s ease, transform .2s ease; }
@@ -414,6 +414,7 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
 .wu-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; display: inline-block; }
 .wu-dot--linux { background: #f0c040; }
 .wu-dot--windows { background: #4fa3e0; }
+.wu-dot--ad { background: #fb923c; }
 
 .wu-difficulty { margin-bottom: 34px; transition: opacity .2s ease; }
 .wu-difficulty__header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
@@ -467,7 +468,7 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
     font-weight: 900;
     margin: 0 0 14px;
     letter-spacing: -0.03em;
-    background: linear-gradient(135deg, var(--accent), #ff9999);
+    background: linear-gradient(135deg, var(--accent), #8fd3ff);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -503,7 +504,7 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
 
 .cert-milestone-year {
     display: inline-block;
-    background: linear-gradient(135deg, var(--accent), #ff9999);
+    background: linear-gradient(135deg, var(--accent), #8fd3ff);
     color: rgb(9, 8, 15);
     padding: 8px 22px;
     border-radius: 50px;
@@ -529,7 +530,7 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
     transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
 }
 
-.cert-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: 0 16px 32px rgba(255, 123, 123, .12); }
+.cert-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: 0 16px 32px rgba(45, 173, 240, .12); }
 .cert-card.is-hidden { display: none; }
 
 .cert-card__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
@@ -599,7 +600,7 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
     transition: all .2s ease;
 }
 
-.cert-card__actions a:hover { background: rgba(255, 123, 123, .22); border-color: var(--accent); }
+.cert-card__actions a:hover { background: rgba(45, 173, 240, .22); border-color: var(--accent); }
 
 @media (max-width: 640px) {
     .cert-grid { grid-template-columns: 1fr; }
@@ -704,7 +705,7 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
     transition: all .25s ease;
 }
 
-.experience-item:hover { border-color: rgba(255, 123, 123, .35); transform: translateY(-2px); }
+.experience-item:hover { border-color: rgba(45, 173, 240, .35); transform: translateY(-2px); }
 .experience-company { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
 .experience-role { color: var(--accent); font-size: .95rem; font-weight: 600; margin-bottom: 4px; }
 .experience-location { color: var(--secondary); font-size: .85rem; font-family: 'JetBrains Mono', monospace; }
@@ -726,7 +727,7 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
     transition: all .25s ease;
 }
 
-.social-link:hover { background: rgba(255, 123, 123, .18); border-color: var(--accent); transform: translateY(-2px); }
+.social-link:hover { background: rgba(45, 173, 240, .18); border-color: var(--accent); transform: translateY(-2px); }
 
 /* ==================================================================
    Fixed timeline sidebar (Certifications, reusable elsewhere)
@@ -749,7 +750,7 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(to bottom, rgba(255, 123, 123, .6), rgba(255, 123, 123, .15));
+    background: linear-gradient(to bottom, rgba(45, 173, 240, .6), rgba(45, 173, 240, .15));
 }
 
 .timeline-sidebar-item {
@@ -769,14 +770,14 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background: rgba(255, 123, 123, .2);
-    border: 2px solid rgba(255, 123, 123, .4);
+    background: rgba(45, 173, 240, .2);
+    border: 2px solid rgba(45, 173, 240, .4);
     transition: all .3s ease;
     flex-shrink: 0;
 }
 
-.timeline-sidebar-item:hover .timeline-dot { background: rgba(255, 123, 123, .4); border-color: var(--accent); transform: scale(1.15); }
-.timeline-sidebar-item.active .timeline-dot { width: 20px; height: 20px; background: var(--accent); border-color: var(--accent); box-shadow: 0 0 20px rgba(255, 123, 123, .5); }
+.timeline-sidebar-item:hover .timeline-dot { background: rgba(45, 173, 240, .4); border-color: var(--accent); transform: scale(1.15); }
+.timeline-sidebar-item.active .timeline-dot { width: 20px; height: 20px; background: var(--accent); border-color: var(--accent); box-shadow: 0 0 20px rgba(45, 173, 240, .5); }
 
 .timeline-year-label { font-size: 1rem; font-weight: 700; color: var(--secondary); opacity: 0; transform: translateX(-8px); transition: all .3s ease; pointer-events: none; white-space: nowrap; }
 .timeline-sidebar-item:hover .timeline-year-label,
@@ -808,3 +809,112 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
 .entry-authorline .tagline { font-size: .78rem; color: var(--secondary); }
 .entry-authorline .tagline a { color: var(--secondary); }
 .entry-authorline .tagline a:hover { color: var(--accent); }
+
+/* ==================================================================
+   Footer: copyright left, icons right (mobile fallback)
+   ================================================================== */
+.footer--split {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    max-width: 1100px;
+    text-align: left;
+}
+
+.footer-social {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-social a { color: var(--secondary); display: flex; }
+.footer-social a:hover { color: var(--accent); }
+
+@media (min-width: 991px) {
+    /* the fixed sidebar already covers this on desktop */
+    .footer-social { display: none; }
+}
+
+/* ==================================================================
+   Shared top-of-page background band (Writeups / Certifications / About)
+   ================================================================== */
+.page-topbg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 420px;
+    z-index: -1;
+    pointer-events: none;
+    background: #09080f url("/images/hero-cover.png") center 20% / cover no-repeat;
+}
+
+.page-topbg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15, 14, 21, .45) 0%, rgb(15, 14, 21) 100%);
+}
+
+/* ==================================================================
+   About page: two-column grid with avatar
+   ================================================================== */
+.about-inner {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 40px;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .about-inner { grid-template-columns: 1fr; }
+}
+
+.about-pic { position: relative; max-width: 260px; margin: 0 auto; }
+
+@media (max-width: 768px) {
+    .about-pic { margin: 30px auto 0; width: 55%; }
+}
+
+.pic-wrapper {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    background-color: var(--accent);
+    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, .5);
+    transition: transform .25s cubic-bezier(.645, .045, .355, 1);
+}
+
+.pic-wrapper::before,
+.pic-wrapper::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    transition: all .25s cubic-bezier(.645, .045, .355, 1);
+}
+
+.pic-wrapper::before { top: 0; left: 0; background-color: var(--theme); mix-blend-mode: screen; }
+.pic-wrapper::after { border: 2px solid var(--accent); top: 12px; left: 12px; z-index: -1; }
+
+.pic-wrapper:hover { transform: translate(-4px, -4px); }
+.pic-wrapper:hover::after { transform: translate(8px, 8px); }
+.pic-wrapper:hover .profile-img { filter: none; mix-blend-mode: normal; }
+
+.profile-img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    mix-blend-mode: luminosity;
+    filter: grayscale(60%) contrast(1.1);
+    transition: filter .25s cubic-bezier(.645, .045, .355, 1);
+    display: block;
+}

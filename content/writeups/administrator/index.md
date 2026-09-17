@@ -1,6 +1,6 @@
 ---
 title: "Administrator — Hack The Box"
-date: 2026-06-28
+date: 2026-08-22
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "medium"]
 categories: ["writeups"]

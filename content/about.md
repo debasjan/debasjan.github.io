@@ -7,8 +7,11 @@ ShowToc: false
 hidemeta: true
 ---
 
+<div class="page-topbg"></div>
+
 <div class="numbered-page">
 <h2 class="numbered-heading">About Me</h2>
+<div class="about-inner">
 <div class="about-text">
 <p>Hi! I'm Jan Jędrzejak (aka <strong>debas</strong>), currently working as a systems administrator at a Dutch local government organization, transitioning into penetration testing.</p>
 <p>In my day job I handle security-related tasks and system hardening, and I'm currently preparing for the OSCP to formalize that shift into offensive security.</p>
@@ -20,6 +23,12 @@ hidemeta: true
 <li>Web Application Fundamentals</li>
 <li>eJPT Certified, OSCP in progress</li>
 </ul>
+</div>
+<div class="about-pic">
+<div class="pic-wrapper">
+<img class="profile-img" src="/images/avatar.png" alt="Jan Jędrzejak (debas)">
+</div>
+</div>
 </div>
 
 <h2 class="numbered-heading">Where I've Worked</h2>

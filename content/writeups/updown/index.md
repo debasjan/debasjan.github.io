@@ -1,6 +1,6 @@
 ---
 title: "UpDown — Hack The Box"
-date: 2026-07-24
+date: 2026-09-17
 draft: false
 tags: ["hackthebox", "linux", "medium"]
 categories: ["writeups"]

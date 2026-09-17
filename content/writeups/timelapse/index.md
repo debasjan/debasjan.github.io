@@ -1,6 +1,6 @@
 ---
 title: "Timelapse — Hack The Box"
-date: 2026-07-23
+date: 2026-09-16
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "easy"]
 categories: ["writeups"]

@@ -1,6 +1,6 @@
 ---
 title: "Lame — Hack The Box"
-date: 2026-07-12
+date: 2026-09-05
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]

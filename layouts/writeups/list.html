@@ -3,6 +3,8 @@
 {{- $htb := where $all "Params.tags" "intersect" (slice "hackthebox") }}
 {{- $thm := where $all "Params.tags" "intersect" (slice "tryhackme") }}
 
+<div class="page-topbg"></div>
+
 <div class="wu-page">
 
   <div class="wu-hero">
@@ -55,6 +57,7 @@
     <div class="wu-legend">
       <span class="wu-legend__item"><span class="wu-dot wu-dot--linux"></span> Linux</span>
       <span class="wu-legend__item"><span class="wu-dot wu-dot--windows"></span> Windows</span>
+      <span class="wu-legend__item"><span class="wu-dot wu-dot--ad"></span> Active Directory</span>
     </div>
 
     {{- $easy := where $pages "Params.tags" "intersect" (slice "easy") }}
@@ -77,6 +80,7 @@
         {{- range .pages }}
         {{- $osClass := "linux" }}
         {{- if in .Params.tags "windows" }}{{ $osClass = "windows" }}{{ end }}
+        {{- if in .Params.tags "active-directory" }}{{ $osClass = "ad" }}{{ end }}
         <a href="{{ .Permalink }}" class="wu-card" data-tags="{{ delimit .Params.tags " " }} {{ lower .Title }}">
           <div class="wu-card__inner">
             <span class="wu-dot wu-dot--{{ $osClass }}"></span>

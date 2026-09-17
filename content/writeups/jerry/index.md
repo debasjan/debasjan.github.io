@@ -1,6 +1,6 @@
 ---
 title: "Jerry — Hack The Box"
-date: 2026-07-10
+date: 2026-09-03
 draft: false
 tags: ["hackthebox", "windows", "easy"]
 categories: ["writeups"]

@@ -1,6 +1,6 @@
 ---
 title: "Editor — Hack The Box"
-date: 2026-07-06
+date: 2026-08-30
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]

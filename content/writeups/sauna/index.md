@@ -1,6 +1,6 @@
 ---
 title: "Sauna — Hack The Box"
-date: 2026-07-20
+date: 2026-09-13
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "easy"]
 categories: ["writeups"]

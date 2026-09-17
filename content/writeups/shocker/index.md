@@ -1,6 +1,6 @@
 ---
 title: "Shocker — Hack The Box"
-date: 2026-07-21
+date: 2026-09-14
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]

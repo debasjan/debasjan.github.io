@@ -1,6 +1,6 @@
 ---
 title: "Blue — Hack The Box"
-date: 2026-07-02
+date: 2026-08-26
 draft: false
 tags: ["hackthebox", "windows", "easy"]
 categories: ["writeups"]

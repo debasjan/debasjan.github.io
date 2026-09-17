@@ -7,6 +7,8 @@ ShowToc: false
 hidemeta: true
 ---
 
+<div class="page-topbg"></div>
+
 <div class="timeline-sidebar" id="certTimeline"></div>
 
 <div class="certs-hero">
@@ -54,22 +56,6 @@ hidemeta: true
 <div class="cert-card" data-category="offensive">
 <div class="cert-card__header">
 <div class="cert-card__id">
-<span class="cert-card__badge">eJ</span>
-<span class="cert-card__acronym">eJPT</span>
-</div>
-<span class="cert-card__check done">✓</span>
-</div>
-<div class="cert-card__vendor">INE / eLearnSecurity</div>
-<h3 class="cert-card__title">Junior Penetration Tester</h3>
-<p class="cert-card__desc">Practical, scenario-based exam covering network and web fundamentals.</p>
-<span class="cert-card__date">Completed</span>
-<div class="cert-card__actions">
-<a href="https://certs.ine.com/e5da4c9b-82af-4036-87af-0da6644de771" target="_blank" rel="noopener noreferrer">Verify Credential →</a>
-</div>
-</div>
-<div class="cert-card" data-category="offensive">
-<div class="cert-card__header">
-<div class="cert-card__id">
 <span class="cert-card__badge">OS</span>
 <span class="cert-card__acronym">OSCP</span>
 </div>
@@ -79,6 +65,28 @@ hidemeta: true
 <h3 class="cert-card__title">OffSec Certified Professional</h3>
 <p class="cert-card__desc">Working through the PEN-200 course and lab machines, focused on methodology over memorized exploits.</p>
 <span class="cert-card__date">In Progress</span>
+</div>
+</div>
+</div>
+
+<div class="cert-milestone" data-year="2025">
+<div class="cert-milestone-year">2025</div>
+<div class="cert-grid">
+<div class="cert-card" data-category="offensive">
+<div class="cert-card__header">
+<div class="cert-card__id">
+<span class="cert-card__badge">eJ</span>
+<span class="cert-card__acronym">eJPT</span>
+</div>
+<span class="cert-card__check done">✓</span>
+</div>
+<div class="cert-card__vendor">INE / eLearnSecurity</div>
+<h3 class="cert-card__title">Junior Penetration Tester</h3>
+<p class="cert-card__desc">Practical, scenario-based exam covering network and web fundamentals.</p>
+<span class="cert-card__date">December 2025</span>
+<div class="cert-card__actions">
+<a href="https://certs.ine.com/e5da4c9b-82af-4036-87af-0da6644de771" target="_blank" rel="noopener noreferrer">Verify Credential →</a>
+</div>
 </div>
 </div>
 </div>

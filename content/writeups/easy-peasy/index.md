@@ -1,6 +1,6 @@
 ---
 title: "Easy Peasy — TryHackMe"
-date: 2026-07-28
+date: 2026-08-12
 draft: false
 tags: ["tryhackme", "linux", "easy"]
 categories: ["writeups"]

@@ -1,6 +1,6 @@
 ---
 title: "Ice — TryHackMe"
-date: 2026-07-29
+date: 2026-08-13
 draft: false
 tags: ["tryhackme", "windows", "easy"]
 categories: ["writeups"]

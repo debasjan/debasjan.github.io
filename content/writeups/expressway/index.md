@@ -1,6 +1,6 @@
 ---
 title: "Expressway — Hack The Box"
-date: 2026-07-07
+date: 2026-08-31
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]
