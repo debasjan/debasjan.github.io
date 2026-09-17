@@ -1,4 +1,5 @@
-{{- /* Project override of PaperMod's post_meta: date intentionally omitted. */ -}}
+{{- /* Project override of PaperMod's post_meta: date and author intentionally
+   omitted (author shown once via the avatar/authorline instead). */ -}}
 {{- $scratch := newScratch }}
 
 {{- if (.Param "ShowReadingTime") -}}
@@ -7,12 +8,6 @@
 
 {{- if (.Param "ShowWordCount") -}}
     {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" (i18n "words" .WordCount | default (printf "%d words" .WordCount)))) }}
-{{- end }}
-
-{{- if not (.Param "hideAuthor") -}}
-    {{- with (partial "author.html" .) }}
-        {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" .)) }}
-    {{- end }}
 {{- end }}
 
 {{- with ($scratch.Get "meta") }}

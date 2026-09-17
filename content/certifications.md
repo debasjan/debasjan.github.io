@@ -7,6 +7,8 @@ ShowToc: false
 hidemeta: true
 ---
 
+<div class="timeline-sidebar" id="certTimeline"></div>
+
 <div class="certs-hero">
 <p class="certs-hero__sub">A running record of certifications and lab completions from my <span class="accent">offensive security journey</span>.</p>
 <div class="certs-stats">
@@ -111,5 +113,33 @@ hidemeta: true
       });
     });
   });
+
+  var timeline = document.getElementById('certTimeline');
+  var milestoneEls = document.querySelectorAll('.cert-milestone');
+  if (timeline && milestoneEls.length) {
+    milestoneEls.forEach(function (m, i) {
+      var year = m.getAttribute('data-year');
+      var item = document.createElement('div');
+      item.className = 'timeline-sidebar-item' + (i === 0 ? ' active' : '');
+      item.innerHTML = '<span class="timeline-dot"></span><span class="timeline-year-label">' + year + '</span>';
+      item.addEventListener('click', function () {
+        m.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      timeline.appendChild(item);
+    });
+
+    var items = timeline.querySelectorAll('.timeline-sidebar-item');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var idx = Array.prototype.indexOf.call(milestoneEls, entry.target);
+        if (entry.isIntersecting && idx !== -1) {
+          items.forEach(function (it) { it.classList.remove('active'); });
+          items[idx].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px' });
+
+    milestoneEls.forEach(function (m) { observer.observe(m); });
+  }
 })();
 </script>
