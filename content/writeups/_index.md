@@ -1,9 +1,5 @@
 ---
 title: "Write-ups"
-layout: "posts"
 summary: "Write-ups from HackTheBox and OSCP labs"
-description: "Write-ups from HackTheBox and OSCP labs"
+description: "Step-by-step breakdowns of HackTheBox machines and TryHackMe rooms — from initial enumeration through to full system compromise."
 ---
-
-Write-ups from HackTheBox machines and OSCP preparation. The focus is on the
-reasoning behind each step, not just a list of commands.

@@ -1,0 +1,128 @@
+{{- define "main" }}
+{{- $all := .RegularPages }}
+{{- $htb := where $all "Params.tags" "intersect" (slice "hackthebox") }}
+{{- $thm := where $all "Params.tags" "intersect" (slice "tryhackme") }}
+
+<div class="wu-page">
+
+  <div class="wu-hero">
+    <div class="wu-hero__eyebrow">Lab Write-ups</div>
+    <h1>CTF <span class="accent">Write-ups</span></h1>
+    <p class="wu-hero__sub">{{ .Description | default "Step-by-step breakdowns of HackTheBox machines and TryHackMe rooms — from initial enumeration through to full system compromise." }}</p>
+    <div class="wu-hero__stats">
+      <div class="wu-hero__stat">
+        <span class="wu-hero__stat-value">{{ len $all }}</span>
+        <span class="wu-hero__stat-label">Total Write-ups</span>
+      </div>
+      <div class="wu-hero__stat">
+        <span class="wu-hero__stat-value">{{ len $htb }}</span>
+        <span class="wu-hero__stat-label">HTB Machines</span>
+      </div>
+      <div class="wu-hero__stat">
+        <span class="wu-hero__stat-value">{{ len $thm }}</span>
+        <span class="wu-hero__stat-label">TryHackMe Rooms</span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="wu-nav" id="wuNav" aria-label="Jump to section">
+    <a href="#hackthebox">Hack The Box</a>
+    <a href="#tryhackme">TryHackMe</a>
+  </nav>
+
+  <div class="wu-search">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <input id="wuSearch" type="text" placeholder="Search write-ups by name or tag…" autocomplete="off">
+  </div>
+  <p class="wu-search__count" id="wuSearchCount"></p>
+  <p class="wu-empty" id="wuGlobalEmpty" style="display:none">No write-ups match your search.</p>
+
+  {{- $groups := slice
+    (dict "id" "hackthebox" "title" "Hack The Box" "desc" "Retired HackTheBox machines, from first foothold to root." "pages" $htb)
+    (dict "id" "tryhackme"  "title" "TryHackMe"    "desc" "Guided and CTF-style TryHackMe rooms."                      "pages" $thm)
+  }}
+
+  {{- range $gi, $group := $groups }}
+  {{- $pages := $group.pages }}
+  {{- if gt (len $pages) 0 }}
+  {{- if gt $gi 0 }}<hr class="wu-divider">{{ end }}
+  <section class="wu-section" id="{{ $group.id }}" data-section>
+    <div class="wu-section__header">
+      <h2 class="wu-section__title">{{ $group.title }}</h2>
+      <span class="wu-section__badge">{{ len $pages }} write-ups</span>
+    </div>
+    <p class="wu-section__desc">{{ $group.desc }}</p>
+    <div class="wu-legend">
+      <span class="wu-legend__item"><span class="wu-dot wu-dot--linux"></span> Linux</span>
+      <span class="wu-legend__item"><span class="wu-dot wu-dot--windows"></span> Windows</span>
+    </div>
+
+    {{- $easy := where $pages "Params.tags" "intersect" (slice "easy") }}
+    {{- $medium := where $pages "Params.tags" "intersect" (slice "medium") }}
+    {{- $hard := where $pages "Params.tags" "intersect" (slice "hard") }}
+
+    {{- range (slice
+        (dict "key" "easy"   "name" "Easy"   "pages" $easy)
+        (dict "key" "medium" "name" "Medium" "pages" $medium)
+        (dict "key" "hard"   "name" "Hard"   "pages" $hard)
+      ) }}
+    {{- if gt (len .pages) 0 }}
+    <div class="wu-difficulty" data-difficulty>
+      <div class="wu-difficulty__header">
+        <div class="wu-difficulty__bar wu-difficulty__bar--{{ .key }}"></div>
+        <h3 class="wu-difficulty__name wu-difficulty__name--{{ .key }}">{{ .name }}</h3>
+        <p class="wu-difficulty__count">({{ len .pages }})</p>
+      </div>
+      <div class="wu-grid">
+        {{- range .pages }}
+        {{- $osClass := "linux" }}
+        {{- if in .Params.tags "windows" }}{{ $osClass = "windows" }}{{ end }}
+        <a href="{{ .Permalink }}" class="wu-card" data-tags="{{ delimit .Params.tags " " }} {{ lower .Title }}">
+          <div class="wu-card__inner">
+            <span class="wu-dot wu-dot--{{ $osClass }}"></span>
+            {{- $shortName := .Title | replaceRE " — Hack The Box$| — TryHackMe$" "" }}
+            <span class="wu-card__name">{{ $shortName }}</span>
+          </div>
+        </a>
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+    {{- end }}
+  </section>
+  {{- end }}
+  {{- end }}
+
+</div>
+
+<script>
+(function () {
+  var input = document.getElementById('wuSearch');
+  var countEl = document.getElementById('wuSearchCount');
+  var globalEmpty = document.getElementById('wuGlobalEmpty');
+  if (!input) return;
+
+  function filter() {
+    var q = input.value.trim().toLowerCase();
+    var visibleTotal = 0;
+    document.querySelectorAll('[data-section]').forEach(function (section) {
+      var sectionVisible = 0;
+      section.querySelectorAll('[data-difficulty]').forEach(function (group) {
+        var groupVisible = 0;
+        group.querySelectorAll('.wu-card').forEach(function (card) {
+          var match = !q || card.getAttribute('data-tags').indexOf(q) !== -1;
+          card.style.display = match ? '' : 'none';
+          if (match) { groupVisible++; sectionVisible++; visibleTotal++; }
+        });
+        group.style.display = groupVisible ? '' : 'none';
+      });
+      section.style.display = sectionVisible ? '' : 'none';
+    });
+    countEl.textContent = q ? (visibleTotal + ' result' + (visibleTotal === 1 ? '' : 's')) : '';
+    globalEmpty.style.display = (q && visibleTotal === 0) ? '' : 'none';
+  }
+
+  input.addEventListener('input', filter);
+})();
+</script>
+{{- end }}
