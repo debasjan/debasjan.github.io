@@ -1,0 +1,27 @@
+{{- /* Project override: single-row header — logo left, menu centered, search icon right. */ -}}
+{{- $currentPage := . }}
+<header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="{{ "" | absLangURL }}" accesskey="h" title="{{ site.Title }} (Alt + H)">{{ site.Params.label.text | default site.Title }}</a>
+        </div>
+        <ul id="menu" class="menu">
+            {{- range site.Menus.main }}
+            {{- $is_search := eq (site.GetPage .KeyName).Layout `search` }}
+            {{- if not $is_search }}
+            {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
+            {{- $page_url := $currentPage.Permalink | absLangURL }}
+            <li>
+                <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}">
+                    <span {{- if eq $menu_item_url $page_url }} class="active" {{- end }}>{{ .Name }}</span>
+                    {{- if (findRE "://" .URL) }}&nbsp;<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path></svg>{{ end }}
+                </a>
+            </li>
+            {{- end }}
+            {{- end }}
+        </ul>
+        <a class="header-search" href="{{ "/search/" | relURL }}" accesskey="/" title="Search (Alt + /)" aria-label="Search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        </a>
+    </nav>
+</header>

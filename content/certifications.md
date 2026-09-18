@@ -5,6 +5,7 @@ url: "/certifications/"
 summary: "Certifications and lab completions"
 ShowToc: false
 hidemeta: true
+hero: true
 ---
 
 <div class="page-topbg"></div>

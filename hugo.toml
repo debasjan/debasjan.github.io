@@ -19,6 +19,9 @@ pygmentsUseClasses = true
   home = ["HTML", "RSS", "JSON"]
 
 [params]
+  [params.label]
+    text = "debas"
+
   env = "production"
   title = "debas — pentesting & security blog"
   description = "Write-ups from HackTheBox and OSCP labs, and offensive-security material by debas."
