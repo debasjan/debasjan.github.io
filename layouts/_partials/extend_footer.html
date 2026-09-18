@@ -3,41 +3,44 @@
 {{- $tags := site.Taxonomies.tags }}
 
 <section class="footer-widgets">
-  <div class="footer-widgets__grid">
+  <div class="fw-container">
+    <div class="footer-widgets__grid">
 
-    <div>
-      <h3 class="fw-title">Latest Posts</h3>
-      {{- range $recent }}
-      {{- $page := . }}
-      <div class="fw-recent">
-        {{- with $page.Params.cover.image }}
-        {{- $cover := ($page.Resources.ByType "image").GetMatch (printf "*%s*" .) }}
-        {{- if $cover }}
-        <a class="fw-recent__img" href="{{ $page.Permalink }}">
-          <img src="{{ $cover.Permalink }}" alt="{{ $page.Title }}" loading="lazy">
-        </a>
+      <div class="fw-col">
+        <h3 class="fw-title">Latest Posts</h3>
+        {{- range $recent }}
+        {{- $page := . }}
+        <div class="fw-recent">
+          {{- with $page.Params.cover.image }}
+          {{- $cover := ($page.Resources.ByType "image").GetMatch (printf "*%s*" .) }}
+          {{- if $cover }}
+          <a class="fw-recent__img" href="{{ $page.Permalink }}" aria-label="{{ $page.Title }}">
+            <img src="{{ $cover.Permalink }}" alt="{{ $page.Title }}" loading="lazy">
+          </a>
+          {{- end }}
+          {{- end }}
+          <div class="fw-recent__body">
+            <div class="fw-recent__meta">{{ $page.ReadingTime }} min read</div>
+            <h4 class="fw-recent__title"><a href="{{ $page.Permalink }}">{{ $page.Title }}</a></h4>
+            <div class="fw-recent__author">
+              <img src="{{ "/images/avatar.png" | relURL }}" alt="Jan Jędrzejak (debas)">
+              <span>debas</span>
+            </div>
+          </div>
+        </div>
         {{- end }}
-        {{- end }}
-        <div>
-          <h4 class="fw-recent__title"><a href="{{ $page.Permalink }}">{{ $page.Title }}</a></h4>
-          <div class="fw-recent__meta">{{ $page.ReadingTime }} min read</div>
+      </div>
+
+      <div class="fw-col">
+        <h3 class="fw-title">Explore Tags</h3>
+        <div class="fw-tagcloud">
+          {{- range $term, $weighted := $tags }}
+          <a href="{{ printf "/tags/%s/" $term | relURL }}">{{ $term }}</a>
+          {{- end }}
         </div>
       </div>
-      {{- end }}
-    </div>
 
-    <div>
-      <h3 class="fw-title">Explore Tags</h3>
-      {{- $tagLabels := dict "hackthebox" "HackTheBox" "tryhackme" "TryHackMe" "active-directory" "Active Directory" }}
-      <div class="fw-tagcloud">
-        {{- range $term, $weighted := $tags }}
-        {{- $label := index $tagLabels $term }}
-        {{- if not $label }}{{ $label = title $term }}{{ end }}
-        <a href="{{ printf "/tags/%s/" $term | relURL }}">{{ $label }}</a>
-        {{- end }}
-      </div>
     </div>
-
   </div>
 </section>
 
