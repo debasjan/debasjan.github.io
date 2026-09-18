@@ -1056,3 +1056,7 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
 
 /* About: narrower column, bigger picture */
 .about-pic { max-width: 300px; }
+
+/* PaperMod hides covers on tag pages; keep the overlay cards there too */
+.posts-grid .tag-entry .entry-cover { display: block; }
+.posts-grid .tag-entry .entry-header h2 { font-size: 1.45rem; }
