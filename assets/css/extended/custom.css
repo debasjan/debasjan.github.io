@@ -158,20 +158,24 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
 .hero-banner {
     position: relative;
     margin: calc(var(--gap) * -1) calc(var(--gap) * -1) var(--content-gap);
-    min-height: 460px;
+    min-height: 640px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     overflow: hidden;
-    background: #09080f url("/images/hero-cover.png") center / cover no-repeat;
+    background: #09080f url("/images/hero-cover.png") center 38% / cover no-repeat;
 }
 
 .hero-banner::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(15, 14, 21, .35) 0%, rgb(15, 14, 21) 100%);
+    background: linear-gradient(180deg, rgba(15, 14, 21, .15) 0%, rgba(15, 14, 21, .55) 55%, rgb(15, 14, 21) 100%);
+}
+
+@media (max-width: 640px) {
+    .hero-banner { min-height: 460px; }
 }
 
 .hero-banner__inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 24px; }
@@ -845,17 +849,21 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
     top: 0;
     left: 0;
     right: 0;
-    height: 420px;
+    height: 640px;
     z-index: -1;
     pointer-events: none;
-    background: #09080f url("/images/hero-cover.png") center 20% / cover no-repeat;
+    background: #09080f url("/images/hero-cover.png") center 38% / cover no-repeat;
 }
 
 .page-topbg::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(15, 14, 21, .45) 0%, rgb(15, 14, 21) 100%);
+    background: linear-gradient(180deg, rgba(15, 14, 21, .15) 0%, rgba(15, 14, 21, .55) 55%, rgb(15, 14, 21) 100%);
+}
+
+@media (max-width: 640px) {
+    .page-topbg { height: 460px; }
 }
 
 /* ==================================================================
