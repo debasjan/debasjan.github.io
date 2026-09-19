@@ -1060,3 +1060,197 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
 /* PaperMod hides covers on tag pages; keep the overlay cards there too */
 .posts-grid .tag-entry .entry-cover { display: block; }
 .posts-grid .tag-entry .entry-header h2 { font-size: 1.45rem; }
+
+/* ==================================================================
+   Write-up single page — reading progress, badges, On-This-Page TOC
+   (layout mirrors blog.thepentesting.ninja post page, in my own palette)
+   ================================================================== */
+
+/* thin reading-progress bar */
+.reading-progress {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    z-index: 9999;
+    background: rgba(45, 173, 240, .08);
+    pointer-events: none;
+}
+.reading-progress__fill {
+    display: block;
+    height: 100%; width: 0;
+    background: var(--accent);
+    box-shadow: 0 0 8px rgba(45, 173, 240, .6);
+    transition: width .05s linear;
+}
+
+/* header meta bar: reading time + date + Platform/OS/Difficulty badges */
+.wu-metabar { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin: 16px 0 4px; }
+.wu-meta__item { font-size: .85rem; font-weight: 600; color: var(--secondary); }
+.wu-meta__date { color: rgba(170, 170, 170, .75); }
+
+.wu-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    padding: 5px 11px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--entry);
+    color: var(--secondary);
+}
+.wu-badge__ic { flex-shrink: 0; display: block; }
+.wu-badge--platform { color: var(--accent); background: var(--accent-dim); border-color: rgba(45,173,240,.3); }
+.wu-badge--win   { color: #5aadf0; border-color: rgba(90,173,240,.4);  background: rgba(90,173,240,.10); }
+.wu-badge--linux { color: #f0c040; border-color: rgba(240,192,64,.4);  background: rgba(240,192,64,.10); }
+.wu-badge--ad    { color: #fb923c; border-color: rgba(251,146,60,.4);  background: rgba(251,146,60,.10); }
+.wu-badge--diff-easy   { color: #4ade80; border-color: rgba(74,222,128,.35);  background: rgba(34,197,94,.10); }
+.wu-badge--diff-medium { color: #fb923c; border-color: rgba(251,146,60,.35);  background: rgba(249,115,22,.10); }
+.wu-badge--diff-hard   { color: #f87171; border-color: rgba(248,113,113,.35); background: rgba(239,68,68,.10); }
+
+/* ==================================================================
+   Code blocks — terminal-style card with copy button
+   (render hook: layouts/_markup/render-codeblock.html)
+   ================================================================== */
+.code-card {
+    margin: 20px 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--code-block-bg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+}
+
+.code-card__bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    background: rgb(19, 18, 26);
+    border-bottom: 1px solid rgba(255, 255, 255, .06);
+}
+
+.code-card__dots { display: inline-flex; gap: 7px; flex-shrink: 0; }
+.code-card__dots i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+.code-card__dots i:nth-child(1) { background: #ff5f56; }
+.code-card__dots i:nth-child(2) { background: #ffbd2e; }
+.code-card__dots i:nth-child(3) { background: #27c93f; }
+
+.code-card__lang {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .74rem;
+    color: var(--secondary);
+    letter-spacing: .02em;
+}
+
+.code-card__copy {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem;
+    font-weight: 700;
+    color: var(--secondary);
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 12px;
+    cursor: pointer;
+    transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.code-card__copy:hover { color: var(--accent); border-color: var(--accent); }
+.code-card__copy.copied { color: #4ade80; border-color: rgba(74,222,128,.5); }
+
+/* neutralise PaperMod's default wrapper styling inside the card */
+.code-card__body .highlight,
+.code-card__body pre.chroma {
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    background: var(--code-block-bg) !important;
+}
+.code-card__body .highlight { padding: 0; }
+.code-card__body pre.chroma { padding: 14px 16px; overflow-x: auto; }
+.code-card__body code { font-family: 'JetBrains Mono', monospace; font-size: .84rem; line-height: 1.55; }
+
+/* keep anchored headings clear of the sticky-ish top when jumped to */
+.writeup-single .post-content h2,
+.writeup-single .post-content h3 { scroll-margin-top: 90px; }
+
+/* fixed "On This Page" panel on the left gutter */
+.wu-toc {
+    position: fixed;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    width: 224px;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: rgba(23, 21, 30, .97);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 0;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+.wu-toc::-webkit-scrollbar { width: 3px; }
+.wu-toc::-webkit-scrollbar-thumb { background: rgba(45,173,240,.25); border-radius: 2px; }
+.wu-toc::-webkit-scrollbar-thumb:hover { background: rgba(45,173,240,.45); }
+
+.wu-toc__header {
+    display: flex; align-items: center; gap: 7px;
+    padding: 0 16px 10px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(45,173,240,.12);
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: rgba(45,173,240,.75);
+}
+
+.wu-toc #TableOfContents { font-size: .85rem; }
+.wu-toc #TableOfContents ul { list-style: none; margin: 0; padding: 0; }
+.wu-toc #TableOfContents ul ul { margin: 0; }
+
+.wu-toc #TableOfContents li > a {
+    display: block;
+    padding: 5px 14px 5px 13px;
+    border-left: 2px solid transparent;
+    color: rgba(170,170,170,.8);
+    text-decoration: none;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+/* nested (h3) links: indented + smaller */
+.wu-toc #TableOfContents ul ul li > a {
+    padding-left: 26px;
+    font-size: .78rem;
+    color: rgba(170,170,170,.6);
+}
+.wu-toc #TableOfContents li > a:hover {
+    color: rgba(45,173,240,.9);
+    border-left-color: rgba(45,173,240,.4);
+    background: rgba(45,173,240,.05);
+}
+/* active section (set by scroll-spy on the <li>) */
+.wu-toc #TableOfContents li.active > a {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: rgba(45,173,240,.08);
+    font-weight: 600;
+}
+
+@media (max-width: 1300px) { .wu-toc { display: none !important; } }
+@media (max-width: 1480px) and (min-width: 1301px) { .wu-toc { width: 186px; left: 12px; } }
+
+/* constrain the write-up reading column so the fixed TOC has clear gutter
+   space on the left (and for a more comfortable line length) */
+.writeup-single { max-width: 860px; margin-left: auto; margin-right: auto; }

@@ -47,3 +47,27 @@
 <nav class="social-sidebar" aria-label="Social links">
 {{- partial "footer_social_icons.html" . }}
 </nav>
+
+<script>
+(function () {
+  document.querySelectorAll('.code-card__copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var card = btn.closest('.code-card');
+      var body = card && card.querySelector('.code-card__body');
+      var text = body ? (body.innerText || body.textContent || '') : '';
+      var done = function () {
+        btn.classList.add('copied'); btn.textContent = 'copied!';
+        setTimeout(function () { btn.classList.remove('copied'); btn.textContent = 'copy'; }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function () {});
+      } else {
+        var r = document.createRange(); r.selectNodeContents(body);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        s.removeAllRanges();
+      }
+    });
+  });
+})();
+</script>

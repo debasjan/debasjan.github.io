@@ -1,0 +1,122 @@
+{{- define "main" }}
+
+{{- /* thin reading-progress bar at the very top of the viewport */ -}}
+<div class="reading-progress" aria-hidden="true"><span class="reading-progress__fill"></span></div>
+
+{{- $tags := .Params.tags }}
+{{- $isHTB := in $tags "hackthebox" }}
+{{- $isTHM := in $tags "tryhackme" }}
+{{- $isWin := in $tags "windows" }}
+{{- $isLin := in $tags "linux" }}
+{{- $isAD  := in $tags "active-directory" }}
+{{- $diff := "" }}
+{{- if in $tags "easy"   }}{{ $diff = "Easy"   }}{{ end }}
+{{- if in $tags "medium" }}{{ $diff = "Medium" }}{{ end }}
+{{- if in $tags "hard"   }}{{ $diff = "Hard"   }}{{ end }}
+
+<article class="post-single writeup-single">
+  <header class="post-header">
+    {{ partial "breadcrumbs.html" . }}
+    <h1 class="post-title">{{ .Title }}</h1>
+
+    {{- with .Description }}
+    <div class="post-description">{{ . }}</div>
+    {{- end }}
+
+    <div class="wu-metabar">
+      {{- if (.Param "ShowReadingTime") }}<span class="wu-meta__item">{{ .ReadingTime }} min read</span>{{ end }}
+      {{- if and (not .Date.IsZero) (ne (.Param "hideDate") true) }}<span class="wu-meta__item wu-meta__date">{{ .Date.Format (site.Params.DateFormat | default "January 2, 2006") }}</span>{{ end }}
+      {{- if $isWin }}<span class="wu-badge wu-badge--win">{{ partial "icon_windows.html" . }}Windows</span>{{ end }}
+      {{- if $isLin }}<span class="wu-badge wu-badge--linux">{{ partial "icon_linux.html" . }}Linux</span>{{ end }}
+      {{- if $isAD  }}<span class="wu-badge wu-badge--ad">Active Directory</span>{{ end }}
+      {{- with $diff }}<span class="wu-badge wu-badge--diff-{{ lower . }}">{{ . }}</span>{{ end }}
+      {{- if $isHTB }}<span class="wu-badge wu-badge--platform">Hack The Box</span>{{ end }}
+      {{- if $isTHM }}<span class="wu-badge wu-badge--platform">TryHackMe</span>{{ end }}
+    </div>
+  </header>
+
+  {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
+  {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
+
+  {{- if .Content }}
+  <div class="post-content md-content">
+    {{- partial "anchored_headings.html" .Content -}}
+  </div>
+  {{- end }}
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      {{- range ($.GetTerms "tags") }}
+      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+    {{- if (.Param "ShowPostNavLinks") }}
+    {{- partial "post_nav_links.html" . }}
+    {{- end }}
+  </footer>
+</article>
+
+{{- if (.Param "ShowToc") }}
+<aside class="wu-toc" aria-label="On this page">
+  <div class="wu-toc__header">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+    On This Page
+  </div>
+  {{ .TableOfContents }}
+</aside>
+
+<script>
+(function () {
+  var content = document.querySelector('.post-content');
+  var toc = document.querySelector('.wu-toc');
+  var fill = document.querySelector('.reading-progress__fill');
+  if (!content) return;
+
+  // ---- reading progress ----
+  function onScroll() {
+    if (fill) {
+      var h = document.documentElement;
+      var max = (h.scrollHeight - h.clientHeight) || 1;
+      fill.style.width = Math.min(100, Math.max(0, (h.scrollTop / max) * 100)) + '%';
+    }
+    spy();
+  }
+
+  // ---- scroll-spy ----
+  var links = toc ? Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]')) : [];
+  var map = {};
+  links.forEach(function (a) {
+    var id = decodeURIComponent(a.getAttribute('href').slice(1));
+    map[id] = a.parentElement; // the <li>
+  });
+  var heads = Array.prototype.slice.call(content.querySelectorAll('h2[id], h3[id]'));
+
+  function spy() {
+    if (!heads.length || !links.length) return;
+    var pos = window.scrollY + 120;
+    var current = heads[0];
+    for (var i = 0; i < heads.length; i++) {
+      if (heads[i].offsetTop <= pos) current = heads[i]; else break;
+    }
+    links.forEach(function (a) { a.parentElement.classList.remove('active'); });
+    var li = map[current.id];
+    if (li) li.classList.add('active');
+  }
+
+  // ---- smooth scroll ----
+  links.forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = decodeURIComponent(a.getAttribute('href').slice(1));
+      var el = document.getElementById(id);
+      if (el) { e.preventDefault(); window.scrollTo({ top: el.offsetTop - 90, behavior: 'smooth' }); history.replaceState(null, '', '#' + id); }
+    });
+  });
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+{{- end }}
+
+{{- end }}{{/* end main */}}

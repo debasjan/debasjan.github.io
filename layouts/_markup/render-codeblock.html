@@ -1,0 +1,12 @@
+{{- $lang := .Type -}}
+{{- $label := $lang -}}
+{{- if eq $label "" }}{{ $label = "plain text" }}{{ end -}}
+{{- $code := transform.Highlight (strings.TrimRight "\n" .Inner) $lang "lineNos=false" -}}
+<div class="code-card">
+  <div class="code-card__bar">
+    <span class="code-card__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="code-card__lang">{{ $label }}</span>
+    <button class="code-card__copy" type="button" aria-label="Copy code">copy</button>
+  </div>
+  <div class="code-card__body">{{ $code }}</div>
+</div>
