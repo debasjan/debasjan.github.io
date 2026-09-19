@@ -8,7 +8,7 @@ summary: "CozyHosting is a Linux box built around a misconfigured Spring Boot ap
 ShowToc: true
 TocOpen: false
 cover:
-  image: "00-card.jpg"
+  image: "00-card.png"
   alt: "CozyHosting — Hack The Box"
   relative: true
 ---
