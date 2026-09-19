@@ -1254,3 +1254,62 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
 /* constrain the write-up reading column so the fixed TOC has clear gutter
    space on the left (and for a more comfortable line length) */
 .writeup-single { max-width: 860px; margin-left: auto; margin-right: auto; }
+
+/* ==================================================================
+   About — "Connect With Me" cards (chevron heading + brand cards)
+   ================================================================== */
+.chevron-heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 44px 0 22px;
+    font-size: 1.7rem;
+    font-weight: 900;
+    color: var(--primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+}
+.chevron-heading::before {
+    content: ">";
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 900;
+}
+.chevron-heading::after {
+    content: "";
+    flex: 1 1 auto;
+    height: 1px;
+    background: var(--border);
+}
+
+.connect-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.connect-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 22px 18px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--entry);
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 1.02rem;
+    text-decoration: none;
+    transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.connect-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    background: rgba(45, 173, 240, .08);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .35);
+}
+.connect-card svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+@media (max-width: 800px) { .connect-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 460px) { .connect-grid { grid-template-columns: 1fr; } }
