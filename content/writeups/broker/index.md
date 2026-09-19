@@ -8,7 +8,7 @@ summary: "Broker runs a version of Apache ActiveMQ vulnerable to a critical unau
 ShowToc: true
 TocOpen: false
 cover:
-  image: "00-card.jpg"
+  image: "00-card.png"
   alt: "Broker — Hack The Box"
   relative: true
 ---
