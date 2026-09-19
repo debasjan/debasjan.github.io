@@ -1,6 +1,10 @@
-{{- /* Project override of PaperMod's post_meta: date and author intentionally
-   omitted (author shown once via the avatar/authorline instead). */ -}}
+{{- /* Project override of PaperMod's post_meta: shows the solve date + reading
+   time (author shown separately via the avatar/authorline). */ -}}
 {{- $scratch := newScratch }}
+
+{{- if and (not .Date.IsZero) (ne (.Param "hideDate") true) -}}
+    {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" (.Date.Format (site.Params.DateFormat | default "January 2, 2006")))) }}
+{{- end }}
 
 {{- if (.Param "ShowReadingTime") -}}
     {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" (i18n "read_time" .ReadingTime | default (printf "%d min" .ReadingTime)))) }}

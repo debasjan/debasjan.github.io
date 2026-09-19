@@ -1,6 +1,6 @@
 ---
 title: "Fluffy — Hack The Box"
-date: 2026-09-01
+date: 2026-03-06
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "easy"]
 categories: ["writeups"]

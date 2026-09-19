@@ -1,6 +1,6 @@
 ---
 title: "Bashed — Hack The Box"
-date: 2026-08-24
+date: 2026-03-07
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]

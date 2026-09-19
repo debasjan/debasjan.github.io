@@ -1,6 +1,7 @@
 ---
 title: "Academy — Hack The Box"
-date: 2026-08-20
+date: 2025-03-20
+hideDate: true
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]

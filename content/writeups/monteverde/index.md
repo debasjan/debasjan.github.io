@@ -1,6 +1,6 @@
 ---
 title: "Monteverde — Hack The Box"
-date: 2026-09-07
+date: 2026-03-08
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "medium"]
 categories: ["writeups"]

@@ -1,6 +1,7 @@
 ---
 title: "ToolsRus — TryHackMe"
-date: 2026-08-19
+date: 2025-03-08
+hideDate: true
 draft: false
 tags: ["tryhackme", "linux", "easy"]
 categories: ["writeups"]

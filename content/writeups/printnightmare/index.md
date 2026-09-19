@@ -1,6 +1,7 @@
 ---
 title: "PrintNightmare — TryHackMe"
-date: 2026-08-16
+date: 2025-03-11
+hideDate: true
 draft: false
 tags: ["tryhackme", "windows", "active-directory", "medium"]
 categories: ["writeups"]

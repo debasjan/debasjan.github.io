@@ -1,6 +1,6 @@
 ---
 title: "Outbound — Hack The Box"
-date: 2026-09-10
+date: 2025-10-12
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]

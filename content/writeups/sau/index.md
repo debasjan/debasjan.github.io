@@ -1,6 +1,6 @@
 ---
 title: "Sau — Hack The Box"
-date: 2026-09-12
+date: 2026-05-22
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]

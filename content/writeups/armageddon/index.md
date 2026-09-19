@@ -1,6 +1,6 @@
 ---
 title: "Armageddon — Hack The Box"
-date: 2026-08-23
+date: 2025-10-08
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]

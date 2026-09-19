@@ -1,6 +1,6 @@
 ---
 title: "Cap — Hack The Box"
-date: 2026-08-28
+date: 2025-09-03
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]

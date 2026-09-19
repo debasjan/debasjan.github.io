@@ -1,6 +1,6 @@
 ---
 title: "Nibbles — Hack The Box"
-date: 2026-09-08
+date: 2025-12-09
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]

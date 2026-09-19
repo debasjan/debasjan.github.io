@@ -1,6 +1,6 @@
 ---
 title: "Cicada — Hack The Box"
-date: 2026-08-29
+date: 2026-01-30
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "easy"]
 categories: ["writeups"]

@@ -1,6 +1,6 @@
 ---
 title: "Keeper — Hack The Box"
-date: 2026-09-04
+date: 2026-05-23
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]

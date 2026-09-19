@@ -1,6 +1,6 @@
 ---
 title: "Optimum — Hack The Box"
-date: 2026-09-09
+date: 2025-12-10
 draft: false
 tags: ["hackthebox", "windows", "easy"]
 categories: ["writeups"]

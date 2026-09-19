@@ -1,6 +1,6 @@
 ---
 title: "Resolute — Hack The Box"
-date: 2026-09-11
+date: 2026-01-21
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "medium"]
 categories: ["writeups"]

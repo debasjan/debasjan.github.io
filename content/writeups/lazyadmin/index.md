@@ -1,6 +1,7 @@
 ---
 title: "LazyAdmin — TryHackMe"
-date: 2026-08-15
+date: 2025-03-12
+hideDate: true
 draft: false
 tags: ["tryhackme", "linux", "easy"]
 categories: ["writeups"]

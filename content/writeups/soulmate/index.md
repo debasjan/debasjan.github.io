@@ -1,6 +1,6 @@
 ---
 title: "Soulmate — Hack The Box"
-date: 2026-09-15
+date: 2025-09-28
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]

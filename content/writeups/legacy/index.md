@@ -1,6 +1,6 @@
 ---
 title: "Legacy — Hack The Box"
-date: 2026-09-06
+date: 2025-12-08
 draft: false
 tags: ["hackthebox", "windows", "easy"]
 categories: ["writeups"]

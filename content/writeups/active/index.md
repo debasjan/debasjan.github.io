@@ -1,6 +1,6 @@
 ---
 title: "Active — Hack The Box"
-date: 2026-08-21
+date: 2025-10-05
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "easy"]
 categories: ["writeups"]

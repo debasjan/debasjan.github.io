@@ -1,6 +1,7 @@
 ---
 title: "Probe — TryHackMe"
-date: 2026-08-17
+date: 2025-03-10
+hideDate: true
 draft: false
 tags: ["tryhackme", "linux", "easy"]
 categories: ["writeups"]

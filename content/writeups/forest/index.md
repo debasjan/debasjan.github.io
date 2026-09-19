@@ -1,6 +1,6 @@
 ---
 title: "Forest — Hack The Box"
-date: 2026-09-02
+date: 2026-01-18
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "easy"]
 categories: ["writeups"]

@@ -1,6 +1,7 @@
 ---
 title: "RootMe — TryHackMe"
-date: 2026-08-18
+date: 2025-03-09
+hideDate: true
 draft: false
 tags: ["tryhackme", "linux", "easy"]
 categories: ["writeups"]

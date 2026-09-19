@@ -1,6 +1,6 @@
 ---
 title: "Broker — Hack The Box"
-date: 2026-08-27
+date: 2026-05-22
 draft: false
 tags: ["hackthebox", "linux", "easy"]
 categories: ["writeups"]

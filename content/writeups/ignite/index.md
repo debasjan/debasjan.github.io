@@ -1,6 +1,7 @@
 ---
 title: "Ignite — TryHackMe"
-date: 2026-08-14
+date: 2025-03-13
+hideDate: true
 draft: false
 tags: ["tryhackme", "linux", "easy"]
 categories: ["writeups"]

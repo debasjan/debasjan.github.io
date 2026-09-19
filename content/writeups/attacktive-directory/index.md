@@ -1,6 +1,7 @@
 ---
 title: "Attacktive Directory — TryHackMe"
-date: 2026-08-10
+date: 2025-03-17
+hideDate: true
 draft: false
 tags: ["tryhackme", "windows", "active-directory", "medium"]
 categories: ["writeups"]
