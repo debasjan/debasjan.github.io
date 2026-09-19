@@ -8,7 +8,7 @@ summary: "Resolute chains a familiar early-AD pattern — anonymous enumeration,
 ShowToc: true
 TocOpen: false
 cover:
-  image: "00-card.webp"
+  image: "00-card.png"
   alt: "Resolute — Hack The Box"
   relative: true
 ---

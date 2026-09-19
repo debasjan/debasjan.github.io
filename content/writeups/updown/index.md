@@ -8,7 +8,7 @@ summary: "UpDown is the deepest chain in this batch: an exposed .git directory l
 ShowToc: true
 TocOpen: false
 cover:
-  image: "00-card.webp"
+  image: "00-card.png"
   alt: "UpDown — Hack The Box"
   relative: true
 ---
