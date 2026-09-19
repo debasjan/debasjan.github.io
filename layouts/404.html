@@ -1,0 +1,12 @@
+{{- define "main" }}
+<div class="page-topbg"></div>
+<section class="notfound">
+  <div class="notfound__code">404</div>
+  <h1 class="notfound__title">Page not found</h1>
+  <p class="notfound__desc">This page got rooted and never came back. Let's get you somewhere useful.</p>
+  <div class="hero-banner__cta">
+    <a class="primary" href="{{ "/" | relURL }}">← Home</a>
+    <a href="{{ "/writeups/" | relURL }}">Browse write-ups</a>
+  </div>
+</section>
+{{- end }}

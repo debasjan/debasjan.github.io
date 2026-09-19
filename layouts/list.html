@@ -72,6 +72,15 @@
 <article class="{{ $class }}">
   {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+  {{- $t := .Params.tags }}
+  {{- $os := "" }}{{ if in $t "windows" }}{{ $os = "Windows" }}{{ else if in $t "linux" }}{{ $os = "Linux" }}{{ end }}
+  {{- $diff := "" }}{{ if in $t "easy" }}{{ $diff = "Easy" }}{{ else if in $t "medium" }}{{ $diff = "Medium" }}{{ else if in $t "hard" }}{{ $diff = "Hard" }}{{ end }}
+  {{- if or $os $diff }}
+  <div class="entry-badges">
+    {{- with $diff }}<span class="entry-badge entry-badge--{{ lower . }}">{{ . }}</span>{{ end }}
+    {{- with $os }}<span class="entry-badge entry-badge--os"><span class="wu-dot wu-dot--{{ lower . }}"></span>{{ . }}</span>{{ end }}
+  </div>
+  {{- end }}
   <header class="entry-header">
     <h2 class="entry-hint-parent">
       {{- .Title }}

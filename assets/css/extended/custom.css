@@ -1313,3 +1313,63 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
 
 @media (max-width: 800px) { .connect-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 460px) { .connect-grid { grid-template-columns: 1fr; } }
+
+/* ==================================================================
+   Home/listing card badges (OS + difficulty chip over the cover)
+   ================================================================== */
+.posts-grid .post-entry .entry-badges,
+.posts-grid .first-entry .entry-badges {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.entry-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: .64rem;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 999px;
+    background: rgba(9, 8, 15, .82);
+    border: 1px solid var(--border);
+    color: #fff;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+.entry-badge--easy   { color: #4ade80; border-color: rgba(74,222,128,.45); }
+.entry-badge--medium { color: #fb923c; border-color: rgba(251,146,60,.45); }
+.entry-badge--hard   { color: #f87171; border-color: rgba(248,113,113,.45); }
+.entry-badge .wu-dot { width: 7px; height: 7px; }
+
+/* ==================================================================
+   Branded 404
+   ================================================================== */
+.notfound {
+    position: relative;
+    z-index: 1;
+    min-height: 52vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 16px;
+}
+.notfound__code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(5rem, 18vw, 9rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--accent);
+    text-shadow: 0 0 30px rgba(45, 173, 240, .35);
+    letter-spacing: -0.03em;
+}
+.notfound__title { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900; color: #fff; margin: 8px 0 10px; }
+.notfound__desc { color: var(--secondary); font-size: 1.02rem; max-width: 440px; margin: 0 0 24px; line-height: 1.6; }
