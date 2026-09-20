@@ -93,10 +93,14 @@ hero: true
 </div>
 </div>
 
-<section class="dante-feature">
-<h2 class="chevron-heading">About the Dante Pro Lab</h2>
-<div class="dante-feature__grid">
-<div class="dante-feature__text">
+<div class="cert-modal" id="certModal" aria-hidden="true">
+<div class="cert-modal__backdrop" data-cert-close></div>
+<button class="cert-modal__close" data-cert-close aria-label="Close">✕</button>
+<div class="cert-modal__body">
+<div class="cert-modal__grid">
+<img class="cert-modal__img" src="/images/certs/dante-certificate.png" alt="Dante Pro Lab certificate of completion — Jan Jędrzejak, HTBCERT-EB6BAAD3CB">
+<div class="cert-modal__info">
+<h2 class="cert-modal__title">About the Dante Pro Lab</h2>
 <p><strong>Dante</strong> is Hack The Box's beginner-friendly <strong>Red Team Operator Level I</strong> Pro Lab. Playing an external auditor for the fictional "Dante LLC", you breach the network perimeter and then explore the environment — moving laterally and vertically until you gain administrative control over every host and reach <strong>Domain Admin</strong>.</p>
 <p>It mixes Windows and Linux targets with the vulnerabilities, misconfigurations and attack paths seen in real engagements, plus flags hidden both on the main path and in optional side-quests.</p>
 <div class="dante-skills">
@@ -104,19 +108,8 @@ hero: true
 </div>
 <p class="dante-meta">40 hours · 40 CPE credits · Completed 22&nbsp;Feb&nbsp;2026 · Cert&nbsp;ID HTBCERT-EB6BAAD3CB</p>
 </div>
-<button class="dante-cert-thumb" data-cert-view aria-label="View the Dante certificate full size">
-<img src="/images/certs/dante-certificate-thumb.png" alt="Dante Pro Lab certificate of completion" loading="lazy" width="760" height="537">
-<span class="dante-cert-thumb__badge">🔍 View Certificate</span>
-</button>
 </div>
-</section>
-
-<div class="cert-modal" id="certModal" aria-hidden="true">
-<div class="cert-modal__backdrop" data-cert-close></div>
-<figure class="cert-modal__body">
-<button class="cert-modal__close" data-cert-close aria-label="Close">✕</button>
-<img src="/images/certs/dante-certificate.png" alt="Dante Pro Lab certificate of completion — Jan Jędrzejak, HTBCERT-EB6BAAD3CB">
-</figure>
+</div>
 </div>
 
 <hr class="wu-divider">
