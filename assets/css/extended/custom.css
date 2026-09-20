@@ -1373,3 +1373,97 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
 }
 .notfound__title { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900; color: #fff; margin: 8px 0 10px; }
 .notfound__desc { color: var(--secondary); font-size: 1.02rem; max-width: 440px; margin: 0 0 24px; line-height: 1.6; }
+
+/* ==================================================================
+   Certifications — Dante feature panel + certificate lightbox
+   ================================================================== */
+.dante-feature { position: relative; z-index: 1; margin: 48px 0 8px; }
+.dante-feature__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+}
+.dante-feature__text p { color: var(--secondary); line-height: 1.7; margin: 0 0 14px; }
+.dante-feature__text strong { color: var(--primary); }
+
+.dante-skills { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+.dante-skills span {
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 12px;
+}
+.dante-meta { font-family: 'JetBrains Mono', monospace; font-size: .8rem; color: var(--secondary); margin: 0; }
+
+.dante-cert-thumb {
+    position: relative;
+    display: block;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgb(9, 8, 15);
+    cursor: pointer;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.dante-cert-thumb img { display: block; width: 100%; height: auto; }
+.dante-cert-thumb:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 16px 32px rgba(0, 0, 0, .45); }
+.dante-cert-thumb__badge {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 10px;
+    text-align: center;
+    font-size: .82rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(to top, rgba(9, 8, 15, .92), rgba(9, 8, 15, 0));
+    opacity: 0;
+    transition: opacity .2s ease;
+}
+.dante-cert-thumb:hover .dante-cert-thumb__badge { opacity: 1; }
+
+@media (max-width: 720px) { .dante-feature__grid { grid-template-columns: 1fr; } }
+
+/* lightbox */
+.cert-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+.cert-modal.open { display: flex; }
+.cert-modal__backdrop { position: absolute; inset: 0; background: rgba(5, 4, 10, .85); backdrop-filter: blur(4px); }
+.cert-modal__body { position: relative; z-index: 1; max-width: 1000px; width: 100%; margin: 0; }
+.cert-modal__body img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .6);
+}
+.cert-modal__close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--entry);
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+.cert-modal__close:hover { background: var(--accent); color: rgb(9, 8, 15); transform: scale(1.08); }
+@media (max-width: 640px) { .cert-modal__close { top: 6px; right: 6px; } }

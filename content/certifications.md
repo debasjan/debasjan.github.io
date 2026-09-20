@@ -48,9 +48,10 @@ hero: true
 </div>
 <div class="cert-card__vendor">Hack The Box</div>
 <h3 class="cert-card__title">Dante Pro Lab</h3>
-<p class="cert-card__desc">Entry-level Active Directory pro lab — a full corporate network compromise from initial foothold to domain takeover.</p>
+<p class="cert-card__desc">Beginner-friendly Red Team Operator Level I lab — breach the perimeter, then move laterally and vertically across a mixed Windows/Linux Active Directory network to Domain Admin.</p>
 <span class="cert-card__date">Feb 2026</span>
-<div class="cert-card__actions">
+<div class="cert-card__actions two">
+<a href="#certModal" data-cert-view>View Certificate</a>
 <a href="https://profile.hackthebox.com/profile/019d1cb4-4b60-7102-8db2-fa81f7ab5df5" target="_blank" rel="noopener noreferrer">HTB Profile →</a>
 </div>
 </div>
@@ -90,6 +91,32 @@ hero: true
 </div>
 </div>
 </div>
+</div>
+
+<section class="dante-feature">
+<h2 class="chevron-heading">About the Dante Pro Lab</h2>
+<div class="dante-feature__grid">
+<div class="dante-feature__text">
+<p><strong>Dante</strong> is Hack The Box's beginner-friendly <strong>Red Team Operator Level I</strong> Pro Lab. Playing an external auditor for the fictional "Dante LLC", you breach the network perimeter and then explore the environment — moving laterally and vertically until you gain administrative control over every host and reach <strong>Domain Admin</strong>.</p>
+<p>It mixes Windows and Linux targets with the vulnerabilities, misconfigurations and attack paths seen in real engagements, plus flags hidden both on the main path and in optional side-quests.</p>
+<div class="dante-skills">
+<span>Enumeration</span><span>Exploit Development</span><span>Lateral Movement</span><span>Privilege Escalation</span><span>Web Application Attacks</span><span>Situational Awareness</span>
+</div>
+<p class="dante-meta">40 hours · 40 CPE credits · Completed 22&nbsp;Feb&nbsp;2026 · Cert&nbsp;ID HTBCERT-EB6BAAD3CB</p>
+</div>
+<button class="dante-cert-thumb" data-cert-view aria-label="View the Dante certificate full size">
+<img src="/images/certs/dante-certificate-thumb.png" alt="Dante Pro Lab certificate of completion" loading="lazy" width="760" height="537">
+<span class="dante-cert-thumb__badge">🔍 View Certificate</span>
+</button>
+</div>
+</section>
+
+<div class="cert-modal" id="certModal" aria-hidden="true">
+<div class="cert-modal__backdrop" data-cert-close></div>
+<figure class="cert-modal__body">
+<button class="cert-modal__close" data-cert-close aria-label="Close">✕</button>
+<img src="/images/certs/dante-certificate.png" alt="Dante Pro Lab certificate of completion — Jan Jędrzejak, HTBCERT-EB6BAAD3CB">
+</figure>
 </div>
 
 <hr class="wu-divider">
@@ -150,5 +177,13 @@ hero: true
 
     milestoneEls.forEach(function (m) { observer.observe(m); });
   }
+
+  // certificate lightbox
+  var modal = document.getElementById('certModal');
+  function openModal(e) { if (e) e.preventDefault(); if (modal) { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); } }
+  function closeModal() { if (modal) { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); } }
+  document.querySelectorAll('[data-cert-view]').forEach(function (el) { el.addEventListener('click', openModal); });
+  document.querySelectorAll('[data-cert-close]').forEach(function (el) { el.addEventListener('click', closeModal); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
 })();
 </script>
