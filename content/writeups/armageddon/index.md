@@ -18,7 +18,6 @@ cover:
 | **Platform** | Hack The Box |
 | **Difficulty** | Easy |
 | **OS** | Linux |
-| **Status** | ✅ Retired |
 | **Key techniques** | Drupalgeddon2 (CVE-2018-7600), config-file credential leak, GTFOBins `snap` abuse |
 
 ---

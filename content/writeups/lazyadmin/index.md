@@ -18,7 +18,6 @@ cover:
 | **Platform** | TryHackMe |
 | **Difficulty** | Easy |
 | **OS** | Linux |
-| **Status** | ✅ Room explicitly aimed at write-ups/beginners |
 | **Key techniques** | Directory brute-forcing to a CMS admin panel, database credential reuse, `sudo` script abuse via a writable Perl backup script |
 
 ---

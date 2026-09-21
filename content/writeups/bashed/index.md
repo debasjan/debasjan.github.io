@@ -18,7 +18,6 @@ cover:
 | **Platform** | Hack The Box |
 | **Difficulty** | Easy |
 | **OS** | Linux |
-| **Status** | ✅ Retired |
 | **Key techniques** | Exposed webshell discovery, `sudo` rule to a secondary user, writable script executed by a privileged process |
 
 ---

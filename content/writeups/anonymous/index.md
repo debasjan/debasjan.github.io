@@ -18,7 +18,6 @@ cover:
 | **Platform** | TryHackMe |
 | **Difficulty** | Easy |
 | **OS** | Linux |
-| **Status** | ✅ Room explicitly aimed at write-ups/beginners |
 | **Key techniques** | Anonymous FTP, SMB share enumeration, SUID `env` abuse (GTFOBins) |
 
 ---

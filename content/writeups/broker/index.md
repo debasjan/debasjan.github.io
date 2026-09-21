@@ -18,7 +18,6 @@ cover:
 | **Platform** | Hack The Box |
 | **Difficulty** | Easy |
 | **OS** | Linux |
-| **Status** | ✅ Retired |
 | **Key techniques** | Apache ActiveMQ unauthenticated RCE (CVE-2023-46604), `sudo nginx` config abuse |
 
 ---

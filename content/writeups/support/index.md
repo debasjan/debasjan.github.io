@@ -18,7 +18,6 @@ cover:
 | **Platform** | Hack The Box |
 | **Difficulty** | Easy |
 | **OS** | Windows |
-| **Status** | ✅ Rooted |
 | **Key techniques** | Anonymous SMB, .NET decompilation (ILSpy), LDAP `info` attribute leak, GenericAll on Computer → RBCD |
 
 ---

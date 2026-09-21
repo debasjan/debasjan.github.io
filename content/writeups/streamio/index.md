@@ -18,7 +18,6 @@ cover:
 | **Platform** | Hack The Box |
 | **Difficulty** | Medium |
 | **OS** | Windows |
-| **Status** | ✅ Rooted (~1h 30m) |
 | **Key techniques** | Vhost fuzzing, UNION SQLi (MSSQL), Hydra spray, LFI → PHP source, `firepwd` on Firefox `key4.db`, `WriteOwner` → LAPS read |
 
 ---

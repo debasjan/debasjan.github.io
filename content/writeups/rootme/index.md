@@ -18,7 +18,6 @@ cover:
 | **Platform** | TryHackMe |
 | **Difficulty** | Easy |
 | **OS** | Linux |
-| **Status** | ✅ Room explicitly aimed at write-ups/beginners |
 | **Key techniques** | Directory brute-forcing, upload-filter bypass, SUID Python abuse |
 
 ---

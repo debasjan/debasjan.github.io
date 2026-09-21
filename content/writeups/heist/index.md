@@ -18,7 +18,6 @@ cover:
 | **Platform** | Hack The Box |
 | **Difficulty** | Easy |
 | **OS** | Windows |
-| **Status** | ✅ Retired |
 | **Key techniques** | Cisco type-5/type-7 password recovery, SMB RID brute, WinRM password spray, Procdump process memory dump, Pass-the-Password |
 
 ---

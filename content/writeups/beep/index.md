@@ -18,7 +18,6 @@ cover:
 | **Platform** | Hack The Box |
 | **Difficulty** | Easy |
 | **OS** | Linux |
-| **Status** | ✅ Retired |
 | **Key techniques** | TLS downgrade to reach a legacy web app, Elastix LFI (config disclosure), credential reuse |
 
 ---

@@ -18,7 +18,6 @@ cover:
 | **Platform** | Hack The Box |
 | **Difficulty** | Easy |
 | **OS** | Windows (Active Directory) |
-| **Status** | ✅ Retired |
 | **Key techniques** | Anonymous LDAP/RPC enumeration, AS-REP Roasting, BloodHound, ACL abuse (WriteDACL), DCSync |
 
 ---

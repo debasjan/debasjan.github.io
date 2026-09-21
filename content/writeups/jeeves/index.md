@@ -18,7 +18,6 @@ cover:
 | **Platform** | Hack The Box |
 | **Difficulty** | Easy |
 | **OS** | Windows |
-| **Status** | ✅ Retired |
 | **Key techniques** | Jenkins Script Console RCE (Groovy), KeePass cracking, Pass-the-Hash, NTFS alternate data stream |
 
 ---

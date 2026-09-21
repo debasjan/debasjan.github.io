@@ -18,7 +18,6 @@ cover:
 | **Platform** | Hack The Box |
 | **Difficulty** | Easy |
 | **OS** | Linux |
-| **Status** | ✅ Retired |
 | **Key techniques** | Default application credentials, KeePass memory-dump attack (CVE-2023-32784), key-format conversion |
 
 ---

@@ -18,7 +18,6 @@ cover:
 | **Platform** | TryHackMe |
 | **Difficulty** | Easy |
 | **OS** | Linux |
-| **Status** | ✅ Room explicitly aimed at write-ups/beginners |
 | **Key techniques** | Directory brute-forcing, layered encoding (base62/base64), hash cracking, steganography (`stegcracker`), binary-to-text decoding |
 
 ---

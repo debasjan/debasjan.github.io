@@ -18,7 +18,6 @@ cover:
 | **Platform** | Hack The Box |
 | **Difficulty** | Medium |
 | **OS** | Linux |
-| **Status** | ✅ Retired |
 | **Key techniques** | Exposed `.git` directory, hidden-header WAF bypass, `phar://` extension-filter bypass, disabled-function bypass, SUID Python2 `input()` injection |
 
 ---

@@ -18,7 +18,6 @@ cover:
 | **Platform** | TryHackMe |
 | **Difficulty** | Easy |
 | **OS** | Linux |
-| **Status** | ✅ Room explicitly aimed at write-ups/beginners |
 | **Key techniques** | Directory brute-forcing, HTTP basic-auth brute-forcing (Hydra), Apache Tomcat/Coyote fingerprinting, public Metasploit RCE |
 
 ---

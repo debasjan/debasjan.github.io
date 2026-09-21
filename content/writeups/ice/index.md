@@ -18,7 +18,6 @@ cover:
 | **Platform** | TryHackMe |
 | **Difficulty** | Easy |
 | **OS** | Windows |
-| **Status** | ✅ Room explicitly aimed at write-ups/beginners |
 | **Key techniques** | Icecast RCE (CVE-2004-1561), Meterpreter local exploit suggester, UAC bypass, process migration for `lsass` access, Mimikatz/Kiwi credential dumping |
 
 ---
