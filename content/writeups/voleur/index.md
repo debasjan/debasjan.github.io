@@ -2,9 +2,9 @@
 title: "Voleur — Hack The Box"
 date: 2026-08-14
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "hard", "kerberos-only"]
+tags: ["hackthebox", "windows", "active-directory", "medium", "kerberos-only"]
 categories: ["writeups"]
-summary: "Voleur is a Kerberos-only AD hard box: office2john on an encrypted Excel, AD Recycle Bin restore of a deleted user, RunasCs + DPAPI chain, targeted Kerberoast on GenericWrite, three service accounts and a backup shell, and finishes with NTDS.dit extracted from C:\\Backups."
+summary: "Voleur is a Kerberos-only AD medium box: office2john on an encrypted Excel, AD Recycle Bin restore of a deleted user, RunasCs + DPAPI chain, targeted Kerberoast on GenericWrite, three service accounts and a backup shell, and finishes with NTDS.dit extracted from C:\\Backups."
 ShowToc: true
 TocOpen: false
 cover:
@@ -16,7 +16,7 @@ cover:
 | | |
 |---|---|
 | **Platform** | Hack The Box |
-| **Difficulty** | Hard |
+| **Difficulty** | Medium |
 | **OS** | Windows |
 | **Status** | ✅ Rooted (~4h with breaks) |
 | **Key techniques** | office2john / Excel, AD Recycle Bin restore, RunasCs, DPAPI decrypt, targeted Kerberoast, Kerberos-only auth workflow, NTDS.dit from `C:\Backups` |

@@ -44,6 +44,18 @@
   </div>
   {{- end }}
 
+  {{- /* image lightbox — clicking any content image opens it full-size,
+        arrow keys loop through every image in the write-up */ -}}
+  <div class="img-lb" id="imgLb" aria-hidden="true">
+    <button class="img-lb__close" data-lb-close aria-label="Close">✕</button>
+    <button class="img-lb__nav img-lb__nav--prev" data-lb-prev aria-label="Previous image">‹</button>
+    <button class="img-lb__nav img-lb__nav--next" data-lb-next aria-label="Next image">›</button>
+    <figure class="img-lb__body">
+      <img class="img-lb__img" alt="">
+      <figcaption class="img-lb__cap"></figcaption>
+    </figure>
+  </div>
+
   <footer class="post-footer">
     <ul class="post-tags">
       {{- range ($.GetTerms "tags") }}
@@ -115,6 +127,44 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
+
+  // ---- image lightbox (click to zoom, ←/→ to loop) ----
+  var lb = document.getElementById('imgLb');
+  if (lb) {
+    var lbImg = lb.querySelector('.img-lb__img');
+    var lbCap = lb.querySelector('.img-lb__cap');
+    var imgs = Array.prototype.slice.call(content.querySelectorAll('img'));
+    // skip images inside inline links that already lead somewhere
+    imgs = imgs.filter(function (im) { return !im.closest('a[href]'); });
+    var idx = 0;
+
+    function show(i) {
+      if (!imgs.length) return;
+      idx = ((i % imgs.length) + imgs.length) % imgs.length;
+      var im = imgs[idx];
+      lbImg.src = im.currentSrc || im.src;
+      lbImg.alt = im.alt || '';
+      lbCap.textContent = im.alt || '';
+      lbCap.style.display = im.alt ? '' : 'none';
+    }
+    function open(i) { show(i); lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+    function close() { lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; lbImg.src = ''; }
+
+    imgs.forEach(function (im, i) {
+      im.classList.add('is-zoomable');
+      im.addEventListener('click', function () { open(i); });
+    });
+    lb.querySelector('[data-lb-close]').addEventListener('click', close);
+    lb.querySelector('[data-lb-prev]').addEventListener('click', function () { show(idx - 1); });
+    lb.querySelector('[data-lb-next]').addEventListener('click', function () { show(idx + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft')  show(idx - 1);
+      else if (e.key === 'ArrowRight') show(idx + 1);
+    });
+  }
 })();
 </script>
 {{- end }}
