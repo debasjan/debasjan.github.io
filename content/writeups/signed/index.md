@@ -207,3 +207,5 @@ full command execution on the DC.)*
 ---
 
 **Machine:** [Hack The Box — Signed](https://www.hackthebox.com/machines/signed)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/signed.md)

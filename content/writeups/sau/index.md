@@ -193,3 +193,5 @@ Got a shell as root and found the flag in `/root/root.txt`.
 ---
 
 **Machine:** [Hack The Box — Sau](https://www.hackthebox.com/machines/sau)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/sau.md)

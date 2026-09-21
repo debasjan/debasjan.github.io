@@ -125,3 +125,5 @@ Root shell obtained. Root flag retrieved.
 ---
 
 **Room:** [TryHackMe — RootMe](https://tryhackme.com/room/rrootme)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/rootme.md)

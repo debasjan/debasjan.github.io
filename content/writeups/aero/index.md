@@ -179,3 +179,5 @@ escalation later.
 ---
 
 **Machine:** [Hack The Box — Aero](https://www.hackthebox.com/machines/aero)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/aero.md)

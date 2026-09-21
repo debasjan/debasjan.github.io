@@ -120,3 +120,5 @@ were located together in a single file under the Administrator's desktop.
 ---
 
 **Machine:** [Hack The Box — Jerry](https://www.hackthebox.com/machines/jerry)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/jerry.md)

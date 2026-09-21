@@ -226,3 +226,5 @@ Read the final flag from `/root/root.txt`:
 ---
 
 **Machine:** [Hack The Box — CozyHosting](https://www.hackthebox.com/machines/cozyhosting)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/cozyhosting.md)

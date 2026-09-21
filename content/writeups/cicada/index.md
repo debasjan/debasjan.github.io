@@ -227,3 +227,5 @@ Rooted, and read the flag from
 ---
 
 **Machine:** [Hack The Box — Cicada](https://www.hackthebox.com/machines/cicada)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/cicada.md)

@@ -227,3 +227,5 @@ impacket-psexec active.htb/Administrator@10.10.10.100
 ---
 
 **Machine:** [Hack The Box — Active](https://www.hackthebox.com/machines/active)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/active.md)

@@ -168,3 +168,5 @@ flag directly through the same primitive:
 ---
 
 **Machine:** [Hack The Box — Soulmate](https://www.hackthebox.com/machines/soulmate)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/soulmate.md)

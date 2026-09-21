@@ -117,3 +117,5 @@ phase was needed on this box.
 ---
 
 **Room:** [TryHackMe — ToolsRus](https://tryhackme.com/room/toolsrus)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/toolsrus.md)

@@ -229,3 +229,5 @@ Domain Admin, root flag retrieved from
 ---
 
 **Machine:** [Hack The Box — Forest](https://www.hackthebox.com/machines/forest)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/forest.md)

@@ -183,3 +183,5 @@ Domain Admin, root flag retrieved.
 ---
 
 **Machine:** [Hack The Box — Sauna](https://www.hackthebox.com/machines/sauna)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/sauna.md)

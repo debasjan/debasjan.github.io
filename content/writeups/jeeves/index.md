@@ -178,3 +178,5 @@ more < hm.txt:root.txt      # `type` can't read an ADS — use `more <`
 ---
 
 **Machine:** [Hack The Box — Jeeves](https://www.hackthebox.com/machines/jeeves)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/jeeves.md)

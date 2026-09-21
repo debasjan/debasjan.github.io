@@ -146,3 +146,5 @@ and the root flag.
 ---
 
 **Machine:** [Hack The Box — Editor](https://www.hackthebox.com/machines/editor)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/editor.md)

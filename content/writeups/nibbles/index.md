@@ -173,3 +173,5 @@ Root shell, root flag retrieved.
 ---
 
 **Machine:** [Hack The Box — Nibbles](https://www.hackthebox.com/machines/nibbles)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/nibbles.md)

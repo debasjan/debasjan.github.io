@@ -130,3 +130,5 @@ This landed directly as root — both flags retrieved in the same step.
 ---
 
 **Machine:** [Hack The Box — Beep](https://www.hackthebox.com/machines/beep)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/beep.md)

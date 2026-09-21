@@ -282,3 +282,5 @@ Read the final flag from `C:\Users\Administrator\Desktop\root.txt`:
 ---
 
 **Machine:** [Hack The Box — Puppy](https://www.hackthebox.com/machines/puppy)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/puppy.md)

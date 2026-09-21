@@ -151,3 +151,5 @@ Read both flags:
 ---
 
 **Machine:** [Hack The Box — Devel](https://www.hackthebox.com/machines/devel)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/devel.md)

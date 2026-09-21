@@ -186,3 +186,5 @@ impacket-psexec -k -no-pass dc.support.htb
   (`addcomputer` → `rbcd -action write` → `getST -impersonate` →
   `psexec -k -no-pass`) is the reflex; drilling it means the exam-shape
   of this box takes minutes, not hours.
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/support.md)

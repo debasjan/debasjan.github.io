@@ -273,3 +273,5 @@ Read the final flag from `C:\Users\Administrator\Desktop\root.txt`.
 ---
 
 **Machine:** [Hack The Box — Administrator](https://www.hackthebox.com/machines/administrator)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/administrator.md)

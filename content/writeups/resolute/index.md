@@ -200,3 +200,5 @@ Root flag retrieved.
 ---
 
 **Machine:** [Hack The Box — Resolute](https://www.hackthebox.com/machines/resolute)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/resolute.md)

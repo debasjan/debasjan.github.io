@@ -187,3 +187,5 @@ root flag.
 ---
 
 **Machine:** [Hack The Box — Monteverde](https://www.hackthebox.com/machines/monteverde)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/monteverde.md)

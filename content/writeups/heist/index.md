@@ -197,3 +197,5 @@ impacket-psexec 'administrator:<password>@10.129.62.207'
 ---
 
 **Machine:** [Hack The Box — Heist](https://www.hackthebox.com/machines/heist)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/heist.md)

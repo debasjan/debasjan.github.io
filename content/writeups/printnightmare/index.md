@@ -163,3 +163,5 @@ July 2021) includes:
 ---
 
 **Room:** [TryHackMe — PrintNightmare](https://tryhackme.com/room/printnightmare)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/printnightmare.md)

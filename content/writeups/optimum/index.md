@@ -152,3 +152,5 @@ Administrator's desktop.
 ---
 
 **Machine:** [Hack The Box — Optimum](https://www.hackthebox.com/machines/optimum)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/optimum.md)

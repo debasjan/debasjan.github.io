@@ -109,3 +109,5 @@ self-signed HTTPS site.
 ---
 
 **Room:** [TryHackMe — Probe](https://tryhackme.com/room/probe)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/probe.md)

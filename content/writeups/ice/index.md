@@ -144,3 +144,5 @@ forward, a persistence technique built on having already compromised the
 ---
 
 **Room:** [TryHackMe — Ice](https://tryhackme.com/room/ice)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/ice.md)

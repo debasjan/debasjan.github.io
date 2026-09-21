@@ -132,3 +132,5 @@ Root shell obtained, root flag retrieved.
 ---
 
 **Machine:** [Hack The Box — Shocker](https://www.hackthebox.com/machines/shocker)
+
+**Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/shocker.md)
