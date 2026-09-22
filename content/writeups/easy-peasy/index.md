@@ -3,7 +3,7 @@ title: "Easy Peasy — TryHackMe"
 date: 2025-03-15
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "easy"]
+tags: ["tryhackme", "linux", "easy", "encoding", "steganography", "password-cracking"]
 categories: ["writeups"]
 summary: "Easy Peasy is less about a single vulnerability and more a chain of encoding/decoding puzzles gating access to the actual machine: directory brute-forcing and source inspection surface..."
 ShowToc: true
@@ -131,5 +131,7 @@ for actual encryption or access control.
 ---
 
 **Room:** [TryHackMe — Easy Peasy](https://tryhackme.com/room/easypeasy)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/easy-peasy.md)

@@ -2,7 +2,7 @@
 title: "Signed — Hack The Box"
 date: 2026-07-27
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium"]
+tags: ["hackthebox", "windows", "active-directory", "medium", "mssql", "responder", "kerberos", "silver-ticket"]
 categories: ["writeups"]
 summary: "Signed exposes only MSSQL (1433). I coerce and crack the service account's NTLM hash with Responder, enumerate the domain through SQL alone, then forge a Kerberos Silver Ticket that makes MSSQL trust me as a sysadmin — reading the root flag with OPENROWSET BULK."
 ShowToc: true
@@ -206,5 +206,7 @@ full command execution on the DC.)*
 ---
 
 **Machine:** [Hack The Box — Signed](https://www.hackthebox.com/machines/signed)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/signed.md)

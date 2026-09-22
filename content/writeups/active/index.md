@@ -2,7 +2,7 @@
 title: "Active — Hack The Box"
 date: 2025-10-05
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "easy"]
+tags: ["hackthebox", "windows", "active-directory", "easy", "gpp", "kerberoasting", "smb"]
 categories: ["writeups"]
 summary: "Active demonstrates two classic AD post-compromise techniques back to back: pulling a Group Policy Preferences credential off an anonymously-readable SMB share, then using that credential to..."
 ShowToc: true
@@ -226,5 +226,7 @@ impacket-psexec active.htb/Administrator@10.10.10.100
 ---
 
 **Machine:** [Hack The Box — Active](https://www.hackthebox.com/machines/active)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/active.md)

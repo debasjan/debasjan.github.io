@@ -3,7 +3,7 @@ title: "Probe — TryHackMe"
 date: 2025-03-10
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "easy"]
+tags: ["tryhackme", "linux", "easy", "enumeration"]
 categories: ["writeups"]
 summary: "Probe is a pure enumeration room — there's no exploitation or shell to obtain, just a target with an unusually wide service footprint (multiple web servers on different ports, FTP, a database..."
 ShowToc: true
@@ -108,5 +108,7 @@ self-signed HTTPS site.
 ---
 
 **Room:** [TryHackMe — Probe](https://tryhackme.com/room/probe)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/probe.md)

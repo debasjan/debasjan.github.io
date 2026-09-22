@@ -3,7 +3,7 @@ title: "Brooklyn Nine Nine — TryHackMe"
 date: 2025-03-16
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "easy"]
+tags: ["tryhackme", "linux", "easy", "ftp-anonymous", "suid-abuse", "gtfobins"]
 categories: ["writeups"]
 summary: "A themed beginner room (Brooklyn Nine-Nine references throughout) where FTP holds a file leaking SSH credentials directly, and privilege escalation is another SUID-binary abuse — this time less,..."
 ShowToc: true
@@ -118,5 +118,7 @@ Root shell obtained. Root flag retrieved.
 ---
 
 **Room:** [TryHackMe — Brooklyn Nine Nine](https://tryhackme.com/room/brooklynninenine)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/brooklyn-nine-nine.md)

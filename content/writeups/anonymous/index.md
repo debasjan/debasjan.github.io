@@ -3,7 +3,7 @@ title: "Anonymous — TryHackMe"
 date: 2025-03-18
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "easy"]
+tags: ["tryhackme", "linux", "easy", "ftp-anonymous", "suid-abuse"]
 categories: ["writeups"]
 summary: "A beginner-focused room built around a single theme: anonymous access left open on both FTP and SMB. Anonymous FTP holds a script that, once understood and lightly modified, becomes a reverse..."
 ShowToc: true
@@ -139,5 +139,7 @@ Root shell obtained. Root flag retrieved.
 ---
 
 **Room:** [TryHackMe — Anonymous](https://tryhackme.com/room/anonymous)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/anonymous.md)

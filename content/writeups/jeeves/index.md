@@ -2,7 +2,7 @@
 title: "Jeeves — Hack The Box"
 date: 2026-07-27
 draft: false
-tags: ["hackthebox", "windows", "easy"]
+tags: ["hackthebox", "windows", "easy", "jenkins", "groovy", "rce", "keepass", "pass-the-hash", "ntfs-ads"]
 categories: ["writeups"]
 summary: "Jeeves hides an unauthenticated Jenkins instance on a non-standard port. Groovy Script Console RCE gives a foothold, a cracked KeePass database leaks the Administrator's NTLM hash, and Pass-the-Hash lands SYSTEM — with the root flag tucked away in an NTFS alternate data stream."
 ShowToc: true
@@ -177,5 +177,7 @@ more < hm.txt:root.txt      # `type` can't read an ADS — use `more <`
 ---
 
 **Machine:** [Hack The Box — Jeeves](https://www.hackthebox.com/machines/jeeves)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/jeeves.md)

@@ -2,7 +2,7 @@
 title: "Broker — Hack The Box"
 date: 2026-05-22
 draft: false
-tags: ["hackthebox", "linux", "easy"]
+tags: ["hackthebox", "linux", "easy", "cve-2023-46604", "activemq", "sudo-abuse"]
 categories: ["writeups"]
 summary: "Broker runs a version of Apache ActiveMQ vulnerable to a critical unauthenticated RCE disclosed in late 2023. That gets a shell directly as the service account. Root comes from a sudo rule..."
 ShowToc: true
@@ -142,5 +142,7 @@ curl localhost:1337/root/root.txt
 ---
 
 **Machine:** [Hack The Box — Broker](https://www.hackthebox.com/machines/broker)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/broker.md)

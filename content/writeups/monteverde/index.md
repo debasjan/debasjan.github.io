@@ -2,7 +2,7 @@
 title: "Monteverde — Hack The Box"
 date: 2026-03-08
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium"]
+tags: ["hackthebox", "windows", "active-directory", "medium", "smb", "ldap", "password-spray", "azure-ad-connect"]
 categories: ["writeups"]
 summary: "Monteverde starts with the same low-effort wins as most AD boxes — anonymous LDAP, a username-as-password spray — but the privilege escalation is what makes it worth including: the box runs Azure..."
 ShowToc: true
@@ -186,5 +186,7 @@ root flag.
 ---
 
 **Machine:** [Hack The Box — Monteverde](https://www.hackthebox.com/machines/monteverde)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/monteverde.md)

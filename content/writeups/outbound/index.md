@@ -2,7 +2,7 @@
 title: "Outbound — Hack The Box"
 date: 2025-10-12
 draft: false
-tags: ["hackthebox", "linux", "easy"]
+tags: ["hackthebox", "linux", "easy", "roundcube", "rce", "3des", "sudo-cve"]
 categories: ["writeups"]
 summary: "Outbound is a multi-stage credential chain hidden behind a single webmail RCE. Exploiting a critical Roundcube vulnerability gives a low-privileged shell and access to the mail application's own..."
 ShowToc: true
@@ -160,5 +160,7 @@ gave a root shell and the root flag.
 ---
 
 **Machine:** [Hack The Box — Outbound](https://www.hackthebox.com/machines/outbound)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/outbound.md)

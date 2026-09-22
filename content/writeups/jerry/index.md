@@ -2,7 +2,7 @@
 title: "Jerry — Hack The Box"
 date: 2025-11-16
 draft: false
-tags: ["hackthebox", "windows", "easy"]
+tags: ["hackthebox", "windows", "easy", "tomcat", "default-creds", "war-upload"]
 categories: ["writeups"]
 summary: "Jerry is a single-service box: Apache Tomcat, reachable with its own undisturbed default manager credentials. Tomcat's manager application is designed to deploy applications on request, and a..."
 ShowToc: true
@@ -119,5 +119,7 @@ were located together in a single file under the Administrator's desktop.
 ---
 
 **Machine:** [Hack The Box — Jerry](https://www.hackthebox.com/machines/jerry)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/jerry.md)

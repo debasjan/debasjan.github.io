@@ -2,7 +2,7 @@
 title: "Resolute — Hack The Box"
 date: 2026-01-21
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium"]
+tags: ["hackthebox", "windows", "active-directory", "medium", "smb-anonymous", "password-spray", "powershell-transcripts", "dnsadmins"]
 categories: ["writeups"]
 summary: "Resolute chains a familiar early-AD pattern — anonymous enumeration, a password left in an LDAP field, a lockout-safe spray — into an escalation path I hadn't used elsewhere in this set: abusing..."
 ShowToc: true
@@ -199,5 +199,7 @@ Root flag retrieved.
 ---
 
 **Machine:** [Hack The Box — Resolute](https://www.hackthebox.com/machines/resolute)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/resolute.md)

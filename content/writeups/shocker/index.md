@@ -2,7 +2,7 @@
 title: "Shocker — Hack The Box"
 date: 2026-03-05
 draft: false
-tags: ["hackthebox", "linux", "easy"]
+tags: ["hackthebox", "linux", "easy", "cve-2014-6271", "shellshock", "gtfobins"]
 categories: ["writeups"]
 summary: "Shocker is a compact demonstration of Shellshock, one of the most widespread web vulnerabilities of the last decade — a bash-parsing bug that turned almost any CGI script into remote code..."
 ShowToc: true
@@ -131,5 +131,7 @@ Root shell obtained, root flag retrieved.
 ---
 
 **Machine:** [Hack The Box — Shocker](https://www.hackthebox.com/machines/shocker)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/shocker.md)

@@ -3,7 +3,7 @@ title: "ToolsRus — TryHackMe"
 date: 2025-03-08
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "easy"]
+tags: ["tryhackme", "linux", "easy", "basic-auth", "brute-force", "tomcat"]
 categories: ["writeups"]
 summary: "A tool-survey style room: directory brute-forcing finds a basic-auth-protected path, Hydra brute-forces the password, and that credential unlocks a second web service (Apache Tomcat) on a..."
 ShowToc: true
@@ -116,5 +116,7 @@ phase was needed on this box.
 ---
 
 **Room:** [TryHackMe — ToolsRus](https://tryhackme.com/room/toolsrus)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/toolsrus.md)

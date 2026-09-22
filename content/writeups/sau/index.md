@@ -2,7 +2,7 @@
 title: "Sau — Hack The Box"
 date: 2026-05-22
 draft: false
-tags: ["hackthebox", "linux", "easy"]
+tags: ["hackthebox", "linux", "easy", "ssrf", "command-injection", "gtfobins"]
 categories: ["writeups"]
 summary: "Sau chains two separate vulnerabilities in two separate applications through a Server-Side Request Forgery: a public Request Baskets instance is used to reach an internal-only Maltrail instance,..."
 ShowToc: true
@@ -192,5 +192,7 @@ Got a shell as root and found the flag in `/root/root.txt`.
 ---
 
 **Machine:** [Hack The Box — Sau](https://www.hackthebox.com/machines/sau)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/sau.md)

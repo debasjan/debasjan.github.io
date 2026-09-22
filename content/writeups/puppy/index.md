@@ -2,7 +2,7 @@
 title: "Puppy — Hack The Box"
 date: 2026-08-01
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium"]
+tags: ["hackthebox", "windows", "active-directory", "medium", "acl-abuse", "keepass", "dpapi", "bloodhound"]
 categories: ["writeups"]
 summary: "Puppy is an assumed-breach AD chain: GenericWrite on a group unlocks a KeePass database, ACL abuse and a disabled-account re-enable move me across users, a website backup leaks an LDAP password, and DPAPI credential decryption recovers the admin twin account for full domain compromise."
 ShowToc: true
@@ -281,5 +281,7 @@ Read the final flag from `C:\Users\Administrator\Desktop\root.txt`:
 ---
 
 **Machine:** [Hack The Box — Puppy](https://www.hackthebox.com/machines/puppy)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/puppy.md)

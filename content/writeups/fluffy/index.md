@@ -2,7 +2,7 @@
 title: "Fluffy — Hack The Box"
 date: 2026-03-06
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "easy"]
+tags: ["hackthebox", "windows", "active-directory", "easy", "cve-2025-24071", "acl-abuse", "adcs", "esc16"]
 categories: ["writeups"]
 summary: "Fluffy is an assumed-breach scenario (starting credentials provided) built around a very recent Windows Explorer spoofing bug and an equally recent AD CS misconfiguration. A crafted archive..."
 ShowToc: true
@@ -234,5 +234,7 @@ flag.
 ---
 
 **Machine:** [Hack The Box — Fluffy](https://www.hackthebox.com/machines/fluffy)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/fluffy.md)

@@ -3,7 +3,7 @@ title: "Ice — TryHackMe"
 date: 2025-03-14
 hideDate: true
 draft: false
-tags: ["tryhackme", "windows", "easy"]
+tags: ["tryhackme", "windows", "easy", "icecast", "rce", "uac-bypass", "mimikatz"]
 categories: ["writeups"]
 summary: "A room built around Icecast, a streaming media server with a disclosed, dated remote code execution vulnerability and a ready Metasploit module. After landing an initial Meterpreter session, the..."
 ShowToc: true
@@ -143,5 +143,7 @@ forward, a persistence technique built on having already compromised the
 ---
 
 **Room:** [TryHackMe — Ice](https://tryhackme.com/room/ice)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/ice.md)

@@ -2,7 +2,7 @@
 title: "Sauna — Hack The Box"
 date: 2026-01-30
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "easy"]
+tags: ["hackthebox", "windows", "active-directory", "easy", "osint", "as-rep-roasting", "autologon", "dcsync"]
 categories: ["writeups"]
 summary: "Sauna's company website lists employee full names, which I turned into a username list and then AS-REP roasted to get a first foothold. Running WinPEAS from there revealed a second account..."
 ShowToc: true
@@ -182,5 +182,7 @@ Domain Admin, root flag retrieved.
 ---
 
 **Machine:** [Hack The Box — Sauna](https://www.hackthebox.com/machines/sauna)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/sauna.md)

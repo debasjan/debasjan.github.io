@@ -2,7 +2,7 @@
 title: "Optimum — Hack The Box"
 date: 2025-12-10
 draft: false
-tags: ["hackthebox", "windows", "easy"]
+tags: ["hackthebox", "windows", "easy", "cve-2014-6287", "kernel-exploit", "ms16-032"]
 categories: ["writeups"]
 summary: "Optimum is a lesson in why version banners matter: the only exposed service is an outdated file-server product with a public remote code execution exploit, giving an immediate foothold. From..."
 ShowToc: true
@@ -151,5 +151,7 @@ Administrator's desktop.
 ---
 
 **Machine:** [Hack The Box — Optimum](https://www.hackthebox.com/machines/optimum)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/optimum.md)

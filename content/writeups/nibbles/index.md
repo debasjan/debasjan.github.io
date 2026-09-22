@@ -2,7 +2,7 @@
 title: "Nibbles — Hack The Box"
 date: 2025-12-09
 draft: false
-tags: ["hackthebox", "linux", "easy"]
+tags: ["hackthebox", "linux", "easy", "cms-rce", "sudo-abuse"]
 categories: ["writeups"]
 summary: "Nibbles looks empty at first glance — a single \"Hello world!\" page — until the page source points at a hidden /nibbleblog/ directory. Guessing the admin password (after a blacklist made..."
 ShowToc: true
@@ -172,5 +172,7 @@ Root shell, root flag retrieved.
 ---
 
 **Machine:** [Hack The Box — Nibbles](https://www.hackthebox.com/machines/nibbles)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/nibbles.md)

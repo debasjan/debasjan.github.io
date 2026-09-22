@@ -2,7 +2,7 @@
 title: "Forest — Hack The Box"
 date: 2026-01-18
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "easy"]
+tags: ["hackthebox", "windows", "active-directory", "easy", "as-rep-roasting", "bloodhound", "acl-abuse", "dcsync"]
 categories: ["writeups"]
 summary: "Forest is a Domain Controller with Exchange installed that allows anonymous LDAP binds, enough to enumerate the domain without any credentials. That turns up a service account with Kerberos..."
 ShowToc: true
@@ -228,5 +228,7 @@ Domain Admin, root flag retrieved from
 ---
 
 **Machine:** [Hack The Box — Forest](https://www.hackthebox.com/machines/forest)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/forest.md)

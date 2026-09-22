@@ -2,7 +2,7 @@
 title: "Expressway — Hack The Box"
 date: 2025-09-28
 draft: false
-tags: ["hackthebox", "linux", "easy"]
+tags: ["hackthebox", "linux", "easy", "ipsec", "ike", "psk-cracking", "sudo-cve"]
 categories: ["writeups"]
 summary: "Expressway is one of the few boxes in this set where the entire foothold lives in UDP rather than TCP — a default nmap scan shows almost nothing until a UDP sweep reveals an IKE/IPsec VPN..."
 ShowToc: true
@@ -142,5 +142,7 @@ and triggering the load. Running it delivered a root shell and the root flag.
 ---
 
 **Machine:** [Hack The Box — Expressway](https://www.hackthebox.com/machines/expressway)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/expressway.md)

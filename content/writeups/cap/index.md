@@ -2,7 +2,7 @@
 title: "Cap — Hack The Box"
 date: 2025-09-03
 draft: false
-tags: ["hackthebox", "linux", "easy"]
+tags: ["hackthebox", "linux", "easy", "idor", "pcap", "linux-capabilities"]
 categories: ["writeups"]
 summary: "Cap runs a web app that lets users capture and download their own network traffic — a feature that's only safe if access control actually checks whose capture is being requested. It doesn't: an..."
 ShowToc: true
@@ -169,5 +169,7 @@ Root shell obtained, root flag retrieved.
 ---
 
 **Machine:** [Hack The Box — Cap](https://app.hackthebox.com/machines/Cap/information)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/cap.md)

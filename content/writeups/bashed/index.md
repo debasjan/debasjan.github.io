@@ -2,7 +2,7 @@
 title: "Bashed — Hack The Box"
 date: 2026-03-07
 draft: false
-tags: ["hackthebox", "linux", "easy"]
+tags: ["hackthebox", "linux", "easy", "exposed-webshell", "sudo-abuse"]
 categories: ["writeups"]
 summary: "Bashed is a short chain built around finding things that were left where they shouldn't be. Directory fuzzing turns up a fully functional web shell someone else forgot to remove, giving instant..."
 ShowToc: true
@@ -138,5 +138,7 @@ Root flag retrieved.
 ---
 
 **Machine:** [Hack The Box — Bashed](https://www.hackthebox.com/machines/bashed)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/bashed.md)

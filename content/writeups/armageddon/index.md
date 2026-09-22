@@ -2,7 +2,7 @@
 title: "Armageddon — Hack The Box"
 date: 2025-10-08
 draft: false
-tags: ["hackthebox", "linux", "easy"]
+tags: ["hackthebox", "linux", "easy", "cve-2018-7600", "drupalgeddon2", "gtfobins", "snap"]
 categories: ["writeups"]
 summary: "Armageddon is a CMS box built around Drupalgeddon2, a critical unauthenticated RCE in old Drupal releases. From the resulting shell, Drupal's own settings file leaks database credentials, which..."
 ShowToc: true
@@ -160,5 +160,7 @@ Root flag retrieved.
 ---
 
 **Machine:** [Hack The Box — Armageddon](https://www.hackthebox.com/machines/armageddon)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/armageddon.md)

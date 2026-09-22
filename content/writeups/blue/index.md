@@ -2,7 +2,7 @@
 title: "Blue — Hack The Box"
 date: 2025-12-08
 draft: false
-tags: ["hackthebox", "windows", "easy"]
+tags: ["hackthebox", "windows", "easy", "cve-2017-0143", "ms17-010", "eternalblue"]
 categories: ["writeups"]
 summary: "Blue is a direct demonstration of EternalBlue, the SMBv1 vulnerability made infamous by WannaCry and NotPetya. A single Metasploit module against an unpatched SMB service gives an immediate SYSTEM..."
 ShowToc: true
@@ -113,5 +113,7 @@ immediately, with no privilege escalation required at all.
 ---
 
 **Machine:** [Hack The Box — Blue](https://www.hackthebox.com/machines/blue)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/blue.md)

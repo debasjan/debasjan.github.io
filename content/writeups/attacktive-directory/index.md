@@ -3,7 +3,7 @@ title: "Attacktive Directory — TryHackMe"
 date: 2025-03-17
 hideDate: true
 draft: false
-tags: ["tryhackme", "windows", "active-directory", "medium"]
+tags: ["tryhackme", "windows", "active-directory", "medium", "kerbrute", "as-rep-roasting", "dcsync", "smb"]
 categories: ["writeups"]
 summary: "A guided introduction to core Active Directory attacks, chained end to end: Kerbrute enumerates valid domain usernames without any credentials, one of those accounts is AS-REP Roastable and cracks..."
 ShowToc: true
@@ -153,5 +153,7 @@ Administrator-level access on the domain controller confirmed.
 ---
 
 **Room:** [TryHackMe — Attacktive Directory](https://tryhackme.com/room/attacktivedirectory)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/attacktive-directory.md)

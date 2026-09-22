@@ -2,7 +2,7 @@
 title: "Lame — Hack The Box"
 date: 2025-04-19
 draft: false
-tags: ["hackthebox", "linux", "easy"]
+tags: ["hackthebox", "linux", "easy", "cve-2007-2447", "samba"]
 categories: ["writeups"]
 summary: "Lame was the very first machine ever published on Hack The Box, and it's a single-exploit box: an old Samba version accepts shell metacharacters in its username-mapping feature, giving direct,..."
 ShowToc: true
@@ -112,5 +112,7 @@ escalation phase needed. Both flags were retrieved in the same step.
 ---
 
 **Machine:** [Hack The Box — Lame](https://www.hackthebox.com/machines/lame)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/lame.md)

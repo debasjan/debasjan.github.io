@@ -3,7 +3,7 @@ title: "Ignite — TryHackMe"
 date: 2025-03-13
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "easy"]
+tags: ["tryhackme", "linux", "easy", "fuel-cms", "rce"]
 categories: ["writeups"]
 summary: "A short, single-application box: the site runs Fuel CMS, and its version and dashboard are enough to identify a public, well-documented remote code execution exploit for the platform. Running it..."
 ShowToc: true
@@ -108,5 +108,7 @@ box. Root flag retrieved.
 ---
 
 **Room:** [TryHackMe — Ignite](https://tryhackme.com/room/ignite)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/ignite.md)

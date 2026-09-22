@@ -3,7 +3,7 @@ title: "RootMe — TryHackMe"
 date: 2025-03-09
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "easy"]
+tags: ["tryhackme", "linux", "easy", "upload-bypass", "suid-abuse", "python"]
 categories: ["writeups"]
 summary: "A compact, classic-shape box: directory brute-forcing finds an admin path hiding a file upload form, an extension-filter bypass gets a PHP web shell onto the server, and privilege escalation is a..."
 ShowToc: true
@@ -124,5 +124,7 @@ Root shell obtained. Root flag retrieved.
 ---
 
 **Room:** [TryHackMe — RootMe](https://tryhackme.com/room/rrootme)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/rootme.md)

@@ -2,7 +2,7 @@
 title: "Cicada — Hack The Box"
 date: 2026-01-30
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "easy"]
+tags: ["hackthebox", "windows", "active-directory", "easy", "smb", "password-spray", "se-backup-privilege"]
 categories: ["writeups"]
 summary: "Cicada is a beginner-friendly AD chain: a guest SMB session reveals an onboarding notice with a default domain password, spraying that password finds a valid account, that account's enumeration..."
 ShowToc: true
@@ -226,5 +226,7 @@ Rooted, and read the flag from
 ---
 
 **Machine:** [Hack The Box — Cicada](https://www.hackthebox.com/machines/cicada)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/cicada.md)

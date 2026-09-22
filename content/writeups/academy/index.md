@@ -3,7 +3,7 @@ title: "Academy — Hack The Box"
 date: 2025-03-20
 hideDate: true
 draft: false
-tags: ["hackthebox", "linux", "easy"]
+tags: ["hackthebox", "linux", "easy", "ftp-anonymous", "upload-rce", "cron-hijack"]
 categories: ["writeups"]
 summary: "Academy's foothold comes from a file left on an anonymous FTP server that hands over working application credentials outright. From there, a student records app accepts a profile picture upload..."
 ShowToc: true
@@ -154,5 +154,7 @@ delivered a shell in the target account's context. Root flag retrieved.
 ---
 
 **Machine:** [Hack The Box — Academy](https://www.hackthebox.com/machines/academy)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/academy.md)

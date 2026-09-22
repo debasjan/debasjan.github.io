@@ -2,7 +2,7 @@
 title: "Voleur — Hack The Box"
 date: 2026-08-14
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium", "kerberos-only"]
+tags: ["hackthebox", "windows", "active-directory", "medium", "kerberos-only", "password-cracking", "recycle-bin", "dpapi", "kerberoast"]
 categories: ["writeups"]
 summary: "Voleur is a Kerberos-only AD medium box: office2john on an encrypted Excel, AD Recycle Bin restore of a deleted user, RunasCs + DPAPI chain, targeted Kerberoast on GenericWrite, three service accounts and a backup shell, and finishes with NTDS.dit extracted from C:\\Backups."
 ShowToc: true
@@ -296,6 +296,47 @@ evil-winrm -i dc.voleur.htb -u Administrator -r voleur.htb
   a Kerberos-only box.
 - **`C:\Backups` is worth grepping on every Windows box.** SYSTEM +
   SAM + NTDS.dit copies bypass the whole live-attack path.
+
+---
+
+
+---
+
+## Remediation
+
+- **Disable Protected Users bypass paths.** `RunasCs` and DPAPI
+  decryption both need the plaintext or the masterkey. Enforce strong
+  passwords on service accounts and rotate them; treat every DPAPI
+  blob on a share as a credential.
+- **Audit AD Recycle Bin restore rights.** A group with restore
+  rights over a Tier-0 identity is effectively Tier-0. Move restore
+  operations under a break-glass PIM / JIT workflow, not permanent
+  group membership.
+- **Alert on `Set-ADUser -ServicePrincipalNames`.** Adding an SPN to
+  a user object is a Kerberoast setup, not day-to-day admin. Event ID
+  `5136` on the DC with `servicePrincipalName` in the attribute list
+  is the signal.
+- **Remove NTLM.** Voleur was Kerberos-only intentionally — most real
+  environments still fall back to NTLM, which makes half these
+  primitives noisier but easier. `Restrict NTLM: Outgoing traffic to
+  remote servers` and audit the fallout for a month before enforcing.
+- **`C:\Backups` is production data on a DC.** Move offline archives
+  (SAM / SYSTEM / NTDS.dit snapshots) to encrypted, ACL-locked
+  storage — not a folder every authenticated user can browse.
+
+---
+
+## Tools used
+
+- `nmap`
+- `office2john` / `hashcat` (Office password cracking)
+- `evil-winrm` (Kerberos mode via `-r <realm>`)
+- `RunasCs`
+- Impacket (`getTGT.py`, `getST.py`, `smbserver.py`, `secretsdump.py`)
+- Python DPAPI utilities (`impacket-dpapi` / `pypykatz`)
+- `bloodhound-python` + BloodHound GUI
+- `targetedKerberoast.py`
+- PowerView (`Get-ADObject -IncludeDeletedObjects`, `Restore-ADObject`)
 
 ---
 

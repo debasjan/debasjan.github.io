@@ -2,7 +2,7 @@
 title: "CozyHosting — Hack The Box"
 date: 2026-07-24
 draft: false
-tags: ["hackthebox", "linux", "easy"]
+tags: ["hackthebox", "linux", "easy", "spring-actuator", "session-hijack", "command-injection", "sudo-abuse"]
 categories: ["writeups"]
 summary: "CozyHosting is a Linux box built around a misconfigured Spring Boot app. An exposed Actuator endpoint leaks an admin session cookie, an OS command injection with an IFS whitespace bypass gives a foothold, a looted JAR yields a Postgres bcrypt hash, and sudo ssh (GTFOBins) gives root."
 ShowToc: true
@@ -225,5 +225,7 @@ Read the final flag from `/root/root.txt`:
 ---
 
 **Machine:** [Hack The Box — CozyHosting](https://www.hackthebox.com/machines/cozyhosting)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/cozyhosting.md)

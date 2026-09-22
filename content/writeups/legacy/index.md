@@ -2,7 +2,7 @@
 title: "Legacy — Hack The Box"
 date: 2025-12-08
 draft: false
-tags: ["hackthebox", "windows", "easy"]
+tags: ["hackthebox", "windows", "easy", "ms08-067"]
 categories: ["writeups"]
 summary: "Legacy, alongside Lame, was one of the very first machines on Hack The Box, and it's built around another single, historically significant SMB vulnerability: MS08-067, a remote code execution bug..."
 ShowToc: true
@@ -102,5 +102,7 @@ The exploit succeeded immediately, returning a session running as
 ---
 
 **Machine:** [Hack The Box — Legacy](https://www.hackthebox.com/machines/legacy)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/legacy.md)

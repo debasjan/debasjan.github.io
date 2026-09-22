@@ -3,7 +3,7 @@ title: "LazyAdmin — TryHackMe"
 date: 2025-03-12
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "easy"]
+tags: ["tryhackme", "linux", "easy", "cms", "credential-reuse", "sudo-abuse"]
 categories: ["writeups"]
 summary: "LazyAdmin's web root hides an outdated CMS (SweetRice) behind brute-forced directories. A database credential recovered from the CMS's own files unlocks its admin panel, which accepts a file..."
 ShowToc: true
@@ -130,5 +130,7 @@ Root shell obtained. Root flag retrieved.
 ---
 
 **Room:** [TryHackMe — LazyAdmin](https://tryhackme.com/room/lazyadmin)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/tryhackme/lazyadmin.md)

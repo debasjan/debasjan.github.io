@@ -2,7 +2,7 @@
 title: "Escape — Hack The Box"
 date: 2026-07-04
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium"]
+tags: ["hackthebox", "windows", "active-directory", "medium", "smb", "mssql", "responder", "adcs", "esc1"]
 categories: ["writeups"]
 summary: "Escape is a Windows Active Directory box that starts with a sensitive PDF on a guest-readable SMB share, moves through an MSSQL hash-capture with Responder, and finishes with an ESC1 certificate template abuse for a full Administrator compromise."
 ShowToc: true
@@ -267,5 +267,7 @@ Read the root flag from `C:\Users\Administrator\Desktop\root.txt`:
 ---
 
 **Machine:** [Hack The Box — Escape](https://www.hackthebox.com/machines/escape)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/escape.md)

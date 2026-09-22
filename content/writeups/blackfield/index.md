@@ -2,7 +2,7 @@
 title: "Blackfield — Hack The Box"
 date: 2026-09-21
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "hard"]
+tags: ["hackthebox", "windows", "active-directory", "hard", "smb-anonymous", "as-rep-roasting", "acl-abuse", "lsass-dump", "pypykatz", "se-backup-privilege", "netexec"]
 categories: ["writeups"]
 summary: "Blackfield is a hard Active Directory box that chains anonymous SMB user enumeration, AS-REP roasting, ForceChangePassword ACL abuse, an lsass memory dump left on a Forensic share, and a SeBackupPrivilege escalation to Domain Admin — with three separate credential material types to keep straight."
 ShowToc: true
@@ -36,12 +36,14 @@ primitives stacked on top of each other:
    old password.
 4. `audit2020` unlocks the `forensic` share, which contains a zipped
    **`lsass.DMP`** memory dump. `pypykatz` parses it offline and
-   returns NT hashes for `svc_backup` and (misleadingly) the local
-   **DSRM** `Administrator`.
+   returns NT hashes for `svc_backup` and for the **Domain**
+   Administrator (whose session was active on the DC when the dump
+   was taken).
 5. `svc_backup` is a Backup Operator with `SeBackupPrivilege`. Instead
    of the manual `reg save` dance, NetExec's `backup_operator` module
-   dumps `SAM`/`SYSTEM`/`SECURITY` remotely and pulls the **domain**
-   Administrator's cleartext password straight out of it.
+   dumps `SAM`/`SYSTEM`/`SECURITY` remotely and pulls the Domain
+   Administrator's **cleartext** password straight out of the SECURITY
+   hive's cached credentials.
 
 Along the way the box hands out three different Administrator
 credentials — a great illustration of why "I have an Administrator
@@ -451,5 +453,7 @@ evil-winrm -i 10.129.229.17 -u Administrator -p '###_ADM1N_3920_###'
 ---
 
 **Machine:** [Hack The Box — Blackfield](https://www.hackthebox.com/machines/blackfield)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/blackfield.md)

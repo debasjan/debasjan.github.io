@@ -2,7 +2,7 @@
 title: "Beep — Hack The Box"
 date: 2026-03-09
 draft: false
-tags: ["hackthebox", "linux", "easy"]
+tags: ["hackthebox", "linux", "easy", "tls-downgrade", "lfi", "credential-reuse"]
 categories: ["writeups"]
 summary: "Beep exposes a large VoIP/PBX (Elastix) stack, and the actual attack surface only becomes reachable after working around a browser-side TLS restriction. A known LFI in Elastix leaks a..."
 ShowToc: true
@@ -129,5 +129,7 @@ This landed directly as root — both flags retrieved in the same step.
 ---
 
 **Machine:** [Hack The Box — Beep](https://www.hackthebox.com/machines/beep)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/beep.md)

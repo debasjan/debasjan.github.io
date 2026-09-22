@@ -2,7 +2,7 @@
 title: "Editor — Hack The Box"
 date: 2025-09-06
 draft: false
-tags: ["hackthebox", "linux", "easy"]
+tags: ["hackthebox", "linux", "easy", "xwiki", "rce", "netdata", "suid-abuse"]
 categories: ["writeups"]
 summary: "Editor is built around two real, recently-disclosed CVEs stacked back to back: an unauthenticated RCE in XWiki, and a SUID-related privilege escalation in a Netdata monitoring plugin. The path..."
 ShowToc: true
@@ -145,5 +145,7 @@ and the root flag.
 ---
 
 **Machine:** [Hack The Box — Editor](https://www.hackthebox.com/machines/editor)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/editor.md)

@@ -2,7 +2,7 @@
 title: "Support — Hack The Box"
 date: 2026-08-14
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "easy"]
+tags: ["hackthebox", "windows", "active-directory", "easy", "smb-anonymous", "dotnet-decompilation", "ldap", "rbcd", "bloodhound"]
 categories: ["writeups"]
 summary: "Support starts with a custom .NET binary on an anonymous SMB share whose XOR-encrypted LDAP password unlocks the domain. An LDAP dump reveals another user's password stored in the info attribute, and BloodHound uncovers GenericAll on the DC — set up for a textbook RBCD attack."
 ShowToc: true
@@ -185,5 +185,44 @@ impacket-psexec -k -no-pass dc.support.htb
   (`addcomputer` → `rbcd -action write` → `getST -impersonate` →
   `psexec -k -no-pass`) is the reflex; drilling it means the exam-shape
   of this box takes minutes, not hours.
+
+
+---
+
+## Remediation
+
+- **Disable anonymous SMB access** — remove `everyone` and null-session
+  read on `support-tools` (and any share hosting binaries / installers).
+  Domain-joined engineers do not need it.
+- **Do not ship credentials in code, even encrypted.** The
+  `UserInfo.exe` binary contained both the ciphertext *and* the XOR
+  key. Move service-account authentication to Windows-integrated
+  auth (LDAP over Kerberos) or gMSA — anything that keeps the
+  credential out of the binary.
+- **Audit LDAP `info` and `description` fields** across the whole
+  directory. Passwords stored there are readable by any authenticated
+  user, no ACLs applied. `ldapsearch ... '(info=*)'` finds them.
+- **Restrict `GenericAll` on computer objects** — a lower-privilege
+  group holding it on a Domain Controller is a direct path to
+  Resource-Based Constrained Delegation. Tier-0 objects should only
+  be writeable by Tier-0 accounts.
+- **Disable RC4 in Kerberos** so silver/golden ticket forgeries and
+  AS-REP roasting become harder; RBCD's `getST` also downgrades to
+  RC4 by default and is more obvious when it is not available.
+
+---
+
+## Tools used
+
+- `smbclient`
+- ILSpy (.NET decompilation)
+- Python (custom XOR decrypt helper)
+- `ldapsearch`
+- `netexec` / `nxc`
+- `evil-winrm`
+- `bloodhound-python` + BloodHound GUI
+- Impacket (`addcomputer.py`, `rbcd.py`, `getST.py`, `psexec.py`)
+
+---
 
 **Also on GitHub:** [this write-up in my security portfolio (methodology & cheat sheets)](https://github.com/debasjan/security-portfolio/blob/main/writeups/hackthebox/support.md)
