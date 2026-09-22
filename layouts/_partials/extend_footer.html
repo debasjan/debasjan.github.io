@@ -34,9 +34,18 @@
       <div class="fw-col">
         <h3 class="fw-title">Explore Tags</h3>
         <div class="fw-tagcloud">
+          {{- /* rank tags by popularity, drop the meta ones, show top 20 */ -}}
+          {{- $meta := slice "hackthebox" "tryhackme" "windows" "linux" "easy" "medium" "hard" }}
+          {{- $ranked := slice }}
           {{- range $term, $weighted := $tags }}
-          <a href="{{ printf "/tags/%s/" $term | relURL }}">{{ $term }}</a>
+            {{- if not (in $meta $term) }}
+              {{- $ranked = $ranked | append (dict "term" $term "count" (len $weighted)) }}
+            {{- end }}
           {{- end }}
+          {{- range first 20 (sort $ranked "count" "desc") }}
+          <a href="{{ printf "/tags/%s/" .term | relURL }}">{{ .term }}</a>
+          {{- end }}
+          <a class="fw-tagcloud__all" href="{{ "/tags/" | relURL }}">All tags →</a>
         </div>
       </div>
 

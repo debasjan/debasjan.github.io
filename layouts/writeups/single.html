@@ -44,6 +44,53 @@
   </div>
   {{- end }}
 
+  {{- /* Related write-ups: score all other write-ups by shared topic tags
+        (ignore meta tags: platform/os/difficulty) and show the top 4. */ -}}
+  {{- $meta := slice "hackthebox" "tryhackme" "windows" "linux" "active-directory" "easy" "medium" "hard" }}
+  {{- $ownTopics := slice }}
+  {{- range .Params.tags }}{{ if not (in $meta .) }}{{ $ownTopics = $ownTopics | append . }}{{ end }}{{ end }}
+  {{- $scored := slice }}
+  {{- if $ownTopics }}
+    {{- range where site.RegularPages "Section" "writeups" }}
+      {{- if ne .Permalink $.Permalink }}
+        {{- $shared := 0 }}
+        {{- range .Params.tags }}{{ if in $ownTopics . }}{{ $shared = add $shared 1 }}{{ end }}{{ end }}
+        {{- if gt $shared 0 }}
+          {{- $scored = $scored | append (dict "page" . "shared" $shared) }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+  {{- $related := first 4 (sort $scored "shared" "desc") }}
+  {{- if $related }}
+  <section class="wu-related">
+    <h2 class="wu-related__title"><span class="wu-related__chevron">&gt;</span> Related write-ups</h2>
+    <div class="wu-related__grid">
+      {{- range $related }}
+      {{- $p := .page }}
+      {{- $rt := $p.Params.tags }}
+      {{- $rdiff := "" }}{{ if in $rt "easy" }}{{ $rdiff = "Easy" }}{{ else if in $rt "medium" }}{{ $rdiff = "Medium" }}{{ else if in $rt "hard" }}{{ $rdiff = "Hard" }}{{ end }}
+      {{- $ros := "" }}{{ if in $rt "windows" }}{{ $ros = "Windows" }}{{ else if in $rt "linux" }}{{ $ros = "Linux" }}{{ end }}
+      <a class="wu-related__card" href="{{ $p.Permalink }}">
+        {{- with $p.Params.cover.image }}
+        {{- $cov := ($p.Resources.ByType "image").GetMatch (printf "*%s*" .) }}
+        {{- if $cov }}
+        <span class="wu-related__cover"><img src="{{ $cov.RelPermalink }}" alt="" loading="lazy"></span>
+        {{- end }}
+        {{- end }}
+        <div class="wu-related__body">
+          <h3 class="wu-related__name">{{ $p.Title | replaceRE " — (Hack The Box|TryHackMe)$" "" }}</h3>
+          <div class="wu-related__meta">
+            {{- with $ros }}<span>{{ . }}</span>{{ end }}
+            {{- with $rdiff }}<span class="wu-related__diff wu-related__diff--{{ lower . }}">{{ . }}</span>{{ end }}
+          </div>
+        </div>
+      </a>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+
   {{- /* image lightbox — clicking any content image opens it full-size,
         arrow keys loop through every image in the write-up */ -}}
   <div class="img-lb" id="imgLb" aria-hidden="true">

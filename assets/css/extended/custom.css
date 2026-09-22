@@ -1547,3 +1547,73 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
     .img-lb__nav--next { right: 6px; }
     .img-lb__close { top: 8px; right: 8px; width: 38px; height: 38px; }
 }
+
+/* ==================================================================
+   Related write-ups — 4 cards at the end of every write-up
+   ================================================================== */
+.wu-related { margin: 56px 0 16px; }
+.wu-related__title {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 1.4rem; font-weight: 900; color: var(--primary);
+    margin: 0 0 20px;
+    letter-spacing: -0.01em;
+}
+.wu-related__chevron { color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+.wu-related__title::after {
+    content: ""; flex: 1 1 auto; height: 1px; background: var(--border);
+}
+.wu-related__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+.wu-related__card {
+    display: block;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.wu-related__card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .4);
+    text-decoration: none;
+}
+.wu-related__cover { display: block; aspect-ratio: 16 / 10; overflow: hidden; background: rgb(9, 8, 15); }
+.wu-related__cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wu-related__body { padding: 12px 14px 14px; }
+.wu-related__name {
+    font-size: .95rem; font-weight: 800; color: #fff;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+}
+.wu-related__card:hover .wu-related__name { color: var(--accent); }
+.wu-related__meta {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px;
+    font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+    color: var(--secondary);
+}
+.wu-related__diff--easy   { color: #4ade80; }
+.wu-related__diff--medium { color: #fb923c; }
+.wu-related__diff--hard   { color: #f87171; }
+
+@media (max-width: 900px) { .wu-related__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .wu-related__grid { grid-template-columns: 1fr; } }
+
+/* Explore Tags: link to full tags index */
+.fw-tagcloud__all {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 5px 5px 0;
+    font-size: 12px;
+    line-height: 10px;
+    font-weight: 700;
+    border: 3px solid var(--accent);
+    border-radius: 24px;
+    color: var(--accent);
+}
+.fw-tagcloud__all:hover { background: var(--accent); color: rgb(9, 8, 15); }
