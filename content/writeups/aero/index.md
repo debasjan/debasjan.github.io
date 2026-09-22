@@ -2,7 +2,7 @@
 title: "Aero — Hack The Box"
 date: 2026-08-07
 draft: false
-tags: ["hackthebox", "windows", "medium", "cve-2023-38146", "themebleed"]
+tags: ["hackthebox", "windows", "medium", "rce"]
 categories: ["writeups"]
 summary: "Aero is a Windows box whose only surface is a theme-upload web app on a Windows 11 target — a clear signal for CVE-2023-38146 (ThemeBleed). I use the public PoC to get a foothold as sam.emerson. The intended privesc is the CLFS driver CVE-2023-28252, which I document but did not complete."
 ShowToc: true

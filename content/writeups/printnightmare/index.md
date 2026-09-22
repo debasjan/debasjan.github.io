@@ -3,7 +3,7 @@ title: "PrintNightmare — TryHackMe"
 date: 2025-03-11
 hideDate: true
 draft: false
-tags: ["tryhackme", "windows", "active-directory", "medium", "cve-2021-1675", "cve-2021-34527", "sysmon", "threat-hunting"]
+tags: ["tryhackme", "windows", "active-directory", "medium", "rce", "threat-hunting"]
 categories: ["writeups"]
 summary: "A dual offense-and-defense room built around PrintNightmare — a vulnerability in the Windows Print Spooler service that lets an authenticated user (any domain user, since the spooler runs by..."
 ShowToc: true

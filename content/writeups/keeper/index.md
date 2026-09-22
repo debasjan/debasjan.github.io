@@ -2,7 +2,7 @@
 title: "Keeper — Hack The Box"
 date: 2026-05-23
 draft: false
-tags: ["hackthebox", "linux", "easy", "default-creds", "keepass", "cve-2023-32784"]
+tags: ["hackthebox", "linux", "easy", "credential-reuse", "keepass"]
 categories: ["writeups"]
 summary: "Keeper's foothold is a support-ticketing system still running its documented default credentials. From there, a leaked password gets an SSH account, whose home directory holds an old KeePass..."
 ShowToc: true

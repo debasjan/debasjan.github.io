@@ -2,7 +2,7 @@
 title: "Heist — Hack The Box"
 date: 2026-07-29
 draft: false
-tags: ["hackthebox", "windows", "easy", "cisco", "password-cracking", "procdump", "pass-the-password"]
+tags: ["hackthebox", "windows", "easy", "credential-reuse", "password-cracking", "lsass-dump"]
 categories: ["writeups"]
 summary: "Heist is a Windows box built around a leaked Cisco config. Type-7 and type-5 passwords are recovered, an SMB RID-brute + spray lands WinRM as Chase, and dumping a live Firefox process with Procdump reveals the Administrator's plaintext password for a Pass-the-Password to SYSTEM."
 ShowToc: true

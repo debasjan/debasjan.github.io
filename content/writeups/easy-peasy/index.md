@@ -3,7 +3,7 @@ title: "Easy Peasy — TryHackMe"
 date: 2025-03-15
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "easy", "encoding", "steganography", "password-cracking"]
+tags: ["tryhackme", "linux", "easy", "reverse-engineering", "password-cracking"]
 categories: ["writeups"]
 summary: "Easy Peasy is less about a single vulnerability and more a chain of encoding/decoding puzzles gating access to the actual machine: directory brute-forcing and source inspection surface..."
 ShowToc: true

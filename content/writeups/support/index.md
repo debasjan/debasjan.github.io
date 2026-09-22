@@ -2,7 +2,7 @@
 title: "Support — Hack The Box"
 date: 2026-08-14
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "easy", "smb-anonymous", "dotnet-decompilation", "ldap", "rbcd", "bloodhound"]
+tags: ["hackthebox", "windows", "active-directory", "easy", "smb-anonymous", "reverse-engineering", "ldap", "rbcd", "bloodhound"]
 categories: ["writeups"]
 summary: "Support starts with a custom .NET binary on an anonymous SMB share whose XOR-encrypted LDAP password unlocks the domain. An LDAP dump reveals another user's password stored in the info attribute, and BloodHound uncovers GenericAll on the DC — set up for a textbook RBCD attack."
 ShowToc: true

@@ -3,7 +3,7 @@ title: "Attacktive Directory — TryHackMe"
 date: 2025-03-17
 hideDate: true
 draft: false
-tags: ["tryhackme", "windows", "active-directory", "medium", "kerbrute", "as-rep-roasting", "dcsync", "smb"]
+tags: ["tryhackme", "windows", "active-directory", "medium", "password-spray", "as-rep-roasting", "dcsync", "smb"]
 categories: ["writeups"]
 summary: "A guided introduction to core Active Directory attacks, chained end to end: Kerbrute enumerates valid domain usernames without any credentials, one of those accounts is AS-REP Roastable and cracks..."
 ShowToc: true

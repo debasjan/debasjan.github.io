@@ -2,7 +2,7 @@
 title: "UpDown — Hack The Box"
 date: 2026-03-04
 draft: false
-tags: ["hackthebox", "linux", "medium", "git-leak", "phar", "suid-abuse", "python2"]
+tags: ["hackthebox", "linux", "medium", "reverse-engineering", "lfi", "suid-abuse", "kernel-exploit"]
 categories: ["writeups"]
 summary: "UpDown is the deepest chain in this batch: an exposed .git directory leaks source code for a hidden developer subdomain gated behind a secret HTTP header. Once inside, an upload filter blocks..."
 ShowToc: true

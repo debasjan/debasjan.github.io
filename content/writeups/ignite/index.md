@@ -3,7 +3,7 @@ title: "Ignite — TryHackMe"
 date: 2025-03-13
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "easy", "fuel-cms", "rce"]
+tags: ["tryhackme", "linux", "easy", "rce"]
 categories: ["writeups"]
 summary: "A short, single-application box: the site runs Fuel CMS, and its version and dashboard are enough to identify a public, well-documented remote code execution exploit for the platform. Running it..."
 ShowToc: true

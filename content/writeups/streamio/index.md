@@ -2,7 +2,7 @@
 title: "StreamIO — Hack The Box"
 date: 2026-09-18
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium", "vhost-fuzzing", "sqli", "lfi", "firefox-creds", "acl-abuse", "laps"]
+tags: ["hackthebox", "windows", "active-directory", "medium", "reverse-engineering", "sqli", "lfi", "credential-reuse", "acl-abuse", "laps"]
 categories: ["writeups"]
 summary: "StreamIO chains vhost fuzzing, MSSQL UNION-based SQLi, Hydra password spraying, an LFI leaking PHP source, Firefox stored credentials via firepwd, and finishes with a BloodHound WriteOwner → group membership → LAPS read on the DC."
 ShowToc: true

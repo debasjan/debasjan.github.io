@@ -3,7 +3,7 @@ title: "ToolsRus — TryHackMe"
 date: 2025-03-08
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "easy", "basic-auth", "brute-force", "tomcat"]
+tags: ["tryhackme", "linux", "easy", "password-spray", "rce"]
 categories: ["writeups"]
 summary: "A tool-survey style room: directory brute-forcing finds a basic-auth-protected path, Hydra brute-forces the password, and that credential unlocks a second web service (Apache Tomcat) on a..."
 ShowToc: true

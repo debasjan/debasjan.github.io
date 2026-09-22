@@ -3,7 +3,7 @@ title: "Brooklyn Nine Nine — TryHackMe"
 date: 2025-03-16
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "easy", "ftp-anonymous", "suid-abuse", "gtfobins"]
+tags: ["tryhackme", "linux", "easy", "smb-anonymous", "suid-abuse", "gtfobins"]
 categories: ["writeups"]
 summary: "A themed beginner room (Brooklyn Nine-Nine references throughout) where FTP holds a file leaking SSH credentials directly, and privilege escalation is another SUID-binary abuse — this time less,..."
 ShowToc: true
