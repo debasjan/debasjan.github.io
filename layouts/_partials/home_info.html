@@ -1,35 +1,15 @@
-{{- /* DEMO override — hero with live stats + latest solve highlight */ -}}
-{{- $htb := where site.RegularPages "Params.tags" "intersect" (slice "hackthebox") }}
-{{- $thm := where site.RegularPages "Params.tags" "intersect" (slice "tryhackme") }}
-{{- $all := where site.RegularPages "Section" "writeups" }}
-{{- $latest := index (where $all "Params.hideDate" "!=" true).ByDate.Reverse 0 }}
+{{- /* Project override: renders the homepage intro as a full-width hero banner. */ -}}
 {{- with site.Params.homeInfoParams }}
-<section class="hero-banner hero-banner--demo">
+<section class="hero-banner">
     <div class="hero-banner__inner">
         <h1 class="hero-banner__title">{{ .Title | markdownify }}</h1>
         <div class="hero-banner__desc">
             {{ $opts := dict "display" "block" }}
             {{ .Content | $.Page.RenderString $opts }}
         </div>
-
-        <div class="hero-stats">
-            <div class="hero-stats__item"><span class="hero-stats__value">{{ len $all }}</span><span class="hero-stats__label">Write-ups</span></div>
-            <div class="hero-stats__item"><span class="hero-stats__value">{{ len $htb }}</span><span class="hero-stats__label">HTB</span></div>
-            <div class="hero-stats__item"><span class="hero-stats__value">{{ len $thm }}</span><span class="hero-stats__label">TryHackMe</span></div>
-            <div class="hero-stats__item"><span class="hero-stats__value">34</span><span class="hero-stats__label">Proving Grounds</span></div>
-        </div>
-
-        {{- with $latest }}
-        <a class="hero-latest" href="{{ .Permalink }}">
-            <span class="hero-latest__label">Latest solve →</span>
-            <span class="hero-latest__name">{{ .Title | replaceRE " — (Hack The Box|TryHackMe)$" "" }}</span>
-            <span class="hero-latest__date">{{ .Date.Format "Jan 2, 2006" }}</span>
-        </a>
-        {{- end }}
-
         <div class="hero-banner__cta">
             <a class="primary" href="{{ "/writeups/" | relURL }}">Read the write-ups</a>
-            <a href="https://github.com/debasjan/security-portfolio">Cheat sheets ↗</a>
+            <a href="https://github.com/debasjan/security-portfolio">Portfolio</a>
         </div>
     </div>
 </section>

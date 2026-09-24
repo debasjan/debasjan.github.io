@@ -1,7 +1,8 @@
 {{- define "main" }}
 {{- $all := .RegularPages }}
-{{- $htb := where $all "Params.tags" "intersect" (slice "hackthebox") }}
-{{- $thm := where $all "Params.tags" "intersect" (slice "tryhackme") }}
+{{- $htb    := where $all "Params.tags" "intersect" (slice "hackthebox") }}
+{{- $thm    := where $all "Params.tags" "intersect" (slice "tryhackme") }}
+{{- $others := where $all "Params.tags" "intersect" (slice "others") }}
 
 <div class="page-topbg"></div>
 
@@ -28,12 +29,19 @@
         <span class="wu-hero__stat-value">34</span>
         <span class="wu-hero__stat-label">Proving Grounds Rooms</span>
       </div>
+      {{- if gt (len $others) 0 }}
+      <div class="wu-hero__stat">
+        <span class="wu-hero__stat-value">{{ len $others }}</span>
+        <span class="wu-hero__stat-label">Others</span>
+      </div>
+      {{- end }}
     </div>
   </div>
 
   <nav class="wu-nav" id="wuNav" aria-label="Jump to section">
     <a href="#hackthebox">Hack The Box</a>
     <a href="#tryhackme">TryHackMe</a>
+    {{- if gt (len $others) 0 }}<a href="#others">Others</a>{{ end }}
   </nav>
 
   <div class="wu-search">
@@ -46,6 +54,7 @@
   {{- $groups := slice
     (dict "id" "hackthebox" "title" "Hack The Box" "desc" "Retired HackTheBox machines, from first foothold to root." "pages" $htb)
     (dict "id" "tryhackme"  "title" "TryHackMe"    "desc" "Guided and CTF-style TryHackMe rooms."                      "pages" $thm)
+    (dict "id" "others"     "title" "Others"       "desc" "My earliest offensive-security practice — TCM Security VulnHub boxes, TryHackMe Buffer Overflow rooms, and the TryHackMe Offensive Pentesting path. These are older, less-polished notes I keep for the record." "pages" $others)
   }}
 
   {{- range $gi, $group := $groups }}
