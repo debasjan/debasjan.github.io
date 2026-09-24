@@ -9,7 +9,7 @@ summary: "A themed beginner room (Brooklyn Nine-Nine references throughout) wher
 ShowToc: true
 TocOpen: false
 cover:
-  image: "00-card.png"
+  image: "00-card.jpg"
   alt: "Brooklyn Nine Nine — TryHackMe"
   relative: true
 ---
