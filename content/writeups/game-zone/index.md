@@ -1,14 +1,13 @@
 ---
-title: "Game Zone"
+title: "Game Zone — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "easy"]
+tags: ["tryhackme", "easy"]
 categories: ["writeups"]
 summary: "Learn to hack into this machine. Understand how to use SQLMap, crack some passwords, reveal services using a reverse SSH tunnel and escalate your privileges to root!"
 ShowToc: true
 TocOpen: false
-platformLabel: "TryHackMe"
 cover:
   image: "00-card.png"
   alt: "Game Zone"

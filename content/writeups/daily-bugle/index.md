@@ -1,14 +1,13 @@
 ---
-title: "Daily Bugle"
+title: "Daily Bugle — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "medium"]
+tags: ["tryhackme", "medium"]
 categories: ["writeups"]
 summary: "Compromise a Joomla CMS account via SQLi, practise cracking hashes and escalate your privileges by taking advantage of yum."
 ShowToc: true
 TocOpen: false
-platformLabel: "TryHackMe"
 cover:
   image: "00-card.png"
   alt: "Daily Bugle"

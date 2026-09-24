@@ -1,14 +1,13 @@
 ---
-title: "Relevant"
+title: "Relevant — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "medium"]
+tags: ["tryhackme", "medium"]
 categories: ["writeups"]
 summary: "You have been assigned to a client that wants a penetration test conducted on an environment due to be released to production in seven days."
 ShowToc: true
 TocOpen: false
-platformLabel: "TryHackMe"
 cover:
   image: "00-card.png"
   alt: "Relevant"

@@ -1,14 +1,13 @@
 ---
-title: "Gatekeeper"
+title: "Gatekeeper — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "medium"]
+tags: ["tryhackme", "medium"]
 categories: ["writeups"]
 summary: "Deploy the machine when you are ready to release the Gatekeeper."
 ShowToc: true
 TocOpen: false
-platformLabel: "TryHackMe"
 cover:
   image: "00-card.png"
   alt: "Gatekeeper"

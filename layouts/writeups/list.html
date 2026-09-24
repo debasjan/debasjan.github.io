@@ -54,7 +54,7 @@
   {{- $groups := slice
     (dict "id" "hackthebox" "title" "Hack The Box" "desc" "Retired HackTheBox machines, from first foothold to root." "pages" $htb)
     (dict "id" "tryhackme"  "title" "TryHackMe"    "desc" "Guided and CTF-style TryHackMe rooms."                      "pages" $thm)
-    (dict "id" "others"     "title" "Others"       "desc" "My earliest offensive-security practice — TCM Security VulnHub boxes, TryHackMe Buffer Overflow rooms, and the TryHackMe Offensive Pentesting path. These are older, less-polished notes I keep for the record." "pages" $others)
+    (dict "id" "others"     "title" "Others"       "desc" "My earliest offensive-security practice — the four TCM Security VulnHub boxes I solved on my way in. Older, less-polished notes kept for the record." "pages" $others)
   }}
 
   {{- range $gi, $group := $groups }}

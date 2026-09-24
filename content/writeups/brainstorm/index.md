@@ -1,14 +1,13 @@
 ---
-title: "Brainstorm"
+title: "Brainstorm — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "medium"]
+tags: ["tryhackme", "medium"]
 categories: ["writeups"]
 summary: "Reverse engineer a chat program and write a script to exploit a Windows machine."
 ShowToc: true
 TocOpen: false
-platformLabel: "TryHackMe"
 cover:
   image: "00-card.png"
   alt: "Brainstorm"

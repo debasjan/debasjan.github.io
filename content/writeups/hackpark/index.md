@@ -1,14 +1,13 @@
 ---
-title: "HackPark"
+title: "HackPark — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "medium"]
+tags: ["tryhackme", "medium"]
 categories: ["writeups"]
 summary: "Bruteforce a websites login with Hydra, identify and use a public exploit then escalate your privileges on this Windows machine!"
 ShowToc: true
 TocOpen: false
-platformLabel: "TryHackMe"
 cover:
   image: "00-card.png"
   alt: "HackPark"

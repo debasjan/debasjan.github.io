@@ -1,14 +1,13 @@
 ---
-title: "Brainpan 1"
+title: "Brainpan 1 — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "medium"]
+tags: ["tryhackme", "medium"]
 categories: ["writeups"]
 summary: "Reverse engineer a Windows executable, find a buffer overflow and exploit it on a Linux machine."
 ShowToc: true
 TocOpen: false
-platformLabel: "TryHackMe"
 cover:
   image: "00-card.png"
   alt: "Brainpan 1"

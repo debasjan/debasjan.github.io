@@ -1,14 +1,13 @@
 ---
-title: "Overpass 2 - Hacked"
+title: "Overpass 2 - Hacked — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "easy"]
+tags: ["tryhackme", "easy"]
 categories: ["writeups"]
 summary: "Overpass has been hacked! Can you analyse the attacker's actions and hack back in?"
 ShowToc: true
 TocOpen: false
-platformLabel: "TryHackMe"
 cover:
   image: "00-card.png"
   alt: "Overpass 2 - Hacked"

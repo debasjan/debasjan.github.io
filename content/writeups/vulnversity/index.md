@@ -1,14 +1,13 @@
 ---
-title: "Vulnversity"
+title: "Vulnversity — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "easy"]
+tags: ["tryhackme", "easy"]
 categories: ["writeups"]
 summary: "Learn about active recon, web app attacks and privilege escalation."
 ShowToc: true
 TocOpen: false
-platformLabel: "TryHackMe"
 cover:
   image: "00-card.png"
   alt: "Vulnversity"

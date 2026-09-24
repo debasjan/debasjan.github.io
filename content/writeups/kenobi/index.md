@@ -1,14 +1,13 @@
 ---
-title: "Kenobi"
+title: "Kenobi — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "easy"]
+tags: ["tryhackme", "easy"]
 categories: ["writeups"]
 summary: "Walkthrough on exploiting a Linux machine. Enumerate Samba for shares, manipulate a vulnerable version of proftpd and escalate your privileges with path variable manipulation."
 ShowToc: true
 TocOpen: false
-platformLabel: "TryHackMe"
 cover:
   image: "00-card.png"
   alt: "Kenobi"

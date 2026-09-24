@@ -1,14 +1,13 @@
 ---
-title: "Steel Mountain"
+title: "Steel Mountain — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "easy"]
+tags: ["tryhackme", "easy"]
 categories: ["writeups"]
 summary: "Hack into a Mr. Robot themed Windows machine. Use metasploit for initial access, utilise powershell for Windows privilege escalation enumeration and learn a new technique to get Administrator access."
 ShowToc: true
 TocOpen: false
-platformLabel: "TryHackMe"
 cover:
   image: "00-card.png"
   alt: "Steel Mountain"

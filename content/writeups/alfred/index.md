@@ -1,14 +1,13 @@
 ---
-title: "Alfred"
+title: "Alfred — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "easy"]
+tags: ["tryhackme", "easy"]
 categories: ["writeups"]
 summary: "Exploit Jenkins to gain an initial shell, then escalate your privileges by exploiting Windows authentication tokens."
 ShowToc: true
 TocOpen: false
-platformLabel: "TryHackMe"
 cover:
   image: "00-card.png"
   alt: "Alfred"
