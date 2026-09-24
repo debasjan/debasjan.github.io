@@ -69,7 +69,7 @@ It's essential to ensure you are always doing your reconnaissance thoroughly bef
 What is the flag for enabling verbose mode using Nmap?
 -v
 
-![Vulnversity scan](Vulnversity scan.png)
+![Vulnversity scan](vulnversity-scan.png)
 
 
 ## **Locating directories using Gobuster**
@@ -102,7 +102,7 @@ I have successfully configured Gobuster. 
 What is the directory that has an upload form page?
 /internal/
 
-![vulnversity gobuster](vulnversity gobuster.png)
+![vulnversity gobuster](vulnversity-gobuster.png)
 
 
 ## **Compromise the Webserver**
@@ -121,13 +121,13 @@ We're going to use Intruder (used for automating customised attacks). To begin,
 - .php5
 - .phtml
 
-![vulnversity php](vulnversity php.png)
+![vulnversity php](vulnversity-php.png)
 
 Now, make sure BurpSuite is configured to intercept all your browser traffic. Upload a file; once this request is captured, send it to the Intruder. Click on "`Payloads`" and select the "`Sniper`" attack type.
 
 Click the "`Position`s" tab now, find the filename and "`Add §`" to the extension. It should look like this:
 
-![vulnversity payload](vulnversity payload.png)
+![vulnversity payload](vulnversity-payload.png)
 
 Now that we know what extension we can use for our payload, we can progress.
 
@@ -144,7 +144,7 @@ To gain remote access to this machine, follow these steps:
 
 You should see a connection on your Netcat session.
 
-![vulnversity user shell](vulnversity user shell.png)
+![vulnversity user shell](vulnversity-user-shell.png)
 
 Answer the following questions based on the above exercise.
 
@@ -167,7 +167,7 @@ What is the user flag?
 8bd7992fbe8a6ad22a63361004cfcedb
 
 
-![vulnversity user flag](vulnversity user flag.png)
+![vulnversity user flag](vulnversity-user-flag.png)
 
 
 ## **Privilege Escalation**
@@ -178,7 +178,7 @@ In Linux, SUID (**set owner userId upon execution**) is a particular type of fil
 
 For example, the binary file to change your password has the SUID bit set on it (`/usr/bin/passwd`). This is because to change your password, you will need to write to the shadowers file that you do not have access to; `root` does, so it has root privileges to make the right changes.
 
-![SUID](SUID.jpg)'
+![SUID](suid-2.jpg)'
 
 It's challenge time! We have guided you through this far. Unleash your skills and exploit this system further to escalate your privileges and answer the following questions.
 
@@ -190,4 +190,4 @@ On the system, search for all SUID files. Which file stands out?
 What is the root flag value?
 `a58ff8579f0a9270368d33a9966c7fd5`
 
-![vulnversity systemcltr suid](vulnversity systemcltr suid.png)
+![vulnversity systemcltr suid](vulnversity-systemcltr-suid.png)

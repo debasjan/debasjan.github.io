@@ -19,7 +19,7 @@ Bruteforce a websites login with Hydra, identify and use a public exploit then e
 
 ## **Deploy the vulnerable Windows machine**
 
-![hackpark win](hackpark win.png)
+![hackpark win](hackpark-win.png)
 
 Connect to our network and deploy this machine. Please be patient as this machine can take up to 5 minutes to boot! You can test if you are connected to our network, by going to our [access page](https://tryhackme.com/access). Please note that this machine does not respond to ping (ICMP) and may take a few minutes to boot up.
 
@@ -29,18 +29,18 @@ This room will cover: brute forcing an accounts credentials, handling public exp
 
 Deploy the machine and access its web server.
 
-![hackpark scan](hackpark scan.png)
+![hackpark scan](hackpark-scan.png)
 
 Whats the name of the clown displayed on the homepage?
 pennywise
 
-![hackpark pennywise](hackpark pennywise.png)
+![hackpark pennywise](hackpark-pennywise.png)
 
 
 
 ## **Using Hydra to brute-force a login**
 
-![hackpark hydra](hackpark hydra.png)
+![hackpark hydra](hackpark-hydra.png)
 
 Hydra is a parallelized, fast and flexible login cracker. If you don't have Hydra installed or need a Linux machine to use it, you can deploy a powerful [Kali Linux machine](https://tryhackme.com/room/kali) and control it in your browser!
 
@@ -54,8 +54,8 @@ You can check what request a form is making by right clicking on the login form,
 
 What request type is the Windows website login form using?
 POST
-![hackpark login page](hackpark login page.png)
-![hackpark post request](hackpark post request.png)
+![hackpark login page](hackpark-login-page.png)
+![hackpark post request](hackpark-post-request.png)
 
 Now we know the **request type** and have a **URL** for the login form, we can get started brute-forcing an account.
 
@@ -65,11 +65,11 @@ Run the following command but fill in the blanks:
 
 Guess a username, choose a password wordlist and gain credentials to a user account!
 1qaz2wsx
-![hackpark login request](hackpark login request.png)
-![hackpark hydra command](hackpark hydra command.png)
+![hackpark login request](hackpark-login-request.png)
+![hackpark hydra command](hackpark-hydra-command.png)
 I have used a cookie from failed login page to brute-force a login.
 
-![hackpark hydra login pass](hackpark hydra login pass.png)
+![hackpark hydra login pass](hackpark-hydra-login-pass.png)
 
 
 Hydra really does have lots of functionality, and there are many "modules" available (an example of a module would be the **http-post-form** that we used above).
@@ -97,28 +97,28 @@ Exploit-Database is a CVE (common vulnerability and exposures) archive of public
 
 Now you have logged into the website, are you able to identify the version of the BlogEngine?
 3.3.6.0
-![hackpark blogengine version](hackpark blogengine version.png)
+![hackpark blogengine version](hackpark-blogengine-version.png)
 
 Use the [exploit database archive](http://www.exploit-db.com) to find an exploit to gain a reverse shell on this system.
 
 What is the CVE?
 CVE-2019-6714
-![hackpark exploit cve](hackpark exploit cve.png)
+![hackpark exploit cve](hackpark-exploit-cve.png)
 
 Using the public exploit, gain initial access to the server.
 
 Who is the webserver running as?
 iis apppool\blog
 
-![hackpark edit cve](hackpark edit cve.png)
-![hackpark exploit upload](hackpark exploit upload.png)
+![hackpark edit cve](hackpark-edit-cve.png)
+![hackpark exploit upload](hackpark-exploit-upload.png)
 
-![hackpark webserver flag](hackpark webserver flag.png)
+![hackpark webserver flag](hackpark-webserver-flag.png)
 
 
 ## **Windows Privilege Escalation**
 
-![hackpark metasploit](hackpark metasploit.png)
+![hackpark metasploit](hackpark-metasploit.png)
 
 
 In this task we will learn about the basics of Windows Privilege Escalation.
@@ -143,17 +143,17 @@ set LHOST <ip>
 set LPORT <port>
 run
 ```
-![hackpark msfvenom shell](hackpark msfvenom shell.png)
+![hackpark msfvenom shell](hackpark-msfvenom-shell.png)
 
-![hackpark shell upload](hackpark shell upload.png)
-![hackpark multi handler](hackpark multi handler.png)
+![hackpark shell upload](hackpark-shell-upload.png)
+![hackpark multi handler](hackpark-multi-handler.png)
 
 You can run metasploit commands such as `sysinfo` to get detailed information about the Windows system. Then feed this information into the [windows-exploit-suggester](https://github.com/GDSSecurity/Windows-Exploit-Suggester) script and quickly identify any obvious vulnerabilities.
 
 What is the OS version of this windows machine?
 Windows 2012 R2 (6.3 Build 9600)
 
-![hackpark sysinfo](hackpark sysinfo.png)
+![hackpark sysinfo](hackpark-sysinfo.png)
 
 Further enumerate the machine.
 ```
@@ -162,9 +162,9 @@ upload <path of winPeas>
 shell  
 winPEASx64.exe
 ```
-![hackpark winpeas uploa](hackpark winpeas uploa.png)
-![hackpark winpeas service](hackpark winpeas service.png)
-![hackpark systemscheduler](hackpark systemscheduler.png)
+![hackpark winpeas uploa](hackpark-winpeas-uploa.png)
+![hackpark winpeas service](hackpark-winpeas-service.png)
+![hackpark systemscheduler](hackpark-systemscheduler.png)
 
 Can you spot a _service_ running some automated task that could be easily exploited? What is the **name** of this service?
 WindowsScheduler
@@ -172,30 +172,30 @@ WindowsScheduler
 What is the name of the binary you're supposed to exploit?
 Message.exe
 
-![hackpark events dir](hackpark events dir.png)
+![hackpark events dir](hackpark-events-dir.png)
 
 Using this interesting service, escalate your privileges!
 
-![hackpark msfvenom message](hackpark msfvenom message.png)
-![hackpark message upload](hackpark message upload.png)
-![hack park multi handler message](hack park multi handler message.png)
-![hackpark message overwrite](hackpark message overwrite.png)
+![hackpark msfvenom message](hackpark-msfvenom-message.png)
+![hackpark message upload](hackpark-message-upload.png)
+![hack park multi handler message](hack-park-multi-handler-message.png)
+![hackpark message overwrite](hackpark-message-overwrite.png)
 
 What is the user flag (on Jeffs Desktop)?
 759bd8af507517bcfaede78a21a73e39
 
-![hackpark user flag jeff](hackpark user flag jeff.png)
+![hackpark user flag jeff](hackpark-user-flag-jeff.png)
 
 
 What is the root flag?
 7e13d97f05f7ceb9881a3eb3d78d3e72
 
-![hackpark root flag](hackpark root flag.png)
+![hackpark root flag](hackpark-root-flag.png)
 
 
 ## **Privilege Escalation Without Metasploit**
 
-![winPEAS](winPEAS.png)
+![winPEAS](winpeas-2.png)
 
 In this task we will escalate our privileges without the use of meterpreter/metasploit! 
 

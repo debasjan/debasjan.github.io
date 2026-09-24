@@ -19,7 +19,7 @@ Learn to hack into this machine. Understand how to use SQLMap, crack some passwo
 
 ## **Deploy the vulnerable machine**
 
-![game zone](game zone.png)
+![game zone](game-zone.png)
 
 
 This room will cover SQLi (exploiting this vulnerability manually and via SQLMap), cracking a users hashed password, using SSH tunnels to reveal a hidden service and using a metasploit payload to gain root privileges.   
@@ -28,14 +28,14 @@ This room will cover SQLi (exploiting this vulnerability manually and via SQLMap
 
 Deploy the machine and access its web server.
 
-![game zone scan](game zone scan.png)
-![game zone web](game zone web.png)
+![game zone scan](game-zone-scan.png)
+![game zone web](game-zone-web.png)
 
 
 What is the name of the large cartoon avatar holding a sniper on the forum?
 Agent 47
 
-![game zone agent](game zone agent.png)
+![game zone agent](game-zone-agent.png)
 
 
 ## **Obatin access via SQLi**
@@ -71,12 +71,12 @@ GameZone doesn't have an admin user in the database, however you can still login
 
 Use ' or 1=1 -- - as your username and leave the password blank.
 
-![or 1=1](or 1=1.png)
+![or 1=1](or-1-1.png)
 
 When you've logged in, what page do you get redirected to?
 portal.php
 
-![game zone portal php](game zone portal php.png)
+![game zone portal php](game-zone-portal-php.png)
 
 
 ## **Using SQLMap**
@@ -96,7 +96,7 @@ Using the page we logged into earlier, we're going point SQLMap to the game revi
 
 First we need to intercept a request made to the search feature using [BurpSuite](https://tryhackme.com/room/learnburp).
 
-![game zone portal](game zone portal.png)
+![game zone portal](game-zone-portal.png)
 
 Save this request into a text file. We can then pass this into SQLMap to use our authenticated user session.
 
@@ -106,7 +106,7 @@ Save this request into a text file. We can then pass this into SQLMap to use our
 **--dbms** tells SQLMap what type of database management system it is  
 **--dump** attempts to outputs the entire database
 
-![game zone sqlmap](game zone sqlmap.png)
+![game zone sqlmap](game-zone-sqlmap.png)
 
 SQLMap will now try different methods and identify the one thats vulnerable. Eventually, it will output the database.
 
@@ -118,8 +118,8 @@ agent47
 
 What was the other table name?
 post
-![game zone request](game zone request.png)
-![game zone sqlmap 1](game zone sqlmap 1.png)
+![game zone request](game-zone-request.png)
+![game zone sqlmap 1](game-zone-sqlmap-1.png)
 
 
 ## **Cracking a password with JohnTheRipper**
@@ -138,7 +138,7 @@ If you are using a low-powered laptop, you can deploy a high spec'd Kali Linux m
 
 Once you have JohnTheRipper installed you can run it against your hash using the following arguments:
 
-![john command](john command.png)
+![john command](john-command.png)
 
 hash.txt - contains a list of your hashes (in your case its just 1 hash)  
 --wordlist - is the wordlist you're using to find the dehashed value  
@@ -147,20 +147,20 @@ hash.txt - contains a list of your hashes (in your case its just 1 hash)
 What is the de-hashed password?
 videogamer124
 
-![game zone john pass](game zone john pass.png)
+![game zone john pass](game-zone-john-pass.png)
 
 Now you have a password and username. Try SSH'ing onto the machine.
 
 What is the user flag?
 649ac17b1480ac13ef1e4fa579dac95c
 
-![game zone user flag](game zone user flag.png)
+![game zone user flag](game-zone-user-flag.png)
 
 
 ## **Exposing services with reverse SSH tunnels**
 
 
-![ssh tunnel](ssh tunnel.png)
+![ssh tunnel](ssh-tunnel.png)
 
 
 Reverse SSH port forwarding specifies that the given port on the remote server host is to be forwarded to the given host and port on the local side.
@@ -186,7 +186,7 @@ If we run **ss -tulpn** it will tell us what socket connections are running
 
 How many TCP sockets are running?
 5
-![ss -tulpn](ss -tulpn.png)
+![ss -tulpn](ss-tulpn.png)
 
 We can see that a service running on port 10000 is blocked via a firewall rule from the outside (we can see this from the IPtable list). However, Using an SSH Tunnel we can expose the port to us (locally)!
 
@@ -213,6 +213,6 @@ What is the root flag?
 a4b945830144bdd71908d12d902adeee
 
 ![metasploit](metasploit.png)
-![metasploit check](metasploit check.png)
-![game zone root flag](game zone root flag.png)
+![metasploit check](metasploit-check.png)
+![game zone root flag](game-zone-root-flag.png)
 

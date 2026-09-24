@@ -28,7 +28,7 @@ Make sure you're connected to our network and deploy the machine
 Scan the machine with nmap, how many ports are open?
 7
 
-![kenobi scan](kenobi scan.png)
+![kenobi scan](kenobi-scan.png)
 
 
 ## **Enumerating Samba for shares**
@@ -49,12 +49,12 @@ nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse 10.10.229.205
 
 SMB has two ports, 445 and 139.
 
-![samba ports](samba ports.png)
+![samba ports](samba-ports.png)
 
 Using the nmap command above, how many shares have been found?
 3
 
-![kenobi scan smb shares](kenobi scan smb shares.png)
+![kenobi scan smb shares](kenobi-scan-smb-shares.png)
 
 On most distributions of Linux smbclient is already installed. Lets inspect one of the shares.
 
@@ -67,7 +67,7 @@ Using your machine, connect to the machines network share.
 Once you're connected, list the files on the share. What is the file can you see?
 log.txt
 
-![kenobi smb list](kenobi smb list.png)
+![kenobi smb list](kenobi-smb-list.png)
 
 You can recursively download the SMB share too. Submit the username and password as nothing.
 
@@ -82,7 +82,7 @@ Open the file on the share. There is a few interesting things found.
 
 What port is FTP running on?
 21
-![kenobi log share](kenobi log share.png)
+![kenobi log share](kenobi-log-share.png)
 
 Your earlier nmap port scan will have shown port 111 running the service rpcbind. This is just a server that converts remote procedure call (RPC) program number into universal addresses. When an RPC service is started, it tells rpcbind the address at which it is listening and the RPC program number its prepared to serve. 
 
@@ -94,7 +94,7 @@ nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount 10.10.229.205
 
 What mount can we see?
 /var
-![kenobi mounr var tmp](kenobi mounr var tmp.png)
+![kenobi mounr var tmp](kenobi-mounr-var-tmp.png)
 
 
 ## **Gain initial access with ProFtpd**
@@ -108,7 +108,7 @@ Lets get the version of ProFtpd. Use netcat to connect to the machine on the FTP
 What is the version?
 1.3.5
 
-![kenobi ftpd version](kenobi ftpd version.png)
+![kenobi ftpd version](kenobi-ftpd-version.png)
 
 We can use searchsploit to find exploits for a particular software version.
 
@@ -117,7 +117,7 @@ Searchsploit is basically just a command line search tool for exploit-db.com.
 How many exploits are there for the ProFTPd running?
 4
 
-![kenobi searchsploit proftpd](kenobi searchsploit proftpd.png)
+![kenobi searchsploit proftpd](kenobi-searchsploit-proftpd.png)
 
 You should have found an exploit from ProFtpd's [mod_copy module](http://www.proftpd.org/docs/contrib/mod_copy.html). 
 
@@ -127,7 +127,7 @@ We know that the FTP service is running as the Kenobi user (from the file on the
 
 We're now going to copy Kenobi's private key using SITE CPFR and SITE CPTO commands.
 
-![kenobi private key copy](kenobi private key copy.png)
+![kenobi private key copy](kenobi-private-key-copy.png)
 
 We knew that the /var directory was a mount we could see (task 2, question 4). So we've now moved Kenobi's private key to the /var/tmp directory.
 
@@ -139,11 +139,11 @@ mount 10.10.229.205:/var /mnt/kenobiNFS
 ls -la /mnt/kenobiNFS
 ```
 
-![kenobi mounr var tmp](kenobi mounr var tmp.png)
+![kenobi mounr var tmp](kenobi-mounr-var-tmp.png)
 
 We now have a network mount on our deployed machine! We can go to /var/tmp and get the private key then login to Kenobi's account.
 
-![kenobi ssh login](kenobi ssh login.png)
+![kenobi ssh login](kenobi-ssh-login.png)
 
 What is Kenobi's user flag (/home/kenobi/user.txt)?
 d0b0f3f53b6caa532a83915e19224899
@@ -151,7 +151,7 @@ d0b0f3f53b6caa532a83915e19224899
 
 ## **Privilege Escalation with Path Variable Manipulation**
 
-![SUID](SUID.png)
+![SUID](suid-2.png)
 
 Lets first understand what what SUID, SGID and Sticky Bits are.
 
@@ -171,20 +171,20 @@ To search the a system for these type of files run the following: find / -perm -
 What file looks particularly out of the ordinary?
 /usr/bin/menu
 
-![suid binary](suid binary.png)
+![suid binary](suid-binary.png)
 
 Run the binary, how many options appear?
 3
 
 Strings is a command on Linux that looks for human readable strings on a binary.
 
-![string binary](string binary.png)
+![string binary](string-binary.png)
 
 This shows us the binary is running without a full path (e.g. not using /usr/bin/curl or /usr/bin/uname).
 
 As this file runs as the root users privileges, we can manipulate our path gain a root shell.
 
-![SUID root flag](SUID root flag.png)
+![SUID root flag](suid-root-flag.png)
 
 We copied the /bin/sh shell, called it curl, gave it the correct permissions and then put its location in our path. This meant that when the /usr/bin/menu binary was run, its using our path variable to find the "curl" binary.. Which is actually a version of /usr/sh, as well as this file being run as root it runs our shell as root!
 

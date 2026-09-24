@@ -41,32 +41,32 @@ root.txt
 7958b569565d7bd88d10c6f22d1c4063
 
 ![nmap](nmap.png)
-![port 80](port 80.png)
+![port 80](port-80.png)
 ![gobuster](gobuster.png)
 ![retro](retro.png)
-![login web](login web.png)
-![web creator](web creator.png)
-![admin failed](admin failed.png)
-![wade account](wade account.png)
-![burp request](burp request.png)
+![login web](login-web.png)
+![web creator](web-creator.png)
+![admin failed](admin-failed.png)
+![wade account](wade-account.png)
+![burp request](burp-request.png)
 ![hydra](hydra.png)
 
 
-![comments file](comments file.png)
+![comments file](comments-file.png)
 
 ![password](password.png)
 ![wordpress](wordpress.png)
 
-![rdp sessie](rdp sessie.png)
+![rdp sessie](rdp-sessie.png)
 
-![user flag](user flag.png)
-![chrome - cvs](chrome - cvs.png)
+![user flag](user-flag.png)
+![chrome - cvs](chrome-cvs.png)
 
 https://github.com/jas502n/CVE-2019-1388/blob/master/CVE-2019-1388.gif
 
 
 ![hhupd](hhupd.png)
 ![certificaat](certificaat.png)
-![chose web](chose web.png)
-![save as cert](save as cert.png)
-![go to c windows path](go to c windows path.png)
+![chose web](chose-web.png)
+![save as cert](save-as-cert.png)
+![go to c windows path](go-to-c-windows-path.png)

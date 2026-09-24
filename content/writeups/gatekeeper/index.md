@@ -31,32 +31,32 @@ Locate and find the User Flag.
 Locate and find the Root Flag
 {Th3_M4y0r_C0ngr4tul4t3s_U}
 
-![nmap scan](nmap scan.png)
+![nmap scan](nmap-scan.png)
 
-![nmap scan 2](nmap scan 2.png)
+![nmap scan 2](nmap-scan-2.png)
 
 
-![smb enum](smb enum.png)
+![smb enum](smb-enum.png)
 
-![test application](test application.png)
+![test application](test-application.png)
 ![fuzzing](fuzzing.png)
 
 ![offset](offset.png)
 
-![bad char](bad char.png)
+![bad char](bad-char.png)
 
-![buffer script shell](buffer script shell.png)
+![buffer script shell](buffer-script-shell.png)
 
-![gatekeeper machine shell](gatekeeper machine shell.png)
-![user flag](user flag.png)
+![gatekeeper machine shell](gatekeeper-machine-shell.png)
+![user flag](user-flag.png)
 
 
-![firefox.lnk](firefox.lnk.png)![firefox profile copy to shared and mounted share](firefox profile copy to shared and mounted share.png)
+![firefox.lnk](firefox-lnk.png)![firefox profile copy to shared and mounted share](firefox-profile-copy-to-shared-and-mounted-share.png)
 
 ![share](share.png)
 
 
-![shared files](shared files.png)
-![firefox decrypt script](firefox decrypt script.png)
-![firefox credentials](firefox credentials.png)
-![root flag](root flag.png)
+![shared files](shared-files.png)
+![firefox decrypt script](firefox-decrypt-script.png)
+![firefox credentials](firefox-credentials.png)
+![root flag](root-flag.png)

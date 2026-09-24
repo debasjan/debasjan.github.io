@@ -35,7 +35,7 @@ Deploy the machine.
 Who is the employee of the month?
 Bill Harper
 
-![steel mountain employee](steel mountain employee.png)
+![steel mountain employee](steel-mountain-employee.png)
 
 
 ## **Initial Access**
@@ -56,13 +56,13 @@ What is the CVE number to exploit this file server?
 Use Metasploit to get an initial shell. What is the user flag?
 b04763b6fcf51fcd7c13abc7db4fd365
 
-![steel mountain scan](steel mountain scan.png)
-![steel mountain http file server](steel mountain http file server.png)
-![steel mountain rejetto](steel mountain rejetto.png)
-![steel mountain rejetto cve](steel mountain rejetto cve.png)
+![steel mountain scan](steel-mountain-scan.png)
+![steel mountain http file server](steel-mountain-http-file-server.png)
+![steel mountain rejetto](steel-mountain-rejetto.png)
+![steel mountain rejetto cve](steel-mountain-rejetto-cve.png)
 
-![steel mountain exploit](steel mountain exploit.png)
-![steel mountain user flag](steel mountain user flag.png)
+![steel mountain exploit](steel-mountain-exploit.png)
+![steel mountain user flag](steel-mountain-user-flag.png)
 
 ## **Privilege Escalation**
 
@@ -77,7 +77,7 @@ You can download the script [here](https://raw.githubusercontent.com/PowerShellM
 Take close attention to the CanRestart option that is set to true. What is the name of the service which shows up as an _unquoted service path_ vulnerability?
 AdvancedSystemCareService9
 
-![steel mountain powerup](steel mountain powerup.png)
+![steel mountain powerup](steel-mountain-powerup.png)
 
 The CanRestart option being true, allows us to restart a service on the system, the directory to the application is also write-able. This means we can replace the legitimate application with our malicious one, restart the service, which will run our infected program!
 
@@ -87,10 +87,10 @@ Use msfvenom to generate a reverse shell as an Windows executable.
 
 Upload your binary and replace the legitimate one. Then restart the program to get a shell as root.
 
-![steel mountain msfvenom](steel mountain msfvenom.png)
+![steel mountain msfvenom](steel-mountain-msfvenom.png)
 
 **Note:** The service showed up as being unquoted (and could be exploited using this technique), however, in this case we have exploited weak file permissions on the service files instead.  
-![steel mountain service](steel mountain service.png)
+![steel mountain service](steel-mountain-service.png)
 
 What is the root flag?
 cd C:\Users\Administrator\Desktop  

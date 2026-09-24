@@ -56,13 +56,13 @@ THM{1fk5kf469devly1gl320zafgl345pv}
 
 ![scan](scan.png)
 ![smbclient](smbclient.png)
-![smbclient disk](smbclient disk.png)
+![smbclient disk](smbclient-disk.png)
 
-![encoded pass](encoded pass.png)
-![decoding passwords](decoding passwords.png)
+![encoded pass](encoded-pass.png)
+![decoding passwords](decoding-passwords.png)
 
-![smb bill error](smb bill error.png)
-![smb bob error](smb bob error.png)
+![smb bill error](smb-bill-error.png)
+![smb bob error](smb-bob-error.png)
 
 
 I check for **robots.txt** and also run a full **gobuster** scan but can’t find anything else useful on the port 80 website.
@@ -96,16 +96,16 @@ And then connect back over to the SMB share and upload it:
 
 `put shell.aspx` and `dir`:
 
-![msfvenom aspx](msfvenom aspx.png)
-![smb aspx](smb aspx.png)
+![msfvenom aspx](msfvenom-aspx.png)
+![smb aspx](smb-aspx.png)
 ![shell](shell.png)
 
-![user flag](user flag.png)
+![user flag](user-flag.png)
 
 ![privs](privs.webp)
 
 ![printspoofer](printspoofer.png)
-![smb share](smb share.png)
-![printspoofer on share](printspoofer on share.png)
-![execute printspoofer](execute printspoofer.png)
-![root flag](root flag.png)
+![smb share](smb-share.png)
+![printspoofer on share](printspoofer-on-share.png)
+![execute printspoofer](execute-printspoofer.png)
+![root flag](root-flag.png)

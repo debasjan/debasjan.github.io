@@ -70,10 +70,10 @@ What was the hash that the attacker used? - go back to the PCAP for this!
 Crack the hash using rockyou and a cracking tool of your choice. What's the password?
 november16
 
-![ssh backdoor](ssh backdoor.png)
+![ssh backdoor](ssh-backdoor.png)
 ![salt](salt.png)
-![default hash](default hash.png)
-![hash attacker used](hash attacker used.png)
+![default hash](default-hash.png)
+![hash attacker used](hash-attacker-used.png)
 ![hash](hash.png)
 ![1710](1710.png)
 ![cracked](cracked.png)
@@ -95,17 +95,17 @@ H4ck3d by CooctusClan
 
 Using the information you've found previously, hack your way back in!
 
-![overpass2 scan](overpass2 scan.png)
+![overpass2 scan](overpass2-scan.png)
 
 What's the user flag?
 thm{d119b4fa8c497ddb0525f7ad200e6567}
 
 ![james](james.png)
-![user flag](user flag.png)
+![user flag](user-flag.png)
 
 
 What's the root flag?
 thm{d53b2684f169360bb9606c333873144d}
 
-![suid bash](suid bash.png)
-![root flag](root flag.png)
+![suid bash](suid-bash.png)
+![root flag](root-flag.png)

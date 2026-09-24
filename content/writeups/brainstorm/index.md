@@ -19,11 +19,11 @@ Reverse engineer a chat program and write a script to exploit a Windows machine.
 
 ## **Deploy Machine and Scan Network**
 
-![brainstorm scan](brainstorm scan.png)
+![brainstorm scan](brainstorm-scan.png)
 
 ## **Accessing Files**
 
-![braintstorm ftp](braintstorm ftp.png)
+![braintstorm ftp](braintstorm-ftp.png)
 
 ## **Access**
 
@@ -46,22 +46,22 @@ Since this would work, you can try generate some shellcode - use msfvenom to gen
 After gaining access, what is the content of the root.txt file?
 5b1001de5a44eca47eee71e7942a8f8a
 
-![brainstorm scan](brainstorm scan.png)
-![braintstorm ftp](braintstorm ftp.png)
+![brainstorm scan](brainstorm-scan.png)
+![braintstorm ftp](braintstorm-ftp.png)
 
 
-![fuzzing brainstorm](fuzzing brainstorm.png)
+![fuzzing brainstorm](fuzzing-brainstorm.png)
 
-![eip down](eip down.png)
-![offset 2012 brainstorm](offset 2012 brainstorm.png)
+![eip down](eip-down.png)
+![offset 2012 brainstorm](offset-2012-brainstorm.png)
 ![badchar](badchar.png)
-![jmp point](jmp point.png)
+![jmp point](jmp-point.png)
 ![payload](payload.png)
-![sending payload](sending payload.png)
-![app running](app running.png)
+![sending payload](sending-payload.png)
+![app running](app-running.png)
 ![shell](shell.png)
-![run chatserver get shell](run chatserver get shell.png)
-![new payload](new payload.png)
-![send buffer](send buffer.png)
-![shell machine](shell machine.png)
-![root flag](root flag.png)
+![run chatserver get shell](run-chatserver-get-shell.png)
+![new payload](new-payload.png)
+![send buffer](send-buffer.png)
+![shell machine](shell-machine.png)
+![root flag](root-flag.png)
