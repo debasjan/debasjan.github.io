@@ -101,7 +101,7 @@ step, not just a list of commands.
     weight = 20
   [[menu.main]]
     identifier = "portfolio"
-    name = "Portfolio ↗"
+    name = "Portfolio"
     url = "https://github.com/debasjan/security-portfolio"
     weight = 30
     [menu.main.params]

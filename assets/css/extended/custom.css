@@ -1617,3 +1617,36 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
     color: var(--accent);
 }
 .fw-tagcloud__all:hover { background: var(--accent); color: rgb(9, 8, 15); }
+
+/* DEMO ============================================================
+   Hero live stats + latest solve highlight (option #4)
+   =============================================================== */
+.hero-stats {
+    display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 22px;
+    margin: 6px 0 20px;
+    padding: 14px 24px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(23, 21, 30, .55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+.hero-stats__item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.hero-stats__value { font-size: 1.35rem; font-weight: 900; color: var(--accent); line-height: 1; }
+.hero-stats__label { font-size: .66rem; text-transform: uppercase; letter-spacing: .08em; color: var(--secondary); }
+
+.hero-latest {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin: 4px 0 18px;
+    padding: 8px 16px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(45, 173, 240, .35);
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.hero-latest:hover { background: rgba(45, 173, 240, .18); border-color: var(--accent); transform: translateY(-1px); }
+.hero-latest__label { font-size: .72rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); }
+.hero-latest__name { font-size: .95rem; font-weight: 800; color: #fff; }
+.hero-latest__date { font-size: .8rem; color: var(--secondary); font-family: 'JetBrains Mono', monospace; }
+
