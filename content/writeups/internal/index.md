@@ -9,7 +9,7 @@ summary: "Internal is a hard Linux box shaped like a real black-box assessment: 
 ShowToc: true
 TocOpen: false
 cover:
-  image: "00-card.png"
+  image: "00-card.jpg"
   alt: "Internal — TryHackMe"
   relative: true
 ---

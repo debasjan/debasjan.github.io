@@ -9,7 +9,7 @@ summary: "Hack into a Mr. Robot themed Windows machine. Use metasploit for initi
 ShowToc: true
 TocOpen: false
 cover:
-  image: "00-card.jpg"
+  image: "00-card.png"
   alt: "Steel Mountain"
   relative: true
 ---
