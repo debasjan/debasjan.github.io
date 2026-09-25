@@ -366,8 +366,12 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
 
 .wu-hero__sub { font-size: 1.02rem; color: var(--secondary); max-width: 560px; line-height: 1.6; margin: 0; }
 
-.wu-hero__stats { display: flex; gap: 32px; flex-wrap: wrap; align-items: flex-end; margin-top: 24px; }
+.wu-hero__stats { display: flex; gap: 32px; flex-wrap: wrap; align-items: flex-start; margin-top: 24px; }
 .wu-hero__stat { display: flex; flex-direction: column; gap: 2px; max-width: 220px; }
+/* the sub-label under Proving Grounds is absolutely positioned so it
+   doesn't push the value/label off the baseline of the other stats */
+.wu-hero__stat--muted { position: relative; padding-bottom: 24px; }
+.wu-hero__stat--muted .wu-hero__stat-sub { position: absolute; top: 100%; left: 0; margin-top: 6px; }
 .wu-hero__stat-value { font-size: 1.5rem; font-weight: 800; color: var(--accent); line-height: 1; }
 .wu-hero__stat-label { font-size: .7rem; color: var(--secondary); text-transform: uppercase; letter-spacing: .04em; }
 /* muted variant (e.g. Proving Grounds — counted, not published) */
