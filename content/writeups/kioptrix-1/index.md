@@ -5,7 +5,7 @@ hideDate: true
 draft: false
 tags: ["others", "linux", "practice", "easy"]
 categories: ["writeups"]
-summary: ""
+summary: "Kioptrix Level 1 from VulnHub — an older Apache/mod_ssl box: an outdated Apache 1.3.20 / OpenSSL fingerprint plus SMB (Samba) exposed. The intended paths are the OpenFuck (CVE-2002-0082) mod_ssl exploit and the Samba trans2open buffer overflow. This is one of the first VMs I ever solved."
 ShowToc: true
 TocOpen: false
 platformLabel: "TCM Security"

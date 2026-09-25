@@ -5,7 +5,7 @@ hideDate: true
 draft: false
 tags: ["others", "linux", "practice", "medium"]
 categories: ["writeups"]
-summary: ""
+summary: "Black Pearl from TCM Security's Practical Ethical Hacking course. A Debian VM whose /secret path plus a leaked email pivot me through a subdomain, custom fuzzing, and eventually a chained privilege-escalation to root. Older notes from my first pass at PEH."
 ShowToc: true
 TocOpen: false
 platformLabel: "TCM Security"
