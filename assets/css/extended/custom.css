@@ -368,23 +368,19 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
 
 .wu-hero__stats { display: flex; gap: 32px; flex-wrap: wrap; align-items: flex-start; margin-top: 24px; }
 .wu-hero__stat { display: flex; flex-direction: column; gap: 2px; max-width: 220px; }
-/* the sub-label under Proving Grounds is absolutely positioned so it
-   doesn't push the value/label off the baseline of the other stats */
-.wu-hero__stat--muted { position: relative; padding-bottom: 24px; }
-.wu-hero__stat--muted .wu-hero__stat-sub { position: absolute; top: 100%; left: 0; margin-top: 6px; }
 .wu-hero__stat-value { font-size: 1.5rem; font-weight: 800; color: var(--accent); line-height: 1; }
 .wu-hero__stat-label { font-size: .7rem; color: var(--secondary); text-transform: uppercase; letter-spacing: .04em; }
 /* muted variant (e.g. Proving Grounds — counted, not published) */
 .wu-hero__stat--muted .wu-hero__stat-value { color: var(--secondary); }
 .wu-hero__stat--muted .wu-hero__stat-label { color: rgba(170, 170, 170, .7); }
 .wu-hero__stat-sub {
-    font-size: .62rem;
-    font-style: italic;
-    color: rgba(170, 170, 170, .6);
+    display: block;
+    font-size: .56rem;
+    color: rgba(170, 170, 170, .55);
     letter-spacing: .02em;
     text-transform: none;
-    line-height: 1.35;
-    margin-top: 3px;
+    line-height: 1.3;
+    margin-top: 2px;
 }
 
 .wu-nav {
