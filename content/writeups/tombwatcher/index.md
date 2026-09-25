@@ -4,7 +4,7 @@ date: 2026-09-25
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "medium", "kerberoasting", "acl-abuse", "bloodhound", "adcs", "gmsa"]
 categories: ["writeups"]
-summary: "TombWatcher is a hard-flavoured Medium AD box that chains six ACL primitives end-to-end: targeted Kerberoast (WriteSPN), AddSelf into a group that can read a gMSA password, gMSA-driven password reset, WriteOwner + GenericAll on a Domain Admin, and finally a dacledit-driven GenericAll on the ADCS OU that unlocks an ESC3 template for Domain Admin certificates. Every step is one bloodyAD or Certipy call."
+summary: "TombWatcher is a hard-flavoured Medium AD box: targeted Kerberoast (WriteSPN), AddSelf into a group that reads a gMSA password, a gMSA-driven password reset, WriteOwner + GenericAll on a Domain Admin, and finally a dacledit-driven GenericAll on the ADCS OU that surfaces a vulnerable ESC3 template. This write-up covers everything up to user.txt and the ESC3 discovery; the certificate-request → Domain Admin step is documented but not yet completed."
 ShowToc: true
 TocOpen: false
 cover:
@@ -18,7 +18,8 @@ cover:
 | **Platform** | Hack The Box |
 | **Difficulty** | Medium |
 | **OS** | Windows (Active Directory) |
-| **Key techniques** | `WriteSPN` → targeted Kerberoast, `AddSelf` → group membership, **gMSA `ReadGMSAPassword`**, `ForceChangePassword`, `WriteOwner` → `GenericAll`, `dacledit` on OU, AD CS **ESC3** |
+| **This write-up** | User flag + ESC3 template discovered. Domain-Admin certificate request is next; not yet completed. |
+| **Key techniques** | `WriteSPN` → targeted Kerberoast, `AddSelf` → group membership, **gMSA `ReadGMSAPassword`**, `ForceChangePassword`, `WriteOwner` → `GenericAll`, `dacledit` on OU, AD CS **ESC3** (discovery) |
 
 ---
 
@@ -40,13 +41,19 @@ edge is one `bloodyAD` command:
 5. **`sam`** has `WriteOwner` on **`john`**. Set self as owner →
    grant self `GenericAll` → reset John's password.
 6. **`john`** has `GenericAll` on the **`OU=ADCS`** container. Use
-   `impacket-dacledit` to write a full-control ACE for John on the OU,
-   then Certipy discovers the vulnerable **User** template (ESC3) and
-   requests a **Domain Admin certificate**. PKINIT logs in and I read
-   `root.txt`.
+   `impacket-dacledit` to write a full-control ACE for John on the
+   OU, then `certipy-ad find` surfaces the vulnerable **User**
+   template (ESC3). *The certificate-request → Domain Admin step is
+   next; documented but not yet completed in this write-up.*
 
-Every step is one BloodHound edge; the whole box is a demonstration
-that a chain of *low-risk-looking* ACL grants can equal Domain Admin.
+Every step is one BloodHound edge — a demonstration that a chain of
+*low-risk-looking* ACL grants can compound all the way to the ADCS
+OU.
+
+> **Honest note:** I got user.txt and confirmed the ESC3 template
+> exists on this box. Requesting the certificate for `administrator`
+> and using it for PKINIT to grab root is on my list — I'll update
+> this post once that's done.
 
 ---
 
@@ -235,18 +242,18 @@ bloodyAD --host dc01.tombwatcher.htb -d tombwatcher.htb \
 ![sam now has GenericAll on john](15-genericall-john.png)
 ![john's password is now 'password'](16-reset-john-password.png)
 
-Kerberos wants a synced clock — quick sanity check before the WinRM /
-RDP login:
+Kerberos wants a synced clock — quick sanity check before the WinRM
+login:
 
 ![ntp sync with the DC](17-time-sync.png)
 
-RDP as John:
+Pass-the-password into WinRM as John:
 
 ```bash
-xfreerdp /u:john /p:password /v:10.10.11.72 +clipboard /dynamic-resolution
+evil-winrm -i 10.129.232.167 -u john -p password
 ```
 
-![RDP session as john](18-rdp-john.png)
+![evil-winrm session as john](18-rdp-john.png)
 
 `user.txt` is on John's desktop:
 
@@ -275,44 +282,26 @@ impacket-dacledit -action 'write' -rights 'FullControl' -inheritance \
 ```
 
 John now effectively controls every template and the CA config
-inside the ADCS OU. **Certipy** discovers the vulnerable template:
+inside the ADCS OU. **Certipy** enumerates what's there:
 
 ```bash
-certipy find -u 'john@tombwatcher.htb' -p 'password' -dc-ip 10.10.11.72 -vulnerable
+certipy-ad find dc01.tombwatcher.htb -u john -p password
 ```
 
-![certipy finds a vulnerable ESC3 template](21-certipy-find.png)
+![certipy-ad find on tombwatcher-CA-1](21-certipy-find.png)
 
 The **`User`** template is a textbook **ESC3** setup: Client
 Authentication + `SubjectAltRequireUpn`, enrollable by Domain
-Users, and User Enrollable Principals include Domain Users too. Any
-domain user can request one — and thanks to the SAN, they can pick
-whose UPN they want it for.
+Users, and `User Enrollable Principals` includes Domain Users too.
+Any domain user can request one — and thanks to the SAN, they can
+pick whose UPN they want it for.
 
 ![the User template — ESC3 target](22-user-template-esc3.png)
 
-Request the certificate for **`Administrator`** via ESC3:
-
-```bash
-certipy req -u 'john@tombwatcher.htb' -p 'password' \
-  -target dc01.tombwatcher.htb -ca 'tombwatcher-CA-1' \
-  -template 'User' -upn 'administrator@tombwatcher.htb' \
-  -dc-ip 10.10.11.72
-```
-
-![certipy requests + saves administrator.pfx](23-certipy-request-cert.png)
-
-PKINIT authenticate as Administrator with the cert:
-
-```bash
-certipy auth -pfx administrator.pfx -dc-ip 10.10.11.72
-```
-
-![certipy auth — Administrator NT hash returned](24-certipy-auth.png)
-
-That returns the Administrator TGT **and** the account's NT hash
-(from PAC_CREDENTIAL_INFO). From there `evil-winrm` or
-`impacket-psexec` on `dc01` reads `root.txt`.
+*The next step is requesting the certificate for `administrator`
+via ESC3 and PKINIT-authenticating with it for the domain
+Administrator's TGT/NT hash. I have the primitive lined up but did
+not run it in this session — I'll update the write-up when I do.*
 
 ---
 
@@ -377,5 +366,5 @@ That returns the Administrator TGT **and** the account's NT hash
 - `targetedKerberoast.py`
 - `hashcat` (mode 13100)
 - `impacket-dacledit`
-- **Certipy** (`find`, `req`, `auth`)
-- `xfreerdp`, `evil-winrm`
+- **Certipy** (`certipy-ad find`; `req` / `auth` still to run)
+- `evil-winrm`
