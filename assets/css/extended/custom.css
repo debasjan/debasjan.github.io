@@ -366,10 +366,22 @@ ul.tags li a:hover { color: var(--theme); background: var(--accent); border-colo
 
 .wu-hero__sub { font-size: 1.02rem; color: var(--secondary); max-width: 560px; line-height: 1.6; margin: 0; }
 
-.wu-hero__stats { display: flex; gap: 32px; flex-wrap: wrap; margin-top: 24px; }
-.wu-hero__stat { display: flex; flex-direction: column; gap: 2px; }
+.wu-hero__stats { display: flex; gap: 32px; flex-wrap: wrap; align-items: flex-end; margin-top: 24px; }
+.wu-hero__stat { display: flex; flex-direction: column; gap: 2px; max-width: 220px; }
 .wu-hero__stat-value { font-size: 1.5rem; font-weight: 800; color: var(--accent); line-height: 1; }
 .wu-hero__stat-label { font-size: .7rem; color: var(--secondary); text-transform: uppercase; letter-spacing: .04em; }
+/* muted variant (e.g. Proving Grounds — counted, not published) */
+.wu-hero__stat--muted .wu-hero__stat-value { color: var(--secondary); }
+.wu-hero__stat--muted .wu-hero__stat-label { color: rgba(170, 170, 170, .7); }
+.wu-hero__stat-sub {
+    font-size: .62rem;
+    font-style: italic;
+    color: rgba(170, 170, 170, .6);
+    letter-spacing: .02em;
+    text-transform: none;
+    line-height: 1.35;
+    margin-top: 3px;
+}
 
 .wu-nav {
     position: sticky;
