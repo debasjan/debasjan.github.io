@@ -3,7 +3,7 @@ title: "Kioptrix Level 1"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "easy"]
+tags: ["others", "linux", "practice", "easy"]
 categories: ["writeups"]
 summary: ""
 ShowToc: true

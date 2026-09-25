@@ -6,6 +6,7 @@
 {{- $tags := .Params.tags }}
 {{- $isHTB := in $tags "hackthebox" }}
 {{- $isTHM := in $tags "tryhackme" }}
+{{- $isOTH := in $tags "others" }}
 {{- $isWin := in $tags "windows" }}
 {{- $isLin := in $tags "linux" }}
 {{- $isAD  := in $tags "active-directory" }}
@@ -32,6 +33,7 @@
       {{- with $diff }}<span class="wu-badge wu-badge--diff-{{ lower . }}">{{ . }}</span>{{ end }}
       {{- if $isHTB }}<span class="wu-badge wu-badge--platform">Hack The Box</span>{{ end }}
       {{- if $isTHM }}<span class="wu-badge wu-badge--platform">TryHackMe</span>{{ end }}
+      {{- if and $isOTH (not $isHTB) (not $isTHM) }}<span class="wu-badge wu-badge--platform">{{ or .Params.platformLabel "TCM Security" }}</span>{{ end }}
     </div>
   </header>
 

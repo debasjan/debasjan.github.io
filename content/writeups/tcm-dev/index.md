@@ -3,7 +3,7 @@ title: "Dev"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "easy"]
+tags: ["others", "linux", "practice", "easy"]
 categories: ["writeups"]
 summary: "We're working on gaining root access to a machine called Dev from TCM Security. It's not widely available or discussed elsewhere, making it a great starting point for beginners in penetration testing."
 ShowToc: true

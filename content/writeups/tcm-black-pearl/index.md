@@ -3,7 +3,7 @@ title: "Black Pearl"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "practice", "medium"]
+tags: ["others", "linux", "practice", "medium"]
 categories: ["writeups"]
 summary: ""
 ShowToc: true
