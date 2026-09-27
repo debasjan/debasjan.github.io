@@ -4,7 +4,7 @@ date: 2026-03-05
 draft: false
 tags: ["hackthebox", "linux", "easy", "shellshock", "gtfobins"]
 categories: ["writeups"]
-summary: "Shocker is a compact demonstration of Shellshock, one of the most widespread web vulnerabilities of the last decade — a bash-parsing bug that turned almost any CGI script into remote code..."
+summary: "Shocker is a compact demonstration of Shellshock, one of the most widespread web vulnerabilities of the last decade — a bash-parsing bug that turned…"
 ShowToc: true
 TocOpen: false
 cover:

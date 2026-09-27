@@ -4,7 +4,7 @@ date: 2026-03-07
 draft: false
 tags: ["hackthebox", "linux", "easy", "sudo-abuse"]
 categories: ["writeups"]
-summary: "Bashed is a short chain built around finding things that were left where they shouldn't be. Directory fuzzing turns up a fully functional web shell someone else forgot to remove, giving instant..."
+summary: "Bashed is a short chain built around finding things that were left where they shouldn't be. Directory fuzzing turns up a fully functional web shell…"
 ShowToc: true
 TocOpen: false
 cover:

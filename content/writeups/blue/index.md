@@ -4,7 +4,7 @@ date: 2025-12-08
 draft: false
 tags: ["hackthebox", "windows", "easy", "eternalblue"]
 categories: ["writeups"]
-summary: "Blue is a direct demonstration of EternalBlue, the SMBv1 vulnerability made infamous by WannaCry and NotPetya. A single Metasploit module against an unpatched SMB service gives an immediate SYSTEM..."
+summary: "Blue is a direct demonstration of EternalBlue, the SMBv1 vulnerability made infamous by WannaCry and NotPetya. A single Metasploit module against an…"
 ShowToc: true
 TocOpen: false
 cover:

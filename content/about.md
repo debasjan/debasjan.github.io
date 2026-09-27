@@ -2,7 +2,7 @@
 title: "About"
 layout: "single"
 url: "/about/"
-summary: "About — Jan Jędrzejak (debas), aspiring penetration tester"
+summary: "About — Jan Jędrzejak (debas), systems administrator transitioning into penetration testing"
 ShowToc: false
 hidemeta: true
 hero: true
@@ -14,15 +14,15 @@ hero: true
 <h2 class="chevron-heading">About Me</h2>
 <div class="about-inner">
 <div class="about-text">
-<p>Hi! I'm Jan Jędrzejak (aka <strong>debas</strong>), currently working as a systems administrator at a Dutch local government organization, transitioning into penetration testing.</p>
-<p>In my day job I handle security-related tasks and system hardening, and I'm currently preparing for the OSCP to formalize that shift into offensive security.</p>
+<p>Hi! I'm Jan Jędrzejak (aka <strong>debas</strong>), a systems administrator in public-sector IT (Netherlands), transitioning into penetration testing with a focus on Windows and Active Directory.</p>
+<p>In my day job I handle security-related tasks and system hardening. On the offensive side I'm preparing for the OSCP, alongside HackTheBox machines and lab work.</p>
 <p>I'm passionate about continuous, hands-on learning — this blog is where I document that: HackTheBox and TryHackMe write-ups, OSCP prep notes, and CTF challenges, always focused on the reasoning behind each step.</p>
 <p>Experience so far:</p>
 <ul class="skills-list">
 <li>Active Directory Attacks &amp; Enumeration</li>
 <li>Windows &amp; Linux Privilege Escalation</li>
 <li>Web Application Fundamentals</li>
-<li>eJPT Certified, OSCP in progress</li>
+<li>eJPT Certified · OSCP in progress</li>
 </ul>
 </div>
 <div class="about-pic">
@@ -34,7 +34,7 @@ hero: true
 
 <h2 class="chevron-heading">Where I've Worked</h2>
 <div class="experience-item">
-<div class="experience-company">Dutch Local Government Organization</div>
+<div class="experience-company">Public-sector IT</div>
 <div class="experience-role">Systems Administrator</div>
 <div class="experience-location">Netherlands</div>
 </div>

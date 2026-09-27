@@ -3,9 +3,9 @@ title: "Skynet — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "medium", "smb", "lfi", "cms-rce", "credential-reuse", "tar-wildcard"]
+tags: ["tryhackme", "linux", "medium", "smb", "lfi", "rce", "credential-reuse", "tar-wildcard"]
 categories: ["writeups"]
-summary: "Skynet is a Terminator-themed Linux TryHackMe room: anonymous SMB leaks an admin's password, Miles Dyson's Squirrelmail account exposes an internal /45kra24zxs28v3yd/ directory, Cuppa CMS falls to a public LFI-to-RFI PoC, and a rootly cron running tar with wildcards escalates the shell to root via --checkpoint-action=exec."
+summary: "Skynet is a Terminator-themed Linux TryHackMe room: anonymous SMB leaks an admin's password, Miles Dyson's Squirrelmail account exposes an internal…"
 ShowToc: true
 TocOpen: false
 cover:

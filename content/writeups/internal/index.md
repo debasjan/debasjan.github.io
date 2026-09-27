@@ -3,9 +3,9 @@ title: "Internal — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "hard", "wpscan", "wp-rce", "sudo-abuse", "pivoting", "jenkins", "docker"]
+tags: ["tryhackme", "linux", "hard", "wordpress", "wpscan", "rce", "sudo-abuse", "pivoting", "jenkins", "docker"]
 categories: ["writeups"]
-summary: "Internal is a hard Linux box shaped like a real black-box assessment: WordPress user enum feeds a wpscan brute-force, an authenticated theme edit gives a shell as www-data, a phpMyAdmin note leaks aubreanna's SSH password, a jenkins.txt in her home unlocks a private Jenkins on localhost:8080, and the Jenkins Script Console pops root inside a Docker container."
+summary: "Internal is a hard Linux box shaped like a real black-box assessment: WordPress user enum feeds a wpscan brute-force, an authenticated theme edit gives a…"
 ShowToc: true
 TocOpen: false
 cover:

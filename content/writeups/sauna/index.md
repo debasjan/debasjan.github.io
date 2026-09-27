@@ -4,7 +4,7 @@ date: 2026-01-30
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "easy", "credential-reuse", "as-rep-roasting", "dcsync"]
 categories: ["writeups"]
-summary: "Sauna's company website lists employee full names, which I turned into a username list and then AS-REP roasted to get a first foothold. Running WinPEAS from there revealed a second account..."
+summary: "Sauna's company website lists employee full names, which I turned into a username list and then AS-REP roasted to get a first foothold."
 ShowToc: true
 TocOpen: false
 cover:

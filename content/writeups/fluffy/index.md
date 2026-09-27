@@ -4,7 +4,7 @@ date: 2026-03-06
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "easy", "rce", "acl-abuse", "adcs"]
 categories: ["writeups"]
-summary: "Fluffy is an assumed-breach scenario (starting credentials provided) built around a very recent Windows Explorer spoofing bug and an equally recent AD CS misconfiguration. A crafted archive..."
+summary: "Fluffy is an assumed-breach scenario (starting credentials provided) built around a very recent Windows Explorer spoofing bug and an equally recent AD CS…"
 ShowToc: true
 TocOpen: false
 cover:

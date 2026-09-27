@@ -5,7 +5,7 @@ hideDate: true
 draft: false
 tags: ["hackthebox", "linux", "easy", "smb-anonymous", "upload-bypass", "sudo-abuse"]
 categories: ["writeups"]
-summary: "Academy's foothold comes from a file left on an anonymous FTP server that hands over working application credentials outright. From there, a student records app accepts a profile picture upload..."
+summary: "Academy's foothold comes from a file left on an anonymous FTP server that hands over working application credentials outright."
 ShowToc: true
 TocOpen: false
 cover:

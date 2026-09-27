@@ -4,7 +4,7 @@ date: 2026-07-24
 draft: false
 tags: ["hackthebox", "linux", "easy", "rce", "credential-reuse", "command-injection", "sudo-abuse"]
 categories: ["writeups"]
-summary: "CozyHosting is a Linux box built around a misconfigured Spring Boot app. An exposed Actuator endpoint leaks an admin session cookie, an OS command injection with an IFS whitespace bypass gives a foothold, a looted JAR yields a Postgres bcrypt hash, and sudo ssh (GTFOBins) gives root."
+summary: "CozyHosting is a Linux box built around a misconfigured Spring Boot app. An exposed Actuator endpoint leaks an admin session cookie, an OS command…"
 ShowToc: true
 TocOpen: false
 cover:

@@ -5,7 +5,7 @@ hideDate: true
 draft: false
 tags: ["tryhackme", "linux", "easy", "upload-bypass", "suid-abuse", "rce"]
 categories: ["writeups"]
-summary: "A compact, classic-shape box: directory brute-forcing finds an admin path hiding a file upload form, an extension-filter bypass gets a PHP web shell onto the server, and privilege escalation is a..."
+summary: "A compact, classic-shape box: directory brute-forcing finds an admin path hiding a file upload form, an extension-filter bypass gets a PHP web shell onto…"
 ShowToc: true
 TocOpen: false
 cover:

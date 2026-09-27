@@ -5,7 +5,7 @@ hideDate: true
 draft: false
 tags: ["tryhackme", "easy"]
 categories: ["writeups"]
-summary: "Learn to hack into this machine. Understand how to use SQLMap, crack some passwords, reveal services using a reverse SSH tunnel and escalate your privileges to root!"
+summary: "Learn to hack into this machine. Understand how to use SQLMap, crack some passwords, reveal services using a reverse SSH tunnel and escalate your…"
 ShowToc: true
 TocOpen: false
 cover:
@@ -39,9 +39,9 @@ Agent 47
 
 ## **Obatin access via SQLi**
 
-![sqli](sqli.webp)
+![SQL injection payload triggered through the vulnerable login form](sqli.webp)
 
-![sql](sql.webp)
+![sqlmap extracting the Game Zone database contents](sql.webp)
 
 
 In this task you will understand more about SQL (structured query language) and how you can potentially manipulate queries to communicate with the database.
@@ -123,7 +123,7 @@ post
 
 ## **Cracking a password with JohnTheRipper**
 
-![john](john.png)
+![John the Ripper cracking the extracted user hash](john.png)
 
 John the Ripper (JTR) is a fast, free and open-source password cracker. This is also pre-installed on all Kali Linux machines.
 
@@ -193,7 +193,7 @@ From our local machine, run `**ssh -L 10000:localhost:10000 <username>@<ip>**`
 
 Once complete, in your browser type "localhost:10000" and you can access the newly-exposed webserver.
 
-![cms](cms.png)
+![Webmin admin panel reached through the SSH port-forward tunnel](cms.png)
 
 What is the name of the exposed CMS?
 Webmin

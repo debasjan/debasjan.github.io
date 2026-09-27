@@ -5,7 +5,7 @@ hideDate: true
 draft: false
 tags: ["tryhackme", "linux", "easy", "smb-anonymous", "suid-abuse"]
 categories: ["writeups"]
-summary: "A beginner-focused room built around a single theme: anonymous access left open on both FTP and SMB. Anonymous FTP holds a script that, once understood and lightly modified, becomes a reverse..."
+summary: "A beginner-focused room built around a single theme: anonymous access left open on both FTP and SMB. Anonymous FTP holds a script that, once understood…"
 ShowToc: true
 TocOpen: false
 cover:

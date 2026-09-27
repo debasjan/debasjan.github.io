@@ -4,7 +4,7 @@ date: 2025-09-06
 draft: false
 tags: ["hackthebox", "linux", "easy", "rce", "suid-abuse"]
 categories: ["writeups"]
-summary: "Editor is built around two real, recently-disclosed CVEs stacked back to back: an unauthenticated RCE in XWiki, and a SUID-related privilege escalation in a Netdata monitoring plugin. The path..."
+summary: "Editor is built around two real, recently-disclosed CVEs stacked back to back: an unauthenticated RCE in XWiki, and a SUID-related privilege escalation in…"
 ShowToc: true
 TocOpen: false
 cover:

@@ -4,7 +4,7 @@ date: 2025-09-03
 draft: false
 tags: ["hackthebox", "linux", "easy", "rce", "reverse-engineering", "sudo-abuse"]
 categories: ["writeups"]
-summary: "Cap runs a web app that lets users capture and download their own network traffic — a feature that's only safe if access control actually checks whose capture is being requested. It doesn't: an..."
+summary: "Cap runs a web app that lets users capture and download their own network traffic — a feature that's only safe if access control actually checks whose…"
 ShowToc: true
 TocOpen: false
 cover:

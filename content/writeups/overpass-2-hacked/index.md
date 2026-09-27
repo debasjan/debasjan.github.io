@@ -70,11 +70,11 @@ Crack the hash using rockyou and a cracking tool of your choice. What's the pass
 november16
 
 ![ssh backdoor](ssh-backdoor.png)
-![salt](salt.png)
+![Salt value recovered from the attacker's PCAP capture](salt.png)
 ![default hash](default-hash.png)
 ![hash attacker used](hash-attacker-used.png)
-![hash](hash.png)
-![1710](1710.png)
+![Password hash recovered from the attacker's backdoor script](hash.png)
+![Attacker's SSH backdoor discovered on TCP port 1710](1710.png)
 ![cracked](cracked.png)
 
 

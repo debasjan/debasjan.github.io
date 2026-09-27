@@ -4,7 +4,7 @@ date: 2025-10-12
 draft: false
 tags: ["hackthebox", "linux", "easy", "rce", "reverse-engineering", "sudo-abuse"]
 categories: ["writeups"]
-summary: "Outbound is a multi-stage credential chain hidden behind a single webmail RCE. Exploiting a critical Roundcube vulnerability gives a low-privileged shell and access to the mail application's own..."
+summary: "Outbound is a multi-stage credential chain hidden behind a single webmail RCE. Exploiting a critical Roundcube vulnerability gives a low-privileged shell…"
 ShowToc: true
 TocOpen: false
 cover:

@@ -4,7 +4,7 @@ date: 2026-01-30
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "easy", "smb", "password-spray", "se-backup-privilege"]
 categories: ["writeups"]
-summary: "Cicada is a beginner-friendly AD chain: a guest SMB session reveals an onboarding notice with a default domain password, spraying that password finds a valid account, that account's enumeration..."
+summary: "Cicada is a beginner-friendly AD chain: a guest SMB session reveals an onboarding notice with a default domain password, spraying that password finds a…"
 ShowToc: true
 TocOpen: false
 cover:

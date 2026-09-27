@@ -4,7 +4,7 @@ date: 2026-09-18
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "medium", "reverse-engineering", "sqli", "lfi", "credential-reuse", "acl-abuse", "laps"]
 categories: ["writeups"]
-summary: "StreamIO chains vhost fuzzing, MSSQL UNION-based SQLi, Hydra password spraying, an LFI leaking PHP source, Firefox stored credentials via firepwd, and finishes with a BloodHound WriteOwner → group membership → LAPS read on the DC."
+summary: "StreamIO chains vhost fuzzing, MSSQL UNION-based SQLi, Hydra password spraying, an LFI leaking PHP source, Firefox stored credentials via firepwd, and…"
 ShowToc: true
 TocOpen: false
 cover:
@@ -48,7 +48,7 @@ LAPS password and lands `Administrator` on the DC.
 sudo nmap -p- -sCV <TARGET_IP>
 ```
 
-![nmap](01-nmap.png)
+![Initial nmap scan of StreamIO](01-nmap.png)
 
 - **53** — DNS
 - **80 / 443** — HTTP/HTTPS (`streamio.htb`)

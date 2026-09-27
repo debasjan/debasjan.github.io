@@ -3,9 +3,9 @@ title: "Kioptrix Level 1"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "linux", "practice", "easy"]
+tags: ["others", "linux", "easy"]
 categories: ["writeups"]
-summary: "Kioptrix Level 1 from VulnHub — an older Apache/mod_ssl box: an outdated Apache 1.3.20 / OpenSSL fingerprint plus SMB (Samba) exposed. The intended paths are the OpenFuck (CVE-2002-0082) mod_ssl exploit and the Samba trans2open buffer overflow. This is one of the first VMs I ever solved."
+summary: "Kioptrix Level 1 from VulnHub — an older Apache/mod_ssl box: an outdated Apache 1.3.20 / OpenSSL fingerprint plus SMB (Samba) exposed."
 ShowToc: true
 TocOpen: false
 platformLabel: "TCM Security"
@@ -158,7 +158,7 @@ hostname
 	- Follow the instruction
 
 ```bash
-git clone https://github.com/heltonWernik/OpenFuck.git
+git clone https://github.com/heltonWernik/OpenLuck.git
 cd OpenFuck
 apt-get install libssl-dev
 gcc -o OpenFuck OpenFuck.c -lcrypto

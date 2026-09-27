@@ -5,7 +5,7 @@ hideDate: true
 draft: false
 tags: ["tryhackme", "linux", "easy", "rce", "credential-reuse", "sudo-abuse"]
 categories: ["writeups"]
-summary: "LazyAdmin's web root hides an outdated CMS (SweetRice) behind brute-forced directories. A database credential recovered from the CMS's own files unlocks its admin panel, which accepts a file..."
+summary: "LazyAdmin's web root hides an outdated CMS (SweetRice) behind brute-forced directories. A database credential recovered from the CMS's own files unlocks…"
 ShowToc: true
 TocOpen: false
 cover:

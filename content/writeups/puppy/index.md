@@ -4,7 +4,7 @@ date: 2026-08-01
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "medium", "acl-abuse", "keepass", "dpapi", "bloodhound"]
 categories: ["writeups"]
-summary: "Puppy is an assumed-breach AD chain: GenericWrite on a group unlocks a KeePass database, ACL abuse and a disabled-account re-enable move me across users, a website backup leaks an LDAP password, and DPAPI credential decryption recovers the admin twin account for full domain compromise."
+summary: "Puppy is an assumed-breach AD chain: GenericWrite on a group unlocks a KeePass database, ACL abuse and a disabled-account re-enable move me across users…"
 ShowToc: true
 TocOpen: false
 cover:

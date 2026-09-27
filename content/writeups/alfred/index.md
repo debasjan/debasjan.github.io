@@ -56,7 +56,7 @@ What is the user.txt flag?
 
 ## **Switching Shells**
 
-![mfs](mfs.png)
+![Metasploit multi/handler catching the upgraded Meterpreter session](mfs.png)
 
 To make the privilege escalation easier, let's switch to a meterpreter shell using the following process.
 
@@ -105,7 +105,7 @@ This access token consists of:
 - Group SIDs
 - Privileges
 
-Amongst other things. More detailed information can be found [here](https://docs.microsoft.com/en-us/windows/win32/secauthz/access-tokens).
+Amongst other things. More detailed information can be found [here](https://learn.microsoft.com/en-us/windows/win32/secauthz/access-tokens).
 
 There are two types of access tokens:
 

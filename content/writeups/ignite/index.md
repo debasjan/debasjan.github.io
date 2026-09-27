@@ -5,7 +5,7 @@ hideDate: true
 draft: false
 tags: ["tryhackme", "linux", "easy", "rce"]
 categories: ["writeups"]
-summary: "A short, single-application box: the site runs Fuel CMS, and its version and dashboard are enough to identify a public, well-documented remote code execution exploit for the platform. Running it..."
+summary: "A short, single-application box: the site runs Fuel CMS, and its version and dashboard are enough to identify a public, well-documented remote code…"
 ShowToc: true
 TocOpen: false
 cover:

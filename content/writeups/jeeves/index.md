@@ -4,7 +4,7 @@ date: 2026-07-27
 draft: false
 tags: ["hackthebox", "windows", "medium", "rce", "keepass", "pass-the-hash", "reverse-engineering"]
 categories: ["writeups"]
-summary: "Jeeves hides an unauthenticated Jenkins instance on a non-standard port. Groovy Script Console RCE gives a foothold, a cracked KeePass database leaks the Administrator's NTLM hash, and Pass-the-Hash lands SYSTEM — with the root flag tucked away in an NTFS alternate data stream."
+summary: "Jeeves hides an unauthenticated Jenkins instance on a non-standard port. Groovy Script Console RCE gives a foothold, a cracked KeePass database leaks the…"
 ShowToc: true
 TocOpen: false
 cover:

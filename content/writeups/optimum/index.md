@@ -4,7 +4,7 @@ date: 2025-12-10
 draft: false
 tags: ["hackthebox", "windows", "easy", "rce", "kernel-exploit"]
 categories: ["writeups"]
-summary: "Optimum is a lesson in why version banners matter: the only exposed service is an outdated file-server product with a public remote code execution exploit, giving an immediate foothold. From..."
+summary: "Optimum is a lesson in why version banners matter: the only exposed service is an outdated file-server product with a public remote code execution…"
 ShowToc: true
 TocOpen: false
 cover:

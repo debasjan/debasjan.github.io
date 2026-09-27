@@ -4,7 +4,7 @@ date: 2026-07-04
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "medium", "smb", "mssql", "credential-reuse", "adcs"]
 categories: ["writeups"]
-summary: "Escape is a Windows Active Directory box that starts with a sensitive PDF on a guest-readable SMB share, moves through an MSSQL hash-capture with Responder, and finishes with an ESC1 certificate template abuse for a full Administrator compromise."
+summary: "Escape is a Windows Active Directory box that starts with a sensitive PDF on a guest-readable SMB share, moves through an MSSQL hash-capture with…"
 ShowToc: true
 TocOpen: false
 cover:

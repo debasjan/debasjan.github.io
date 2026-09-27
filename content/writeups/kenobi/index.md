@@ -5,7 +5,7 @@ hideDate: true
 draft: false
 tags: ["tryhackme", "easy"]
 categories: ["writeups"]
-summary: "Walkthrough on exploiting a Linux machine. Enumerate Samba for shares, manipulate a vulnerable version of proftpd and escalate your privileges with path variable manipulation."
+summary: "Walkthrough on exploiting a Linux machine. Enumerate Samba for shares, manipulate a vulnerable version of proftpd and escalate your privileges with path…"
 ShowToc: true
 TocOpen: false
 cover:
@@ -150,7 +150,7 @@ d0b0f3f53b6caa532a83915e19224899
 
 ## **Privilege Escalation with Path Variable Manipulation**
 
-![SUID](suid-2.png)
+![Enumerating SUID binaries for a path-hijack candidate](suid-2.png)
 
 Lets first understand what what SUID, SGID and Sticky Bits are.
 

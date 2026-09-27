@@ -5,7 +5,7 @@ hideDate: true
 draft: false
 tags: ["tryhackme", "linux", "easy", "smb-anonymous", "suid-abuse", "gtfobins"]
 categories: ["writeups"]
-summary: "A themed beginner room (Brooklyn Nine-Nine references throughout) where FTP holds a file leaking SSH credentials directly, and privilege escalation is another SUID-binary abuse — this time less,..."
+summary: "A themed beginner room (Brooklyn Nine-Nine references throughout) where FTP holds a file leaking SSH credentials directly, and privilege escalation is…"
 ShowToc: true
 TocOpen: false
 cover:

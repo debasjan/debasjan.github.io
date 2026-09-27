@@ -5,7 +5,7 @@ hideDate: true
 draft: false
 tags: ["tryhackme", "linux", "easy", "smb"]
 categories: ["writeups"]
-summary: "Probe is a pure enumeration room — there's no exploitation or shell to obtain, just a target with an unusually wide service footprint (multiple web servers on different ports, FTP, a database..."
+summary: "Probe is a pure enumeration room — there's no exploitation or shell to obtain, just a target with an unusually wide service footprint (multiple web…"
 ShowToc: true
 TocOpen: false
 cover:

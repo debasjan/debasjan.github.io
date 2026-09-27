@@ -5,7 +5,7 @@ hideDate: true
 draft: false
 tags: ["tryhackme", "windows", "active-directory", "medium", "password-spray", "as-rep-roasting", "dcsync", "smb"]
 categories: ["writeups"]
-summary: "A guided introduction to core Active Directory attacks, chained end to end: Kerbrute enumerates valid domain usernames without any credentials, one of those accounts is AS-REP Roastable and cracks..."
+summary: "A guided introduction to core Active Directory attacks, chained end to end: Kerbrute enumerates valid domain usernames without any credentials, one of…"
 ShowToc: true
 TocOpen: false
 cover:

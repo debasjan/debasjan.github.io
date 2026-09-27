@@ -51,4 +51,4 @@ Escalate your privileges to root.
 ![payload script + shell machine](payload-script-shell-machine.png)
 ![shell](shell.png)
 ![sudo -l](sudo-l.png)
-![root](root.png)
+![Root shell on Brainpan after privilege escalation](root.png)

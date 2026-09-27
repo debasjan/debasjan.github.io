@@ -25,7 +25,7 @@ Compromise a Joomla CMS account via SQLi, practise cracking hashes and escalate 
 Access the web server, who robbed the bank?
 Spiderman
 
-![scan](scan.png)
+![nmap scan output for Daily Bugle](scan.png)
 
 ![port 80 web](port-80-web.png)
 

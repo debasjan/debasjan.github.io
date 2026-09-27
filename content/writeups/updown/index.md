@@ -4,7 +4,7 @@ date: 2026-03-04
 draft: false
 tags: ["hackthebox", "linux", "medium", "reverse-engineering", "lfi", "suid-abuse", "kernel-exploit"]
 categories: ["writeups"]
-summary: "UpDown is the deepest chain in this batch: an exposed .git directory leaks source code for a hidden developer subdomain gated behind a secret HTTP header. Once inside, an upload filter blocks..."
+summary: "UpDown is the deepest chain in this batch: an exposed .git directory leaks source code for a hidden developer subdomain gated behind a secret HTTP header."
 ShowToc: true
 TocOpen: false
 cover:

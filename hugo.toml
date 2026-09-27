@@ -19,13 +19,10 @@ pygmentsUseClasses = true
   home = ["HTML", "RSS", "JSON"]
 
 [params]
-  [params.label]
-    text = "debas"
-
   env = "production"
   title = "debas — pentesting & security blog"
-  description = "Write-ups from HackTheBox and OSCP labs, and offensive-security material by debas."
-  keywords = ["pentesting", "security", "hackthebox", "oscp", "active directory", "cybersecurity", "write-ups", "ethical hacking"]
+  description = "Pentesting write-ups and offensive-security notes by debas — Systems Administrator transitioning into Penetration Testing. Focus on Windows, Active Directory, internal pentesting."
+  keywords = ["pentesting", "security", "hackthebox", "active directory", "windows", "internal pentesting", "cybersecurity", "write-ups", "ethical hacking"]
   author = "Jan Jędrzejak (debas)"
   images = ["images/og-cover.png"]
   DateFormat = "January 2, 2006"
@@ -77,6 +74,9 @@ step, not just a list of commands.
     threshold = 0.4
     minMatchCharLength = 0
     keys = ["title", "permalink", "summary", "content"]
+
+  [params.label]
+    text = "debas"
 
 [menu]
   [[menu.main]]

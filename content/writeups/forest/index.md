@@ -4,7 +4,7 @@ date: 2026-01-18
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "easy", "as-rep-roasting", "bloodhound", "acl-abuse", "dcsync"]
 categories: ["writeups"]
-summary: "Forest is a Domain Controller with Exchange installed that allows anonymous LDAP binds, enough to enumerate the domain without any credentials. That turns up a service account with Kerberos..."
+summary: "Forest is a Domain Controller with Exchange installed that allows anonymous LDAP binds, enough to enumerate the domain without any credentials."
 ShowToc: true
 TocOpen: false
 cover:

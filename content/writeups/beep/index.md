@@ -4,7 +4,7 @@ date: 2026-03-09
 draft: false
 tags: ["hackthebox", "linux", "easy", "lfi", "credential-reuse"]
 categories: ["writeups"]
-summary: "Beep exposes a large VoIP/PBX (Elastix) stack, and the actual attack surface only becomes reachable after working around a browser-side TLS restriction. A known LFI in Elastix leaks a..."
+summary: "Beep exposes a large VoIP/PBX (Elastix) stack, and the actual attack surface only becomes reachable after working around a browser-side TLS restriction."
 ShowToc: true
 TocOpen: false
 cover:

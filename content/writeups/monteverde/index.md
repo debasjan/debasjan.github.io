@@ -4,7 +4,7 @@ date: 2026-03-08
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "medium", "smb", "ldap", "password-spray", "credential-reuse"]
 categories: ["writeups"]
-summary: "Monteverde starts with the same low-effort wins as most AD boxes — anonymous LDAP, a username-as-password spray — but the privilege escalation is what makes it worth including: the box runs Azure..."
+summary: "Monteverde starts with the same low-effort wins as most AD boxes — anonymous LDAP, a username-as-password spray — but the privilege escalation is what…"
 ShowToc: true
 TocOpen: false
 cover:

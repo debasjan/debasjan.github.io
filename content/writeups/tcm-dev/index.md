@@ -3,9 +3,9 @@ title: "Dev"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "linux", "practice", "easy"]
+tags: ["others", "linux", "easy"]
 categories: ["writeups"]
-summary: "We're working on gaining root access to a machine called Dev from TCM Security. It's not widely available or discussed elsewhere, making it a great starting point for beginners in penetration testing."
+summary: "We're working on gaining root access to a machine called Dev from TCM Security. It's not widely available or discussed elsewhere, making it a great…"
 ShowToc: true
 TocOpen: false
 platformLabel: "TCM Security"
@@ -190,7 +190,7 @@ We want now to abuse that feature and be able to escalate into root
 
 Go to website:
 
-[GTFOBins](https://gtfobins.github.io/)
+[GTFOBins](https://gtfobins.org/)
 
 Great websie for escalations. We are going to select suda and scrolling down for zip.
 

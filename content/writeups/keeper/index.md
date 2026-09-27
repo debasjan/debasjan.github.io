@@ -4,7 +4,7 @@ date: 2026-05-23
 draft: false
 tags: ["hackthebox", "linux", "easy", "credential-reuse", "keepass"]
 categories: ["writeups"]
-summary: "Keeper's foothold is a support-ticketing system still running its documented default credentials. From there, a leaked password gets an SSH account, whose home directory holds an old KeePass..."
+summary: "Keeper's foothold is a support-ticketing system still running its documented default credentials. From there, a leaked password gets an SSH account, whose…"
 ShowToc: true
 TocOpen: false
 cover:

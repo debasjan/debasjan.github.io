@@ -5,7 +5,7 @@ hideDate: true
 draft: false
 tags: ["tryhackme", "windows", "easy", "rce", "kernel-exploit", "mimikatz"]
 categories: ["writeups"]
-summary: "A room built around Icecast, a streaming media server with a disclosed, dated remote code execution vulnerability and a ready Metasploit module. After landing an initial Meterpreter session, the..."
+summary: "A room built around Icecast, a streaming media server with a disclosed, dated remote code execution vulnerability and a ready Metasploit module."
 ShowToc: true
 TocOpen: false
 cover:

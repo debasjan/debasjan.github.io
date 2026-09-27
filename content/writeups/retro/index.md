@@ -5,7 +5,7 @@ hideDate: true
 draft: false
 tags: ["tryhackme", "windows", "hard", "wordpress", "rdp", "cve-2019-1388", "uac-bypass"]
 categories: ["writeups"]
-summary: "Retro is an 80s-arcade themed Windows box: a WordPress instance at /retro leaks the admin's password in a post's comments, RDP takes me in as `wade`, and the outdated 'Windows Certificate Dialog' UAC bypass (CVE-2019-1388) via hhupd.exe hands me SYSTEM."
+summary: "Retro is an 80s-arcade themed Windows box: a WordPress instance at /retro leaks the admin's password in a post's comments, RDP takes me in as `wade`, and…"
 ShowToc: true
 TocOpen: false
 cover:

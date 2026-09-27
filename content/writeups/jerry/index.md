@@ -4,7 +4,7 @@ date: 2025-11-16
 draft: false
 tags: ["hackthebox", "windows", "easy", "rce", "credential-reuse", "upload-bypass"]
 categories: ["writeups"]
-summary: "Jerry is a single-service box: Apache Tomcat, reachable with its own undisturbed default manager credentials. Tomcat's manager application is designed to deploy applications on request, and a..."
+summary: "Jerry is a single-service box: Apache Tomcat, reachable with its own undisturbed default manager credentials. Tomcat's manager application is designed to…"
 ShowToc: true
 TocOpen: false
 cover:

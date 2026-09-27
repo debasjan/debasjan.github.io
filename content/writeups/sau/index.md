@@ -4,7 +4,7 @@ date: 2026-05-22
 draft: false
 tags: ["hackthebox", "linux", "easy", "ssrf", "command-injection", "gtfobins"]
 categories: ["writeups"]
-summary: "Sau chains two separate vulnerabilities in two separate applications through a Server-Side Request Forgery: a public Request Baskets instance is used to reach an internal-only Maltrail instance,..."
+summary: "Sau chains two separate vulnerabilities in two separate applications through a Server-Side Request Forgery: a public Request Baskets instance is used to…"
 ShowToc: true
 TocOpen: false
 cover:

@@ -4,7 +4,7 @@ date: 2025-12-09
 draft: false
 tags: ["hackthebox", "linux", "easy", "rce", "sudo-abuse"]
 categories: ["writeups"]
-summary: "Nibbles looks empty at first glance — a single \"Hello world!\" page — until the page source points at a hidden /nibbleblog/ directory. Guessing the admin password (after a blacklist made..."
+summary: "Nibbles looks empty at first glance — a single \"Hello world!\" page — until the page source points at a hidden /nibbleblog/ directory."
 ShowToc: true
 TocOpen: false
 cover:

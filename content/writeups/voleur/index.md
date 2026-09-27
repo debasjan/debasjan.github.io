@@ -2,9 +2,9 @@
 title: "Voleur — Hack The Box"
 date: 2026-08-14
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium", "kerberos", "password-cracking", "acl-abuse", "dpapi"]
+tags: ["hackthebox", "windows", "active-directory", "medium", "kerberoasting", "password-cracking", "acl-abuse", "dpapi"]
 categories: ["writeups"]
-summary: "Voleur is a Kerberos-only AD medium box: office2john on an encrypted Excel, AD Recycle Bin restore of a deleted user, RunasCs + DPAPI chain, targeted Kerberoast on GenericWrite, three service accounts and a backup shell, and finishes with NTDS.dit extracted from C:\\Backups."
+summary: "Voleur is a Kerberos-only AD medium box: office2john on an encrypted Excel, AD Recycle Bin restore of a deleted user, RunasCs + DPAPI chain, targeted…"
 ShowToc: true
 TocOpen: false
 cover:
@@ -50,7 +50,7 @@ NTLM, and a final `getTGT` + `evil-winrm -r voleur.htb` lands the DC.
 sudo nmap -p- -sCV <TARGET_IP>
 ```
 
-![nmap](01-nmap.png)
+![Initial nmap scan of Voleur](01-nmap.png)
 
 Kerberos-heavy AD environment (KDC / LDAP / GC / SMB / WinRM). Added
 the DC FQDN to `/etc/hosts` (this **must** be right for Kerberos):
@@ -143,7 +143,7 @@ ls -Force C:\Users\todd.wolfe\AppData\Roaming\Microsoft\Protect\<SID>\
 ![AppData](22-appdata-todd.png)
 ![Protect folder](23-protect-appdata.png)
 ![Protect subfolder](24-protect-appdata-2.png)
-![SID](25-sid.png)
+![Resolving the SID of todd.wolfe for DPAPI blob extraction](25-sid.png)
 
 Exfil via SMB (evil-winrm `download` is unreliable on hidden+system
 attributes; SMB copy is safer):

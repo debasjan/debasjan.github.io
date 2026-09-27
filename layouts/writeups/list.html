@@ -49,6 +49,24 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
     <input id="wuSearch" type="text" placeholder="Search write-ups by name or tag…" autocomplete="off">
   </div>
+
+  <div class="wu-filters" id="wuFilters" role="group" aria-label="Filter write-ups">
+    <div class="wu-filter-group" data-filter-group="difficulty">
+      <span class="wu-filter-label">Difficulty</span>
+      <button class="wu-chip is-active" data-filter="difficulty" data-value="all" type="button">All</button>
+      <button class="wu-chip" data-filter="difficulty" data-value="easy" type="button">Easy</button>
+      <button class="wu-chip" data-filter="difficulty" data-value="medium" type="button">Medium</button>
+      <button class="wu-chip" data-filter="difficulty" data-value="hard" type="button">Hard</button>
+    </div>
+    <div class="wu-filter-group" data-filter-group="os">
+      <span class="wu-filter-label">OS / Type</span>
+      <button class="wu-chip is-active" data-filter="os" data-value="all" type="button">All</button>
+      <button class="wu-chip" data-filter="os" data-value="linux" type="button"><span class="wu-dot wu-dot--linux"></span>Linux</button>
+      <button class="wu-chip" data-filter="os" data-value="windows" type="button"><span class="wu-dot wu-dot--windows"></span>Windows</button>
+      <button class="wu-chip" data-filter="os" data-value="active-directory" type="button"><span class="wu-dot wu-dot--ad"></span>Active Directory</button>
+    </div>
+  </div>
+
   <p class="wu-search__count" id="wuSearchCount"></p>
   <p class="wu-empty" id="wuGlobalEmpty" style="display:none">No write-ups match your search.</p>
 
@@ -93,9 +111,14 @@
       <div class="wu-grid">
         {{- range .pages }}
         {{- $osClass := "linux" }}
-        {{- if in .Params.tags "windows" }}{{ $osClass = "windows" }}{{ end }}
-        {{- if in .Params.tags "active-directory" }}{{ $osClass = "ad" }}{{ end }}
-        <a href="{{ .Permalink }}" class="wu-card" data-tags="{{ delimit .Params.tags " " }} {{ lower .Title }}">
+        {{- $osTag := "linux" }}
+        {{- if in .Params.tags "windows" }}{{ $osClass = "windows" }}{{ $osTag = "windows" }}{{ end }}
+        {{- if in .Params.tags "active-directory" }}{{ $osClass = "ad" }}{{ $osTag = "active-directory" }}{{ end }}
+        {{- $diff := "" }}
+        {{- if in .Params.tags "easy" }}{{ $diff = "easy" }}{{ end }}
+        {{- if in .Params.tags "medium" }}{{ $diff = "medium" }}{{ end }}
+        {{- if in .Params.tags "hard" }}{{ $diff = "hard" }}{{ end }}
+        <a href="{{ .Permalink }}" class="wu-card" data-tags="{{ delimit .Params.tags " " }} {{ lower .Title }}" data-diff="{{ $diff }}" data-os="{{ $osTag }}">
           <div class="wu-card__inner">
             <span class="wu-dot wu-dot--{{ $osClass }}"></span>
             {{- $shortName := .Title | replaceRE " — Hack The Box$| — TryHackMe$" "" }}
@@ -118,7 +141,10 @@
   var input = document.getElementById('wuSearch');
   var countEl = document.getElementById('wuSearchCount');
   var globalEmpty = document.getElementById('wuGlobalEmpty');
+  var chips = document.querySelectorAll('.wu-chip');
   if (!input) return;
+
+  var state = { difficulty: 'all', os: 'all' };
 
   function filter() {
     var q = input.value.trim().toLowerCase();
@@ -128,7 +154,10 @@
       section.querySelectorAll('[data-difficulty]').forEach(function (group) {
         var groupVisible = 0;
         group.querySelectorAll('.wu-card').forEach(function (card) {
-          var match = !q || card.getAttribute('data-tags').indexOf(q) !== -1;
+          var matchQ = !q || card.getAttribute('data-tags').indexOf(q) !== -1;
+          var matchDiff = state.difficulty === 'all' || card.getAttribute('data-diff') === state.difficulty;
+          var matchOs = state.os === 'all' || card.getAttribute('data-os') === state.os;
+          var match = matchQ && matchDiff && matchOs;
           card.style.display = match ? '' : 'none';
           if (match) { groupVisible++; sectionVisible++; visibleTotal++; }
         });
@@ -136,9 +165,22 @@
       });
       section.style.display = sectionVisible ? '' : 'none';
     });
-    countEl.textContent = q ? (visibleTotal + ' result' + (visibleTotal === 1 ? '' : 's')) : '';
-    globalEmpty.style.display = (q && visibleTotal === 0) ? '' : 'none';
+    var activeFilters = (q ? 1 : 0) + (state.difficulty !== 'all' ? 1 : 0) + (state.os !== 'all' ? 1 : 0);
+    countEl.textContent = activeFilters ? (visibleTotal + ' result' + (visibleTotal === 1 ? '' : 's')) : '';
+    globalEmpty.style.display = (activeFilters && visibleTotal === 0) ? '' : 'none';
   }
+
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var group = chip.getAttribute('data-filter');
+      var value = chip.getAttribute('data-value');
+      state[group] = value;
+      document.querySelectorAll('.wu-chip[data-filter="' + group + '"]').forEach(function (c) {
+        c.classList.toggle('is-active', c === chip);
+      });
+      filter();
+    });
+  });
 
   input.addEventListener('input', filter);
 })();
