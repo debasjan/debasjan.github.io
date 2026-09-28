@@ -2,7 +2,7 @@
 title: "Certifications"
 layout: "single"
 url: "/certifications/"
-summary: "Certifications and Pro Lab completions on my path into penetration testing — eJPT (Dec 2025), Dante Pro Lab (Feb 2026), OSCP in progress."
+summary: "Certifications and Pro Lab completions on my path into penetration testing — eJPT (Dec 2025), Dante Pro Lab (Feb 2026), OSCP PEN-200 preparation."
 ShowToc: false
 hidemeta: true
 hero: true
@@ -21,7 +21,7 @@ hero: true
 </div>
 <div>
 <div class="certs-stat-value">1</div>
-<div class="certs-stat-label">In Progress</div>
+<div class="certs-stat-label">In Preparation</div>
 </div>
 <div>
 <div class="certs-stat-value">2</div>
@@ -61,12 +61,12 @@ hero: true
 <span class="cert-card__badge">OS</span>
 <span class="cert-card__acronym">OSCP</span>
 </div>
-<span class="cert-card__check progress" aria-label="OSCP preparation in progress — retake ahead">⏳</span>
+<span class="cert-card__check progress" aria-label="OSCP PEN-200 preparation, exam attempted">⏳</span>
 </div>
 <div class="cert-card__vendor">OffSec</div>
 <h3 class="cert-card__title">OffSec Certified Professional</h3>
 <p class="cert-card__desc">PEN-200 preparation focused on Active Directory, Windows and Linux privilege escalation, and methodology over memorized exploits.</p>
-<span class="cert-card__date">In Progress</span>
+<span class="cert-card__date">PEN-200 preparation / exam attempted</span>
 </div>
 </div>
 </div>

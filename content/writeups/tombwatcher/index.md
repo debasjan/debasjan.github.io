@@ -1,6 +1,6 @@
 ---
 title: "TombWatcher — Hack The Box"
-date: 2026-09-25
+date: 2026-09-27
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "medium", "kerberoasting", "acl-abuse", "bloodhound", "adcs", "gmsa"]
 categories: ["writeups"]

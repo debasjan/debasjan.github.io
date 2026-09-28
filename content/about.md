@@ -22,7 +22,7 @@ hero: true
 <li>Active Directory Attacks &amp; Enumeration</li>
 <li>Windows &amp; Linux Privilege Escalation</li>
 <li>Web Application Fundamentals</li>
-<li>eJPT Certified · OSCP in progress</li>
+<li>eJPT Certified · OSCP PEN-200 preparation / exam attempted</li>
 </ul>
 </div>
 <div class="about-pic">
