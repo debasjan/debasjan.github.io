@@ -4,7 +4,7 @@ date: 2026-07-27
 draft: false
 tags: ["hackthebox", "windows", "active-directory", "medium", "mssql", "credential-reuse", "silver-ticket"]
 categories: ["writeups"]
-summary: "Signed exposes only MSSQL (1433). I coerce and crack the service account's NTLM hash with Responder, enumerate the domain through SQL alone, then forge a…"
+summary: "Signed exposes only MSSQL (1433). I coerce and crack the service account's NetNTLMv2 hash with Responder, enumerate the domain through SQL alone, then forge a…"
 ShowToc: true
 TocOpen: false
 cover:
@@ -18,7 +18,7 @@ cover:
 | **Platform** | Hack The Box |
 | **Difficulty** | Medium |
 | **OS** | Windows (Active Directory) |
-| **Key techniques** | NTLM hash coercion (Responder), domain enumeration through MSSQL (`SUSER_SID`), Kerberos Silver Ticket forging, MSSQL `OPENROWSET(BULK)` file read |
+| **Key techniques** | NetNTLMv2 hash coercion (Responder), domain enumeration through MSSQL (`SUSER_SID`), Kerberos Silver Ticket forging, MSSQL `OPENROWSET(BULK)` file read |
 
 ---
 
