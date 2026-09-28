@@ -55,6 +55,42 @@
 {{- partial "home_info.html" . }}
 {{- end }}
 
+{{- if and .IsHome (eq $paginator.PageNumber 1) site.Params.featuredWriteups }}
+{{- $featured := slice }}
+{{- range site.Params.featuredWriteups }}
+  {{- with site.GetPage (printf "writeups/%s" .) }}
+    {{- $featured = $featured | append . }}
+  {{- end }}
+{{- end }}
+{{- if $featured }}
+<section class="featured-work" aria-labelledby="featured-heading">
+  <div class="featured-work__header">
+    <h2 id="featured-heading" class="featured-work__title"><span class="accent">Featured</span> write-ups</h2>
+    <p class="featured-work__sub">Flagship chains — the ones I'd point a hiring manager at first.</p>
+  </div>
+  <div class="featured-work__grid">
+    {{- range $featured }}
+    {{- $t := .Params.tags }}
+    {{- $osClass := "linux" }}{{ if in $t "windows" }}{{ $osClass = "windows" }}{{ end }}{{ if in $t "active-directory" }}{{ $osClass = "ad" }}{{ end }}
+    {{- $diff := "" }}{{ if in $t "easy" }}{{ $diff = "Easy" }}{{ else if in $t "medium" }}{{ $diff = "Medium" }}{{ else if in $t "hard" }}{{ $diff = "Hard" }}{{ end }}
+    {{- $platform := "" }}{{ if in $t "hackthebox" }}{{ $platform = "Hack The Box" }}{{ else if in $t "tryhackme" }}{{ $platform = "TryHackMe" }}{{ end }}
+    {{- $shortName := .Title | replaceRE " — Hack The Box$| — TryHackMe$" "" }}
+    <a href="{{ .Permalink }}" class="featured-card">
+      <div class="featured-card__badges">
+        {{- with $diff }}<span class="entry-badge entry-badge--{{ lower . }}">{{ . }}</span>{{ end }}
+        <span class="entry-badge entry-badge--os"><span class="wu-dot wu-dot--{{ $osClass }}"></span>{{ if eq $osClass "ad" }}Active Directory{{ else if eq $osClass "windows" }}Windows{{ else }}Linux{{ end }}</span>
+      </div>
+      <h3 class="featured-card__title">{{ $shortName }}</h3>
+      {{- with $platform }}<div class="featured-card__platform">{{ . }}</div>{{ end }}
+      <p class="featured-card__summary">{{ .Summary | plainify | htmlUnescape }}</p>
+      <span class="featured-card__cta" aria-hidden="true">Read write-up →</span>
+    </a>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+{{- end }}
+
 {{- $term := .Data.Term }}
 
 <div class="posts-grid">

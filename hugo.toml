@@ -44,12 +44,16 @@ pygmentsUseClasses = true
   showtoc = true
   tocopen = false
 
+  # Slugs featured in the "Featured Work" section on the homepage.
+  # Order here is the display order.
+  featuredWriteups = ["tombwatcher", "blackfield", "fluffy", "administrator"]
+
   [params.homeInfoParams]
     Title = "the <span class=\"accent\">debas</span> blog"
     Content = """
-Hacking and offensive security content — write-ups from HackTheBox machines
-and notes from my OSCP preparation, focused on the reasoning behind each
-step, not just a list of commands.
+Systems administrator moving into offensive security — Windows, Active
+Directory, internal pentesting. HackTheBox write-ups and OSCP prep notes,
+reasoning over commands.
 """
 
   [[params.socialIcons]]
