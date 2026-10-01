@@ -29,7 +29,7 @@ primitives stacked on top of each other:
 
 1. Anonymous read of the `profiles$` SMB share leaks the user list from
    folder names.
-2. That list feeds `GetNPUsers.py` — `support` has `DONT_REQ_PREAUTH`,
+2. That list feeds `GetNPUsers.py`. `support` has `DONT_REQ_PREAUTH`,
    so an AS-REP hash pops out and cracks in seconds.
 3. BloodHound shows `support` has `ForceChangePassword` on `audit2020`,
    so `net rpc password` resets `audit2020` without ever knowing its
@@ -45,8 +45,8 @@ primitives stacked on top of each other:
    Administrator's **cleartext** password straight out of the SECURITY
    hive's cached credentials.
 
-Along the way the box hands out three different Administrator
-credentials — a great illustration of why "I have an Administrator
+Along the way the box gives three different Administrator
+credentials, a great illustration of why "I have an Administrator
 hash" is not the same as "I have Domain Admin".
 
 ---
@@ -61,8 +61,8 @@ sudo nmap -p- -A -T4 10.129.229.17
 ![nmap TCP sweep](01-nmap.png)
 ![nmap -A version + OS + host scripts](02-nmap-scripts.png)
 
-Domain controller for `BLACKFIELD.local` — SMB, LDAP, Kerberos and
-WinRM. Textbook AD attack surface.
+Domain controller for `BLACKFIELD.local`, SMB, LDAP, Kerberos and
+WinRM. A standard AD attack surface.
 
 ---
 
@@ -78,7 +78,7 @@ smbclient -N //10.129.229.17/profiles$
 ![profiles$ readable anonymously](03-smb-profiles.png)
 
 Inside `profiles$`, every domain user has an empty folder named after
-their SAM name — a **free user list**, no credentials required.
+their SAM name, a **free user list**, no credentials required.
 
 ![raw ls of profiles$](04-user-list-raw.png)
 
@@ -110,7 +110,7 @@ impacket-GetNPUsers blackfield.local/ -no-pass \
 ```
 
 Almost everyone comes back with **`doesn't have UF_DONT_REQUIRE_PREAUTH
-set`** — except **`support`**, which coughs up an AS-REP hash:
+set`**, except **`support`**, which coughs up an AS-REP hash:
 
 ![GetNPUsers finds support](07-asrep-hash-support.png)
 
@@ -127,7 +127,7 @@ Password: `#00^BlackKnight`.
 ### Password spray — sanity check
 
 Before pivoting, I sprayed the recovered password across the whole
-user list — it's cheap, and password reuse is normal in real
+user list. It's cheap, and password reuse is normal in real
 environments. NetExec makes this a one-liner:
 
 ```bash
@@ -136,7 +136,7 @@ nxc smb 10.129.229.17 -u users.txt -p password.txt --continue-on-success
 
 ![password spray across the user list](06-getnpusers.png)
 
-Every account authenticates as **Guest** with `#00^BlackKnight` — so
+Every account authenticates as **Guest** with `#00^BlackKnight`, so
 this password isn't unique to `support`, but it also doesn't give
 Guest access to any share worth mentioning. The one interesting
 result: **`audit2020` fails with `STATUS_LOGON_FAILURE`**, which
@@ -182,7 +182,7 @@ net rpc password "audit2020" "Password123" -U "blackfield.local"/"support"%'#00^
 ![net rpc password reset](12-net-rpc-reset.png)
 ![audit2020 authenticates with the new password](13-audit2020-new-password.png)
 
-Ethical note: on a real engagement this is disruptive — you're
+Ethical note: on a real engagement this is disruptive. You're
 changing someone's password. Fine on retired HTB, but on client work
 you'd coordinate a window and reset it back at the end.
 
@@ -216,7 +216,7 @@ smbclient //10.129.229.17/forensic -U 'audit2020%Password123' \
 ### pypykatz — mimikatz offline, in Python
 
 I don't want to load Mimikatz on a live host if I don't have to.
-`pypykatz` parses `lsass.DMP` **offline** in pure Python — same output,
+`pypykatz` parses `lsass.DMP` **offline** in pure Python, same output,
 no AV surface on the target:
 
 ```bash
@@ -228,12 +228,12 @@ pypykatz lsa minidump lsass.DMP
 
 The dump has three logon sessions worth caring about:
 
-- **`svc_backup`** NT hash — a domain service account:
+- **`svc_backup`** NT hash, a domain service account:
 
   ![svc_backup logon session](20-pypykatz-svc-backup.png)
   ![clean svc_backup NT hash](21-svc-backup-nt-hash.png)
 
-- **`Administrator@BLACKFIELD`** — a real Domain Admin session that
+- **`Administrator@BLACKFIELD`**, a real Domain Admin session that
   was active on the DC when the dump was taken, NT hash
   `7f1e4ff8c6a8e6b6fcae2d9c0572cd62`:
 
@@ -246,7 +246,7 @@ The dump has three logon sessions worth caring about:
 
 The Domain Administrator hash is technically enough to `wmiexec` or
 `psexec` in, but the RM management group on Blackfield doesn't accept
-it via WinRM. I need something better — and I already have the
+it via WinRM. I need something better, and I already have the
 prerequisite: `svc_backup` with `SeBackupPrivilege`.
 
 ---
@@ -254,7 +254,7 @@ prerequisite: `svc_backup` with `SeBackupPrivilege`.
 ## Foothold as `svc_backup` (Pass-the-Hash)
 
 `svc_backup` is in **Remote Management Users**, so evil-winrm accepts
-its hash directly — no cracking needed:
+its hash directly, no cracking needed:
 
 ```bash
 evil-winrm -i 10.129.229.17 -u svc_backup -H <NT-hash>
@@ -272,7 +272,7 @@ evil-winrm -i 10.129.229.17 -u svc_backup -H <NT-hash>
 ![SeBackupPrivilege enabled](24-whoami-priv.png)
 
 `SeBackupPrivilege` lets the holder read **any** file on the filesystem
-regardless of ACLs — including the registry hives. That is enough to
+regardless of ACLs, including the registry hives. That is enough to
 walk off the DC with the SAM database and the LSA secrets.
 
 ### The manual way (works, but noisy)
@@ -324,10 +324,10 @@ impacket-secretsdump -system system -sam sam local
 
 ![impacket-secretsdump on the exfiltrated hives](30-nxc-admin-cleartext.png)
 
-That gives back the **local SAM** hashes — including
+That gives back the **local SAM** hashes, including
 `Administrator:500:...:67ef902eae0d740df6257f273de75051`. Important:
 that `Administrator:500` is the DC's **local** account, not the
-domain one (see the "gotcha" below). It's not enough on its own — I
+domain one (see the "gotcha" below). It's not enough on its own. I
 need the LSA secrets too.
 
 ### The clean way — NetExec `backup_operator` module
@@ -335,7 +335,7 @@ need the LSA secrets too.
 NetExec has a **`backup_operator`** module that does the whole thing
 remotely: it uses `SeBackupPrivilege` to save `SAM`/`SYSTEM`/`SECURITY`
 via the WinReg service, streams them back, and runs `secretsdump`
-against them — one command, no files staged on the target:
+against them, one command, no files staged on the target:
 
 ```bash
 nxc smb 10.129.229.17 -u svc_backup -H <NT-hash> -M backup_operator
@@ -346,7 +346,7 @@ nxc smb 10.129.229.17 -u svc_backup -H <NT-hash> -M backup_operator
 This is the "new for me" bit of the box, and it's what I'm keeping in
 muscle memory. Same primitive (`SeBackupPrivilege` → registry hives),
 one command instead of ten. The output includes everything
-`secretsdump` normally gives you, plus what the manual way missed —
+`secretsdump` normally gives you, plus what the manual way missed,
 the cached credentials from the SECURITY hive. One of those lines is:
 
 ```
@@ -358,7 +358,7 @@ the DC. Game over.
 
 ### Gotcha — three different Administrator credentials
 
-Blackfield hands out three different "Administrator" credentials in
+Blackfield gives three different "Administrator" credentials in
 three different places, and the first time you see them they're easy
 to conflate:
 
@@ -372,7 +372,7 @@ The two NT hashes look identical in shape but represent two
 different accounts (Local Administrator on the DC vs. Domain
 Administrator in AD). Trying #2 as a Pass-the-Hash against
 `Administrator` over WinRM returns `STATUS_LOGON_FAILURE` (visible
-in the `backup_operator` output above) — because from the domain's
+in the `backup_operator` output above), because from the domain's
 perspective, that hash belongs to a completely different SID.
 
 The lesson: an `Administrator` hash from a DC isn't automatically
@@ -395,20 +395,20 @@ evil-winrm -i 10.129.229.17 -u Administrator -p '###_ADM1N_3920_###'
 ## Lessons Learned
 
 - **Anonymous `profiles$` = free user list.** Any share with per-user
-  folders is a wordlist waiting to be scraped; always try `smbclient
+  folders is a wordlist waiting to be scraped. Always try `smbclient
   -N` first, before you have any credentials.
 - **AS-REP Roast the moment you have a user list.** It's cheap, it's
   passive from an auth point of view, and `DONT_REQ_PREAUTH` is still
   common on service and legacy accounts.
 - **`ForceChangePassword` is an "instant" privilege escalation over
-  the wire** — no old password needed. `net rpc password` (Linux) and
+  the wire**, no old password needed. `net rpc password` (Linux) and
   `Set-DomainUserPassword` (PowerView) both work. Note the disruption
   on real engagements.
 - **`pypykatz` beats loading Mimikatz on the box.** Downloaded
   `lsass.DMP` → offline analysis on Kali → zero AV noise on the
   target.
 - **`SeBackupPrivilege` on a DC = domain compromise.** Learn the
-  primitive (read any file), then automate the ceremony —
+  primitive (read any file), then automate the ceremony.
   **`nxc … -M backup_operator`** does the whole SAM/SYSTEM/SECURITY
   dance in one line.
 - **DSRM ≠ Domain Administrator.** Always sanity-check where an
@@ -423,13 +423,13 @@ evil-winrm -i 10.129.229.17 -u Administrator -p '###_ADM1N_3920_###'
   user, computer or group names by folder structure). Least
   privilege on file shares is not optional on a DC subnet.
 - Disable `DONT_REQ_PREAUTH` on all accounts unless a legacy system
-  genuinely requires it — treat it like `AS-REP roast me`.
+  genuinely requires it. Treat it like `AS-REP roast me`.
 - Audit `ForceChangePassword` / `User-Force-Change-Password` grants;
   any low-privilege account with this right over a higher-privilege
   account is a straight escalation path.
 - Do not leave process memory dumps on network shares. LSASS in a zip
   on a Forensic share is a domain compromise waiting to happen.
-- Restrict `SeBackupPrivilege` to Tier-0 accounts only; make Backup
+- Restrict `SeBackupPrivilege` to Tier-0 accounts only. Make Backup
   Operators effectively "Domain Admin" and treat them accordingly.
 
 ---
@@ -444,7 +444,7 @@ evil-winrm -i 10.129.229.17 -u Administrator -p '###_ADM1N_3920_###'
 - `7z`, **`pypykatz`**
 - `evil-winrm`
 - **NetExec** (`nxc smb -M backup_operator`)
-- Impacket (`smbserver.py`, `secretsdump.py`) — for the manual walkthrough
+- Impacket (`smbserver.py`, `secretsdump.py`) for the manual walkthrough
 
 ---
 

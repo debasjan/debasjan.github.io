@@ -42,7 +42,7 @@ nmap -sC -sV -p- 10.129.10.95
 ![nmap service scan](01-nmap.png)
 
 Results: FTP (21), DNS (53), Kerberos (88), RPC (135), LDAP (389, domain
-`administrator.htb`) — a domain controller. The box hands over a starting
+`administrator.htb`), a domain controller. The box gives a starting
 credential up front: `Olivia:ichliebedich`.
 
 ---
@@ -62,7 +62,7 @@ Michael:
 
 ![BloodHound showing Olivia's GenericAll over Michael](02-bloodhound-genericall.png)
 
-`GenericAll` over a user object is complete control over it — enough to
+`GenericAll` over a user object is complete control over it, enough to
 reset the password outright. Clicking the edge in BloodHound spells out
 exactly how to abuse it:
 
@@ -179,7 +179,7 @@ BloodHound shows Emily has `GenericWrite` over Ethan:
 ![BloodHound showing Emily's GenericWrite over Ethan](18-bloodhound-genericwrite-info.png)
 
 `GenericWrite` is enough to give Ethan an SPN, request a ticket for that
-fake service, and get back a hash encrypted with Ethan's password — a
+fake service, and get back a hash encrypted with Ethan's password, a
 targeted Kerberoast:
 
 ```bash
@@ -202,8 +202,7 @@ Ethan's password: `limpbizkit`.
 
 ### Shell as Administrator
 
-In BloodHound, Ethan has `GetChangesAll` privileges over the domain —
-DCSync rights:
+In BloodHound, Ethan has `GetChangesAll` privileges over the domain, DCSync rights:
 
 ![BloodHound showing ethan's DCSync rights](04-dcsync-rights.png)
 
@@ -229,12 +228,12 @@ Read the final flag from `C:\Users\Administrator\Desktop\root.txt`.
 ## Lessons Learned
 
 - A single starting credential in AD can cascade into full domain
-  compromise purely through ACL abuse — no exploit needed anywhere in this
+  compromise purely through ACL abuse, no exploit needed anywhere in this
   chain.
-- BloodHound after every new credential, not just the first — each hop
+- BloodHound after every new credential, not just the first, each hop
   (Olivia, Michael, Emily, Ethan) had its own distinct outbound edge.
 - Password managers found on a share are worth cracking even when they
-  don't belong to the current user — the accounts stored inside were real,
+  don't belong to the current user, the accounts stored inside were real,
   live domain credentials.
 - DCSync doesn't require Domain Admin membership, only the specific
   replication rights.

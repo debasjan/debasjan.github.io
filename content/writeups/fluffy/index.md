@@ -28,8 +28,8 @@ Fluffy is an assumed-breach scenario (starting credentials provided)
 built around a very recent Windows Explorer spoofing bug and an equally
 recent AD CS misconfiguration. A crafted archive triggers an NTLM
 authentication leak to a listener, cracking a second user's password.
-BloodHound then reveals a chain of ACL abuse — `GenericAll` on a group,
-`GenericWrite` on service accounts — that ends in shadow-credential
+BloodHound then reveals a chain of ACL abuse, `GenericAll` on a group,
+`GenericWrite` on service accounts. That ends in shadow-credential
 attacks and an ESC16 certificate-template abuse against the CA,
 ultimately minting a certificate that authenticates as Administrator.
 
@@ -43,7 +43,7 @@ nmap -sC -sV -p- -T4 10.129.232.88
 
 ![nmap service scan](01-nmap.png)
 
-DNS, Kerberos, SMB, LDAP, WinRM — `fluffy.htb`, DC `DC01.fluffy.htb`.
+DNS, Kerberos, SMB, LDAP, WinRM, `fluffy.htb`, DC `DC01.fluffy.htb`.
 
 ### SMB
 
@@ -56,7 +56,7 @@ smbclient -L //10.129.232.88 -N
 
 ![listing SMB shares, including an IT share](05-smb-shares.png)
 
-An `IT` share held `Upgrade_Notice.pdf` — an internal memo listing recent
+An `IT` share held `Upgrade_Notice.pdf`, an internal memo listing recent
 vulnerabilities the IT team was tracking:
 
 ```bash
@@ -66,11 +66,10 @@ get Upgrade_Notice.pdf
 
 ![the Upgrade Notice PDF listing recent CVEs](06-upgrade-notice-pdf.png)
 
-Reading operational documents like this is worth doing on every box —
-defenders sometimes document their own exposure without realizing it.
+Reading operational documents like this is worth doing on every box. Defenders sometimes document their own exposure without realizing it.
 The notice referenced **CVE-2025-24071**, a Windows File Explorer
 spoofing vulnerability where extracting a ZIP containing a crafted
-`.library-ms` file causes an automatic SMB authentication attempt —
+`.library-ms` file causes an automatic SMB authentication attempt,
 leaking the extracting user's NTLM hash.
 
 ---
@@ -124,9 +123,9 @@ including `winrm_svc` and `ca_svc` (a member of Cert Publishers):
 
 ![GenericWrite from service accounts onto winrm_svc and ca_svc](09-genericwrite-winrm-ca-svc.png)
 
-`GenericAll` on a group means I can add myself to it; once inside,
-`GenericWrite` on an account lets me attach **shadow credentials** — an
-alternate authentication key — without needing to know or reset the
+`GenericAll` on a group means I can add myself to it. Once inside,
+`GenericWrite` on an account lets me attach **shadow credentials**, an
+alternate authentication key, without needing to know or reset the
 account's real password:
 
 ```bash
@@ -154,7 +153,7 @@ certipy-ad find -u ca_svc@fluffy.htb -hashes <RC4_HASH> -vulnerable -stdout
 
 ![certipy find flagging ESC16](04-esc16-vulnerable.png)
 
-**ESC16** — a misconfiguration where a security extension is globally
+**ESC16**, a misconfiguration where a security extension is globally
 disabled on the CA, meaning a certificate's embedded UPN is trusted
 without the usual binding check. That makes the attack simple:
 temporarily set `ca_svc`'s UPN to `administrator`, request a certificate
@@ -191,15 +190,15 @@ flag.
 
 ## Lessons Learned
 
-- Internal documentation can be an attack roadmap — a memo naming a
+- Internal documentation can be an attack roadmap, a memo naming a
   specific CVE handed me the exact exploit to use.
-- `GenericAll`/`GenericWrite` on a group is transitive — mapping it
+- `GenericAll`/`GenericWrite` on a group is transitive, mapping it
   manually is error-prone; BloodHound's *Outbound Object Control* view
   exists precisely because these chains are easy to miss otherwise.
-- Shadow credentials are a quieter alternative to a password reset —
+- Shadow credentials are a quieter alternative to a password reset,
   useful to know both offensively and defensively, since a reset is loud
   and shadow credentials often aren't monitored as closely.
-- ESC16 is a CA-wide setting, not a per-template misconfiguration — one
+- ESC16 is a CA-wide setting, not a per-template misconfiguration, one
   disabled security extension undermines every template's UPN binding at
   once.
 
@@ -207,9 +206,9 @@ flag.
 
 ## Remediation
 
-- Patch CVE-2025-24071; treat `.library-ms`/similar file types in
+- Patch CVE-2025-24071. Treat `.library-ms`/similar file types in
   attacker-controlled archives as a real threat.
-- Apply least privilege to AD groups — `GenericAll`/`GenericWrite` over
+- Apply least privilege to AD groups, `GenericAll`/`GenericWrite` over
   service-account groups should be audited like Domain Admin membership.
 - Re-enable the CA security extension globally and monitor certificate
   requests where a low-privileged account modifies a UPN before
