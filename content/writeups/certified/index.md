@@ -8,7 +8,7 @@ summary: "Certified is a Medium AD box that is really an ADCS ESC9 workshop wrap
 ShowToc: true
 TocOpen: false
 cover:
-  image: "01-nmap.png"
+  image: "00-card.png"
   alt: "Certified — Hack The Box"
   relative: true
 ---
