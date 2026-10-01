@@ -27,17 +27,17 @@ cover:
 The main site is a video-streaming front, but the interesting attack
 surface is a second vhost (`watch.streamio.htb`) surfaced through
 `ffuf -H "Host: FUZZ.streamio.htb"`. The primary site's `search.php`
-is UNION-injectable against MSSQL; extracting `information_schema` and
+is UNION-injectable against MSSQL. Extracting `information_schema` and
 the users table yields hashes that crack to a password list. Hydra sprays
 that list at the `watch.streamio.htb` login and returns an admin combo.
-The admin panel exposes an LFI in an `?include=` parameter — wrapping it
+The admin panel exposes an LFI in an `?include=` parameter, wrapping it
 in `php://filter/convert.base64-encode/resource=master.php` leaks the
 PHP source and, with it, credentials for the streamio_backend database.
 Dumping that DB gives credentials for `nikk39`, who has WinRM on the DC.
-`nikk39`'s user profile stores a Firefox `key4.db`/`logins.json` pair;
+`nikk39`'s user profile stores a Firefox `key4.db`/`logins.json` pair.
 `firepwd.py` decrypts it and yields `yoshihide`. BloodHound then shows
 `yoshihide` has `WriteOwner` on the `Core Staff` group, which has
-`ReadLAPSPassword` on the DC — the four-step ACL abuse chain reads the
+`ReadLAPSPassword` on the DC, the four-step ACL abuse chain reads the
 LAPS password and lands `Administrator` on the DC.
 
 ---
@@ -50,11 +50,11 @@ sudo nmap -p- -sCV <TARGET_IP>
 
 ![Initial nmap scan of StreamIO](01-nmap.png)
 
-- **53** — DNS
-- **80 / 443** — HTTP/HTTPS (`streamio.htb`)
-- **88** — Kerberos
-- **135 / 139 / 445** — SMB / RPC
-- **389 / 636 / 3268 / 3269** — LDAP (domain `streamio.htb`)
+- **53**, DNS
+- **80 / 443**, HTTP/HTTPS (`streamio.htb`)
+- **88**, Kerberos
+- **135 / 139 / 445**, SMB / RPC
+- **389 / 636 / 3268 / 3269**, LDAP (domain `streamio.htb`)
 
 The site on 443:
 
@@ -75,7 +75,7 @@ Directory brute-force did not surface much:
 ## SQL Injection — UNION on search.php
 
 The `search.php` parameter was UNION-injectable against a MSSQL
-backend. Standard cheatsheet path — probe version, count columns, walk
+backend. Standard cheatsheet path, probe version, count columns, walk
 `information_schema`:
 
 ![SQLi cheatsheet reference](07-sqli-cheat.png)
@@ -123,7 +123,7 @@ Landed the admin panel:
 
 ## LFI → PHP source → DB creds → RCE
 
-The admin panel exposed an `?include=` parameter — LFI:
+The admin panel exposed an `?include=` parameter, LFI:
 
 ![LFI parameter](23-lfi.png)
 
@@ -249,18 +249,18 @@ evil-winrm -i streamio.htb -u Administrator -p '<LAPS_pw>'
 - **Vhost fuzzing changes the box completely.** A single unnoticed
   `Host:` header on Hack The Box regularly hides the entire attack
   surface (`watch.streamio.htb` here).
-- **UNION SQLi has a fixed sequence — do not fuzz it.** Version →
+- **UNION SQLi has a fixed sequence. Do not fuzz it.** Version →
   columns → `information_schema.tables` → `columns` → dump. Same order
   every time, whether the backend is MySQL, MSSQL, or PostgreSQL. Only
   the syntax quotes change.
 - **LFI + `php://filter` = source disclosure.** Any `?include=` /
   `?page=` / `?file=` parameter that behaves like an include gets the
-  base64 filter treatment first — source code beats blind LFI every
+  base64 filter treatment first, source code beats blind LFI every
   time.
 - **Saved browser credentials live on disk.** Firefox `key4.db` +
   `logins.json` → `firepwd.py`. Chrome `Login Data` + `Local State` →
   DPAPI. Neither one gets audited in most environments.
-- **`WriteOwner` is not lateral — it is total.** Own → grant self →
+- **`WriteOwner` is not lateral. It is total.** Own → grant self →
   add member → read the protected attribute. When the target group
   can read LAPS, that is the DC.
 - **Different LDAP and WinRM permission surfaces.** New members of a
@@ -282,7 +282,7 @@ evil-winrm -i streamio.htb -u Administrator -p '<LAPS_pw>'
   serving `watch.streamio.htb`. `ffuf`/`gobuster -mode vhost` are
   cheap smoke tests to run on a schedule.
 - **Parameterise every SQL query.** MSSQL, MySQL and PostgreSQL all
-  support parameterised queries or prepared statements — using them
+  support parameterised queries or prepared statements, using them
   removes UNION-based extraction as a class of vulnerability. Do not
   rely on `escape()` helpers.
 - **Turn off `allow_url_include` and consider disabling PHP filter
@@ -291,11 +291,11 @@ evil-winrm -i streamio.htb -u Administrator -p '<LAPS_pw>'
   blacklists on the parameter value.
 - **Never save credentials in Firefox on shared / production hosts.**
   If the workflow requires it, use a master password (properly
-  configured key3/key4) — the master-password key derivation slows
+  configured key3/key4), the master-password key derivation slows
   `firepwd.py` down enough to be useful.
 - **Tighten AD ACLs on LAPS-readable groups.** `WriteOwner` on a group
   that can read `ms-mcs-admpwd` is the same as DA to an attacker.
-  Least privilege on Tier-0 group ownership; alert on ownership
+  Least privilege on Tier-0 group ownership. Alert on ownership
   changes.
 
 ---

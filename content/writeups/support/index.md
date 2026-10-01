@@ -26,10 +26,10 @@ cover:
 
 `Support` starts from an anonymously readable SMB share hosting a
 `UserInfo.exe` .NET binary. Decompiling it with ILSpy reveals an LDAP
-password encrypted with a hardcoded key (`armando`); reproducing the
+password encrypted with a hardcoded key (`armando`). Reproducing the
 routine in a short helper script recovers a real credential. Authenticated
 LDAP dumping shows the user `support` carries a plaintext password in
-the `info` attribute — that's the user flag. From there BloodHound reveals
+the `info` attribute. That's the user flag. From there BloodHound reveals
 that `support`'s group has `GenericAll` on the DC computer object, which
 is the textbook setup for **Resource-Based Constrained Delegation**:
 create a machine account, set it as an allowed delegate, request an
@@ -45,7 +45,7 @@ sudo nmap -p- -sCV <TARGET_IP>
 
 ![nmap scan](01-nmap.png)
 
-Domain controller for `support.htb` — SMB, LDAP, Kerberos, DNS, GC.
+Domain controller for `support.htb`, SMB, LDAP, Kerberos, DNS, GC.
 
 ---
 
@@ -69,7 +69,7 @@ surfaced the LDAP bind routine:
 ![Decompiled LdapQuery class](06-ilspy-decompile.png)
 
 The class held a base64-encoded ciphertext and a hardcoded key (`armando`).
-The routine XORs the ciphertext against the key after decoding — trivial
+The routine XORs the ciphertext against the key after decoding, trivial
 to reproduce in Python/C#:
 
 ![Encrypted LDAP password](07-encrypted-password.png)
@@ -81,7 +81,7 @@ to reproduce in Python/C#:
 ## Lateral movement — LDAP → support
 
 The recovered credential authenticates for LDAP queries. Dumping the full
-directory surfaces every attribute — including the `info` field on the
+directory surfaces every attribute, including the `info` field on the
 `support` user, which contains their plaintext password:
 
 ```bash
@@ -175,15 +175,15 @@ impacket-psexec -k -no-pass dc.support.htb
 
 ## Lessons Learned
 
-- **A binary on an anonymous share is a code review, not a foothold** —
+- **A binary on an anonymous share is a code review, not a foothold**,
   before running it, throw it into ILSpy / dnSpy / IDA. Hardcoded keys
   and encrypted config values are common.
 - **LDAP `info` and `description` are goldmines.** Any authenticated
-  LDAP dump should grep both — real environments still store passwords
+  LDAP dump should grep both, real environments still store passwords
   there.
 - **`GenericAll` on a Computer object = RBCD.** The four-command chain
   (`addcomputer` → `rbcd -action write` → `getST -impersonate` →
-  `psexec -k -no-pass`) is the reflex; drilling it means the exam-shape
+  `psexec -k -no-pass`) is the reflex. Drilling it means the exam-shape
   of this box takes minutes, not hours.
 
 
@@ -191,23 +191,23 @@ impacket-psexec -k -no-pass dc.support.htb
 
 ## Remediation
 
-- **Disable anonymous SMB access** — remove `everyone` and null-session
+- **Disable anonymous SMB access**, remove `everyone` and null-session
   read on `support-tools` (and any share hosting binaries / installers).
   Domain-joined engineers do not need it.
 - **Do not ship credentials in code, even encrypted.** The
   `UserInfo.exe` binary contained both the ciphertext *and* the XOR
   key. Move service-account authentication to Windows-integrated
-  auth (LDAP over Kerberos) or gMSA — anything that keeps the
+  auth (LDAP over Kerberos) or gMSA, anything that keeps the
   credential out of the binary.
 - **Audit LDAP `info` and `description` fields** across the whole
   directory. Passwords stored there are readable by any authenticated
   user, no ACLs applied. `ldapsearch ... '(info=*)'` finds them.
-- **Restrict `GenericAll` on computer objects** — a lower-privilege
+- **Restrict `GenericAll` on computer objects**, a lower-privilege
   group holding it on a Domain Controller is a direct path to
   Resource-Based Constrained Delegation. Tier-0 objects should only
   be writeable by Tier-0 accounts.
 - **Disable RC4 in Kerberos** so silver/golden ticket forgeries and
-  AS-REP roasting become harder; RBCD's `getST` also downgrades to
+  AS-REP roasting become harder. RBCD's `getST` also downgrades to
   RC4 by default and is more obvious when it is not available.
 
 ---

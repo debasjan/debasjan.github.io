@@ -27,9 +27,9 @@ cover:
 Heist is built around a leaked Cisco router configuration linked from a
 "Support" web login. The config holds a **type-7** (reversible) and a
 **type-5** (crackable MD5) password. Recovering both and spraying them
-across the local users — enumerated via an SMB **RID-brute** — lands valid
-WinRM credentials for `Chase`. On the box, Chase has **Firefox running**;
-dumping the process memory with **Procdump** and grepping the dump reveals
+across the local users, enumerated via an SMB **RID-brute**, lands valid
+WinRM credentials for `Chase`. On the box, Chase has **Firefox running**.
+Dumping the process memory with **Procdump** and grepping the dump reveals
 the Administrator's plaintext password inside a cached login URL, which I
 reuse via Pass-the-Password with `psexec` for a SYSTEM shell.
 
@@ -54,7 +54,7 @@ configuration file:
 
 ![the support page](02-support-page.png)
 
-The config contains two credential types — a type-5 (MD5, crackable) and a
+The config contains two credential types, a type-5 (MD5, crackable) and a
 type-7 (reversible cipher):
 
 ![Cisco config with type-5 and type-7 secrets](03-cisco-config.png)
@@ -110,7 +110,7 @@ credentials store and pointed at dumping browser memory:
 ![winPEAS run](13-winpeas-run.png)
 ![winPEAS flagging Firefox](14-firefox-creds.png)
 
-The key detail: Firefox was **actually running** — a live process can leak
+The key detail: Firefox was **actually running**, a live process can leak
 more than the saved-logins DB on disk:
 
 ```powershell
@@ -128,7 +128,7 @@ Uploaded **Procdump** (Sysinternals) and dumped the process by PID:
 ![Procdump](16-procdump.png)
 ![Firefox process dumped](17-firefox-dump.png)
 
-Exfiltrated the `.dmp` and grepped it for credentials — Firefox had cached
+Exfiltrated the `.dmp` and grepped it for credentials, Firefox had cached
 a leaked admin login **URL** with the password in plaintext:
 
 ```bash
@@ -158,21 +158,21 @@ impacket-psexec 'administrator:<password>@10.129.62.207'
 ## Lessons Learned
 
 - Leaked device configs (Cisco/network gear) often carry **both**
-  reversible (type-7) and crackable (type-5) secrets — recover both, they
+  reversible (type-7) and crackable (type-5) secrets, recover both, they
   get reused as real user passwords.
 - An SMB RID-brute with any valid low-priv login enumerates the full local
-  user list — feed it straight into a spray.
+  user list, feed it straight into a spray.
 - Always check whether a juicy process (browser, password manager) is
-  **running** before deciding on privesc; a live process can be dumped for
+  **running** before deciding on privesc. A live process can be dumped for
   secrets still in memory, beyond what's on disk.
 - `procdump -ma <PID>` + `strings | grep` is the same idea as LSASS
-  dumping — it generalizes to any process holding secrets.
+  dumping. It generalizes to any process holding secrets.
 
 ---
 
 ## Remediation
 
-- Never publish device configs with embedded secrets; rotate any exposed
+- Never publish device configs with embedded secrets. Rotate any exposed
   type-5/type-7 passwords.
 - Enforce unique passwords so a single leaked one can't be sprayed.
 - Restrict low-privileged users from dumping process memory, and don't

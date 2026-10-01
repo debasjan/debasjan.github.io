@@ -34,18 +34,18 @@ Judith is the owner of group `management`, and `management` has
 the group (owner privilege), add myself as a member, then run
 **Shadow Credentials** against `management_svc` for its NT hash.
 `management_svc` sits in `Remote Management Users` so WinRM works
-(WMI does not — different rights). BloodHound then shows
-`management_svc` has `GenericAll` on `ca_operator`; a second Shadow
+(WMI does not, different rights). BloodHound then shows
+`management_svc` has `GenericAll` on `ca_operator`. A second Shadow
 Credentials attack yields `ca_operator`'s NT hash. Certipy flags the
 `CertifiedAuthentication` template as **ESC9** (`NoSecurityExtension`
 flag). The exploit path is: as `management_svc` (who has `GenericAll`
 on `ca_operator`), rewrite `ca_operator`'s `userPrincipalName` to
 `administrator@certified.htb`, request a cert as `ca_operator`, then
-authenticate — the KDC maps the cert to `administrator` because the
+authenticate, the KDC maps the cert to `administrator` because the
 cert has no security extension carrying the original SID. There is one
 last certipy v5.1.0 quirk that made auth fail with a name-mismatch
-until I restored the UPN, then re-authenticated with the cert — I
-document that honestly, I do not pretend to know the exact mechanism.
+until I restored the UPN, then re-authenticated with the cert. I
+document that honestly. I do not pretend to know the exact mechanism.
 Final Administrator NT hash lands the box.
 
 ---
@@ -58,7 +58,7 @@ nmap -p- -A -T4 10.129.231.186
 
 ![nmap on certified.htb](01-nmap.png)
 
-Standard DC signature — DNS, Kerberos, SMB, LDAP/LDAPS, GC, WinRM,
+Standard DC signature, DNS, Kerberos, SMB, LDAP/LDAPS, GC, WinRM,
 .NET Remoting on 9389. Domain `certified.htb`, host `dc01.certified.htb`,
 Windows Server 2022. `/etc/hosts` update so Kerberos service tickets
 resolve to the right hostname later:
@@ -83,7 +83,7 @@ bloodhound-python -u judith.mader -p judith09 -d certified.htb \
 ![bloodhound-python collect](03-bloodhound-collect.png)
 
 Marked `judith.mader@CERTIFIED.HTB` as **Owned** and ran *Shortest
-paths from owned* — the whole box drops out of one query:
+paths from owned*, the whole box drops out of one query:
 
 ![shortest path from Judith](04-shortest-path.png)
 
@@ -103,7 +103,7 @@ judith.mader ──owns──▶ management ──GenericWrite──▶ manageme
 
 To use the `GenericWrite`, I need to be a **member** of `management`,
 not just its owner. The owner edge does not directly give me the
-target's ACE — it gives me the right to change the group's DACL, which
+target's ACE. It gives me the right to change the group's DACL, which
 I then use to grant myself the rights I want.
 
 ---
@@ -112,7 +112,7 @@ I then use to grant myself the rights I want.
 
 Before touching the ACL chain I tried the cheap option first. `management`
 has `GenericWrite` on `management_svc`, and `GenericWrite` on a user is
-enough to set a `servicePrincipalName` — which means a **targeted
+enough to set a `servicePrincipalName`, which means a **targeted
 Kerberoast** is available as soon as I am a member. But I can also
 Kerberoast anything that already has an SPN as any authenticated user,
 so I ran the whole-domain version first:
@@ -149,7 +149,7 @@ the group first, then add myself as a member.
 
 Why two calls instead of one `Add-DomainGroupMember`? Because
 "owner" and "member" are not the same thing to
-`SAMR_QUERY_INFORMATION_GROUP` / `SAMR_ADD_MEMBER_TO_GROUP` — the
+`SAMR_QUERY_INFORMATION_GROUP` / `SAMR_ADD_MEMBER_TO_GROUP`, the
 SAMR write path checks the group's DACL for a write-members ACE for
 the caller's SID, not "is caller the owner of this object". So I
 need the explicit `GenericAll` (which includes `WriteMembers`) on
@@ -179,7 +179,7 @@ The first `add groupMember` returned silently. **I did not verify** the
 membership before moving on, hit an unrelated error a couple of steps
 later, and worked backwards to find that the membership had not
 actually applied on the first call (probably a replication / caching
-quirk with the DC's LDAP handling; the second call, straight after,
+quirk with the DC's LDAP handling. The second call, straight after,
 worked).
 
 ![second add groupMember succeeds — Judith visible in management](10-addgroupmember-retry.png)
@@ -201,7 +201,7 @@ bloodyAD --host dc01.certified.htb -d certified.htb \
 
 Now that I am a member of `management`, the `GenericWrite` edge on
 `management_svc` is live for me. `GenericWrite` includes the right to
-edit `msDS-KeyCredentialLink` — which is exactly the primitive
+edit `msDS-KeyCredentialLink`, which is exactly the primitive
 Shadow Credentials abuses.
 
 **Concept.** Shadow Credentials was described by Elad Shamir / Charlie
@@ -210,7 +210,7 @@ computer object holds public keys used for **PKINIT** authentication
 (Windows Hello for Business, primarily). If I can write that
 attribute, I add my own key, then use PKINIT to obtain a TGT for the
 target account. No password reset, no observable event on the target,
-and the target's original password/hash keeps working — the victim
+and the target's original password/hash keeps working, the victim
 does not notice they were had.
 
 `certipy-ad shadow auto` does the whole dance: generate keypair, patch
@@ -241,7 +241,7 @@ nxc winrm 10.129.231.186 -u management_svc -H a091c1832bcdd4677c28b5a6a1295584
 
 ### WinRM works, WMI does not — and this matters
 
-While setting up the shell I also tried `impacket-wmiexec` — it fails
+While setting up the shell I also tried `impacket-wmiexec`. It fails
 with `WBEM_E_ACCESS_DENIED`:
 
 ```bash
@@ -260,8 +260,8 @@ permissions** and the CIMV2 namespace ACLs, which are typically
 different bouncer.
 
 Take-away: if `wmiexec` fails with `WBEM_E_ACCESS_DENIED` but WinRM
-authenticates, you are not looking at a credential problem — you are
-looking at a rights-scope mismatch. Do not tunnel; use the door
+authenticates, you are not looking at a credential problem. You are
+looking at a rights-scope mismatch. Do not tunnel. Use the door
 that is open.
 
 ### evil-winrm bug (documented for the archive)
@@ -279,7 +279,7 @@ Fix in one line:
 sudo gem install rubyntlm -v 0.6.3
 ```
 
-I did not need it — `nxc winrm` and `impacket-psexec` were fine, so I
+I did not need it, `nxc winrm` and `impacket-psexec` were fine, so I
 moved on. Noting it here so future-me does not lose 10 minutes on it.
 
 ---
@@ -302,7 +302,7 @@ nxc winrm 10.129.231.186 -u management_svc \
 Re-ran BloodHound as `management_svc` and the next edge is right
 there: `management_svc` has `GenericAll` on `ca_operator`.
 `GenericAll` includes `WriteProperty` on `msDS-KeyCredentialLink`, so
-Shadow Credentials is the reflex — no need to try a password reset
+Shadow Credentials is the reflex, no need to try a password reset
 first (the box's whole theme is ADCS, and I want a certificate path,
 not a fresh password to type).
 
@@ -318,8 +318,8 @@ certipy-ad shadow auto \
 **NT hash `ca_operator`:** `b4b86f45c6018f1b664f70805f45d8f2`.
 
 Two identities in hand:
-- `management_svc` — `GenericAll` on `ca_operator`.
-- `ca_operator` — the account that is enrollable on the interesting
+- `management_svc`, `GenericAll` on `ca_operator`.
+- `ca_operator`, the account that is enrollable on the interesting
   template (about to be discovered).
 
 ---
@@ -353,16 +353,16 @@ it by the CA. That extension carries the **SID** of the account the
 CA authenticated when it issued the cert. When someone later
 authenticates to the KDC with that cert (PKINIT), the KDC's cert
 mapping logic uses the SID from that extension as the ground-truth
-identity — the `userPrincipalName` on the cert is only cosmetic.
+identity, the `userPrincipalName` on the cert is only cosmetic.
 
 If a template has the **`NoSecurityExtension`** flag set (Enrollment
 Flag `0x80000`), the CA does not embed that SID extension. The KDC
-then falls back to **UPN mapping** — it reads the `SubjectAltName`
+then falls back to **UPN mapping**. It reads the `SubjectAltName`
 UPN from the certificate and looks up the AD user whose
 `userPrincipalName` matches. So: if I can rewrite the UPN of an
 account I control (or that I have `GenericAll` on) to
 `administrator@certified.htb`, request a cert on the vulnerable
-template as that account, then authenticate with the cert — the KDC
+template as that account, then authenticate with the cert, the KDC
 maps me to Administrator.
 
 The gotcha: the UPN must match the target at the moment the KDC does
@@ -382,7 +382,7 @@ certipy-ad account read -u management_svc -hashes :a091c1832... \
 
 ![current UPN on ca_operator](18-upn-check.png)
 
-Tried the naive path first — as `ca_operator` itself, rewriting its
+Tried the naive path first, as `ca_operator` itself, rewriting its
 own UPN. Fails cleanly:
 
 > `SELF` write on `userPrincipalName` is not permitted for user objects
@@ -393,7 +393,7 @@ lets a user modify a handful of self-attributes by default (e.g.
 `msDS-KeyCredentialLink` under `Self` ACEs) but `userPrincipalName`
 requires either `Domain Admin` / `Account Operators` group membership
 or an explicit `WriteProperty` on the attribute. My path is not
-through `ca_operator`'s own rights — it is through `management_svc`'s
+through `ca_operator`'s own rights. It is through `management_svc`'s
 `GenericAll` on `ca_operator`, which gives me `WriteProperty` on
 every attribute of that object.
 
@@ -419,7 +419,7 @@ Verify from the outside:
 
 **Important detail up front:** the certificate must be requested
 **after** the UPN change. The UPN is copied into the CSR at request
-time; a `.pfx` produced before the change has the old UPN baked in
+time. A `.pfx` produced before the change has the old UPN baked in
 and does not map anywhere useful.
 
 Request as `ca_operator` (the enrollable account) on the vulnerable
@@ -436,8 +436,8 @@ certipy-ad req \
 ![certipy req produces administrator.pfx](21-certipy-req.png)
 
 The output `.pfx` is named `administrator.pfx` because certipy names
-it after the UPN it sees in the CSR — and that UPN is now
-`administrator@certified.htb`. Reassuring; the ESC9 primitive is
+it after the UPN it sees in the CSR, and that UPN is now
+`administrator@certified.htb`. Reassuring. The ESC9 primitive is
 armed.
 
 Now authenticate with the cert:
@@ -472,7 +472,7 @@ certipy-ad auth -pfx administrator.pfx \
 ```
 
 Authenticating with the `ca_operator.pfx` (whose SAN UPN is
-`ca_operator@certified.htb`) returns `ca_operator`'s own hash — a cert
+`ca_operator@certified.htb`) returns `ca_operator`'s own hash, a cert
 maps strictly to whatever identity its SAN carries, which is exactly
 why the `administrator`-SAN cert is the one that matters:
 
@@ -483,7 +483,7 @@ needed the restore step. The two candidate explanations I considered
 are (a) a client-side LDAP prefetch inside `certipy-ad auth` that
 matches the SAN UPN back to an LDAP object before it even talks to
 the KDC, and (b) a KDC-side detail I was not tracing. The KDC-side
-one seems unlikely — once the TGT request is made, the KDC uses the
+one seems unlikely, once the TGT request is made, the KDC uses the
 UPN present on the certificate at that moment, and by then I had
 already requested the cert. Regardless: this is documented as an
 empirical fix that unblocked the box, not as a confirmed mechanism.
@@ -501,7 +501,7 @@ impacket-wmiexec -hashes :0d5b49608bbce1751f708748f67e2d34 \
   certified.htb/administrator@10.129.231.186
 ```
 
-`wmiexec` works this time — as Administrator, DCOM launch/activation
+`wmiexec` works this time, as Administrator, DCOM launch/activation
 rights are there.
 
 ![wmiexec as Administrator](24-wmiexec-administrator.png)
@@ -513,7 +513,7 @@ type C:\Users\Administrator\Desktop\root.txt
 
 ![root flag](25-root-flag.png)
 
-Optional flex — full DCSync from the recovered credential:
+Optional flex, full DCSync from the recovered credential:
 
 ```bash
 impacket-secretsdump -hashes :0d5b49608bbce1751f708748f67e2d34 \
@@ -538,7 +538,7 @@ impacket-secretsdump -hashes :0d5b49608bbce1751f708748f67e2d34 \
   the work. Fix logged for future me.
 - **certipy v5.1.0 name-mismatch on `auth`.** Empirical fix: revert the
   UPN to its original before running `auth`. I do not know the exact
-  mechanism inside certipy 5.1.0 — logging it as such.
+  mechanism inside certipy 5.1.0, logging it as such.
 
 ---
 
@@ -550,17 +550,17 @@ impacket-secretsdump -hashes :0d5b49608bbce1751f708748f67e2d34 \
   about password complexity, and does not leave a broken cracked
   hash on your notes.
 - **Owner ≠ member.** If you own a group, you can only rewrite its
-  DACL — you still have to add yourself as a member for the
+  DACL. You still have to add yourself as a member for the
   member-only rights (like write access to a group's outbound
   targets) to apply to you.
 - **ESC9 is a UPN spoof, not a cert spoof.** The cert itself is
   perfectly valid. What matters is that the CA left off the
   extension that carries the identity SID, forcing the KDC to trust
   the certificate's UPN. Any AD account you can rewrite the UPN on
-  turns into any AD account you can name — including the one whose
+  turns into any AD account you can name, including the one whose
   UPN you set it to.
 - **Different auth surfaces answer to different rights.** WinRM,
-  WMI/DCOM, SMB admin shares, MSRPC — same NT hash, four different
+  WMI/DCOM, SMB admin shares, MSRPC, same NT hash, four different
   ACL bases. Never conclude "the account cannot do X" from "the hash
   didn't authenticate to Y".
 - **Read-back after every AD write.** Ten seconds now saves twenty
@@ -571,21 +571,21 @@ impacket-secretsdump -hashes :0d5b49608bbce1751f708748f67e2d34 \
 
 ## References
 
-- **ADCS Attacks with Certipy** — Serioton CTF's ADCS reference
+- **ADCS Attacks with Certipy**, Serioton CTF's ADCS reference
   covering the ESC1–ESC15 primitives and the certipy command shape
   for each one. The ESC9 walkthrough here follows the same UPN
   rewrite → request → auth pattern I used above:
   <https://seriotonctf.github.io/ADCS-Attacks-with-Certipy/index.html>
-- **BloodyAD Cheatsheet** — same author's cheatsheet, indexed by
+- **BloodyAD Cheatsheet**, same author's cheatsheet, indexed by
   the BloodHound edge you already have. That is what makes it
   useful in flow: read the edge in BloodHound, look up the exact
   `bloodyAD` invocation, run it, verify with `get object`:
   <https://seriotonctf.github.io/BloodyAD-Cheatsheet/index.html>
-- **`targetedKerberoast.py`** — ShutdownRepo's tool that handles
+- **`targetedKerberoast.py`**, ShutdownRepo's tool that handles
   the whole set-SPN → roast → clean-up loop for `GenericWrite` /
   `WriteSPN` edges. One command instead of three:
   <https://github.com/ShutdownRepo/targetedKerberoast/blob/main/targetedKerberoast.py>
-- **BloodHound — "Abuse Info" panel on each edge.** This is where the
+- **BloodHound, "Abuse Info" panel on each edge.** This is where the
   mechanisms actually live. Click the `WriteOwner` edge and BloodHound
   spells out the "become owner → grant self `GenericAll` → then use
   the group rights" sequence, with the `PowerView` and `bloodyAD` /
@@ -593,7 +593,7 @@ impacket-secretsdump -hashes :0d5b49608bbce1751f708748f67e2d34 \
   documents the Shadow Credentials primitive
   (`msDS-KeyCredentialLink` → `certipy shadow auto`). Everything in
   the ACL half of this write-up came from those panels the first
-  time — worth reading in full for any BloodHound edge you have not
+  time, worth reading in full for any BloodHound edge you have not
   used before.
 
 ---

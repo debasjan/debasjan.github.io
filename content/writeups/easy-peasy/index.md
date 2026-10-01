@@ -40,7 +40,7 @@ inside.
 nmap -sC -sV <TARGET_IP>
 ```
 
-nginx and Apache both present on non-standard ports — nginx serving the
+nginx and Apache both present on non-standard ports, nginx serving the
 main site, Apache on the highest port found. Directory brute-forcing on the
 nginx-served site was the natural next step given no other obvious surface:
 
@@ -56,7 +56,7 @@ gobuster dir -u http://<TARGET_IP> -w <wordlist>
 
 Brute-forcing turned up a hidden path whose page source contained an
 encoded value. Decoding it (through CyberChef or equivalent) revealed a
-**base62**-encoded string pointing to a further hidden directory — each
+**base62**-encoded string pointing to a further hidden directory, each
 layer's output became the input/location for the next.
 
 ![gobuster finding the hidden directory](02-gobuster-hidden-dir.png)
@@ -71,7 +71,7 @@ stegcracker <image_file> <wordlist>
 ```
 
 The extracted password was itself encoded one more time (binary), and
-decoding it produced the actual working credential — used to log in over
+decoding it produced the actual working credential, used to log in over
 SSH.
 
 ```bash
@@ -85,7 +85,7 @@ User access obtained.
 ## Privilege Escalation
 
 A script left accessible on the box, once decoded/reversed in the same
-spirit as the earlier steps, revealed the path to root — following its
+spirit as the earlier steps, revealed the path to root, following its
 logic (rather than a traditional SUID/`sudo` misconfiguration) was enough to
 complete the escalation and reach a root shell.
 
@@ -93,7 +93,7 @@ complete the escalation and reach a root shell.
 
 ## Lessons Learned
 
-- **Not every room is a "real" vulnerability chain** — some are built
+- **Not every room is a "real" vulnerability chain**, some are built
   specifically to drill encoding/decoding recognition (base62 vs base64 vs
   hex vs binary), a skill that's genuinely useful for spotting obfuscated
   payloads and encoded credentials in real engagements.
@@ -102,14 +102,14 @@ complete the escalation and reach a root shell.
   flow, especially once a wordlist is already established from an earlier
   step.
 - Layered encoding chains reward methodical, one-step-at-a-time decoding
-  over trying to guess the final answer — each layer's output is the next
+  over trying to guess the final answer, each layer's output is the next
   layer's input, not a red herring.
 
 ---
 
 ## Remediation
 
-Not directly applicable — this is a puzzle-style CTF room rather than a
+Not directly applicable. This is a puzzle-style CTF room rather than a
 realistic misconfiguration scenario. The transferable lesson for real
 environments is recognizing encoded/obfuscated data during log or traffic
 analysis, and never relying on encoding (base64, hex, etc.) as a substitute

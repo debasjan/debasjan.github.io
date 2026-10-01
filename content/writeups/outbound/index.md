@@ -27,7 +27,7 @@ cover:
 Outbound is a multi-stage credential chain hidden behind a single webmail
 RCE. Exploiting a critical Roundcube vulnerability gives a low-privileged
 shell and access to the mail application's own database, where a session
-table holds a Triple-DES-encrypted credential — decryptable using a key
+table holds a Triple-DES-encrypted credential, decryptable using a key
 that's sitting in the same configuration file. The decrypted password opens
 a mailbox containing a *second* password in plain text, which reaches SSH.
 Root is a very recent local privilege escalation in a systems-monitoring
@@ -65,17 +65,17 @@ set rhosts 10.10.11.77
 run
 ```
 
-This landed a shell as `www-data` — not yet the user flag, but a foothold
+This landed a shell as `www-data`, not yet the user flag, but a foothold
 into the application's own files.
 
 ![Roundcube config.inc.php leaking the DB password and des_key](03-roundcube-config.png)
 
 Roundcube's `config.inc.php` held both a
-MySQL credential and a `des_key` value — the encryption key Roundcube itself
+MySQL credential and a `des_key` value, the encryption key Roundcube itself
 uses to protect stored IMAP session credentials with Triple-DES.
 
 Querying the `session` table with the recovered MySQL credentials exposed a
-base64-encoded, Triple-DES-encrypted blob per session — and decoding one
+base64-encoded, Triple-DES-encrypted blob per session, and decoding one
 revealed a username, `jacob`, alongside the encrypted password:
 
 ```bash
@@ -83,8 +83,8 @@ mysql -u roundcube -p roundcube -e "SHOW COLUMNS FROM session;"
 ```
 
 Since the `des_key` was already known from the config file, decrypting the
-session value was a matter of splitting the decoded bytes correctly — the
-first eight bytes serve as the IV, the rest is ciphertext — and running a
+session value was a matter of splitting the decoded bytes correctly, the
+first eight bytes serve as the IV, the rest is ciphertext, and running a
 standard Triple-DES decryption. That recovered `jacob`'s webmail password.
 
 Logging into Roundcube as `jacob` revealed an email titled *"Important
@@ -101,11 +101,11 @@ User flag retrieved.
 ## Privilege Escalation
 
 `sudo -l` as `jacob` showed a single passwordless command:
-`/usr/bin/below` — a Linux resource-monitoring tool. A quick search
+`/usr/bin/below`, a Linux resource-monitoring tool. A quick search
 identified **CVE-2025-27591**, a very recently disclosed local privilege
 escalation: when `below` is run under `sudo`, it can log errors into a
 world-writable directory (`/var/log/below`). Symlinking a log path in that
-directory to a sensitive target — like `/etc/passwd` — lets a low-privileged
+directory to a sensitive target, like `/etc/passwd`. Lets a low-privileged
 user coerce `below`'s root-level logging into overwriting arbitrary files:
 
 ```bash
@@ -125,10 +125,10 @@ gave a root shell and the root flag.
   database credentials meant "encrypted" here didn't mean "safe" once the
   file itself was readable.
 - **A password recovered from one system is worth checking against every
-  other credential store on the box** — the webmail password unlocked an
+  other credential store on the box**, the webmail password unlocked an
   email that contained an entirely separate SSH password.
 - **`sudo -l` output naming an unusual, specific binary is worth an
-  immediate CVE search** — `below` isn't a common household name, but it had
+  immediate CVE search**, `below` isn't a common household name, but it had
   a very fresh, fully public privilege escalation at the time this box was
   built.
 
@@ -136,10 +136,10 @@ gave a root shell and the root flag.
 
 ## Remediation
 
-- Patch Roundcube immediately; CVE-2025-49113 is a critical unauthenticated
+- Patch Roundcube immediately. CVE-2025-49113 is a critical unauthenticated
   RCE with public exploit code.
 - Never store an encryption key in the same file/location as the data it's
-  meant to protect — separate secrets management is the point.
+  meant to protect, separate secrets management is the point.
 - Patch monitoring tools like `below` with the same urgency as user-facing
   software, and avoid granting passwordless `sudo` rights to any binary that
   writes logs, since log paths are a common privilege-escalation surface.

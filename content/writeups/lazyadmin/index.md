@@ -28,7 +28,7 @@ LazyAdmin's web root hides an outdated CMS (**SweetRice**) behind
 brute-forced directories. A database credential recovered from the CMS's
 own files unlocks its admin panel, which accepts a file upload used to
 plant a PHP reverse shell. Privilege escalation reuses a `sudo`-permitted
-Perl backup script that's writable by the current user — editing it
+Perl backup script that's writable by the current user, editing it
 directly gets root on its next authorized run.
 
 ---
@@ -54,7 +54,7 @@ of **SweetRice CMS**, identifiable by version through its own files/pages.
 An `inc`/includes-style path exposed a MySQL database credential directly
 in a reachable file. Testing that credential against the local database
 confirmed it was valid, and cross-referencing it against the CMS's own
-admin login worked as well — credential reuse between the database and the
+admin login worked as well, credential reuse between the database and the
 application layer.
 
 Logged into the SweetRice admin panel, a file-upload feature (typically
@@ -73,7 +73,7 @@ User flag retrieved.
 ## Privilege Escalation
 
 `sudo -l` showed the current user could run a specific Perl backup script
-(`backup.pl`) as root with no password — and critically, that script file
+(`backup.pl`) as root with no password, and critically, that script file
 itself was **writable** by the current user. A `sudo`-permitted script that
 can be edited by the user running it is equivalent to arbitrary code
 execution as the target of the `sudo` rule: replacing its contents with a
@@ -92,14 +92,14 @@ Root shell obtained. Root flag retrieved.
 
 ## Lessons Learned
 
-- **Directory brute-forcing needs to go more than one level deep** — the
+- **Directory brute-forcing needs to go more than one level deep**, the
   CMS install here sat behind a nested, non-obvious path that a shallow
   scan would miss.
 - **Database credentials found in application files are worth testing
-  against the application's own login**, not just the database itself —
+  against the application's own login**, not just the database itself,
   credential reuse across layers is extremely common.
 - **A `sudo`-permitted script is only as safe as its own file
-  permissions** — if the invoking user can edit the script, the `sudo` rule
+  permissions**, if the invoking user can edit the script, the `sudo` rule
   grants arbitrary code execution as its target user regardless of what the
   script was originally meant to do.
 
@@ -107,7 +107,7 @@ Root shell obtained. Root flag retrieved.
 
 ## Remediation
 
-- Never store database credentials in a web-reachable file; use environment
+- Never store database credentials in a web-reachable file. Use environment
   variables or a secrets manager instead.
 - Ensure any script granted through `sudo` is owned by and writable only by
   root (or another suitably trusted account), never by the user permitted

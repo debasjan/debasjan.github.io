@@ -29,7 +29,7 @@ SMB share hands out a PDF with a temporary MSSQL account. From MSSQL I
 force the service to authenticate to my box and capture the `sql_svc`
 NTLMv2 hash, crack it, and get a WinRM shell. A leftover `ERRORLOG.BAK`
 leaks `ryan.cooper`'s password, and Ryan can enroll against a certificate
-template vulnerable to **ESC1** — which I abuse to mint an Administrator
+template vulnerable to **ESC1**, which I abuse to mint an Administrator
 certificate and pull the Administrator hash.
 
 ---
@@ -59,7 +59,7 @@ smbclient -L //10.129.228.253
 
 ![anonymous SMB share listing](03-smb-public-share.png)
 
-The share held a PDF of SQL server procedures — downloaded it:
+The share held a PDF of SQL server procedures, downloaded it:
 
 ```bash
 smbclient //10.129.228.253/Public
@@ -89,7 +89,7 @@ impacket-mssqlclient sequel/PublicUser@10.129.228.253
 ```
 
 The account has no write access, so instead of running commands I forced
-the MSSQL service to authenticate to my machine and captured its hash — a
+the MSSQL service to authenticate to my machine and captured its hash, a
 classic MSSQL technique:
 
 ![preparing the MSSQL hash capture](07-mssql-hashcapture-info.png)
@@ -166,7 +166,7 @@ evil-winrm -i 10.129.228.253 -u Ryan.Cooper -p NuclearMosquito3
 
 ### AD CS enumeration
 
-Ryan is a member of `BUILTIN\Certificate Service DCOM Access` — a hint
+Ryan is a member of `BUILTIN\Certificate Service DCOM Access`, a hint
 that Active Directory Certificate Services is in play. Enumerated AD CS
 with Certipy:
 
@@ -178,7 +178,7 @@ certipy-ad find -u Ryan.Cooper@sequel.htb -p 'NuclearMosquito3' -dc-ip 10.129.22
 
 ![checking the exported certificate templates](18-check-templates.png)
 
-One template was flagged vulnerable to **ESC1** — enrollees can supply an
+One template was flagged vulnerable to **ESC1**, enrollees can supply an
 arbitrary `subjectAltName`, so a low-privileged user can request a
 certificate *as* any account, including Domain Admin:
 
@@ -225,14 +225,14 @@ Read the root flag from `C:\Users\Administrator\Desktop\root.txt`:
 
 ## Lessons Learned
 
-- Anonymous/guest SMB access is worth checking on every AD box — a single
+- Anonymous/guest SMB access is worth checking on every AD box, a single
   readable share leaked the whole foothold here.
 - When a SQL account can't run commands, it can often still be *coerced*:
   `xp_dirtree` against Responder turns "no write access" into a
   crackable service hash.
 - Log and backup files (`ERRORLOG.BAK`) frequently capture credentials
-  users fat-fingered into the wrong field — always read them.
-- AD CS is a domain-compromise surface in its own right; ESC1 alone takes
+  users fat-fingered into the wrong field, always read them.
+- AD CS is a domain-compromise surface in its own right. ESC1 alone takes
   a normal user straight to Domain Admin.
 
 ---
@@ -240,7 +240,7 @@ Read the root flag from `C:\Users\Administrator\Desktop\root.txt`:
 ## Remediation
 
 - Remove sensitive documents (and embedded credentials) from
-  guest-readable shares; disable anonymous SMB enumeration.
+  guest-readable shares. Disable anonymous SMB enumeration.
 - Run MSSQL under a low-privileged, non-domain service account and block
   outbound SMB so hash capture isn't possible.
 - Scrub credentials from log/backup files and restrict who can read them.

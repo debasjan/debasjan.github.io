@@ -49,7 +49,7 @@ Two ports: FTP (21) with anonymous login allowed, and HTTP (80) on IIS.
 ### FTP
 
 Anonymous login works, and the FTP root turns out to be the same directory
-IIS serves — the default IIS files (`iisstart.htm`, `welcome.png`) are
+IIS serves, the default IIS files (`iisstart.htm`, `welcome.png`) are
 sitting right there:
 
 ![anonymous FTP listing showing the IIS webroot](02-ftp-anonymous.png)
@@ -60,7 +60,7 @@ Port 80 is just the default IIS landing page:
 
 ![default IIS page](03-webserver.png)
 
-That combination — **writable FTP mapped to the webroot** — means anything
+That combination, **writable FTP mapped to the webroot**, means anything
 I upload over FTP is reachable (and executable) through the web server.
 
 ---
@@ -97,7 +97,7 @@ run
 
 ## Privilege Escalation
 
-Upgraded to a Meterpreter session and checked `sysinfo` — the box is
+Upgraded to a Meterpreter session and checked `sysinfo`, the box is
 running a very old Windows build with an unpatched kernel:
 
 ![sysinfo showing an outdated Windows version](07-sysinfo.png)
@@ -119,11 +119,11 @@ Read both flags:
 
 ## Lessons Learned
 
-- Anonymous FTP is worth checking on every box — here it was not only
+- Anonymous FTP is worth checking on every box, here it was not only
   enabled but **writable and mapped to the webroot**.
 - When an upload directory is also served by the web server, file-type
   matters: IIS will happily execute an uploaded `.aspx`.
-- Old, unpatched Windows kernels are a one-command privesc — the exploit
+- Old, unpatched Windows kernels are a one-command privesc, the exploit
   suggester does the triage for you.
 
 ---
@@ -133,7 +133,7 @@ Read both flags:
 - Disable anonymous FTP, and never map an FTP upload directory to a
   web-executable path.
 - Restrict which extensions IIS will execute in upload locations.
-- Keep the OS patched — the kernel exploit used here was fixed years ago.
+- Keep the OS patched, the kernel exploit used here was fixed years ago.
 
 ---
 

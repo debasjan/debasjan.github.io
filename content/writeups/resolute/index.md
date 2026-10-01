@@ -24,8 +24,8 @@ cover:
 
 ## TL;DR
 
-Resolute chains a familiar early-AD pattern — anonymous enumeration, a
-password left in an LDAP field, a lockout-safe spray — into an escalation
+Resolute chains a familiar early-AD pattern, anonymous enumeration, a
+password left in an LDAP field, a lockout-safe spray, into an escalation
 path I hadn't used elsewhere in this set: abusing the **DnsAdmins**
 group's ability to load an arbitrary DLL into the DNS service, turning a
 restart of a routine Windows service into `NT AUTHORITY\SYSTEM` on the
@@ -63,7 +63,7 @@ ldapsearch -x -H ldap://10.129.96.155 -D '' -w '' -b "dc=megabank,dc=local" | gr
 ![ldapsearch grepping for password across the domain](05-ldap-password-policy-search.png)
 
 That turned up a password mentioned in an object's description-field
-notes. Before spraying it, checked the account lockout policy — spraying
+notes. Before spraying it, checked the account lockout policy, spraying
 blind on an unknown policy risks locking out real accounts:
 
 ```bash
@@ -96,7 +96,7 @@ User flag retrieved.
 ## Lateral Movement
 
 Windows logs more than people expect by default, including **PowerShell
-transcripts** — and Resolute's `PSTranscripts` folder had one sitting in
+transcripts**, and Resolute's `PSTranscripts` folder had one sitting in
 plain reach, containing a command someone had typed with credentials
 embedded directly on the command line:
 
@@ -114,7 +114,7 @@ evil-winrm -i 10.129.96.155 -u ryan -p 'Serv3r4Admin4cc123!'
 
 ## Privilege Escalation
 
-DnsAdmins can specify a plugin DLL for the DNS Server service to load —
+DnsAdmins can specify a plugin DLL for the DNS Server service to load,
 a legitimate extensibility feature that, combined with permission to
 restart the service, becomes a privileged code-execution primitive.
 Built a malicious DLL with msfvenom that changes the Administrator
@@ -145,7 +145,7 @@ sc.exe start dns
 ![dnscmd setting the plugin DLL, then restarting the DNS service](09-dnscmd-plugin-dll-restart.png)
 
 DnsAdmins members are commonly, if unintentionally, granted rights to
-restart the DNS service — and it restarted cleanly, loading the DLL as
+restart the DNS service, and it restarted cleanly, loading the DLL as
 `NT AUTHORITY\SYSTEM` and rewriting the Administrator's password in the
 process. Confirmed with:
 
@@ -160,13 +160,13 @@ Root flag retrieved.
 ## Lessons Learned
 
 - PowerShell transcript logs are one of the highest-value artifacts on
-  any Windows box — they capture exactly the credentials-on-the-command-
+  any Windows box. They capture exactly the credentials-on-the-command-
   line mistake that's otherwise invisible.
-- DnsAdmins is a much more powerful group than its name suggests — DLL
+- DnsAdmins is a much more powerful group than its name suggests, DLL
   loading via the DNS service is a well-known SYSTEM-level escalation,
   not a documentation footnote.
-- Checking the account lockout policy before spraying isn't optional —
-  it's the difference between a safe recon step and taking down real
+- Checking the account lockout policy before spraying isn't optional.
+  It's the difference between a safe recon step and taking down real
   accounts.
 
 ---
@@ -176,9 +176,9 @@ Root flag retrieved.
 - Disable or restrict PowerShell transcription in locations reachable by
   low-privileged users, and never type credentials directly on a command
   line.
-- Treat DnsAdmins membership as Tier-0 privileged — it should be as
+- Treat DnsAdmins membership as Tier-0 privileged. It should be as
   tightly controlled and audited as Domain Admins.
-- Enforce a sane account lockout policy; "no lockout" turns every future
+- Enforce a sane account lockout policy. "no lockout" turns every future
   spraying attempt into a free, safe attack for anyone on the network.
 
 ---

@@ -56,7 +56,7 @@ This found a hidden `/panel/` directory.
 
 The panel exposed a file upload form that rejected obvious PHP extensions
 outright. Testing alternate PHP-executing extensions (`.phtml`, `.php5`,
-etc. — a standard extension-filter bypass technique) got a PHP reverse
+etc., a standard extension-filter bypass technique) got a PHP reverse
 shell past the filter and into the uploads directory, where it was directly
 reachable and executable:
 
@@ -78,7 +78,7 @@ find / -perm -4000 2>/dev/null
 ```
 
 A SUID Python binary runs any script (or inline command) with the owning
-user's privileges rather than the invoking user's — GTFOBins documents the
+user's privileges rather than the invoking user's, GTFOBins documents the
 direct escalation, spawning a shell through Python's own `os.system`/`pty`
 call with inherited privilege:
 
@@ -92,11 +92,11 @@ Root shell obtained. Root flag retrieved.
 
 ## Lessons Learned
 
-- **Extension-based upload filters are commonly incomplete** — testing
+- **Extension-based upload filters are commonly incomplete**, testing
   alternate PHP-executing extensions (`.phtml`, `.php3`/`.php4`/`.php5`,
   `.pht`) is a fast, high-value check whenever `.php` alone is blocked.
 - **A SUID interpreter (Python, Perl, Ruby, etc.) is functionally
-  equivalent to a SUID shell** — always check GTFOBins for the specific
+  equivalent to a SUID shell**, always check GTFOBins for the specific
   invocation once one turns up in a SUID sweep.
 
 ---
@@ -105,7 +105,7 @@ Root shell obtained. Root flag retrieved.
 
 - Validate uploads by content/MIME type rather than extension blacklist,
   and store uploads outside any web-executable directory.
-- Never set the SUID bit on a general-purpose interpreter; if a script
+- Never set the SUID bit on a general-purpose interpreter. If a script
   genuinely needs elevated privileges, use a narrowly-scoped `sudo` rule
   instead.
 

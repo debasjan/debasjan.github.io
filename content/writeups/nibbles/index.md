@@ -24,7 +24,7 @@ cover:
 
 ## TL;DR
 
-Nibbles looks empty at first glance — a single "Hello world!" page —
+Nibbles looks empty at first glance, a single "Hello world!" page,
 until the page source points at a hidden `/nibbleblog/` directory.
 Guessing the admin password (after a blacklist made brute-forcing
 painful) got into NibbleBlog's admin panel, which has a known file-upload
@@ -74,12 +74,12 @@ gobuster dir -u http://10.10.10.75/nibbleblog -w /usr/share/wordlists/dirbuster/
 ## Foothold / Initial Access
 
 NibbleBlog had a login blacklist configured, which ruled out a
-straightforward brute-force — tried anyway with Hydra to confirm, then
+straightforward brute-force, tried anyway with Hydra to confirm, then
 switched to guessing a handful of likely passwords manually instead:
 
 ![brute-force attempt against the login form](05-hydra-bruteforce.png)
 
-`nibbles` — the site's own name — turned out to be the admin password.
+`nibbles`, the site's own name, turned out to be the admin password.
 
 With admin access, NibbleBlog has a known file-upload remote code
 execution (there's both a Metasploit module and a public script for it).
@@ -117,7 +117,7 @@ sudo -l
 ![sudo -l showing NOPASSWD on monitor.sh](08-sudo-l-monitor-sh.png)
 
 `nibbler` could run `/home/nibbler/personal/stuff/monitor.sh` as root
-with no password — and that's exactly the path `unzip` had just written
+with no password, and that's exactly the path `unzip` had just written
 to, which meant the script was fully writable by the same user allowed to
 `sudo` it. Overwrote it with a shell:
 
@@ -133,14 +133,14 @@ Root shell, root flag retrieved.
 
 ## Lessons Learned
 
-- HTML comments are still worth checking on every page — a single
+- HTML comments are still worth checking on every page, a single
   "nothing interesting here" comment was the entire path to the real
   application.
 - A login blacklist stops automated brute-forcing but not a short list of
   manually-guessed, contextually obvious passwords (the site's own name,
   here).
 - A `sudo` rule pointing at a script is only as safe as that script's own
-  file permissions — if the invoking user can write to it, `sudo` grants
+  file permissions, if the invoking user can write to it, `sudo` grants
   arbitrary code execution as the rule's target user.
 
 ---

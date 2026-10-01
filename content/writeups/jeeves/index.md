@@ -27,7 +27,7 @@ cover:
 Jeeves runs an **unauthenticated Jenkins** instance hidden on a
 non-standard path. Its Script Console runs arbitrary Groovy, so a reverse
 shell gets me a foothold as `kohsuke`. In the user's files there's a
-KeePass database (`CEH.kdbx`) — I exfiltrate it through a Jenkins job
+KeePass database (`CEH.kdbx`). I exfiltrate it through a Jenkins job
 workspace, crack it offline, and one entry holds the local
 **Administrator's NTLM hash**. Pass-the-Hash with `psexec` gives SYSTEM,
 and the root flag lives in an **NTFS alternate data stream**.
@@ -57,7 +57,7 @@ feroxbuster -u http://10.129.228.112:50000
 
 ![feroxbuster finding /askjeeves](02-feroxbuster.png)
 
-`/askjeeves` is an **unauthenticated Jenkins** instance — no login at all:
+`/askjeeves` is an **unauthenticated Jenkins** instance, no login at all:
 
 ![the Jenkins dashboard](03-jenkins.png)
 
@@ -101,7 +101,7 @@ hashcat -m 13400 keepass.hash /usr/share/wordlists/rockyou.txt
 ![hashcat cracking the master key](14-hashcat-keepass.png)
 ![cracked master password](15-master-password.png)
 
-Opened the database with the cracked master password — one entry stores an
+Opened the database with the cracked master password, one entry stores an
 **NTLM hash** for the local Administrator, not a plaintext password:
 
 ![KeePass entries](16-keepass-entries.png)
@@ -111,7 +111,7 @@ Opened the database with the cracked master password — one entry stores an
 
 ## Privilege Escalation — Pass-the-Hash
 
-No need to crack the NTLM hash — I passed it directly with `psexec`:
+No need to crack the NTLM hash. I passed it directly with `psexec`:
 
 ```bash
 impacket-psexec administrator@10.129.228.112 -hashes <LM>:<NT>
@@ -125,7 +125,7 @@ That gives a `NT AUTHORITY\SYSTEM` shell.
 
 ## Root flag — NTFS Alternate Data Stream
 
-`root.txt` isn't a normal file — the Administrator desktop only has
+`root.txt` isn't a normal file, the Administrator desktop only has
 `hm.txt`. `dir /r` reveals a hidden **ADS**, `hm.txt:root.txt:$DATA`:
 
 ```text
@@ -141,11 +141,11 @@ more < hm.txt:root.txt      # `type` can't read an ADS — use `more <`
 
 ## Lessons Learned
 
-- Always dir-brute non-standard web ports — Jenkins was invisible behind
+- Always dir-brute non-standard web ports, Jenkins was invisible behind
   the decoy on port 80 and only showed up on `50000/askjeeves`.
 - An unauthenticated Jenkins Script Console is instant RCE via Groovy.
-- KeePass databases crack with `keepass2john` + hashcat `-m 13400`; loot
-  every entry — a stored NTLM hash is as good as a password.
+- KeePass databases crack with `keepass2john` + hashcat `-m 13400`. Loot
+  every entry, a stored NTLM hash is as good as a password.
 - A hash found in loot means **Pass-the-Hash**, no cracking required.
 - Flags/data can hide in NTFS alternate data streams: `dir /r` to spot
   them, `more <` to read them (`type` fails on streams).
@@ -154,7 +154,7 @@ more < hm.txt:root.txt      # `type` can't read an ADS — use `more <`
 
 ## Remediation
 
-- Never expose Jenkins unauthenticated; lock down the Script Console and
+- Never expose Jenkins unauthenticated. Lock down the Script Console and
   place Jenkins behind authentication.
 - Don't store credential databases on application servers.
 - Rotate the Administrator password and don't stash its hash in a shared

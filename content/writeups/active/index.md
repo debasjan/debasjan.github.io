@@ -27,7 +27,7 @@ cover:
 Active demonstrates two classic AD post-compromise techniques back to back:
 pulling a Group Policy Preferences credential off an anonymously-readable
 SMB share, then using that credential to Kerberoast the Administrator
-account itself. No exploit, no CVE — just two well-known
+account itself. No exploit, no CVE, just two well-known
 misconfigurations chained together.
 
 ---
@@ -47,7 +47,7 @@ nmap -Pn -sV -sC 10.10.10.100
 ![nmap service scan](01-nmap.png)
 
 The important results: **LDAP** (389, `active.htb` domain) and **SMB**
-(445) — the signature of a domain controller.
+(445), the signature of a domain controller.
 
 ---
 
@@ -63,7 +63,7 @@ smbmap -H 10.10.10.100
 
 ![smbmap showing a READ ONLY Replication share](04-smb-replication-share.png)
 
-A `Replication` share stood out with **READ ONLY** access — that's the
+A `Replication` share stood out with **READ ONLY** access. That's the
 SYSVOL replication share every domain controller exposes, and it's worth
 checking whenever it's reachable, since it holds Group Policy data.
 
@@ -115,7 +115,7 @@ smbmap -H 10.10.10.100 -u SVC_TGS -p GPPstillStandingStrong2k18
 
 ![smbmap with SVC_TGS creds showing more readable shares](08-smbmap-svc-tgs.png)
 
-More shares turned READ ONLY with this account, including `Users` — that's
+More shares turned READ ONLY with this account, including `Users`. That's
 where the user flag was sitting.
 
 ---
@@ -131,7 +131,7 @@ has Kerberos pre-authentication disabled.
 impacket-GetNPUsers -dc-ip 10.10.10.100 active.htb/SVC_TGS:GPPstillStandingStrong2k18 -request
 ```
 
-Nothing came back — no AS-REP roastable accounts here. Worth checking
+Nothing came back, no AS-REP roastable accounts here. Worth checking
 first regardless, since it costs nothing and doesn't risk a lockout.
 
 ### Kerberoasting
@@ -144,7 +144,7 @@ impacket-GetUserSPNs -dc-ip 10.10.10.100 active.htb/SVC_TGS:GPPstillStandingStro
 
 ![GetUserSPNs returning a TGS hash for the Administrator account](03-kerberoasting.png)
 
-The **Administrator** account itself had an SPN set — meaning I could
+The **Administrator** account itself had an SPN set, meaning I could
 request a service ticket for it and get back a hash encrypted with the
 Administrator's own password. Cracked it with hashcat:
 
@@ -166,7 +166,7 @@ smbmap -H 10.10.10.100 -u Administrator -p Ticketmaster1968
 
 ![Administrator credential giving READ, WRITE on ADMIN$ and C$](10-smbmap-admin-readwrite.png)
 
-Read/write on `ADMIN$` and `C$` — full access to the file system. Root
+Read/write on `ADMIN$` and `C$`, full access to the file system. Root
 flag retrieved from the C$ share.
 
 ### Bonus: interactive shell
@@ -186,13 +186,13 @@ impacket-psexec active.htb/Administrator@10.10.10.100
 
 ## Lessons Learned
 
-- **GPP `cpassword` is not a secret** — the AES key Microsoft used to
+- **GPP `cpassword` is not a secret**, the AES key Microsoft used to
   encrypt it has been public since the vulnerability was disclosed in
   2014. Any credential stored this way should be treated as plaintext.
-- **Always check AS-REP roasting before Kerberoasting** — it costs nothing
+- **Always check AS-REP roasting before Kerberoasting**. It costs nothing
   and doesn't risk an account lockout, even when (like here) it comes back
   empty.
-- **A domain account with an SPN doesn't have to be a service account** —
+- **A domain account with an SPN doesn't have to be a service account**,
   here it was Administrator itself, which meant Kerberoasting led straight
   to full domain compromise instead of just another foothold.
 
@@ -200,10 +200,10 @@ impacket-psexec active.htb/Administrator@10.10.10.100
 
 ## Remediation
 
-- Never distribute credentials via Group Policy Preferences; remove any
+- Never distribute credentials via Group Policy Preferences. Remove any
   `cpassword` values from SYSVOL and rotate the affected accounts (patch
   MS14-025 covers the underlying issue).
-- Set strong, random passwords for any account with an SPN — Kerberoast
+- Set strong, random passwords for any account with an SPN, Kerberoast
   hashes can be cracked entirely offline, at whatever speed the attacker's
   hardware allows.
 - Avoid assigning SPNs to highly privileged accounts (especially

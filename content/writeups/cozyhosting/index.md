@@ -28,9 +28,9 @@ CozyHosting runs a misconfigured Spring Boot application. An exposed
 `/actuator/sessions` endpoint leaks the administrator's session cookie,
 which I reuse to hijack the admin session. The admin dashboard's SSH
 "connection settings" feature is vulnerable to OS command injection in
-the `username` field — bypassing its whitespace filter with `${IFS}` and
+the `username` field, bypassing its whitespace filter with `${IFS}` and
 a base64-encoded payload gives a shell as `app`. The application JAR holds
-a PostgreSQL connection string; the database yields a bcrypt hash that
+a PostgreSQL connection string. The database yields a bcrypt hash that
 cracks and reuses over SSH as `josh`. Finally, `josh` can run `ssh` as
 root via `sudo`, which I abuse with `ProxyCommand` for a root shell.
 
@@ -60,7 +60,7 @@ dirsearch -u http://cozyhosting.htb
 
 ![dirsearch finding the actuator endpoints](02-dirsearch.png)
 
-The `/actuator/sessions` endpoint leaks active session IDs — including the
+The `/actuator/sessions` endpoint leaks active session IDs, including the
 administrator's (`kanderson`):
 
 ![/actuator/sessions leaking the admin session](03-actuator-sessions.png)
@@ -68,7 +68,7 @@ administrator's (`kanderson`):
 
 ### Session hijack
 
-I replaced my `JSESSIONID` with the leaked admin value and refreshed —
+I replaced my `JSESSIONID` with the leaked admin value and refreshed,
 now authenticated as admin:
 
 ![swapping in the leaked session cookie](05-cookie-swap.png)
@@ -85,7 +85,7 @@ into a shell command:
 ![the connection settings feature](07-connection-settings.png)
 
 The field rejects **whitespace**, so I used `${IFS}` (the shell's internal
-field separator) and confirmed injection with a time-based probe — the
+field separator) and confirmed injection with a time-based probe, the
 response hung for 5 seconds:
 
 ```text
@@ -151,7 +151,7 @@ hashcat -m 3200 admin.hash /usr/share/wordlists/rockyou.txt
 ![hashcat cracking the bcrypt hash](18-hashcat-crack.png)
 
 Password: `manchesterunited`. There is a local user `josh`, and the
-password reuses — logged in over SSH and read the user flag:
+password reuses, logged in over SSH and read the user flag:
 
 ```bash
 ssh josh@cozyhosting.htb
@@ -169,7 +169,7 @@ ssh josh@cozyhosting.htb
 ![sudo -l allowing ssh as root](21-sudo-l.png)
 
 Per GTFOBins, `ssh` can execute arbitrary commands via its `ProxyCommand`
-option — running it as root gives a root shell:
+option, running it as root gives a root shell:
 
 ```bash
 sudo ssh -o ProxyCommand=';sh 0<&2 1>&2' x
@@ -186,20 +186,20 @@ Read the final flag from `/root/root.txt`:
 
 ## Lessons Learned
 
-- Spring Boot Actuator endpoints (`/actuator/*`) are a recurring win —
+- Spring Boot Actuator endpoints (`/actuator/*`) are a recurring win,
   `/sessions` alone handed over an authenticated admin session here.
 - A whitespace filter is not a command-injection fix: `${IFS}` sidesteps
   it, and base64 smuggles past character restrictions.
-- Java JARs are just ZIPs — always unpack them and grep for
+- Java JARs are just ZIPs, always unpack them and grep for
   `application.properties` / hardcoded credentials.
-- `sudo -l` first on every Linux box; a single GTFOBins entry (`ssh`) was
+- `sudo -l` first on every Linux box. A single GTFOBins entry (`ssh`) was
   the whole privesc.
 
 ---
 
 ## Remediation
 
-- Never expose Spring Boot Actuator to unauthenticated users; disable
+- Never expose Spring Boot Actuator to unauthenticated users. Disable
   `/sessions` or lock it behind authentication.
 - Sanitize/allowlist input passed to shell commands instead of filtering
   whitespace.

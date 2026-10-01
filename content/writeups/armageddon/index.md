@@ -28,7 +28,7 @@ Armageddon is a CMS box built around Drupalgeddon2, a critical unauthenticated
 RCE in old Drupal releases. From the resulting shell, Drupal's own settings
 file leaks database credentials, which lead to a cracked account password and
 SSH access. Root comes from a `sudo` rule allowing unrestricted `snap`
-installs — a package manager that, per GTFOBins, will happily run arbitrary
+installs, a package manager that, per GTFOBins, will happily run arbitrary
 code as root during install.
 
 ---
@@ -43,7 +43,7 @@ nmap -sV -p- 10.10.10.233
 
 SSH and Apache. Directory brute-forcing on the web root found `/profiles`,
 which exposed a Drupal version string vulnerable to **Drupalgeddon2**
-(CVE-2018-7600) — a well-known, critical unauthenticated RCE affecting
+(CVE-2018-7600), a well-known, critical unauthenticated RCE affecting
 multiple Drupal 7.x/8.x releases.
 
 ```bash
@@ -71,7 +71,7 @@ confirming the vulnerable version first.
 ## Privilege Escalation
 
 Drupal's `sites/default/settings.php` is where its own database credentials
-live — checking it is close to automatic on any compromised Drupal install:
+live, checking it is close to automatic on any compromised Drupal install:
 
 ```bash
 cat /var/www/html/sites/default/settings.php
@@ -80,7 +80,7 @@ cat /var/www/html/sites/default/settings.php
 ![Drupal settings.php leaking the MySQL password](03-mysql-config-leak.png)
 
 That gave working MySQL credentials, which in turn exposed the Drupal
-`users` table — and a hashed password for a real system account,
+`users` table, and a hashed password for a real system account,
 `brucetherealadmin`:
 
 ```bash
@@ -97,7 +97,7 @@ The cracked password worked directly over SSH, giving the user flag.
 ```
 
 GTFOBins documents `snap` as directly abusable: a snap package can define an
-install hook, which runs during installation — as root, since the install
+install hook, which runs during installation, as root, since the install
 itself needs root. Building a minimal malicious snap on my own machine:
 
 ```bash
@@ -122,26 +122,26 @@ Root flag retrieved.
 ## Lessons Learned
 
 - **A CVE with a public, well-tested exploit script (Drupalgeddon2) is often
-  faster and more reliable than trying to reproduce it manually** — reading
+  faster and more reliable than trying to reproduce it manually**, reading
   the PoC first is still worth doing to understand what it actually does.
 - **A CMS's own configuration file is the fastest path to its database
-  credentials** — checking `settings.php` (or the equivalent for any CMS) is
+  credentials**, checking `settings.php` (or the equivalent for any CMS) is
   close to a reflex once you have a shell as the web user.
 - **`sudo` rules granting unrestricted access to package managers are a root
-  shell in disguise** — `snap`, `apt`, `gem`, and similar tools almost always
+  shell in disguise**, `snap`, `apt`, `gem`, and similar tools almost always
   have a documented GTFOBins entry.
 
 ---
 
 ## Remediation
 
-- Patch Drupal (and any CMS) promptly; Drupalgeddon2 had a public exploit
+- Patch Drupal (and any CMS) promptly. Drupalgeddon2 had a public exploit
   within days of disclosure.
 - Never store database credentials in world-readable configuration files
   without additional access controls, and rotate them if a shell as the web
   user is ever obtained.
 - Never grant `NOPASSWD` `sudo` access to a package manager without
-  restricting it to a specific, reviewed package — an unrestricted install
+  restricting it to a specific, reviewed package, an unrestricted install
   right is equivalent to root.
 
 ---

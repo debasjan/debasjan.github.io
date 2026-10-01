@@ -30,7 +30,7 @@ hands over working application credentials outright. From there, a student
 records app accepts a profile picture upload with no server-side validation
 beyond the browser, giving code execution. Root comes from a classic
 misconfiguration: a periodic backup script owned by an administrative user,
-world-writable and runnable — replacing its contents is enough.
+world-writable and runnable, replacing its contents is enough.
 
 ---
 
@@ -43,7 +43,7 @@ nmap -A -sV -sC -O <TARGET_IP>
 ![nmap service scan](01-nmap.png)
 
 FTP (21, anonymous login allowed), SSH (22), HTTP (80). Anonymous FTP is
-always worth checking first — it costs nothing and regularly holds exactly
+always worth checking first. It costs nothing and regularly holds exactly
 this kind of leftover file:
 
 ```bash
@@ -69,7 +69,7 @@ hashcat -m 0 -a 0 -o cracked.txt hash.txt /usr/share/wordlists/rockyou.txt
 ```
 
 That gave a working login to the student portal. The portal let a student
-update their own record, including uploading a profile picture — a feature
+update their own record, including uploading a profile picture, a feature
 that only enforced a `.jpg`-style check client-side. Uploading a PHP reverse
 shell instead of an image executed on upload, landing a `www-data` shell.
 
@@ -92,7 +92,7 @@ containing database credentials:
 cat /var/www/html/academy/includes/config.php
 ```
 
-That file held a plaintext password for a SQL account, `grimmie` — and
+That file held a plaintext password for a SQL account, `grimmie`, and
 password reuse meant it also worked over SSH:
 
 ```bash
@@ -115,15 +115,15 @@ delivered a shell in the target account's context. Root flag retrieved.
 
 ## Lessons Learned
 
-- **Anonymous FTP deserves a full listing check on every box** — a leftover
+- **Anonymous FTP deserves a full listing check on every box**, a leftover
   `note.txt` here was the entire foothold, no exploit needed.
-- **Client-side-only upload validation is not validation** — any "only
+- **Client-side-only upload validation is not validation**, any "only
   images allowed" check needs verification server-side, ideally by content
   inspection, not just an extension check.
 - **A world-writable script executed by cron is root**, regardless of how
-  ordinary it looks — `backup.sh` was never meant to be an attack vector, but
+  ordinary it looks, `backup.sh` was never meant to be an attack vector, but
   its permissions made it one.
-- **`pspy` is the right tool when `crontab -l` shows nothing** — a user's own
+- **`pspy` is the right tool when `crontab -l` shows nothing**, a user's own
   crontab isn't the only place scheduled execution can hide.
 
 ---
@@ -134,7 +134,7 @@ delivered a shell in the target account's context. Root flag retrieved.
   it, and never leave credential-bearing files reachable through it.
 - Validate uploads server-side by content (magic bytes/MIME), not by
   filename extension, and store uploads outside the web root when possible.
-- Audit script permissions for anything invoked by cron or a scheduled task —
+- Audit script permissions for anything invoked by cron or a scheduled task,
   the invoking user's identity is only as safe as the script's write
   permissions.
 

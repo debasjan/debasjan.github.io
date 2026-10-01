@@ -33,7 +33,7 @@ common Linux-CTF primitives:
 2. That password unlocks Squirrelmail, where an email points at a
    hidden `/45kra24zxs28v3yd/` directory hosting **Cuppa CMS**.
 3. Cuppa CMS's `alerts/alertConfigField.php?urlConfig=` is a
-   textbook **LFI/RFI** — I host a PHP reverse shell on my box and
+   textbook **LFI/RFI**. I host a PHP reverse shell on my box and
    include it remotely for RCE.
 4. As `milesdyson` I find a **root cron** that runs `tar` over
    `/var/www/html/*` with a wildcard. Dropping `--checkpoint=1
@@ -52,7 +52,7 @@ nmap -sC -sV -p- 10.10.130.201
 
 Open ports: **22 (SSH), 80 (Apache/Squirrelmail), 110 (POP3), 139/445
 (Samba), 143 (IMAP)**. Web + SMB combo on a Linux target is worth
-enumerating together — SMB often leaks paths or credentials that turn
+enumerating together, SMB often leaks paths or credentials that turn
 webmail into a real credential.
 
 ---
@@ -120,8 +120,8 @@ gobuster dir -u http://10.10.130.201/45kra24zxs28v3yd -w /usr/share/wordlists/di
 
 Cuppa CMS has a well-known unauthenticated vulnerability:
 `administrator/alerts/alertConfigField.php` takes an `urlConfig`
-parameter and `include()`s it directly. Whatever I pass — local
-path, `php://filter`, or a remote URL — gets executed as PHP.
+parameter and `include()`s it directly. Whatever I pass, local
+path, `php://filter`, or a remote URL, gets executed as PHP.
 
 ```bash
 searchsploit cuppa cms
@@ -189,7 +189,7 @@ touch "/var/www/html/--checkpoint=1"
 ```
 
 When cron runs `tar cf … *`, glob expansion turns the `--checkpoint*`
-files into **flags** — `tar` reads them as arguments, fires the
+files into **flags**, `tar` reads them as arguments, fires the
 `exec=sh shell.sh` on the first checkpoint, and my listener catches a
 root shell:
 
@@ -210,14 +210,14 @@ nc -lvnp 1234
 - **Cuppa CMS `urlConfig=` is one of those "always test it" endpoints.**
   When you see any CMS with a config-loading GET parameter, throw a
   `php://filter/read=convert.base64-encode` at it before you do
-  anything else — half the time you get source, the other half you
+  anything else, half the time you get source, the other half you
   get RCE.
 - **`tar` + wildcard + cron = root.** The pattern
   `tar cf backup.tgz *` in any script running as a higher user is a
-  privesc. `--checkpoint-action` is the payload; `zip` has an
+  privesc. `--checkpoint-action` is the payload. `zip` has an
   equivalent (`-T --unzip-command`) and `rsync` too.
 - **PHP reverse shell via RFI still works on old boxes.** Hosting
-  the payload on a local Python HTTP server is the simplest way —
+  the payload on a local Python HTTP server is the simplest way,
   no upload required, no auth needed on the CMS.
 
 ---
@@ -226,8 +226,8 @@ nc -lvnp 1234
 
 - **Do not host anonymous SMB shares** on Internet-facing hosts.
   Even read-only, they leak filesystem layouts, user directories,
-  and — as here — passwords in log files.
-- **Patch Cuppa CMS** (or replace it — the project is unmaintained).
+  and, as here, passwords in log files.
+- **Patch Cuppa CMS** (or replace it, the project is unmaintained).
   Any CMS whose LFI has a public exploit older than a year should
   not be running on production.
 - **Never pass unquoted wildcards to `tar`/`zip`/`rsync` in a

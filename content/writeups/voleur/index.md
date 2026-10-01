@@ -24,9 +24,9 @@ cover:
 
 ## TL;DR
 
-Voleur is a chain box that only accepts Kerberos for anything meaningful
-— NTLM is disabled on the DC. Given creds unlock SMB read on an IT share
-holding a password-protected Excel; `office2john` + hashcat cracks it,
+Voleur is a chain box that only accepts Kerberos for anything meaningful.
+NTLM is disabled on the DC. Given creds unlock SMB read on an IT share
+holding a password-protected Excel. `office2john` + hashcat cracks it,
 and its contents reference a **deleted** user (`todd.wolfe`). The current
 identity can restore deleted objects via the AD Recycle Bin, so
 `Get-ADObject -IncludeDeletedObjects` + `Restore-ADObject` brings
@@ -39,7 +39,7 @@ Kerberos-only (`getTGT`, `KRB5CCNAME`, `-k -no-pass` on impacket
 tooling), and getting `/etc/hosts` + `/etc/krb5.conf` wrong turns any
 step into an unhelpful stack trace. There is also an `svc_backup` SSH
 account whose home mounts `C:\Backups`, containing `SYSTEM`, `SAM`, and
-`NTDS.dit` copies; offline `secretsdump` extracts the Administrator
+`NTDS.dit` copies. Offline `secretsdump` extracts the Administrator
 NTLM, and a final `getTGT` + `evil-winrm -r voleur.htb` lands the DC.
 
 ---
@@ -146,7 +146,7 @@ ls -Force C:\Users\todd.wolfe\AppData\Roaming\Microsoft\Protect\<SID>\
 ![Resolving the SID of todd.wolfe for DPAPI blob extraction](25-sid.png)
 
 Exfil via SMB (evil-winrm `download` is unreliable on hidden+system
-attributes; SMB copy is safer):
+attributes. SMB copy is safer):
 
 ```bash
 impacket-dpapi masterkey -file masterkey.bin -sid <SID> -password '<todd_pw>'
@@ -225,7 +225,7 @@ evil-winrm -i dc.voleur.htb -u <user> -r voleur.htb
 
 ## svc_ldap → svc_winrm → WinRM to DC
 
-svc_ldap surfaces material for svc_winrm; WinRM lands on the DC:
+svc_ldap surfaces material for svc_winrm. WinRM lands on the DC:
 
 ![svc_winrm password](50-svc-winrm-password.png)
 ![TGT for svc_winrm](51-tgt-svc-winrm.png)
@@ -256,7 +256,7 @@ impacket-secretsdump -system SYSTEM -ntds NTDS.dit LOCAL
 ![get protected material](60-get-protected.png)
 ![Downloading NTDS](61-downloading-file.png)
 
-Final step — TGT for Administrator, WinRM in:
+Final step, TGT for Administrator, WinRM in:
 
 ```bash
 impacket-getTGT voleur.htb/Administrator -hashes :<NT>
@@ -276,7 +276,7 @@ evil-winrm -i dc.voleur.htb -u Administrator -r voleur.htb
   `/etc/hosts` or the realm entry in `/etc/krb5.conf` is wrong, or
   `ntpdate` was not run. Fix those three things before assuming a
   credential is bad.
-- **office2john is the reflex for any protected Office file** — same
+- **office2john is the reflex for any protected Office file**, same
   path for `.docx` / `.pptx` (mode 9400/9500/9600 by version). Never
   brute-force in the app.
 - **AD Recycle Bin is a real attack surface.** `Get-ADObject
@@ -284,14 +284,14 @@ evil-winrm -i dc.voleur.htb -u Administrator -r voleur.htb
   identity is in a "restore" group is often the shortcut past a
   password-reset chain.
 - **DPAPI blobs need the user context or their password.** `RunasCs`
-  is the workhorse for the first case; masterkey + `-password` for
+  is the workhorse for the first case. Masterkey + `-password` for
   the second. When both are available, prefer offline decryption on
-  Kali — cleaner than PowerShell forensics on the box.
+  Kali, cleaner than PowerShell forensics on the box.
 - **`WriteOwner` / `GenericWrite` on a user is a Kerberoast surface,
   not just a password-reset one.** Setting an SPN on the target and
   roasting it can be quieter and produce a hash for a service account
   that would not otherwise be roastable.
-- **`evil-winrm -r <realm>`** — the `-r` flag switches evil-winrm into
+- **`evil-winrm -r <realm>`**, the `-r` flag switches evil-winrm into
   Kerberos mode using the current `KRB5CCNAME`. Trivial to forget on
   a Kerberos-only box.
 - **`C:\Backups` is worth grepping on every Windows box.** SYSTEM +
@@ -306,7 +306,7 @@ evil-winrm -i dc.voleur.htb -u Administrator -r voleur.htb
 
 - **Disable Protected Users bypass paths.** `RunasCs` and DPAPI
   decryption both need the plaintext or the masterkey. Enforce strong
-  passwords on service accounts and rotate them; treat every DPAPI
+  passwords on service accounts and rotate them. Treat every DPAPI
   blob on a share as a credential.
 - **Audit AD Recycle Bin restore rights.** A group with restore
   rights over a Tier-0 identity is effectively Tier-0. Move restore
@@ -316,13 +316,13 @@ evil-winrm -i dc.voleur.htb -u Administrator -r voleur.htb
   a user object is a Kerberoast setup, not day-to-day admin. Event ID
   `5136` on the DC with `servicePrincipalName` in the attribute list
   is the signal.
-- **Remove NTLM.** Voleur was Kerberos-only intentionally — most real
+- **Remove NTLM.** Voleur was Kerberos-only intentionally, most real
   environments still fall back to NTLM, which makes half these
   primitives noisier but easier. `Restrict NTLM: Outgoing traffic to
   remote servers` and audit the fallout for a month before enforcing.
 - **`C:\Backups` is production data on a DC.** Move offline archives
   (SAM / SYSTEM / NTDS.dit snapshots) to encrypted, ACL-locked
-  storage — not a folder every authenticated user can browse.
+  storage, not a folder every authenticated user can browse.
 
 ---
 

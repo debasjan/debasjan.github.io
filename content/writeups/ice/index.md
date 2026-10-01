@@ -63,13 +63,13 @@ session opened running as the account that owned the Icecast process.
 With an initial foothold, Meterpreter's built-in **local exploit suggester**
 (`post/multi/recon/local_exploit_suggester`) enumerated the OS build for
 applicable privilege escalation modules and returned several candidates. The
-first — a UAC bypass via the Event Viewer autoelevate mechanism
-(`bypassuac_eventvwr`) — was selected, pointed at the backgrounded session,
+first, a UAC bypass via the Event Viewer autoelevate mechanism
+(`bypassuac_eventvwr`). Was selected, pointed at the backgrounded session,
 and run with a fresh listener IP set. It returned a second, elevated
 session.
 
 From that elevated session, `getprivs` confirmed expanded privileges
-including the ability to take ownership of files — a strong signal that
+including the ability to take ownership of files, a strong signal that
 further access to protected processes (like `lsass`) was now possible.
 
 To actually reach `lsass`-protected credential material, the session needed
@@ -83,7 +83,7 @@ migrate -N spoolsv.exe
 
 Confirming `NT AUTHORITY\SYSTEM` afterward, loading Meterpreter's Mimikatz
 integration (`load kiwi`) and running its credential-dumping command
-recovered the logged-in user's plaintext password directly from memory —
+recovered the logged-in user's plaintext password directly from memory,
 notable because the room highlights this works even without the user
 actively logged in, since a scheduled task runs the vulnerable service under
 that account's context, and Windows Defender is disabled on the box.
@@ -97,7 +97,7 @@ capabilities once SYSTEM is held: `hashdump` for local password hashes,
 `screenshare`/`record_mic` for live monitoring, `timestomp` for altering
 file timestamps (explicitly framed as something to never do outside an
 authorized engagement, since it actively harms incident-response timeline
-reconstruction), and Mimikatz's **golden ticket** generation — forging a
+reconstruction), and Mimikatz's **golden ticket** generation, forging a
 Kerberos ticket-granting ticket to authenticate as any domain user going
 forward, a persistence technique built on having already compromised the
 `krbtgt` account's material.
@@ -114,16 +114,16 @@ forward, a persistence technique built on having already compromised the
   than working from a fragile initial shell.
 - **Credentials can be recovered from memory even without an active login
   session**, if a scheduled task or service runs under that account's
-  context — `lsass` retains cached material accordingly.
+  context, `lsass` retains cached material accordingly.
 
 ---
 
 ## Remediation
 
-- Patch or retire outdated Icecast installations; this CVE has been public
+- Patch or retire outdated Icecast installations. This CVE has been public
   and fixed for a long time.
 - Keep endpoint protection (Windows Defender or equivalent) enabled and
-  monitored — several steps in this chain are meaningfully harder with
+  monitored, several steps in this chain are meaningfully harder with
   active AV/EDR.
 - Apply the Event Viewer autoelevate UAC bypass mitigations (patch level
   and UAC configuration) and monitor for `lsass` access attempts from

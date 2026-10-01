@@ -28,7 +28,7 @@ Bashed is a short chain built around finding things that were left where they
 shouldn't be. Directory fuzzing turns up a fully functional web shell someone
 else forgot to remove, giving instant code execution. From there, a broad
 `sudo` rule allows switching to a second account, and a writable script owned
-by that account — sitting where an automated process expects to find it —
+by that account, sitting where an automated process expects to find it,
 provides the path to root.
 
 ---
@@ -54,7 +54,7 @@ gobuster dir -u http://10.129.2.32 -w /usr/share/wordlists/dirbuster/directory-l
 
 The scan turned up **`phpbash`**, a minimal PHP web shell, already deployed
 and reachable directly. This is the kind of finding that looks almost too
-easy — but leftover debugging/admin tooling exposed on a production-style web
+easy, but leftover debugging/admin tooling exposed on a production-style web
 root is a very real class of real-world vulnerability, not just a lab
 contrivance.
 
@@ -85,7 +85,7 @@ sudo -u scriptmanager /bin/bash
 ![listing the /scripts directory](03-scripts-dir.png)
 
 As `scriptmanager`, a `/scripts` directory held a Python file, `test.py`,
-owned by `scriptmanager`, alongside a `test.txt` owned by `root` — a strong
+owned by `scriptmanager`, alongside a `test.txt` owned by `root`, a strong
 signal that something running as `root` executes `test.py` periodically.
 Since I owned that file, overwriting it with a reverse-shell payload and
 waiting for the next execution window delivered a shell as root:
@@ -102,14 +102,14 @@ Root flag retrieved.
 ## Lessons Learned
 
 - **Exposed debugging/admin web shells are a real vulnerability class, not
-  just a lab shortcut** — directory fuzzing should always include common
+  just a lab shortcut**, directory fuzzing should always include common
   webshell/tool names.
 - **An overly broad `sudo` rule ("run anything as this other user") is
-  functionally the same as being that user** — it should be scoped to
+  functionally the same as being that user**. It should be scoped to
   specific commands wherever possible.
 - **A file you can write, that something else executes on its own schedule,
-  is a privilege escalation path regardless of how the scheduling works** —
-  it doesn't need to be your own crontab.
+  is a privilege escalation path regardless of how the scheduling works**.
+  It doesn't need to be your own crontab.
 
 ---
 
@@ -120,7 +120,7 @@ Root flag retrieved.
 - Scope `sudo` rules to exact commands/binaries, never a blanket
   `ALL` grant to switch users.
 - Ensure any script executed by an automated or privileged process is owned
-  and writable only by that same privilege tier — never by a lower-privileged
+  and writable only by that same privilege tier, never by a lower-privileged
   account.
 
 ---

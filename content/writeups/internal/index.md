@@ -25,15 +25,15 @@ cover:
 
 ## TL;DR
 
-Internal is a "black-box" style TryHackMe room — no creds given,
+Internal is a "black-box" style TryHackMe room, no creds given,
 scope is one IP + `internal.thm`. Full compromise chain:
 
-1. **Recon:** port 80 hosts a plain page; `/blog` is WordPress and
+1. **Recon:** port 80 hosts a plain page. `/blog` is WordPress and
    `/phpmyadmin` is exposed.
-2. **WordPress:** `wpscan --enumerate u` pulls the `admin` user;
+2. **WordPress:** `wpscan --enumerate u` pulls the `admin` user.
    `wpscan --passwords rockyou.txt` cracks it.
 3. **Foothold:** log in to `wp-admin`, edit the theme's `404.php`
-   with a PHP reverse shell — I get a shell as `www-data`.
+   with a PHP reverse shell. I get a shell as `www-data`.
 4. **Loot:** a `wp-save.txt` note under `/opt` gives me
    `aubreanna:<password>` for SSH. That's user.txt.
 5. **Pivot:** `/home/aubreanna/jenkins.txt` mentions Jenkins on
@@ -64,8 +64,8 @@ gobuster dir -u http://internal.thm -w /usr/share/wordlists/dirbuster/directory-
 
 Two interesting paths:
 
-- `/phpmyadmin/` — admin panel, needs creds.
-- `/blog/` — WordPress.
+- `/phpmyadmin/`, admin panel, needs creds.
+- `/blog/`, WordPress.
 
 ![phpMyAdmin login](phpmyadmin.png)
 ![phpMyAdmin — wrong creds keeps me out for now](phpmyadmin-admin.png)
@@ -120,8 +120,8 @@ curl http://internal.thm/blog/wp-content/themes/twentyseventeen/404.php
 ![DB tables](mysql-tables.png)
 ![admin row in wp_users](mysql-admin-account.png)
 
-Nothing new for privesc — but the DB tour is a good reflex on a
-WordPress box; sometimes the `wp_users` table holds a hash for a
+Nothing new for privesc, but the DB tour is a good reflex on a
+WordPress box. Sometimes the `wp_users` table holds a hash for a
 Windows/AD user reused elsewhere.
 
 ---
@@ -152,7 +152,7 @@ ssh aubreanna@internal.thm
 
 ![linpeas summary](linpeas.png)
 
-But `/home/aubreanna/jenkins.txt` is a lead — the sysadmin noted a
+But `/home/aubreanna/jenkins.txt` is a lead, the sysadmin noted a
 Jenkins service is running **only on `localhost:8080`**:
 
 ![jenkins.txt](jenkins-txt.png)
@@ -190,7 +190,7 @@ Same rockyou brute-force pattern with Hydra / a small Python wrapper
 ## Root — Jenkins Script Console
 
 Once inside Jenkins, **Manage Jenkins → Script Console** runs Groovy
-as the Jenkins JVM user — which on this box is `root` inside a
+as the Jenkins JVM user, which on this box is `root` inside a
 Docker container.
 
 ```groovy
@@ -217,7 +217,7 @@ p.destroy(); s.close();
 
 ![the Groovy payload in the Script Console](jenkins-script-console.png)
 
-Listener catches a `jenkins` shell — inside a container:
+Listener catches a `jenkins` shell, inside a container:
 
 ![callback as jenkins](jenkins.png)
 
@@ -243,22 +243,22 @@ THM{d0ck3r_d3str0y3r}
 ## Lessons Learned
 
 - **Black-box scope means enumerate every path twice.** `phpMyAdmin`
-  looked useless without creds until WordPress leaked them — always
+  looked useless without creds until WordPress leaked them, always
   come back to the ones you skipped.
 - **WordPress user enum is free.** `?author=1`, `/wp-json/wp/v2/users`,
-  or `wpscan --enumerate u` — one of them always works. If the admin
+  or `wpscan --enumerate u`, one of them always works. If the admin
   username is exposed, treat the login as effectively half-cracked.
 - **Theme Editor RCE is the classic WP admin → shell.** Any file
   under `wp-content/themes/<active>/` that the site renders
-  (`404.php`, `header.php`, `footer.php`) can host the payload;
+  (`404.php`, `header.php`, `footer.php`) can host the payload.
   `404.php` is the least noisy because you don't have to break the
   live layout.
-- **A service bound to `localhost` is not "hidden" — it's one port
-  forward away.** `ssh -L`, `chisel`, `ligolo-ng` — pick one, it's
+- **A service bound to `localhost` is not "hidden". It's one port
+  forward away.** `ssh -L`, `chisel`, `ligolo-ng`, pick one, it's
   the same primitive.
 - **Jenkins Script Console = auth'd RCE.** If you can log in, you
   are the Jenkins user. If Jenkins is in a container, that user is
-  usually `root` inside it — with an escape path more often than
+  usually `root` inside it, with an escape path more often than
   people expect.
 
 ---
@@ -272,12 +272,12 @@ THM{d0ck3r_d3str0y3r}
   A single brute-forceable `admin` account cost this box.
 - **Disable file editing in WordPress:** set
   `define('DISALLOW_FILE_EDIT', true);` in `wp-config.php`. The
-  Theme Editor is convenient — and a foothold every time.
+  Theme Editor is convenient, and a foothold every time.
 - **Do not leave plaintext credential notes on the filesystem.**
   `wp-save.txt` and `jenkins.txt` gave up the whole box. Use a
   password manager or Vault.
 - **Restrict Jenkins Script Console** to a tiny admin group, and
-  never run the Jenkins agent as root — even inside a container.
+  never run the Jenkins agent as root, even inside a container.
 
 ---
 

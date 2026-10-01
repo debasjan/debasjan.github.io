@@ -25,11 +25,11 @@ cover:
 ## TL;DR
 
 Cap runs a web app that lets users capture and download their own network
-traffic — a feature that's only safe if access control actually checks
+traffic, a feature that's only safe if access control actually checks
 whose capture is being requested. It doesn't: an IDOR lets me pull
 another user's `.pcap` file directly, and that capture contains a
 plaintext credential used elsewhere on the box. A misconfigured Linux
-capability on the Python binary — instead of a SUID bit — then provides a
+capability on the Python binary, instead of a SUID bit, then provides a
 direct path to root.
 
 ---
@@ -71,7 +71,7 @@ gobuster dir -u http://10.10.10.245 -w /usr/share/wordlists/dirbuster/directory-
 
 `/ip` and `/netstat` reflected live system data back to the browser. In
 the "Security Snapshots" section of the menu there was a `/data`
-path with downloadable content — numbered captures a user could download
+path with downloadable content, numbered captures a user could download
 of their own traffic.
 
 ---
@@ -89,7 +89,7 @@ clear:
 
 ![FTP PASS command visible in the pcap](06-wireshark-ftp-creds.png)
 
-A plaintext credential for the user `nathan` — the "isolate your own
+A plaintext credential for the user `nathan`, the "isolate your own
 traffic" feature had just leaked someone else's login instead. Tried it
 over SSH:
 
@@ -104,7 +104,7 @@ Worked directly. Foothold as `nathan`, user flag retrieved.
 ## Privilege Escalation
 
 Checked for SUID binaries first, nothing interesting. Moved on to Linux
-**capabilities** — a less-checked but increasingly common privesc vector,
+**capabilities**, a less-checked but increasingly common privesc vector,
 since capabilities give a binary a specific elevated syscall permission
 without a full SUID bit:
 
@@ -114,7 +114,7 @@ getcap -r / 2>/dev/null
 
 ![getcap output showing python3.8 with cap_setuid](07-getcap-python.png)
 
-`/usr/bin/python3.8` had `cap_setuid,cap_net_bind_service+eip` assigned —
+`/usr/bin/python3.8` had `cap_setuid,cap_net_bind_service+eip` assigned,
 GTFOBins documents this exact capability as directly abusable, since a
 binary that can freely call `setuid()` can just become root:
 
@@ -131,7 +131,7 @@ Root shell obtained, root flag retrieved.
 ## Lessons Learned
 
 - Any endpoint that serves "your own" data by numeric ID needs an
-  explicit ownership check — otherwise it's an IDOR waiting to be walked.
+  explicit ownership check, otherwise it's an IDOR waiting to be walked.
 - A network capture *of a user logging in* is itself a credential leak.
   If an app lets you capture traffic, cleartext-auth protocols anywhere
   on that network turn every capture into a potential credential dump.
@@ -143,12 +143,12 @@ Root shell obtained, root flag retrieved.
 
 ## Remediation
 
-- Enforce per-user authorization on every data-retrieval endpoint — never
+- Enforce per-user authorization on every data-retrieval endpoint, never
   trust a client-supplied ID alone to scope access.
 - Eliminate cleartext-credential protocols on any network segment where
   traffic capture is possible, and rotate any credential that may have
   traversed the wire unencrypted.
-- Audit `getcap -r /` output as part of routine host hardening — remove
+- Audit `getcap -r /` output as part of routine host hardening, remove
   capabilities from interpreters (Python, Perl, etc.) unless a specific,
   reviewed reason requires them.
 

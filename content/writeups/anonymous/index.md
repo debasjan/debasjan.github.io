@@ -50,13 +50,13 @@ enum4linux -a <TARGET_IP>
 
 SMB enumeration confirmed a share holding user files (a `pics` share), while
 FTP allowed anonymous login and contained a script (`clean.sh`) alongside a
-compiled helper — the box's actual foothold vector.
+compiled helper, the box's actual foothold vector.
 
 ---
 
 ## Foothold / Initial Access
 
-Anonymous FTP access wasn't just readable — it was **writable**, letting the
+Anonymous FTP access wasn't just readable. It was **writable**, letting the
 existing `clean.sh` script be edited/replaced rather than exploited through
 any deliberate scripting flaw. Appending a reverse shell one-liner to the
 script and waiting for whatever scheduled/triggered process ran it caught a
@@ -82,7 +82,7 @@ User flag retrieved.
 
 ## Privilege Escalation
 
-A SUID-permission sweep found `env` with the SUID bit set — an unusual and
+A SUID-permission sweep found `env` with the SUID bit set, an unusual and
 immediately actionable finding, since `env` is meant to just print or modify
 environment variables before running a command, but with SUID set it runs
 that command with the file owner's privileges:
@@ -94,8 +94,8 @@ find / -perm -4000 2>/dev/null
 ![SUID sweep finding /usr/bin/env](03-suid-env.png)
 
 GTFOBins documents the abuse directly: `env` with SUID launches whatever
-command follows it *with the elevated privilege the binary itself carries*
-— effectively an inherited-privilege shell spawn:
+command follows it *with the elevated privilege the binary itself carries*,
+effectively an inherited-privilege shell spawn:
 
 ```bash
 env /bin/sh -p
@@ -108,11 +108,11 @@ Root shell obtained. Root flag retrieved.
 ## Lessons Learned
 
 - **Anonymous FTP being *writable*, not just readable, changes the whole
-  approach** — modifying an existing script that a scheduled process later
+  approach**, modifying an existing script that a scheduled process later
   executes is a simpler path than searching for an independent code
   execution bug.
 - **A routine SUID sweep (`find / -perm -4000`) should be one of the first
-  privilege-escalation checks on any Linux box** — an unexpected binary
+  privilege-escalation checks on any Linux box**, an unexpected binary
   like `env` on that list is immediately actionable via GTFOBins.
 
 ---
@@ -121,7 +121,7 @@ Root shell obtained. Root flag retrieved.
 
 - Disable anonymous FTP write access at minimum, and anonymous access
   entirely where not explicitly required.
-- Remove the SUID bit from any binary that doesn't strictly require it;
+- Remove the SUID bit from any binary that doesn't strictly require it.
   `env` should never carry SUID on a production system.
 
 ---

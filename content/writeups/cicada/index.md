@@ -107,7 +107,7 @@ crackmapexec smb 10.129.231.149 -u michael.wrightson -p 'Cicada$M6Corpb*@Lp#nZp!
 ![david.orelious's AD description containing a password](07-david-description-password.png)
 
 `david.orelious` had saved their password directly in their AD
-**description** field ("Just in case I forget my password is...") — a
+**description** field ("Just in case I forget my password is..."), a
 surprisingly common real-world habit.
 
 ---
@@ -146,7 +146,7 @@ whoami /priv
 
 ![whoami /priv showing SeBackupPrivilege enabled](09-whoami-priv-sebackup.png)
 
-`SeBackupPrivilege` — typically given to service or backup accounts. It
+`SeBackupPrivilege`, typically given to service or backup accounts. It
 bypasses normal file permissions for backup operations, which means it
 also grants read access to protected files like the `SAM` and `SYSTEM`
 registry hives:
@@ -185,15 +185,15 @@ Rooted, and read the flag from
 ## Lessons Learned
 
 - A "default password" mentioned in an onboarding document is a real
-  credential to try — check for these before assuming a share is a dead
+  credential to try. Check for these before assuming a share is a dead
   end.
 - AD **description fields** are free-text and readable by any account
-  that can enumerate users — a surprisingly common place to find leftover
+  that can enumerate users, a surprisingly common place to find leftover
   passwords.
 - Scripts on shared drives (`Backup_script.ps1` here) routinely have
   hardcoded credentials baked in for automation convenience.
 - `SeBackupPrivilege` on a non-admin account is a direct path to
-  SAM/SYSTEM and full credential extraction — always check `whoami /priv`
+  SAM/SYSTEM and full credential extraction, always check `whoami /priv`
   after landing a shell.
 
 ---
@@ -204,7 +204,7 @@ Rooted, and read the flag from
   guest/anonymous accounts.
 - Audit AD description fields for stored secrets as part of routine
   hygiene.
-- Remove hardcoded credentials from automation scripts; use a credential
+- Remove hardcoded credentials from automation scripts. Use a credential
   vault or managed service accounts.
 - Restrict `SeBackupPrivilege`/`SeRestorePrivilege` to genuinely trusted
   backup operator accounts, and monitor for SAM/SYSTEM hive access.

@@ -24,18 +24,18 @@ cover:
 
 ## TL;DR
 
-Signed exposes a single port — **MSSQL (1433)**. I recover the `mssqlsvc`
+Signed exposes a single port, **MSSQL (1433)**. I recover the `mssqlsvc`
 service account's credentials by coercing an NTLMv2 authentication to
 Responder and cracking the hash. `mssqlsvc` is **not** a sysadmin, and with
 no LDAP/SMB the domain has to be enumerated *through SQL* (`SUSER_SID` to
 recover the domain SID). Because I control the service account's password,
 I forge a **Kerberos Silver Ticket** for the `MSSQLSvc` SPN that places me
-in **Domain Admins** — MSSQL trusts the ticket because it's signed with the
+in **Domain Admins**, MSSQL trusts the ticket because it's signed with the
 service account's own key, so I authenticate as **sysadmin** and read the
 flags, using `OPENROWSET(BULK)` for arbitrary file read.
 
 > Silver Ticket forging and MSSQL `OPENROWSET` file read were both new
-> techniques for me here — learnt from HackTricks rather than a walkthrough.
+> techniques for me here, learnt from HackTricks rather than a walkthrough.
 
 ---
 
@@ -110,7 +110,7 @@ RID). `enum_logins` lists the SQL logins:
 I control the MSSQL service account's password, so I can forge a **Silver
 Ticket** for its SPN. A silver ticket is signed offline with the service
 account's own NT hash, targets one service, and lets me put myself in any
-groups in the PAC — including **Domain Admins (512)** — which MSSQL trusts
+groups in the PAC, including **Domain Admins (512)**, which MSSQL trusts
 blindly.
 
 Converted the password to its NT hash:
@@ -132,7 +132,7 @@ impacket-ticketer \
 ![silver ticket created](12-silver-ticket.png)
 ![silver ticket key notes](13-silver-ticket-note.png)
 
-Used the ticket (Kerberos auth) — this time I'm **sysadmin**:
+Used the ticket (Kerberos auth). This time I'm **sysadmin**:
 
 ```bash
 export KRB5CCNAME=mssqlsvc.ccache
@@ -152,7 +152,7 @@ User flag:
 
 ![user flag](17-user-flag.png)
 
-As sysadmin, `OPENROWSET(BULK)` reads any file on the system — used it for
+As sysadmin, `OPENROWSET(BULK)` reads any file on the system, used it for
 the root flag:
 
 ```sql
@@ -169,13 +169,13 @@ full command execution on the DC.)*
 
 ## Lessons Learned
 
-- One open port (1433) doesn't mean a dead end — MSSQL is both foothold and
+- One open port (1433) doesn't mean a dead end, MSSQL is both foothold and
   enumeration window. `SUSER_SID`/`SUSER_SNAME` enumerate the domain when
   there's no LDAP/SMB.
 - Owning a service account's password/hash lets you forge a **Silver
-  Ticket** for its SPN and put yourself in Domain Admins; the service
+  Ticket** for its SPN and put yourself in Domain Admins. The service
   trusts the PAC because it's signed with its own key.
-- A silver ticket is offline, single-service, and needs no DC contact —
+- A silver ticket is offline, single-service, and needs no DC contact,
   just the service NT hash, domain SID and SPN.
 - sysadmin on MSSQL is file read (`OPENROWSET BULK`) and RCE
   (`xp_cmdshell`).

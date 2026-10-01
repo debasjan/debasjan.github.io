@@ -42,7 +42,7 @@ nmap -Pn -p 445 -sC -sV 10.10.10.4
 ![nmap service scan](01-nmap.png)
 
 SMB (445) was the only service of interest, and version fingerprinting
-against it flagged the target as vulnerable to **MS08-067** — one of the
+against it flagged the target as vulnerable to **MS08-067**, one of the
 oldest widely-exploited Windows RCE vulnerabilities, sitting in the SMB path
 canonicalization logic.
 
@@ -61,27 +61,27 @@ run
 ```
 
 The exploit succeeded immediately, returning a session running as
-`NT AUTHORITY\SYSTEM` — both flags were reachable right away under
+`NT AUTHORITY\SYSTEM`, both flags were reachable right away under
 `C:\Documents and Settings\...`, with no further escalation required.
 
 ---
 
 ## Lessons Learned
 
-- **MS08-067 and MS17-010 (Blue) are worth knowing as a pair** — a decade
+- **MS08-067 and MS17-010 (Blue) are worth knowing as a pair**, a decade
   apart, both are SMB remote code execution bugs that were mass-exploited by
   self-propagating worms (Conficker and WannaCry, respectively). Recognizing
-  the pattern — SMB, old, unpatched, worm-exploited — speeds up triage on any
+  the pattern, SMB, old, unpatched, worm-exploited, speeds up triage on any
   legacy Windows box.
 - **The oldest vulnerabilities are still worth checking first on old-looking
-  targets** — version fingerprinting immediately pointed at a specific,
+  targets**, version fingerprinting immediately pointed at a specific,
   well-documented exploit rather than requiring broader exploration.
 
 ---
 
 ## Remediation
 
-- Apply the MS08-067 patch immediately; this vulnerability is from 2008 and
+- Apply the MS08-067 patch immediately. This vulnerability is from 2008 and
   has no legitimate reason to remain unpatched on any host.
 - Disable legacy SMB versions and restrict SMB to internal, trusted network
   segments only.

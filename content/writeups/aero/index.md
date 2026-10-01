@@ -26,15 +26,15 @@ cover:
 ## TL;DR
 
 Aero's only surface is an "Aero Theme Hub" web app that accepts uploaded
-`.theme` / `.themepack` files on a Windows 11 target — a textbook signal
+`.theme` / `.themepack` files on a Windows 11 target, a textbook signal
 for **CVE-2023-38146 (ThemeBleed)**. The public PoC builds a malicious
-theme that references an attacker-hosted SMB DLL; when the box previews the
+theme that references an attacker-hosted SMB DLL. When the box previews the
 uploaded theme, the DLL fires and I get a shell as `AERO\sam.emerson`.
 
 > **Honest note:** I got the foothold and the user flag. The intended
 > privilege escalation is **CVE-2023-28252** (CLFS driver EoP), which
 > requires modifying and recompiling a kernel-exploit PoC. I've documented
-> that path below but did not complete it — this write-up is foothold-only.
+> that path below but did not complete it. This write-up is foothold-only.
 
 ---
 
@@ -107,7 +107,7 @@ Uploaded `evil_theme.theme` through the web form:
 ![uploading the malicious theme](07-upload-theme.png)
 ![upload succeeded — the box will preview it](08-upload-success.png)
 
-Started a listener; when the box previewed the theme, the DLL fired and I
+Started a listener. When the box previewed the theme, the DLL fired and I
 got a PowerShell shell as `AERO\sam.emerson`:
 
 ```bash
@@ -124,7 +124,7 @@ rlwrap -cAr nc -lvnp 8888
 winPEAS flagged a non-Microsoft scheduled task, but it runs as
 `sam.emerson` (the user I already am), so it isn't a privesc. The user's
 `Documents` folder also contains a CVE disclosure notice pointing at
-**CVE-2023-28252** (Windows CLFS Driver Elevation of Privilege) — the box
+**CVE-2023-28252** (Windows CLFS Driver Elevation of Privilege), the box
 is telegraphing the intended path.
 
 Turning the public CLFS PoC into a working escalation requires:
@@ -147,10 +147,10 @@ escalation later.
 
 - Read the enumeration signal: an explicit `.theme` upload widget on a
   Windows 11 host is a near-direct pointer to ThemeBleed.
-- ThemeBleed is a client-side chain — the payload only fires when someone
+- ThemeBleed is a client-side chain, the payload only fires when someone
   on the box opens/previews the uploaded theme.
 - HTB medium boxes often build privesc around a specific CVE that needs PoC
-  modification and compilation — worth recognizing early so you can budget
+  modification and compilation, worth recognizing early so you can budget
   time for it.
 
 ---

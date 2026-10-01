@@ -73,19 +73,19 @@ msfconsole
 # select and configure a Tomcat manager deployment/exploit module
 ```
 
-Shell returned as **root** directly — no separate privilege escalation
+Shell returned as **root** directly, no separate privilege escalation
 phase was needed on this box.
 
 ---
 
 ## Lessons Learned
 
-- **Basic-auth-protected directories are a Hydra target, not a dead end** —
+- **Basic-auth-protected directories are a Hydra target, not a dead end**,
   once a candidate username is known (from an earlier enumeration step),
   brute-forcing the password against `http-get` is a quick, standard
   attempt.
 - **Tomcat manager access (whether via default, brute-forced, or leaked
-  credentials) is close to direct code execution** — WAR file deployment
+  credentials) is close to direct code execution**, WAR file deployment
   through the manager interface is a well-worn, reliable path, and
   Metasploit automates it end-to-end once the version and credentials are
   known.
@@ -95,7 +95,7 @@ phase was needed on this box.
 ## Remediation
 
 - Never protect sensitive paths with HTTP basic auth alone if the password
-  is weak enough for a wordlist attack; pair with account lockout or
+  is weak enough for a wordlist attack. Pair with account lockout or
   stronger authentication.
 - Restrict or disable the Tomcat manager application in production, and if
   required, place it behind network-level access control in addition to

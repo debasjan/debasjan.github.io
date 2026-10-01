@@ -47,7 +47,7 @@ An AD host with SMB open. Checked for anonymous access:
 smbclient -L //10.129.227.113
 ```
 
-A `Shares` folder was reachable, and inside it a `winrm_backup.zip` — a
+A `Shares` folder was reachable, and inside it a `winrm_backup.zip`, a
 name that's basically an invitation, since a backup of WinRM
 configuration almost always means certificate or credential material.
 
@@ -65,7 +65,7 @@ zip2john winrm_backup.zip > winrm.hash
 john winrm.hash -wordlist:/usr/share/wordlists/rockyou.txt
 ```
 
-Inside was `legacyy_dev_auth.pfx` — a PKCS#12 bundle, also
+Inside was `legacyy_dev_auth.pfx`, a PKCS#12 bundle, also
 password-protected. Same approach:
 
 ```bash
@@ -82,7 +82,7 @@ openssl pkcs12 -in legacyy_dev_auth.pfx -nocerts -out key.pem -nodes
 ```
 
 A client certificate plus its private key is a direct WinRM
-authentication method — no password needed at all once you have both
+authentication method, no password needed at all once you have both
 halves:
 
 ```bash
@@ -145,15 +145,15 @@ That password gave a WinRM session as Administrator and the root flag.
 
 ## Lessons Learned
 
-- A password-protected archive is not the end of the road — `zip2john`
+- A password-protected archive is not the end of the road, `zip2john`
   and `pfx2john` turn "I'd need the password" into "I need a wordlist,"
   which is a much easier problem.
-- A certificate + private key pair authenticates like a credential — once
+- A certificate + private key pair authenticates like a credential, once
   extracted from a PFX, there's no password to guess at all for WinRM.
 - PowerShell history is a recurring credential leak across multiple boxes
-  in this portfolio — it's worth checking as a reflex on every Windows
+  in this portfolio. It's worth checking as a reflex on every Windows
   foothold, not just when nothing else works.
-- LAPS read rights are effectively local-admin-on-every-managed-host —
+- LAPS read rights are effectively local-admin-on-every-managed-host,
   membership in a LAPS reader group deserves the same scrutiny as any
   other privileged group.
 
@@ -162,7 +162,7 @@ That password gave a WinRM session as Administrator and the root flag.
 ## Remediation
 
 - Don't store credential material (PFX bundles, backup ZIPs) on
-  network-reachable shares, even password-protected — assume any password
+  network-reachable shares, even password-protected, assume any password
   can eventually be cracked offline.
 - Clear or disable PowerShell history/transcription on hosts where
   credentials are ever typed, and avoid typing plaintext passwords into a

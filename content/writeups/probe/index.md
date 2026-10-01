@@ -24,7 +24,7 @@ cover:
 
 ## TL;DR
 
-Probe is a pure **enumeration** room — there's no exploitation or shell to
+Probe is a pure **enumeration** room. There's no exploitation or shell to
 obtain, just a target with an unusually wide service footprint (multiple
 web servers on different ports, FTP, a database admin panel, a
 self-signed-cert site) to fully fingerprint. The exercise is in being
@@ -40,7 +40,7 @@ stopping at the first web server found.
 nmap -sC -sV -p- <TARGET_IP>
 ```
 
-A notably large number of open ports for an "easy" box — several distinct
+A notably large number of open ports for an "easy" box, several distinct
 HTTP services on non-standard ports, FTP on a non-default port, and a
 self-signed HTTPS site.
 
@@ -59,7 +59,7 @@ self-signed HTTPS site.
 - Another port exposed **phpMyAdmin**, identified by its default login
   page.
 - The self-signed HTTPS site's **certificate metadata** (subject/contact
-  email) was inspected directly — SSL certificates are a frequently
+  email) was inspected directly, SSL certificates are a frequently
   overlooked source of hostnames and organizational/contact information.
 - **Nikto** against the web roots flagged a licensing file
   (`OSVDB-3092`), a common fingerprint for identifying blogging-platform
@@ -72,10 +72,10 @@ self-signed HTTPS site.
 ## Lessons Learned
 
 - **A wide-open service footprint rewards methodical, port-by-port
-  fingerprinting** over rushing to the first web app found — several
+  fingerprinting** over rushing to the first web app found, several
   distinct findings here were only reachable by checking every port
   individually.
-- **SSL/TLS certificates are enumeration data, not just encryption** — the
+- **SSL/TLS certificates are enumeration data, not just encryption**, the
   subject and contact fields on a self-signed cert can leak hostnames,
   environment names, and organizational details.
 - **Service banners (FTP welcome text, HTTP response headers) are free
@@ -87,7 +87,7 @@ self-signed HTTPS site.
 ## Remediation
 
 - Minimize the number of distinct services/admin panels exposed on a
-  single host; each one is independent attack surface.
+  single host. Each one is independent attack surface.
 - Strip identifying metadata (contact emails, internal hostnames) from
   self-signed certificates used outside of pure internal testing.
 - Suppress version banners and licensing files that allow fingerprinting

@@ -26,7 +26,7 @@ cover:
 
 A themed beginner room (Brooklyn Nine-Nine references throughout) where FTP
 holds a file leaking SSH credentials directly, and privilege escalation is
-another SUID-binary abuse — this time `less`, reached through GTFOBins'
+another SUID-binary abuse. This time `less`, reached through GTFOBins'
 documented shell-escape trick.
 
 ---
@@ -50,7 +50,7 @@ and held a file readable by anyone connecting.
 
 The FTP-hosted file contained a working SSH credential pair for a user
 (`jake`, in keeping with the room's theme). Logging in directly over SSH
-with the recovered credentials worked immediately — no exploitation
+with the recovered credentials worked immediately, no exploitation
 required beyond finding and reading the leaked file:
 
 ```bash
@@ -67,7 +67,7 @@ User flag retrieved.
 
 A `sudo -l` / SUID sweep turned up **`less`** as runnable with elevated
 privileges. `less`, like several pager/editor-style Unix tools, supports an
-in-program shell escape (`!` followed by a command) — documented directly on
+in-program shell escape (`!` followed by a command), documented directly on
 GTFOBins as a privilege escalation primitive when the pager itself runs
 with elevated rights:
 
@@ -85,12 +85,12 @@ Root shell obtained. Root flag retrieved.
 ## Lessons Learned
 
 - **FTP is worth checking for leaked credentials even on "themed" or
-  beginner-oriented boxes** — the pattern (anonymous FTP holding a text file
+  beginner-oriented boxes**, the pattern (anonymous FTP holding a text file
   with real creds) repeats across dozens of easy machines because it
   reflects a genuinely common real-world mistake.
 - **Any pager or editor granted through `sudo` (`less`, `more`, `vim`,
-  `man`) is a near-automatic root shell** via its built-in shell escape —
-  always check GTFOBins for the exact escape sequence before assuming a
+  `man`) is a near-automatic root shell** via its built-in shell escape.
+  Always check GTFOBins for the exact escape sequence before assuming a
   `sudo` rule is "just" read access.
 
 ---
@@ -100,7 +100,7 @@ Root shell obtained. Root flag retrieved.
 - Never store credentials in a file reachable via anonymous FTP or any
   unauthenticated service.
 - Avoid granting `sudo` rights to pagers, editors, or any tool with a
-  documented shell-escape; if such access is required, use `--restricted`
+  documented shell-escape. If such access is required, use `--restricted`
   modes or wrapper scripts that strip the escape capability.
 
 ---

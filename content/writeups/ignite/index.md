@@ -76,11 +76,11 @@ box. Root flag retrieved.
 ## Lessons Learned
 
 - **CMS dashboards that disclose their exact version are a direct line to
-  `searchsploit`** — Fuel CMS's evaluation feature is a recurring
+  `searchsploit`**, Fuel CMS's evaluation feature is a recurring
   real-world RCE pattern for CMS platforms that allow templated/dynamic
   code evaluation.
 - **Application configuration files are a first stop after any web-shell
-  foothold** — database credentials stored in plaintext config are a common
+  foothold**, database credentials stored in plaintext config are a common
   and fast route to further access.
 
 ---

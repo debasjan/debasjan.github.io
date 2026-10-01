@@ -24,8 +24,8 @@ cover:
 
 ## TL;DR
 
-Monteverde starts with the same low-effort wins as most AD boxes —
-anonymous LDAP, a username-as-password spray — but the privilege
+Monteverde starts with the same low-effort wins as most AD boxes,
+anonymous LDAP, a username-as-password spray, but the privilege
 escalation is what makes it worth including: the box runs **Azure AD
 Connect**, the service that syncs an on-prem domain with Azure AD, and
 its sync account credentials can be decrypted directly from the local
@@ -82,7 +82,7 @@ ls
 
 ![browsing the world-readable users$ share](05-smbclient-users-share.png)
 
-Inside a per-user folder (`mhope`) sat `azure.xml` — an Azure AD Connect
+Inside a per-user folder (`mhope`) sat `azure.xml`, an Azure AD Connect
 account export:
 
 ```bash
@@ -122,7 +122,7 @@ ls "C:\Program Files"
 
 Azure AD Connect needs a highly privileged domain account to perform its
 sync (often literally the domain administrator, as a matter of
-historical default configuration) — and it has to store that account's
+historical default configuration), and it has to store that account's
 credentials *somewhere* retrievable, since the sync process runs
 unattended. That "somewhere" is an encrypted blob in the local `ADSync`
 SQL database, decryptable using a key management API the service itself
@@ -148,11 +148,11 @@ root flag.
 ## Lessons Learned
 
 - Azure AD Connect is a single point of catastrophic failure if
-  compromised — the account it uses to sync is often over-privileged by
+  compromised, the account it uses to sync is often over-privileged by
   default, and the service is *designed* to be able to decrypt its own
   stored credential, which means anyone with local access to the sync
   server can too.
-- A `.xml` config export found on a share is worth opening in full —
+- A `.xml` config export found on a share is worth opening in full,
   sync and integration tooling routinely embeds plaintext credentials in
   configuration exports meant only for internal use.
 - Password reuse between a service account and a real user account is
@@ -163,8 +163,8 @@ root flag.
 ## Remediation
 
 - Run Azure AD Connect with a dedicated, minimally-privileged sync
-  account — never the domain Administrator.
-- Restrict local access to the AD Connect server itself; if an attacker
+  account, never the domain Administrator.
+- Restrict local access to the AD Connect server itself. If an attacker
   can't reach the SQL database, the decryption path doesn't matter.
 - Audit shares for configuration exports (`.xml`, `.config`, `.json`)
   containing credentials, and treat any found as an immediate incident.

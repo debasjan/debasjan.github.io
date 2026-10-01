@@ -30,7 +30,7 @@ credentials. That turns up a service account with Kerberos
 pre-authentication disabled, which I AS-REP roast and crack offline.
 BloodHound then shows the account inherits **Account Operators** through
 nested group membership, and from there a chain through **Exchange
-Windows Permissions**' `WriteDACL` grants DCSync rights — a straight line
+Windows Permissions**' `WriteDACL` grants DCSync rights, a straight line
 from anonymous LDAP to Domain Admin.
 
 ---
@@ -55,7 +55,7 @@ ldapsearch -x -H ldap://10.129.95.210 -s base
 
 ![anonymous LDAP bind succeeding](04-ldap-anonymous-bind.png)
 
-We were able to query the domain without credentials — null bind is
+We were able to query the domain without credentials, null bind is
 enabled.
 
 ### RPC and Kerbrute
@@ -112,7 +112,7 @@ Foothold as `svc-alfresco`, user flag retrieved.
 
 ### Active Directory recon
 
-A single domain user is rarely the end goal — the real question is what
+A single domain user is rarely the end goal, the real question is what
 that account can reach. Uploaded SharpHound to collect data about the
 domain:
 
@@ -125,7 +125,7 @@ download <collection>.zip
 ![SharpHound collection running on the target](07-sharphound-collection.png)
 
 Imported into BloodHound and searched for `svc-alfresco`. It's a member
-of **six groups through nested membership** — invisible from `net user`
+of **six groups through nested membership**, invisible from `net user`
 output, only visible once you graph it. One of those nested groups is
 **Account Operators**, a built-in AD group whose members can create and
 modify users and add them to non-protected groups.
@@ -138,9 +138,9 @@ on the domain object itself:
 ![WriteDACL from Exchange Windows Permissions onto the domain](08-writedacl-info.png)
 
 `WriteDACL` means a member of that group can modify the domain's access
-control list — including granting DCSync rights to any principal they
+control list, including granting DCSync rights to any principal they
 choose. Account Operators can add users to Exchange Windows Permissions,
-and Exchange Windows Permissions can grant DCSync — two privileges that
+and Exchange Windows Permissions can grant DCSync, two privileges that
 look unrelated on their own chain into full domain replication rights.
 
 ### Executing the chain
@@ -184,16 +184,16 @@ Domain Admin, root flag retrieved from
 
 ## Lessons Learned
 
-- Anonymous LDAP bind is a bigger deal than it looks — it turned "no
+- Anonymous LDAP bind is a bigger deal than it looks. It turned "no
   credentials" into a full username list before I'd exploited anything.
-- AS-REP Roasting should be tried before any password spray — it costs
+- AS-REP Roasting should be tried before any password spray. It costs
   nothing, doesn't risk a lockout, and is often faster than guessing.
 - Nested group membership hides real privilege. `net user` alone would
-  never have shown the path to Account Operators — BloodHound's graph is
+  never have shown the path to Account Operators, BloodHound's graph is
   what made the chain visible.
 - Small privileges chain into big ones. Account Operators (manage users)
   and WriteDACL (modify ACLs) are individually limited, but together they
-  produce DCSync — full domain compromise.
+  produce DCSync, full domain compromise.
 
 ---
 
@@ -201,13 +201,13 @@ Domain Admin, root flag retrieved from
 
 - Disable anonymous LDAP binds unless there's a specific, documented
   reason to allow them.
-- Enable Kerberos pre-authentication on every account — audit for
+- Enable Kerberos pre-authentication on every account. Audit for
   `DONT_REQ_PREAUTH` regularly, not just at account creation.
 - Treat **Account Operators** and any group with `WriteDACL`/`WriteOwner`
-  on the domain object as Tier-0 (Domain Admin–equivalent) privilege, and
+  on the domain object as Tier-0 (Domain Admin-equivalent) privilege, and
   audit membership accordingly.
 - Run BloodHound (or an equivalent ACL-graphing tool) against your own
-  domain periodically — this attack path is invisible to standard
+  domain periodically. This attack path is invisible to standard
   group-membership audits.
 
 ---

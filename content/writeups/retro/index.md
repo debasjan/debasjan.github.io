@@ -30,14 +30,14 @@ Retro is short and gimmicky, but it teaches one very good lesson:
 
 1. Web enum: `/retro` is a WordPress install with the "Cool Retro
    Term" aesthetic. The blog posts include a `wade` account.
-2. The admin login is stubborn; a Burp-captured login request feeds
-   `hydra` and gives `wade`'s password — but there's a shortcut. One
+2. The admin login is stubborn. A Burp-captured login request feeds
+   `hydra` and gives `wade`'s password, but there's a shortcut. One
    post's **comments** contain a note where `wade` mentions the
    password out loud.
 3. RDP in as `wade` → user.txt is on his desktop.
 4. On the desktop is an `hhupd.exe` installer. Right-clicking it in
-   the Windows Certificate Dialog surfaces a hyperlink; opening it
-   launches a browser as **SYSTEM** — the classic **CVE-2019-1388**
+   the Windows Certificate Dialog surfaces a hyperlink. Opening it
+   launches a browser as **SYSTEM**, the classic **CVE-2019-1388**
    UAC bypass. From that SYSTEM browser I "Save as" a `.bat`
    spawning `cmd.exe`, and root.txt is done.
 
@@ -72,7 +72,7 @@ gobuster dir -u http://10.10.62.207 -w /usr/share/wordlists/dirbuster/directory-
 
 ![the WordPress theme](retro.png)
 
-Poking at the posts and skimming the front page — the blog author is
+Poking at the posts and skimming the front page, the blog author is
 `wade`, and the site's title/description are cluttered with Ready
 Player One / 80s references. That "Cool Retro Term" tag on one post
 is the one to open.
@@ -133,7 +133,7 @@ xfreerdp /u:wade /p:'<password>' /v:10.10.62.207 +clipboard /dynamic-resolution
 ## Privilege Escalation — CVE-2019-1388 via `hhupd.exe`
 
 Also on the desktop is an `hhupd.exe` installer. It runs as an
-elevated MSI — and it uses the old Windows Certificate Dialog, which
+elevated MSI, and it uses the old Windows Certificate Dialog, which
 is vulnerable to **CVE-2019-1388**: right-clicking the "Show
 information about the certificate" link (published by Verisign, back
 when this ran) opens a hyperlink from within a **SYSTEM** process,
@@ -157,7 +157,7 @@ as** to write a file to disk with an unrestricted picker:
 ![navigating to C:\Windows](go-to-c-windows-path.png)
 
 Save the "page" as `cmd.bat` (or overwrite an admin binary if you
-prefer); double-click it — the resulting `cmd.exe` is SYSTEM.
+prefer). Double-click it, the resulting `cmd.exe` is SYSTEM.
 
 `root.txt` is under `C:\Users\Administrator\Desktop\root.txt`:
 
@@ -170,7 +170,7 @@ prefer); double-click it — the resulting `cmd.exe` is SYSTEM.
 ## Lessons Learned
 
 - **Comments are recon.** WordPress comments, forum threads, README
-  files, and Git history are pages designed for humans — and humans
+  files, and Git history are pages designed for humans, and humans
   leak. Read them before you brute-force anything.
 - **A Hydra `http-post-form` against WordPress is worth memorising:**
   the failure string is stable enough (`Invalid username`,
@@ -181,7 +181,7 @@ prefer); double-click it — the resulting `cmd.exe` is SYSTEM.
   from before the 2019 patch is worth right-clicking on.
 - **Any process running as SYSTEM that shows a Windows dialog is a
   potential privesc.** The Save-As dialog, the printer picker, the
-  browser — anything that lets you spawn a follow-up file operation.
+  browser, anything that lets you spawn a follow-up file operation.
 
 ---
 

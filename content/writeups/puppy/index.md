@@ -24,12 +24,12 @@ cover:
 
 ## TL;DR
 
-Puppy is an assumed-breach AD box — it starts with a low-privileged
+Puppy is an assumed-breach AD box. It starts with a low-privileged
 credential (`levi.james:KingofAkron2025!`). `GenericWrite` on the
 `Developers` group lets me add myself in and read a KeePass 4 database off
-the `DEV` share; cracking it and spraying the entries reveals
+the `DEV` share. Cracking it and spraying the entries reveals
 `ant.edwards`. From there `GenericAll` over `adam.silver` lets me
-force-change his password — the account is disabled, so I re-enable it with
+force-change his password, the account is disabled, so I re-enable it with
 `bloodyAD`. A website backup in `C:\Backups\` leaks `steph.cooper`'s LDAP
 password in cleartext, and finally **DPAPI** credential decryption on
 Steph's profile recovers the `steph.cooper_adm` admin twin account for
@@ -82,12 +82,12 @@ net rpc group addmem "Developers" "levi.james" -U "puppy.htb"/"levi.james" -S "1
 ![adding levi to Developers](05-add-to-developers.png)
 ![verifying group membership](06-verify-membership.png)
 
-Before joining, the `DEV` share was read-only; afterwards I could read it:
+Before joining, the `DEV` share was read-only. Afterwards I could read it:
 
 ![DEV share read-only](07-dev-readonly.png)
 ![DEV share readable after joining](08-dev-access.png)
 
-The share held `recovery.kdbx` — a **KeePass 4** database. Kali's stock
+The share held `recovery.kdbx`, a **KeePass 4** database. Kali's stock
 `keepass2john` doesn't support the KeePass 4 (Argon2) format:
 
 ![keepass2john not supporting KeePass 4](09-keepass2john-fail.png)
@@ -104,12 +104,12 @@ snap run john-the-ripper hash --wordlist=rockyou.txt --format=KeePass
 ![KeePass hash](11-keepass-hash.png)
 ![cracked to 'liverpool'](12-cracked-liverpool.png)
 
-Opened it in `keepassxc` with `liverpool` — five sets of credentials:
+Opened it in `keepassxc` with `liverpool`, five sets of credentials:
 
 ![KeePass entries](13-keepassxc.png)
 ![credentials copied out](14-credentials.png)
 
-Sprayed them with NetExec; only `ant.edwards:Antman2025!` was valid, and
+Sprayed them with NetExec. Only `ant.edwards:Antman2025!` was valid, and
 that account has read/write on the `DEV` share:
 
 ```bash
@@ -138,7 +138,7 @@ net rpc password "adam.silver" "newP@ssword2026" -U "puppy.htb"/"ant.edwards" -S
 
 ![forcing adam.silver's password](18-force-change-adam.png)
 
-Login failed — the account is **disabled**:
+Login failed, the account is **disabled**:
 
 ![account disabled](19-account-disabled.png)
 
@@ -178,7 +178,7 @@ cleartext:
 
 ![LDAP password in the backup](24-ldap-password.png)
 
-Validated the credentials — WinRM works:
+Validated the credentials, WinRM works:
 
 ![steph.cooper credentials valid](25-steph-valid.png)
 ![Evil-WinRM as steph.cooper](26-steph-shell.png)
@@ -190,7 +190,7 @@ Validated the credentials — WinRM works:
 winPEAS returned nothing useful, so I checked **DPAPI** manually. DPAPI
 stores encrypted per-user credentials as blobs under
 `AppData\...\Credentials\<GUID>`, protected by a master key under
-`AppData\Roaming\Microsoft\Protect\<SID>\<GUID>`; the master key itself is
+`AppData\Roaming\Microsoft\Protect\<SID>\<GUID>`. The master key itself is
 encrypted with a key derived from the user's password. So: password →
 master key → blob → plaintext credentials.
 
@@ -211,7 +211,7 @@ impacket-smbserver share ./ -smb2support
 
 Decrypted the master key with Steph's password, then used the resulting
 key to decrypt each blob. The first blob was a WindowsLive cache token
-(junk); the second revealed real domain credentials:
+(junk). The second revealed real domain credentials:
 
 ```bash
 impacket-dpapi masterkey -file masterkey.bin -sid <SID> -password 'ChefSteph2025!'
@@ -220,7 +220,7 @@ impacket-dpapi credential -file blob2.bin -key 0x<decrypted-key>
 
 ![DPAPI credential: steph.cooper_adm](30-dpapi-decrypt.png)
 
-The credential is for `steph.cooper_adm` — the **admin twin account** of
+The credential is for `steph.cooper_adm`, the **admin twin account** of
 `steph.cooper`, a common AD pattern pairing a user with a privileged
 version of the same identity.
 
@@ -240,16 +240,16 @@ Read the final flag from `C:\Users\Administrator\Desktop\root.txt`:
 
 ## Lessons Learned
 
-- `GenericWrite` on a group is a foothold, not just an ACL note — self-add
+- `GenericWrite` on a group is a foothold, not just an ACL note, self-add
   to inherit whatever the group can reach (here, a writable share).
-- KeePass 4 uses Argon2; if `keepass2john` chokes, use the snap build of
+- KeePass 4 uses Argon2. If `keepass2john` chokes, use the snap build of
   John. Then spray every recovered entry, not just the obvious one.
-- `GenericAll` over a user covers `userAccountControl` too — a disabled
+- `GenericAll` over a user covers `userAccountControl` too, a disabled
   target can be re-enabled with `bloodyAD` after a forced password change.
-- Website/app backups are a classic cleartext-credential source; always
+- Website/app backups are a classic cleartext-credential source. Always
   hunt non-standard folders like `C:\Backups`.
 - **DPAPI** is the payoff technique: locate blob + master key, decrypt the
-  master key with the user password, then the blob — and filter out the
+  master key with the user password, then the blob, and filter out the
   WindowsLive junk blob.
 
 ---

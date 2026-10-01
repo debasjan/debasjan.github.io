@@ -79,7 +79,7 @@ Sent a request to trigger it:
 curl http://10.129.229.26:55555/8vwyd59
 ```
 
-Got the connection on my listener — confirmed the SSRF works:
+Got the connection on my listener, confirmed the SSRF works:
 
 ![connection landing on my listener](08-listener-hit.png)
 
@@ -88,7 +88,7 @@ box itself:
 
 ![Forward URL pointed at 127.0.0.1:80](09-forward-to-localhost.png)
 
-Browsing to the basket URL again this time returned content — "Powered by
+Browsing to the basket URL again this time returned content, "Powered by
 Maltrail (v0.53)":
 
 ![Maltrail banner leaking through the SSRF](10-maltrail-banner.png)
@@ -133,7 +133,7 @@ systemctl --version
 ![checking the systemctl version](13-systemctl-version.png)
 
 Looked up whether that version was affected by anything and found
-**CVE-2023-26604** — systemd doesn't set `LESSSECURE`, so `less` (the
+**CVE-2023-26604**, systemd doesn't set `LESSSECURE`, so `less` (the
 default pager for `systemctl status` output) can spawn a shell that
 inherits whatever ran it:
 
@@ -154,13 +154,13 @@ Got a shell as root and found the flag in `/root/root.txt`.
 
 ## Lessons Learned
 
-- SSRF isn't just "leaked data" — it's a real pivot to things you'd
+- SSRF isn't just "leaked data". It's a real pivot to things you'd
   otherwise never see. Maltrail on this box wasn't reachable any other way.
 - A narrowly-scoped `sudo` rule can still be a full root shell if the
   allowed command has any interactive component (a pager, an editor) that
   supports shell escapes.
 - `sudo -l` output naming a read-only-looking command (`systemctl status`)
-  isn't automatically safe — check the systemd version against known CVEs
+  isn't automatically safe. Check the systemd version against known CVEs
   before assuming.
 
 ---
@@ -169,7 +169,7 @@ Got a shell as root and found the flag in `/root/root.txt`.
 
 - Patch Request Baskets and restrict Forward URL targets to an allow-list,
   blocking loopback/internal ranges by default.
-- Patch or remove Maltrail; never assume "internal-only" binding is
+- Patch or remove Maltrail. Never assume "internal-only" binding is
   sufficient protection against SSRF pivots.
 - When granting `sudo` for read-only-seeming commands, force non-interactive
   output (`--no-pager`, or `SYSTEMD_PAGER=cat`) to eliminate the pager

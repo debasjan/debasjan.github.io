@@ -27,7 +27,7 @@ cover:
 Optimum is a lesson in why version banners matter: the only exposed
 service is an outdated file-server product with a public remote code
 execution exploit, giving an immediate foothold. From there, WinPEAS
-flags both leftover AutoLogon credentials and an unpatched kernel — the
+flags both leftover AutoLogon credentials and an unpatched kernel, the
 kernel exploit is the fast path straight to `NT AUTHORITY\SYSTEM`.
 
 ---
@@ -61,7 +61,7 @@ search HttpFileServer 2.3
 
 A matching module exists for this exact version
 (`exploit/windows/http/rejetto_hfs_exec`). Set the target/payload/`LHOST`
-options and ran it — a Meterpreter session landed directly, no chained
+options and ran it, a Meterpreter session landed directly, no chained
 steps required. Got access as the local user `kostas`, user flag
 retrieved.
 
@@ -116,12 +116,12 @@ Administrator's desktop.
 ## Lessons Learned
 
 - A single exposed service means the version banner *is* the whole
-  attack surface — checking it against known exploits before trying
+  attack surface, checking it against known exploits before trying
   anything else paid off immediately here.
 - Automated privesc scanners earn their keep on patch-gap boxes. When the
   vulnerability is "this kernel build is old," a scanner finds it far
   faster than manual enumeration built for misconfigurations.
-- Kernel exploits carry stability risk — migrating to a stable process
+- Kernel exploits carry stability risk, migrating to a stable process
   right after a successful kernel-level exploit is worth doing
   immediately.
 
@@ -129,10 +129,10 @@ Administrator's desktop.
 
 ## Remediation
 
-- Retire or patch legacy file-sharing utilities (like HFS) — software
+- Retire or patch legacy file-sharing utilities (like HFS), software
   that's "just for internal file sharing" still needs the same patch
   cadence as anything internet-facing.
-- Keep Windows kernel patches current; a scanner finding an exploitable
+- Keep Windows kernel patches current. A scanner finding an exploitable
   kernel build is a patch-management failure, not a novel attack.
 - Never configure AutoLogon with a plaintext password in the registry.
 
