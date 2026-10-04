@@ -3,7 +3,9 @@ title: "Anonymous — TryHackMe"
 date: 2025-03-18
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "easy", "smb-anonymous", "suid-abuse"]
+tags: ["linux", "smb-anonymous", "suid-abuse"]
+difficulty: ["easy"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "A beginner-focused room built around a single theme: anonymous access left open on both FTP and SMB. Anonymous FTP holds a script that, once understood…"
 ShowToc: true

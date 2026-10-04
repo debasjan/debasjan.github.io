@@ -3,7 +3,9 @@ title: "LazyAdmin — TryHackMe"
 date: 2025-03-12
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "easy", "rce", "credential-reuse", "sudo-abuse"]
+tags: ["linux", "rce", "credential-reuse", "sudo-abuse"]
+difficulty: ["easy"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "LazyAdmin's web root hides an outdated CMS (SweetRice) behind brute-forced directories. A database credential recovered from the CMS's own files unlocks…"
 ShowToc: true

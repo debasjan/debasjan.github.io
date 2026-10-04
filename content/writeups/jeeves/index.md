@@ -2,7 +2,9 @@
 title: "Jeeves — Hack The Box"
 date: 2026-07-27
 draft: false
-tags: ["hackthebox", "windows", "medium", "rce", "keepass", "pass-the-hash", "reverse-engineering"]
+tags: ["windows", "rce", "keepass", "pass-the-hash", "reverse-engineering"]
+difficulty: ["medium"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Jeeves hides an unauthenticated Jenkins instance on a non-standard port. Groovy Script Console RCE gives a foothold, a cracked KeePass database leaks the…"
 ShowToc: true

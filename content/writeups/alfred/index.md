@@ -3,7 +3,9 @@ title: "Alfred — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "easy"]
+tags: []
+difficulty: ["easy"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "Exploit Jenkins to gain an initial shell, then escalate your privileges by exploiting Windows authentication tokens."
 ShowToc: true

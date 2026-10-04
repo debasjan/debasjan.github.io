@@ -3,7 +3,9 @@ title: "Relevant — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "medium"]
+tags: []
+difficulty: ["medium"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "You have been assigned to a client that wants a penetration test conducted on an environment due to be released to production in seven days."
 ShowToc: true

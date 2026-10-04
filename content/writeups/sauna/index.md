@@ -2,7 +2,9 @@
 title: "Sauna — Hack The Box"
 date: 2026-01-30
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "easy", "credential-reuse", "as-rep-roasting", "dcsync"]
+tags: ["windows", "active-directory", "credential-reuse", "as-rep-roasting", "dcsync"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Sauna's company website lists employee full names, which I turned into a username list and then AS-REP roasted to get a first foothold."
 ShowToc: true

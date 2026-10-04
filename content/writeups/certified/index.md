@@ -2,7 +2,9 @@
 title: "Certified — Hack The Box"
 date: 2026-09-29
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium", "acl-abuse", "adcs", "shadow-credentials", "bloodhound", "kerberoasting"]
+tags: ["windows", "active-directory", "acl-abuse", "adcs", "shadow-credentials", "bloodhound", "kerberoasting"]
+difficulty: ["medium"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Certified is a Medium AD box that is really an ADCS ESC9 workshop wrapped in an ACL-abuse warm-up: WriteOwner → GenericAll → group membership → Shadow Credentials twice → template with NoSecurityExtension → UPN spoof → Administrator."
 ShowToc: true

@@ -2,7 +2,9 @@
 title: "Cap — Hack The Box"
 date: 2025-09-03
 draft: false
-tags: ["hackthebox", "linux", "easy", "idor", "capabilities", "reverse-engineering"]
+tags: ["linux", "idor", "capabilities", "reverse-engineering"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Cap runs a web app that lets users capture and download their own network traffic — a feature that's only safe if access control actually checks whose…"
 ShowToc: true

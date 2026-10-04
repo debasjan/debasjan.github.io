@@ -3,7 +3,9 @@ title: "Black Pearl"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "linux", "medium"]
+tags: ["linux"]
+difficulty: ["medium"]
+platform: ["others"]
 categories: ["writeups"]
 summary: "Black Pearl from TCM Security's Practical Ethical Hacking course. A Debian VM whose /secret path plus a leaked email pivot me through a subdomain, custom…"
 ShowToc: true

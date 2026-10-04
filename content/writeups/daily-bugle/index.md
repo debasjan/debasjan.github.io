@@ -3,7 +3,9 @@ title: "Daily Bugle — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "medium"]
+tags: []
+difficulty: ["medium"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "Compromise a Joomla CMS account via SQLi, practise cracking hashes and escalate your privileges by taking advantage of yum."
 ShowToc: true

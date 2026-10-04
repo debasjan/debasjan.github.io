@@ -3,7 +3,9 @@ title: "Brainpan 1 — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "medium"]
+tags: []
+difficulty: ["medium"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "Reverse engineer a Windows executable, find a buffer overflow and exploit it on a Linux machine."
 ShowToc: true

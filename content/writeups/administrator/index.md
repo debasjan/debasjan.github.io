@@ -2,7 +2,9 @@
 title: "Administrator — Hack The Box"
 date: 2026-02-03
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium", "acl-abuse", "bloodhound", "dcsync", "password-cracking"]
+tags: ["windows", "active-directory", "acl-abuse", "bloodhound", "dcsync", "password-cracking"]
+difficulty: ["medium"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Administrator is a full domain-compromise chain built entirely on ACL abuse, starting from a single low-privileged credential given at the start."
 ShowToc: true

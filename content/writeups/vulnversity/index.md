@@ -3,7 +3,9 @@ title: "Vulnversity — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "easy"]
+tags: []
+difficulty: ["easy"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "Learn about active recon, web app attacks and privilege escalation."
 ShowToc: true

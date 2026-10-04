@@ -2,7 +2,9 @@
 title: "Jerry — Hack The Box"
 date: 2025-11-16
 draft: false
-tags: ["hackthebox", "windows", "easy", "rce", "credential-reuse", "upload-bypass"]
+tags: ["windows", "rce", "credential-reuse", "upload-bypass"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Jerry is a single-service box: Apache Tomcat, reachable with its own undisturbed default manager credentials. Tomcat's manager application is designed to…"
 ShowToc: true

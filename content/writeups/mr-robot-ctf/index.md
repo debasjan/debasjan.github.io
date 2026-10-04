@@ -3,7 +3,9 @@ title: "Mr Robot CTF — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "medium"]
+tags: []
+difficulty: ["medium"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "Can you root this Mr. Robot styled machine? This is a virtual machine meant for beginners/intermediate users. There are 3 hidden keys located on the…"
 ShowToc: true

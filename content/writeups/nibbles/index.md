@@ -2,7 +2,9 @@
 title: "Nibbles — Hack The Box"
 date: 2025-12-09
 draft: false
-tags: ["hackthebox", "linux", "easy", "rce", "sudo-abuse"]
+tags: ["linux", "rce", "sudo-abuse"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Nibbles looks empty at first glance — a single \"Hello world!\" page — until the page source points at a hidden /nibbleblog/ directory."
 ShowToc: true

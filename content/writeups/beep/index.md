@@ -2,7 +2,9 @@
 title: "Beep — Hack The Box"
 date: 2026-03-09
 draft: false
-tags: ["hackthebox", "linux", "easy", "lfi", "credential-reuse"]
+tags: ["linux", "lfi", "credential-reuse"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Beep exposes a large VoIP/PBX (Elastix) stack, and the actual attack surface only becomes reachable after working around a browser-side TLS restriction."
 ShowToc: true

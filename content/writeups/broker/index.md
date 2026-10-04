@@ -2,7 +2,9 @@
 title: "Broker — Hack The Box"
 date: 2026-05-22
 draft: false
-tags: ["hackthebox", "linux", "easy", "rce", "sudo-abuse"]
+tags: ["linux", "rce", "sudo-abuse"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Broker runs a version of Apache ActiveMQ vulnerable to a critical unauthenticated RCE disclosed in late 2023. That gets a shell directly as the service…"
 ShowToc: true

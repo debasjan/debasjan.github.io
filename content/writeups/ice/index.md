@@ -3,7 +3,9 @@ title: "Ice — TryHackMe"
 date: 2025-03-14
 hideDate: true
 draft: false
-tags: ["tryhackme", "windows", "easy", "rce", "kernel-exploit", "mimikatz"]
+tags: ["windows", "rce", "kernel-exploit", "mimikatz"]
+difficulty: ["easy"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "A room built around Icecast, a streaming media server with a disclosed, dated remote code execution vulnerability and a ready Metasploit module."
 ShowToc: true

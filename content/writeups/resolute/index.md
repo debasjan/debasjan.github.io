@@ -2,7 +2,9 @@
 title: "Resolute — Hack The Box"
 date: 2026-01-21
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium", "smb-anonymous", "password-spray", "credential-reuse", "acl-abuse"]
+tags: ["windows", "active-directory", "smb-anonymous", "password-spray", "credential-reuse", "acl-abuse"]
+difficulty: ["medium"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Resolute chains a familiar early-AD pattern — anonymous enumeration, a password left in an LDAP field, a lockout-safe spray — into an escalation path I…"
 ShowToc: true

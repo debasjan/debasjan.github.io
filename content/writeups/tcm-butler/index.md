@@ -3,7 +3,9 @@ title: "Butler"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "windows", "easy"]
+tags: ["windows"]
+difficulty: ["easy"]
+platform: ["others"]
 categories: ["writeups"]
 summary: "**Goal:** gain administrator (SYSTEM) privileges on the _Butler_ vulnerable VM from the Practical Ethical Hacking course (TCM Security)."
 ShowToc: true

@@ -2,7 +2,9 @@
 title: "Signed — Hack The Box"
 date: 2026-07-27
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium", "mssql", "credential-reuse", "silver-ticket"]
+tags: ["windows", "active-directory", "mssql", "credential-reuse", "silver-ticket"]
+difficulty: ["medium"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Signed exposes only MSSQL (1433). I coerce and crack the service account's NetNTLMv2 hash with Responder, enumerate the domain through SQL alone, then forge a…"
 ShowToc: true

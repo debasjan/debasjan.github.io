@@ -2,7 +2,9 @@
 title: "Sau — Hack The Box"
 date: 2026-05-22
 draft: false
-tags: ["hackthebox", "linux", "easy", "ssrf", "command-injection", "gtfobins"]
+tags: ["linux", "ssrf", "command-injection", "gtfobins"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Sau chains two separate vulnerabilities in two separate applications through a Server-Side Request Forgery: a public Request Baskets instance is used to…"
 ShowToc: true

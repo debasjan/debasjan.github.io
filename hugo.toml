@@ -120,6 +120,8 @@ reasoning over commands.
   tag = "tags"
   category = "categories"
   series = "series"
+  difficulty = "difficulty"
+  platform = "platform"
 
 [privacy]
   [privacy.vimeo]

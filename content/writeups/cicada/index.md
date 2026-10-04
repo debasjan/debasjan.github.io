@@ -2,7 +2,9 @@
 title: "Cicada — Hack The Box"
 date: 2026-01-30
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "easy", "smb", "password-spray", "se-backup-privilege"]
+tags: ["windows", "active-directory", "smb", "password-spray", "se-backup-privilege"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Cicada is a beginner-friendly AD chain: a guest SMB session reveals an onboarding notice with a default domain password, spraying that password finds a…"
 ShowToc: true

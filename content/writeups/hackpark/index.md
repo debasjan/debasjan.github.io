@@ -3,7 +3,9 @@ title: "HackPark — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "medium"]
+tags: []
+difficulty: ["medium"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "Bruteforce a websites login with Hydra, identify and use a public exploit then escalate your privileges on this Windows machine!"
 ShowToc: true

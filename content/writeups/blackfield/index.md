@@ -2,7 +2,9 @@
 title: "Blackfield — Hack The Box"
 date: 2026-09-21
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "hard", "smb-anonymous", "as-rep-roasting", "acl-abuse", "lsass-dump", "se-backup-privilege", "netexec"]
+tags: ["windows", "active-directory", "smb-anonymous", "as-rep-roasting", "acl-abuse", "lsass-dump", "se-backup-privilege", "netexec"]
+difficulty: ["hard"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Blackfield is a hard Active Directory box that chains anonymous SMB user enumeration, AS-REP roasting, ForceChangePassword ACL abuse, an lsass memory dump…"
 ShowToc: true

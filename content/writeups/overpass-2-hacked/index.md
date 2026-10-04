@@ -3,7 +3,9 @@ title: "Overpass 2 - Hacked — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "easy"]
+tags: []
+difficulty: ["easy"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "Overpass has been hacked! Can you analyse the attacker's actions and hack back in?"
 ShowToc: true

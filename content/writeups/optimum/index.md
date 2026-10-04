@@ -2,7 +2,9 @@
 title: "Optimum — Hack The Box"
 date: 2025-12-10
 draft: false
-tags: ["hackthebox", "windows", "easy", "rce", "kernel-exploit"]
+tags: ["windows", "rce", "kernel-exploit"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Optimum is a lesson in why version banners matter: the only exposed service is an outdated file-server product with a public remote code execution…"
 ShowToc: true

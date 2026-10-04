@@ -3,7 +3,9 @@ title: "PrintNightmare — TryHackMe"
 date: 2025-03-11
 hideDate: true
 draft: false
-tags: ["tryhackme", "windows", "active-directory", "medium", "rce", "threat-hunting"]
+tags: ["windows", "active-directory", "rce", "threat-hunting"]
+difficulty: ["medium"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "A dual offense-and-defense room built around PrintNightmare — a vulnerability in the Windows Print Spooler service that lets an authenticated user (any…"
 ShowToc: true

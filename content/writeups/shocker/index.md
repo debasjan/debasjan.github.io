@@ -2,7 +2,9 @@
 title: "Shocker — Hack The Box"
 date: 2026-03-05
 draft: false
-tags: ["hackthebox", "linux", "easy", "shellshock", "gtfobins"]
+tags: ["linux", "shellshock", "gtfobins"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Shocker is a compact demonstration of Shellshock, one of the most widespread web vulnerabilities of the last decade — a bash-parsing bug that turned…"
 ShowToc: true

@@ -3,7 +3,9 @@ title: "Skynet — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "medium", "smb", "lfi", "rce", "credential-reuse", "tar-wildcard"]
+tags: ["linux", "smb", "lfi", "rce", "credential-reuse", "tar-wildcard"]
+difficulty: ["medium"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "Skynet is a Terminator-themed Linux TryHackMe room: anonymous SMB leaks an admin's password, Miles Dyson's Squirrelmail account exposes an internal…"
 ShowToc: true

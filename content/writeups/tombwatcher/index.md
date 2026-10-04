@@ -2,7 +2,9 @@
 title: "TombWatcher — Hack The Box"
 date: 2026-09-27
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium", "kerberoasting", "acl-abuse", "bloodhound", "adcs", "gmsa"]
+tags: ["windows", "active-directory", "kerberoasting", "acl-abuse", "bloodhound", "adcs", "gmsa"]
+difficulty: ["medium"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "TombWatcher is a Medium AD box with a long ACL chain: targeted Kerberoast (WriteSPN), AddSelf into a group that reads a gMSA password, gMSA-driven password reset, WriteOwner, dacledit on an OU, AD Recycle Bin revival, and an ADCS ESC15 → ESC3 chain."
 ShowToc: true

@@ -2,7 +2,9 @@
 title: "Lame — Hack The Box"
 date: 2025-04-19
 draft: false
-tags: ["hackthebox", "linux", "easy", "rce"]
+tags: ["linux", "rce"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Lame was the very first machine ever published on Hack The Box, and it's a single-exploit box: an old Samba version accepts shell metacharacters in its…"
 ShowToc: true

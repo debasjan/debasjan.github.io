@@ -3,7 +3,9 @@ title: "Brainstorm — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "medium"]
+tags: []
+difficulty: ["medium"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "Reverse engineer a chat program and write a script to exploit a Windows machine."
 ShowToc: true

@@ -3,7 +3,9 @@ title: "Academy — Hack The Box"
 date: 2025-03-20
 hideDate: true
 draft: false
-tags: ["hackthebox", "linux", "easy", "smb-anonymous", "upload-bypass", "sudo-abuse"]
+tags: ["linux", "smb-anonymous", "upload-bypass", "sudo-abuse"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Academy's foothold comes from a file left on an anonymous FTP server that hands over working application credentials outright."
 ShowToc: true

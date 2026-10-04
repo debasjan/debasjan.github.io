@@ -2,7 +2,9 @@
 title: "Expressway — Hack The Box"
 date: 2025-09-28
 draft: false
-tags: ["hackthebox", "linux", "easy", "credential-reuse", "password-cracking", "sudo-abuse"]
+tags: ["linux", "credential-reuse", "password-cracking", "sudo-abuse"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Expressway is one of the few boxes in this set where the entire foothold lives in UDP rather than TCP — a default nmap scan shows almost nothing until a…"
 ShowToc: true

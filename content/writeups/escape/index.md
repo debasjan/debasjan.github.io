@@ -2,7 +2,9 @@
 title: "Escape — Hack The Box"
 date: 2026-07-04
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium", "smb", "mssql", "credential-reuse", "adcs"]
+tags: ["windows", "active-directory", "smb", "mssql", "credential-reuse", "adcs"]
+difficulty: ["medium"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Escape is a Windows Active Directory box that starts with a sensitive PDF on a guest-readable SMB share, moves through an MSSQL hash-capture with…"
 ShowToc: true

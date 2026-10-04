@@ -71,9 +71,10 @@
   <div class="featured-work__grid">
     {{- range $featured }}
     {{- $t := .Params.tags }}
+    {{- $d := .Params.difficulty }}{{ $p := .Params.platform }}
     {{- $osClass := "linux" }}{{ if in $t "windows" }}{{ $osClass = "windows" }}{{ end }}{{ if in $t "active-directory" }}{{ $osClass = "ad" }}{{ end }}
-    {{- $diff := "" }}{{ if in $t "easy" }}{{ $diff = "Easy" }}{{ else if in $t "medium" }}{{ $diff = "Medium" }}{{ else if in $t "hard" }}{{ $diff = "Hard" }}{{ end }}
-    {{- $platform := "" }}{{ if in $t "hackthebox" }}{{ $platform = "Hack The Box" }}{{ else if in $t "tryhackme" }}{{ $platform = "TryHackMe" }}{{ end }}
+    {{- $diff := "" }}{{ if in $d "easy" }}{{ $diff = "Easy" }}{{ else if in $d "medium" }}{{ $diff = "Medium" }}{{ else if in $d "hard" }}{{ $diff = "Hard" }}{{ end }}
+    {{- $platform := "" }}{{ if in $p "hackthebox" }}{{ $platform = "Hack The Box" }}{{ else if in $p "tryhackme" }}{{ $platform = "TryHackMe" }}{{ end }}
     {{- $shortName := .Title | replaceRE " — Hack The Box$| — TryHackMe$" "" }}
     <a href="{{ .Permalink }}" class="featured-card">
       <div class="featured-card__badges">
@@ -109,8 +110,9 @@
   {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
   {{- $t := .Params.tags }}
+  {{- $d := .Params.difficulty }}
   {{- $os := "" }}{{ if in $t "windows" }}{{ $os = "Windows" }}{{ else if in $t "linux" }}{{ $os = "Linux" }}{{ end }}
-  {{- $diff := "" }}{{ if in $t "easy" }}{{ $diff = "Easy" }}{{ else if in $t "medium" }}{{ $diff = "Medium" }}{{ else if in $t "hard" }}{{ $diff = "Hard" }}{{ end }}
+  {{- $diff := "" }}{{ if in $d "easy" }}{{ $diff = "Easy" }}{{ else if in $d "medium" }}{{ $diff = "Medium" }}{{ else if in $d "hard" }}{{ $diff = "Hard" }}{{ end }}
   {{- if or $os $diff }}
   <div class="entry-badges">
     {{- with $diff }}<span class="entry-badge entry-badge--{{ lower . }}">{{ . }}</span>{{ end }}

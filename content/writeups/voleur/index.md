@@ -2,7 +2,9 @@
 title: "Voleur — Hack The Box"
 date: 2026-08-14
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "medium", "kerberoasting", "password-cracking", "acl-abuse", "dpapi"]
+tags: ["windows", "active-directory", "kerberoasting", "password-cracking", "acl-abuse", "dpapi"]
+difficulty: ["medium"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Voleur is a Kerberos-only AD medium box: office2john on an encrypted Excel, AD Recycle Bin restore of a deleted user, RunasCs + DPAPI chain, targeted…"
 ShowToc: true

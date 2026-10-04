@@ -2,7 +2,9 @@
 title: "Devel — Hack The Box"
 date: 2025-12-08
 draft: false
-tags: ["hackthebox", "windows", "easy", "smb-anonymous", "upload-bypass", "kernel-exploit"]
+tags: ["windows", "smb-anonymous", "upload-bypass", "kernel-exploit"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Devel is a beginner Windows box where anonymous FTP is mapped straight to the IIS webroot. I drop an ASPX reverse shell over FTP, execute it through the…"
 ShowToc: true

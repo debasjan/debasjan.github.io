@@ -3,7 +3,9 @@ title: "Retro — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "windows", "hard", "wordpress", "rdp", "cve-2019-1388", "uac-bypass"]
+tags: ["windows", "wordpress", "rdp", "cve-2019-1388", "uac-bypass"]
+difficulty: ["hard"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "Retro is an 80s-arcade themed Windows box: a WordPress instance at /retro leaks the admin's password in a post's comments, RDP takes me in as `wade`, and…"
 ShowToc: true

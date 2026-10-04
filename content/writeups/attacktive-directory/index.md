@@ -3,7 +3,9 @@ title: "Attacktive Directory — TryHackMe"
 date: 2025-03-17
 hideDate: true
 draft: false
-tags: ["tryhackme", "windows", "active-directory", "medium", "password-spray", "as-rep-roasting", "dcsync", "smb"]
+tags: ["windows", "active-directory", "password-spray", "as-rep-roasting", "dcsync", "smb"]
+difficulty: ["medium"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "A guided introduction to core Active Directory attacks, chained end to end: Kerbrute enumerates valid domain usernames without any credentials, one of…"
 ShowToc: true

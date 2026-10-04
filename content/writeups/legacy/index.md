@@ -2,7 +2,9 @@
 title: "Legacy — Hack The Box"
 date: 2025-12-08
 draft: false
-tags: ["hackthebox", "windows", "easy", "kernel-exploit"]
+tags: ["windows", "kernel-exploit"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Legacy, alongside Lame, was one of the very first machines on Hack The Box, and it's built around another single, historically significant SMB…"
 ShowToc: true

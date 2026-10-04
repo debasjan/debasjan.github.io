@@ -2,7 +2,9 @@
 title: "Forest — Hack The Box"
 date: 2026-01-18
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "easy", "as-rep-roasting", "bloodhound", "acl-abuse", "dcsync"]
+tags: ["windows", "active-directory", "as-rep-roasting", "bloodhound", "acl-abuse", "dcsync"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Forest is a Domain Controller with Exchange installed that allows anonymous LDAP binds, enough to enumerate the domain without any credentials."
 ShowToc: true

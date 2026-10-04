@@ -2,7 +2,9 @@
 title: "Timelapse — Hack The Box"
 date: 2026-05-17
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "easy", "password-cracking", "adcs", "laps"]
+tags: ["windows", "active-directory", "password-cracking", "adcs", "laps"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Timelapse chains three layers of \"encrypted, but crackable\" data: a password-protected ZIP, a password-protected PFX certificate bundle inside it, and…"
 ShowToc: true

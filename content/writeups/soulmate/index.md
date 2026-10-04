@@ -2,7 +2,9 @@
 title: "Soulmate — Hack The Box"
 date: 2025-09-28
 draft: false
-tags: ["hackthebox", "linux", "easy", "reverse-engineering", "rce"]
+tags: ["linux", "reverse-engineering", "rce"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Soulmate hides its real attack surface behind a subdomain that only shows up under vhost fuzzing. That subdomain runs CrushFTP, vulnerable to a very…"
 ShowToc: true

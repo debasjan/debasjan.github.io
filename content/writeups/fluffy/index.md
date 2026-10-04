@@ -2,7 +2,9 @@
 title: "Fluffy — Hack The Box"
 date: 2026-03-06
 draft: false
-tags: ["hackthebox", "windows", "active-directory", "easy", "shadow-credentials", "acl-abuse", "adcs"]
+tags: ["windows", "active-directory", "shadow-credentials", "acl-abuse", "adcs"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Fluffy is an assumed-breach scenario (starting credentials provided) built around a very recent Windows Explorer spoofing bug and an equally recent AD CS…"
 ShowToc: true

@@ -2,7 +2,9 @@
 title: "Armageddon — Hack The Box"
 date: 2025-10-08
 draft: false
-tags: ["hackthebox", "linux", "easy", "rce", "gtfobins"]
+tags: ["linux", "rce", "gtfobins"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "Armageddon is a CMS box built around Drupalgeddon2, a critical unauthenticated RCE in old Drupal releases. From the resulting shell, Drupal's own settings…"
 ShowToc: true

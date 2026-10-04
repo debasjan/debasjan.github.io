@@ -3,7 +3,9 @@ title: "Gatekeeper — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "medium"]
+tags: []
+difficulty: ["medium"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "Deploy the machine when you are ready to release the Gatekeeper."
 ShowToc: true

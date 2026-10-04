@@ -3,7 +3,9 @@ title: "Internal — TryHackMe"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["tryhackme", "linux", "hard", "wordpress", "wpscan", "rce", "sudo-abuse", "pivoting", "jenkins", "docker"]
+tags: ["linux", "wordpress", "wpscan", "rce", "sudo-abuse", "pivoting", "jenkins", "docker"]
+difficulty: ["hard"]
+platform: ["tryhackme"]
 categories: ["writeups"]
 summary: "Internal is a hard Linux box shaped like a real black-box assessment: WordPress user enum feeds a wpscan brute-force, an authenticated theme edit gives a…"
 ShowToc: true

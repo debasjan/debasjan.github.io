@@ -3,7 +3,9 @@ title: "Kioptrix Level 1"
 date: 2025-01-01
 hideDate: true
 draft: false
-tags: ["others", "linux", "easy"]
+tags: ["linux"]
+difficulty: ["easy"]
+platform: ["others"]
 categories: ["writeups"]
 summary: "Kioptrix Level 1 from VulnHub — an older Apache/mod_ssl box: an outdated Apache 1.3.20 / OpenSSL fingerprint plus SMB (Samba) exposed."
 ShowToc: true

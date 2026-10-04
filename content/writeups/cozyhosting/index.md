@@ -2,7 +2,9 @@
 title: "CozyHosting — Hack The Box"
 date: 2026-07-24
 draft: false
-tags: ["hackthebox", "linux", "easy", "rce", "credential-reuse", "command-injection", "sudo-abuse"]
+tags: ["linux", "rce", "credential-reuse", "command-injection", "sudo-abuse"]
+difficulty: ["easy"]
+platform: ["hackthebox"]
 categories: ["writeups"]
 summary: "CozyHosting is a Linux box built around a misconfigured Spring Boot app. An exposed Actuator endpoint leaks an admin session cookie, an OS command…"
 ShowToc: true
