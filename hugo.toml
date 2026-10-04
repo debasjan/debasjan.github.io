@@ -46,7 +46,7 @@ pygmentsUseClasses = true
 
   # Slugs featured in the "Featured Work" section on the homepage.
   # Order here is the display order.
-  featuredWriteups = ["tombwatcher", "certified", "blackfield", "fluffy", "administrator"]
+  featuredWriteups = ["tombwatcher", "certified", "blackfield", "fluffy"]
 
   [params.homeInfoParams]
     Title = "the <span class=\"accent\">debas</span> blog"
