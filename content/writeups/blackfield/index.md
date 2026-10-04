@@ -424,8 +424,8 @@ evil-winrm -i 10.129.229.17 -u Administrator -p '###_ADM1N_3920_###'
   privilege on file shares is not optional on a DC subnet.
 - Disable `DONT_REQ_PREAUTH` on all accounts unless a legacy system
   genuinely requires it. Treat it like `AS-REP roast me`.
-- Audit `ForceChangePassword` / `User-Force-Change-Password` grants;
-  any low-privilege account with this right over a higher-privilege
+- Audit `ForceChangePassword` / `User-Force-Change-Password` grants.
+  Any low-privilege account with this right over a higher-privilege
   account is a straight escalation path.
 - Do not leave process memory dumps on network shares. LSASS in a zip
   on a Forensic share is a domain compromise waiting to happen.

@@ -193,7 +193,7 @@ flag.
 - Internal documentation can be an attack roadmap, a memo naming a
   specific CVE handed me the exact exploit to use.
 - `GenericAll`/`GenericWrite` on a group is transitive, mapping it
-  manually is error-prone; BloodHound's *Outbound Object Control* view
+  manually is error-prone. BloodHound's *Outbound Object Control* view
   exists precisely because these chains are easy to miss otherwise.
 - Shadow credentials are a quieter alternative to a password reset,
   useful to know both offensively and defensively, since a reset is loud

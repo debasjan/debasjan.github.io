@@ -46,7 +46,7 @@ Every edge is one `bloodyAD` command.
 7. The **WebServer** template has an **orphan SID** in `Enrollment
    Rights` (`S-1-5-21-…-1111`). It does not resolve. Not a known
    group. `Get-ADObject -IncludeDeletedObjects` finds it in the AD
-   Recycle Bin — a deleted user called **`cert_admin`**. Restore
+   Recycle Bin, a deleted user called **`cert_admin`**. Restore
    it. John now has a fresh `GenericAll` edge on the restored
    account.
 8. Reset `cert_admin`'s password with `bloodyAD`. `certipy-ad find
@@ -67,7 +67,7 @@ Recycle-Bin restore plus one ESC15+ESC3 double request.
 
 ## Recon
 
-Given credentials for `henry` — assumed-breach starting position.
+Given credentials for `henry`, the assumed-breach starting position.
 
 ```bash
 nmap -p- --min-rate=5000 -oA tombwatcher 10.129.232.167
@@ -307,7 +307,7 @@ Two things stand out:
 - `Schema Version 1` + `EnrolleeSuppliesSubject: True` + no
   `Client Authentication` in the EKU. That is not classic ESC1
   (missing client-auth EKU). It matches the ESC15 preconditions
-  (CVE-2024-49019 — schema v1 templates allow application-policy
+  (CVE-2024-49019, schema v1 templates allow application-policy
   injection at enrollment time).
 - **Enrollment Rights** includes an orphan SID:
   `S-1-5-21-1392491010-1358638721-2126982587-1111`. Not a group,
@@ -350,7 +350,7 @@ newly-alive `cert_admin`:
 ![cert_admin outbound edges include enrollment rights on WebServer](28-genericall-cert-admin.png)
 
 `bloodyAD` sets a password on `cert_admin` (no old password
-required — the GenericAll edge covers it):
+required, the GenericAll edge covers it):
 
 ```bash
 bloodyAD --host dc01.tombwatcher.htb -d tombwatcher.htb \
@@ -444,7 +444,7 @@ This time the cert **does** carry the object SID
 ## Step 11 — PKINIT as Administrator → root
 
 Authenticate with the PFX. Kerberos wants a synced clock again
-(there was a `KRB_AP_ERR_SKEW` on the first try; `ntpdate` fixes
+(there was a `KRB_AP_ERR_SKEW` on the first try, and `ntpdate` fixes
 it):
 
 ```bash
@@ -553,10 +553,10 @@ evil-winrm -i 10.129.232.167 -u administrator \
 
 - `nmap`
 - `bloodhound-python` + BloodHound GUI
-- `bloodyAD` — the main tool on this box
+- `bloodyAD`, the main tool on this box
 - `targetedKerberoast.py`
 - `hashcat` (mode 13100)
 - `impacket-dacledit`
 - PowerShell AD module (`Get-ADObject -IncludeDeletedObjects`, `Restore-ADObject`)
-- **Certipy** (`certipy-ad find`, `req`, `auth`) — for ESC15 injection and ESC3 enroll-on-behalf-of
+- **Certipy** (`certipy-ad find`, `req`, `auth`) for ESC15 injection and ESC3 enroll-on-behalf-of
 - `evil-winrm` (Pass-the-Hash for root)
