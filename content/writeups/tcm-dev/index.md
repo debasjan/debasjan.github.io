@@ -24,16 +24,16 @@ We need to login on the machine:
 - Login: root
 - Password: tcm
 
-No we need to setup DHCP
+Now we need to set up DHCP
 
 ```bash
 dhclient
 ip a
 ```
 
-Check the ip adres of the target machine
+Check the IP address of the target machine
 
-No we can run nmap scan on vulnerable machine
+Now we can run an nmap scan on the vulnerable machine
 
 ## Nmap
 
@@ -59,7 +59,7 @@ nmap -A -T4 -p- 192.168.100.129
 
 ## Port 80
 
-I have runned gobuster on port 80 to see any direcortys on the website
+I ran gobuster on port 80 to find directories on the website
 
 Command:
 
@@ -79,9 +79,9 @@ gobuster dir -u http://192.168.100.129:80 -w /usr/share/wordlists/dirbuster/dire
 
 Let's look what is in the config folder:
 
-We can see some of .yaml config's.
+We can see some .yaml configs.
 
-I found possible password in the config.yml file.
+I found a possible password in the config.yml file.
 
 Let's try to open /app/database:
 
@@ -89,16 +89,16 @@ Unlucky nothing.
 
 ## Port 8080
 
-I'm gonna run Fuzz scan on port 8080 to see if we can get more dictionaries on this site
+I'm going to run an FFUF scan on port 8080 to find more directories on this site
 
 Command:
 ```bash
 ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt:FUZZ -u http://192.168.100.129:8080/FUZZ
 ```
 
-Here we can se an extra dictionarie and that is a /dev
+Here we can see an extra directory, /dev
 
-Let's go to this dictionary
+Let's go to this directory
 
 We can look around, but nothing interesting.
 
@@ -108,9 +108,9 @@ Google is our go-to. Whenever we learn about a new service or program we should 
 
 We currently don’t know the version of Boltwire being used, but we can try the LFI and see. Below is the URL we use in the browser, for this to work you must be an authenticated user, which means you need to make an account.
 
-LFI it is a method of using the website to navigate through the host server, normal practise it to make it so that these types of URLs are sanitised. However, if not, we can use directory traversal (../) to move back to root, and then go into etc/passwd to be given the list of users.
+LFI it is a method of using the website to navigate through the host server, normal practice is to make it so that these types of URLs are sanitised. However, if not, we can use directory traversal (../) to move back to root, and then go into etc/passwd to be given the list of users.
 
-We gonna paste this into our link:
+We paste this into the URL:
 
 - index.php?p=action.search&action=../../../../../../../etc/passwd
     
@@ -119,19 +119,19 @@ If you go through the list you will find a username at the bottom jeanpaul, that
 
 ## Port 2049
 
-Let's check what is in the NFS (Network File Share)
+Let's check what is in the NFS (Network File System)
 
 Command:
 ```bash
 showmount -e 192.168.100.129
 ```
 
-Firts i'm going to make a directory for mount
+First I'm going to make a directory to mount to
 
-I'm gonna now mount this to directory on my attack machine
+Now I'm going to mount this to a directory on my attack machine
 
 - - t we need to set the type. It is nfs
-- Then target ip adres with the file we want to mount
+- Then the target IP address with the file we want to mount
 - As last directory where we want to set the file
 
 Let's go now to this directory:
@@ -143,9 +143,9 @@ ls
 
 Let's try to unzip this file
 
-Unfortunely we need a password to unzip this file
+Unfortunately we need a password to unzip this file
 
-We gonna try to crack this file and see if we can maybe get in there
+We'll try to crack this file and see if we can get in
 
 Command:
 ```bash
@@ -154,8 +154,8 @@ fcrackzip -v -u -D -p /usr/share/wordlists/rockyou.txt save.zip
 
 - - v for verbose, we want to have verbosity here and see all the output
 - - u means unzipping the files
-- - D We gonna using a dictionary attack
-- - p We gonna using a file in order to attack
+- -D we use a dictionary attack
+- -p we use a file for the attack
 - Wordlist rockyou.txt
 
 Let's try now to open this file

