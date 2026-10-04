@@ -16,11 +16,11 @@ cover:
 
 ## **Pre-Engagement Briefing**
 
-You have been assigned to a client that wants a penetration test conducted on an environment due to be released to production in seven days. 
+You have been assigned to a client that wants a penetration test conducted on an environment due to be released to production in seven days. 
 
 **Scope of Work**
 
-The client requests that an engineer conducts an assessment of the provided virtual environment. The client has asked that minimal information be provided about the assessment, wanting the engagement conducted from the eyes of a malicious actor (black box penetration test).  The client has asked that you secure two flags (no location provided) as proof of exploitation:
+The client requests that an engineer conducts an assessment of the provided virtual environment. The client has asked that minimal information be provided about the assessment, wanting the engagement conducted from the eyes of a malicious actor (black box penetration test).  The client has asked that you secure two flags (no location provided) as proof of exploitation:
 
 - User.txt
 - Root.txt  
@@ -43,15 +43,11 @@ Machine may take up to 5 minutes for all services to start.
 
 ****Writeups will not be accepted for this room.****
 
-###### Answer the questions below
-
 User Flag  
 THM{fdk4ka34vk346ksxfr21tg789ktf45}
 
 Root Flag
 THM{1fk5kf469devly1gl320zafgl345pv}
-
-
 
 ![nmap scan output for the Relevant box](scan.png)
 ![smbclient](smbclient.png)
@@ -62,7 +58,6 @@ THM{1fk5kf469devly1gl320zafgl345pv}
 
 ![smb bill error](smb-bill-error.png)
 ![smb bob error](smb-bob-error.png)
-
 
 I check for **robots.txt** and also run a full **gobuster** scan but can’t find anything else useful on the port 80 website.
 
@@ -75,7 +70,6 @@ Running **gobuster** on the port 49663 website shows the following though:
 ```
 /nt4wrksv             (Status: 200) [Size: 0]
 ```
-
 
 Interesting. That’s the same name as the SMB share we came across earlier.
 

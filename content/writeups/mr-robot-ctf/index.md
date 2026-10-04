@@ -14,22 +14,12 @@ cover:
   relative: true
 ---
 
-## **Hack the machine**
-
 ![mr robot](mr-robot-2.png)
 
-
-Can you root this Mr. Robot styled machine? This is a virtual machine meant for beginners/intermediate users. There are 3 hidden keys located on the machine, can you find them?
-
-###### Answer the questions below
-
-What is key 1?
 073403c8a58a1f80d943455fb30724b9
 
-What is key 2?
 822c73956184f694993bede3eb39f959
 
-What is key 3?
 04787ddef27c3dee1ee161b21670b4e4
 
 # Mr-Robot-CTF-Writeup
@@ -50,10 +40,9 @@ Explanation: `-p-` scans all ports, `-A` performs OS/service detection and scrip
 
 Result: open ports: 22 (SSH), 80 (HTTP), 443 (HTTPS).
 
-
 ### 2. HTTP enumeration — finding hidden directories
 
-The website basically tells you a few things, and lets you input some commands. After a quick test, those don’t seem very useful.
+The website basically tells you a few things, and lets you input some commands. After a quick test, those don’t seem very useful.
 ![port 80](port-80.png)
 
 So while I explore it, let’s run gobuster to discover hidden files and directories:

@@ -20,9 +20,7 @@ Deploy the machine when you are ready to release the Gatekeeper.
 
 ## **Defeat the Gatekeeper and pass through the fire.**
 
-Defeat the Gatekeeper to break the chains.  But beware, fire awaits on the other side.  
-
-###### Answer the questions below
+Defeat the Gatekeeper to break the chains.  But beware, fire awaits on the other side.  
 
 Locate and find the User Flag.  
 {H4lf_W4y_Th3r3}
@@ -33,7 +31,6 @@ Locate and find the Root Flag
 ![nmap scan](nmap-scan.png)
 
 ![nmap scan 2](nmap-scan-2.png)
-
 
 ![smb enum](smb-enum.png)
 
@@ -49,11 +46,9 @@ Locate and find the Root Flag
 ![gatekeeper machine shell](gatekeeper-machine-shell.png)
 ![user flag](user-flag.png)
 
-
 ![firefox.lnk](firefox-lnk.png)![firefox profile copy to shared and mounted share](firefox-profile-copy-to-shared-and-mounted-share.png)
 
 ![share](share.png)
-
 
 ![shared files](shared-files.png)
 ![firefox decrypt script](firefox-decrypt-script.png)

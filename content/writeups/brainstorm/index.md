@@ -26,13 +26,11 @@ Reverse engineer a chat program and write a script to exploit a Windows machine.
 
 ## **Access**
 
-After enumeration, you now must have noticed that the service interacting on the strange port is some how related to the files you found! Is there anyway you can exploit that strange service to gain access to the system? 
+After enumeration, you now must have noticed that the service interacting on the strange port is some how related to the files you found! Is there anyway you can exploit that strange service to gain access to the system? 
 
-It is worth using a Python script to try out different payloads to gain access! You can even use the files to locally try the exploit. 
+It is worth using a Python script to try out different payloads to gain access! You can even use the files to locally try the exploit. 
 
 If you've not done buffer overflows before, check [this](https://tryhackme.com/room/bof1) room out!
-
-###### Answer the questions below
 
 Read the description.
 
@@ -47,7 +45,6 @@ After gaining access, what is the content of the root.txt file?
 
 ![brainstorm scan](brainstorm-scan.png)
 ![braintstorm ftp](braintstorm-ftp.png)
-
 
 ![fuzzing brainstorm](fuzzing-brainstorm.png)
 
