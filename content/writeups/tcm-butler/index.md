@@ -36,14 +36,14 @@ sudo nmap -T4 -p- -A -vv 192.168.XX.XX
 
 ### Open ports
 
-- 135 — msrpc
-- 139 — smb
-- 445 — smb
-- 5040 — unknown
-- 7680 — pando-pub ?
-- 8080 — http — Jetty 9.4.41.v20210516
+- 135, msrpc
+- 139, smb
+- 445, smb
+- 5040, unknown
+- 7680, pando-pub ?
+- 8080, http, Jetty 9.4.41.v20210516
 	- Info about robots.txt
-- 49664–49669 — msrpc
+- 49664–49669, msrpc
 
 Note: Jetty on port 8080 and `robots.txt` worth investigating.
 
@@ -174,10 +174,10 @@ The shell come back and we are now in.
 To prevent similar attacks:
 
 1. **Jenkins security:**
-    - Do not expose Jenkins UI publicly; restrict access to trusted IPs.
+    - Do not expose Jenkins UI publicly. Restrict access to trusted IPs.
     - Enforce strong credentials and multi-factor authentication.
     - Keep Jenkins and plugins up to date.
-    - Restrict who can run Groovy scripts — only trusted admins.
+    - Restrict who can run Groovy scripts, only trusted admins.
 
 2. **Unquoted service paths:**
     - Audit service `ImagePath` entries and wrap paths containing spaces in quotes, e.g.:

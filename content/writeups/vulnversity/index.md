@@ -29,7 +29,7 @@ This room recommends using the AttackBox, which can be launched by clicking the 
 nmap -sV MACHINE_IP.
 
 
-Nmap is a free, open-source and powerful tool used to discover hosts and services on a computer network. In our example, we use Nmap to scan this machine to identify all services running on a particular port. Nmap has many capabilities; a table summarises some of its functionality below.
+Nmap is a free, open-source and powerful tool used to discover hosts and services on a computer network. In our example, we use Nmap to scan this machine to identify all services running on a particular port. Nmap has many capabilities. A table summarises some of its functionality below.
 
 |   |   |
 |---|---|
@@ -48,7 +48,7 @@ Nmap is a free, open-source and powerful tool used to discover hosts and service
 
 There are many Nmap "cheatsheets" online that you can use too.  
 
-Scan the box; how many ports are open?
+Scan the box. How many ports are open?
 6
 
 What version of the squid proxy is running on the machine?
@@ -122,7 +122,7 @@ We're going to use Intruder (used for automating customised attacks). To begin,
 
 ![vulnversity php](vulnversity-php.png)
 
-Now, make sure BurpSuite is configured to intercept all your browser traffic. Upload a file; once this request is captured, send it to the Intruder. Click on "`Payloads`" and select the "`Sniper`" attack type.
+Now, make sure BurpSuite is configured to intercept all your browser traffic. Upload a file. Once this request is captured, send it to the Intruder. Click on "`Payloads`" and select the "`Sniper`" attack type.
 
 Click the "`Position`s" tab now, find the filename and "`Add §`" to the extension. It should look like this:
 
@@ -175,7 +175,7 @@ Now that you have compromised this machine, we will escalate our privileges and 
 
 In Linux, SUID (**set owner userId upon execution**) is a particular type of file permission given to a file. SUID gives temporary permissions to a user to run the program/file with the permission of the file owner (rather than the user who runs it).
 
-For example, the binary file to change your password has the SUID bit set on it (`/usr/bin/passwd`). This is because to change your password, you will need to write to the shadowers file that you do not have access to; `root` does, so it has root privileges to make the right changes.
+For example, the binary file to change your password has the SUID bit set on it (`/usr/bin/passwd`). This is because to change your password, you will need to write to the shadowers file that you do not have access to. `root` does, so it has root privileges to make the right changes.
 
 ![Enumerating SUID binaries on Vulnversity for the systemctl privesc](suid-2.jpg)'
 

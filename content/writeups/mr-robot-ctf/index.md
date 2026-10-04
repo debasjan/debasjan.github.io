@@ -144,13 +144,13 @@ One of the SUID binaries was `nmap` (or an nmap binary version that could be use
 ```
 find / -perm -u=s -type f 2>/dev/null
 ```
-- `find` – a command used to search for files and directories in the system.
-- `/` – the starting directory for the search. Here, it means the entire filesystem, starting from the root directory.
-- - `-perm` – filter by file permissions.
-- `-u=s` – search for files with the SUID bit (Set User ID) set.
+- `find`, a command used to search for files and directories in the system.
+- `/`, the starting directory for the search. Here, it means the entire filesystem, starting from the root directory.
+- - `-perm`, filter by file permissions.
+- `-u=s`, search for files with the SUID bit (Set User ID) set.
 - `-type f` Limits results to regular files only (not directories or symbolic links).
-- `2>` – redirects the error stream (stderr)..
-- `/dev/null` – a "black hole" where all data ends up.
+- `2>`, redirects the error stream (stderr)..
+- `/dev/null`, a "black hole" where all data ends up.
 
 ![potential escalation](potential-escalation.png)
 
