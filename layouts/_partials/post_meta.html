@@ -7,7 +7,8 @@
 {{- end }}
 
 {{- if (.Param "ShowReadingTime") -}}
-    {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" (i18n "read_time" .ReadingTime | default (printf "%d min" .ReadingTime)))) }}
+    {{- $rt := partial "reading_time.html" . -}}
+    {{- $scratch.Add "meta" (slice (printf "<span>%s min</span>" $rt)) }}
 {{- end }}
 
 {{- if (.Param "ShowWordCount") -}}

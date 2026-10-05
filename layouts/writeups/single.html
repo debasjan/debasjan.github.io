@@ -27,7 +27,7 @@
     {{- end }}
 
     <div class="wu-metabar">
-      {{- if (.Param "ShowReadingTime") }}<span class="wu-meta__item">{{ .ReadingTime }} min read</span>{{ end }}
+      {{- if (.Param "ShowReadingTime") }}<span class="wu-meta__item">{{ partial "reading_time.html" . }} min read</span>{{ end }}
       {{- if and (not .Date.IsZero) (ne (.Param "hideDate") true) }}<span class="wu-meta__item wu-meta__date">{{ .Date.Format (site.Params.DateFormat | default "January 2, 2006") }}</span>{{ end }}
       {{- if $isWin }}<span class="wu-badge wu-badge--win">{{ partial "icon_windows.html" . }}Windows</span>{{ end }}
       {{- if $isLin }}<span class="wu-badge wu-badge--linux">{{ partial "icon_linux.html" . }}Linux</span>{{ end }}

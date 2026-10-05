@@ -1,0 +1,11 @@
+{{- /* Reading time that also accounts for screenshots.
+       Hugo's .ReadingTime counts words only and ignores images, which
+       understates screenshot-heavy write-ups. We add ~5s per rendered
+       image on top of the word-based time, then round to whole minutes
+       (minimum 1). Text-heavy posts are unaffected (a few images add
+       only seconds). */ -}}
+{{- $imgCount := len (findRE "<img" .Content) -}}
+{{- $readMin := div (float .WordCount) 213.0 -}}
+{{- $imgMin := div (mul (float $imgCount) 5.0) 60.0 -}}
+{{- $total := math.Round (add $readMin $imgMin) -}}
+{{- cond (lt $total 1.0) 1 (int $total) -}}
