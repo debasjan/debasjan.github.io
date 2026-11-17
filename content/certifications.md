@@ -2,7 +2,7 @@
 title: "Certifications"
 layout: "single"
 url: "/certifications/"
-summary: "Certifications and Pro Lab completions on my path into penetration testing — eJPT (Dec 2025), Dante Pro Lab (Feb 2026), OSCP PEN-200 preparation."
+summary: "Certifications and Pro Lab completions on my path into penetration testing — eJPT (Dec 2025), Dante & Zephyr Pro Labs (2026), OSCP PEN-200 preparation."
 ShowToc: false
 hidemeta: true
 hero: true
@@ -16,7 +16,7 @@ hero: true
 <p class="certs-hero__sub">A running record of certifications and lab completions from my <span class="accent">offensive security journey</span>.</p>
 <div class="certs-stats">
 <div>
-<div class="certs-stat-value">3</div>
+<div class="certs-stat-value">4</div>
 <div class="certs-stat-label">Total Certs</div>
 </div>
 <div>
@@ -38,6 +38,23 @@ hero: true
 <div class="cert-milestone" data-year="2026">
 <div class="cert-milestone-year">2026</div>
 <div class="cert-grid">
+<div class="cert-card" data-category="offensive">
+<div class="cert-card__header">
+<div class="cert-card__id">
+<span class="cert-card__badge">HTB</span>
+<span class="cert-card__acronym">Zephyr</span>
+</div>
+<span class="cert-card__check done">✓</span>
+</div>
+<div class="cert-card__vendor">Hack The Box</div>
+<h3 class="cert-card__title">Zephyr Pro Lab</h3>
+<p class="cert-card__desc">Red Team Operator Level II lab — a multi-domain Active Directory forest with trust boundaries to cross, lateral movement and privilege escalation chained across a full enterprise network.</p>
+<span class="cert-card__date">Nov 2026</span>
+<div class="cert-card__actions two">
+<a href="#certModal-zephyr" data-cert-view>View Certificate</a>
+<a href="https://profile.hackthebox.com/profile/019d1cb4-4b60-7102-8db2-fa81f7ab5df5" target="_blank" rel="noopener noreferrer">HTB Profile →</a>
+</div>
+</div>
 <div class="cert-card" data-category="offensive">
 <div class="cert-card__header">
 <div class="cert-card__id">
@@ -88,6 +105,25 @@ hero: true
 <span class="cert-card__date">December 2025</span>
 <div class="cert-card__actions">
 <a href="https://certs.ine.com/e5da4c9b-82af-4036-87af-0da6644de771" target="_blank" rel="noopener noreferrer">Verify Credential →</a>
+</div>
+</div>
+</div>
+</div>
+
+<div class="cert-modal" id="certModal-zephyr" aria-hidden="true">
+<div class="cert-modal__backdrop" data-cert-close></div>
+<button class="cert-modal__close" data-cert-close aria-label="Close">✕</button>
+<div class="cert-modal__body">
+<div class="cert-modal__grid">
+<img class="cert-modal__img" src="/images/certs/zephyr-certificate.png" alt="Zephyr Pro Lab certificate of completion — Jan Jedrzejak, HTBCERT-93EF46F26A">
+<div class="cert-modal__info">
+<h2 class="cert-modal__title">About the Zephyr Pro Lab</h2>
+<p><strong>Zephyr</strong> is Hack The Box's <strong>Red Team Operator Level II</strong> Pro Lab — a multi-domain Active Directory forest built around realistic trust boundaries between separate companies/domains, not just one flat network.</p>
+<p>The engagement chains an initial web foothold into Active Directory, moves laterally and vertically across multiple Windows Server hosts, and crosses domain and forest trust boundaries to reach Domain Admin on more than one domain. Per HTB's Pro Lab policy, write-ups of the attack path itself aren't published — this page only covers the scope and skills, not the solution.</p>
+<div class="dante-skills">
+<span>Enumeration</span><span>Relay Attacks</span><span>Pivoting</span><span>SQL Attacks</span><span>Password Cracking</span><span>Privilege Escalation</span><span>Web Application Attacks</span><span>AD Exploitation</span><span>Lateral Movement</span><span>Trust Boundaries</span>
+</div>
+<p class="dante-meta">40 hours · 40 CPE credits · Completed 3&nbsp;Nov&nbsp;2026 · Cert&nbsp;ID HTBCERT-93EF46F26A</p>
 </div>
 </div>
 </div>
@@ -171,12 +207,22 @@ hero: true
     milestoneEls.forEach(function (m) { observer.observe(m); });
   }
 
-  // certificate lightbox
-  var modal = document.getElementById('certModal');
-  function openModal(e) { if (e) e.preventDefault(); if (modal) { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); } }
-  function closeModal() { if (modal) { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); } }
+  // certificate lightbox (supports multiple modals, matched by each link's href)
+  function openModal(e) {
+    if (e) e.preventDefault();
+    var targetId = e && e.currentTarget ? e.currentTarget.getAttribute('href') : null;
+    var modal = targetId ? document.querySelector(targetId) : null;
+    if (modal) { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); }
+  }
+  function closeModal(modal) {
+    if (modal) { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); }
+  }
   document.querySelectorAll('[data-cert-view]').forEach(function (el) { el.addEventListener('click', openModal); });
-  document.querySelectorAll('[data-cert-close]').forEach(function (el) { el.addEventListener('click', closeModal); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+  document.querySelectorAll('[data-cert-close]').forEach(function (el) {
+    el.addEventListener('click', function () { closeModal(el.closest('.cert-modal')); });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { document.querySelectorAll('.cert-modal.open').forEach(closeModal); }
+  });
 })();
 </script>
